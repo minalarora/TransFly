@@ -1,8 +1,10 @@
-package com.truck.transfly;
+package com.truck.transfly.Activty;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.truck.transfly.R;
 
 public class MainActivity extends AppCompatActivity {
 
