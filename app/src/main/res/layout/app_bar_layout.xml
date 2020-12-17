@@ -34,16 +34,31 @@
 
     </androidx.cardview.widget.CardView>
 
-    <fragment
-        android:id="@+id/map"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        class="com.google.android.gms.maps.SupportMapFragment"/>
+        android:layout_height="match_parent">
+
+        <fragment
+            android:id="@+id/map"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            class="com.google.android.gms.maps.SupportMapFragment"/>
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="-13dp"
+            android:src="@drawable/location_icon"
+            />
+
+    </FrameLayout>
 
     <androidx.cardview.widget.CardView
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_margin="20dp"
+        android:id="@+id/my_location"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         app:cardBackgroundColor="#ddffffff"

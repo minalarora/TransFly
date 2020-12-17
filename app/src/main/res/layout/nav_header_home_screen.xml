@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:orientation="vertical"
+    android:background="#363636"
     android:layout_height="wrap_content">
 
     <RelativeLayout
@@ -10,42 +11,56 @@
         android:layout_marginTop="12dp"
         android:layout_height="wrap_content">
 
+        <ImageView
+            android:id="@+id/pencil"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/profile_image"
+            android:layout_marginStart="21dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_action_pencil"
+            app:tint="@color/white" />
+
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_image"
             android:layout_width="60dp"
+            android:layout_centerInParent="true"
             android:layout_height="60dp"
             android:layout_marginStart="12dp"
             android:src="@drawable/default_profile" />
 
-        <de.hdodenhof.circleimageview.CircleImageView
+        <ImageView
             android:id="@+id/appLogo"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginStart="12dp"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/profile_image"
+            android:layout_marginStart="26dp"
             android:layout_marginEnd="12dp"
-            android:layout_alignParentEnd="true"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@drawable/ic_action_settings"
+            app:tint="@color/white" />
 
     </RelativeLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="20dp"
-        android:layout_toEndOf="@+id/profile_image"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/customer_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/font_medium"
+            android:fontFamily="@font/font_opensans"
+            android:gravity="center"
+            android:maxLines="1"
             android:paddingTop="8dp"
-            android:alpha="0.8"
             android:text="Shani Gupta"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:textColor="@color/white"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/number"
@@ -53,13 +68,22 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/allerta"
             android:text="9399104904"
-            android:alpha="0.5"
-            android:layout_marginTop="7dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="center"
+            android:layout_marginTop="4dp"
             android:letterSpacing="0.03"
-            android:textColor="@color/black"
-            android:textSize="14sp" />
+            android:textColor="#47cad5"
+            android:textSize="13sp" />
 
     </LinearLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="4dp"
+        android:background="@color/white"
+        />
 
 </LinearLayout>

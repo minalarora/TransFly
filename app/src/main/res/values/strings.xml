@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">TransFly</string>
     <string name="API_KEY">AIzaSyBOlojLzUDEVc_4GBixP35jFDheOZqHxNk</string>
+    <string name="verification_code_sent_to_your_mobile_number">Verification Code Send to Your Mobile Number</string>
 </resources>

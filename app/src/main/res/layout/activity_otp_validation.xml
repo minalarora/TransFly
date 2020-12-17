@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/root_layout"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="50dp"
+        android:contentDescription="otp"
+        app:srcCompat="@drawable/ic_otp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:gravity="center"
+        android:padding="4dp"
+        android:lineSpacingExtra="7dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:textSize="16dp"
+        android:fontFamily="@font/worksansregular"
+        android:text="@string/verification_code_sent_to_your_mobile_number" />
+
+    <TextView
+        android:id="@+id/mobile_no_Tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="4dp"
+        android:text=""
+        android:textColor="@android:color/black"
+        android:textSize="14dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@drawable/round_edittext">
+
+        <EditText
+            android:id="@+id/otp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@android:color/transparent"
+            android:hint="Enter Otp number"
+            android:inputType="number"
+            android:textSize="14dp"
+            android:paddingStart="22dp"
+            android:paddingEnd="16dp"
+            android:textColorHint="#817A7A" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="320dp"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/design_as_edittext_gradient"
+        android:layout_gravity="center_horizontal"
+        android:elevation="6dp"
+        android:layout_height="45dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Submit"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/candal"
+            android:textSize="14dp"
+            android:textColor="@color/white"
+            />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="6dp"
+            android:textStyle="bold"
+            android:text="Did not Recieve"
+            android:fontFamily="@font/worksansregular"
+            android:textColor="@color/quantum_grey"
+            android:textSize="14dp" />
+
+        <TextView
+            android:id="@+id/resend_otp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="6dp"
+            android:textStyle="bold"
+            android:text="Resend OTP"
+            android:fontFamily="@font/worksansregular"
+            android:textColor="@color/quantum_pink"
+            android:textSize="15dp" />
+
+
+    </LinearLayout>
+
+</LinearLayout>

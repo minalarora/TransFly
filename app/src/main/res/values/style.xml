@@ -2,7 +2,7 @@
 <resources>
 
     <style name="RobotoTextViewStyle" parent="android:Widget.TextView">
-        <item name="android:fontFamily">@font/font_medium</item>
+        <item name="android:fontFamily">@font/font_opensans</item>
         <item name="textAllCaps">false</item>
         <item name="android:textSize">14dp</item>
         <item name="android:letterSpacing">0.02</item>
