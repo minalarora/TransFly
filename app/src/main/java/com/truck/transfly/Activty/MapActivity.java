@@ -30,7 +30,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResponse;
@@ -70,11 +72,18 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private double tulsipurLat=27.5786526, tulsipurLong=82.4505776;
     private DrawerLayout drawerLayout;
     private CardView viewById;
+    private LocationCallback mLocationCallBack;
     private SettingsClient mSettingsClient;
     private LocationSettingsRequest mLocationSettingsRequest;
     private FusedLocationProviderClient mLocationClient;
     private static final int REQUEST_CHECK_SETTINGS = 214;
     private static final int REQUEST_ENABLE_GPS = 516;
+    private double Mylongitude;
+    private double Mylatitude;
+    private boolean isStart=true;
+   private boolean isFirstTime=true;
+    private LocationRequest locationRequest;
+    private Marker marker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,11 +100,11 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         mapFragment.getMapAsync(this::onMapReady);
 
-        mLocationClient = LocationServices.getFusedLocationProviderClient(MapActivity.this);
-
         drawerLayout = findViewById(R.id.drawer_layout);
 
         viewById = findViewById(R.id.drawer_icon);
+
+        mLocationClient = LocationServices.getFusedLocationProviderClient(MapActivity.this);
 
         viewById.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,6 +122,35 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             }
         });
 
+        mLocationCallBack=new LocationCallback(){
+
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                super.onLocationResult(locationResult);
+
+                Location lastLocation = locationResult.getLastLocation();
+
+                Mylatitude = lastLocation.getLatitude();
+                Mylongitude = lastLocation.getLongitude();
+                
+                LatLng latLng = new LatLng(Mylatitude, Mylongitude);
+
+                if(marker!=null)
+                    marker.remove();
+
+                MarkerOptions markerOptions = new MarkerOptions();
+                markerOptions.position(latLng);
+                markerOptions.title("My Location");
+                marker = mGoogleMap.addMarker(markerOptions);
+
+                if(isStart) {
+                    getoLocation(Mylatitude, Mylongitude);
+                    isStart=false;
+                }
+
+            }
+        };
+
         findViewById(R.id.my_location).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,38 +159,17 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
                 if (permissionIsGranted() && manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
 
-                    if (ActivityCompat.checkSelfPermission(MapActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(MapActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                        // TODO: Consider calling
-                        //    ActivityCompat#requestPermissions
-                        // here to request the missing permissions, and then overriding
-                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                        //                                          int[] grantResults)
-                        // to handle the case where the user grants the permission. See the documentation
-                        // for ActivityCompat#requestPermissions for more details.
-                        return;
-                    }
+                    if(Mylatitude!=0 && Mylongitude!=0)
+                        goToLocationWithAnimation(Mylatitude,Mylongitude);
 
-                    mLocationClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Location> task) {
-
-                            Location result = task.getResult();
-
-                            if (task.isSuccessful() && result!=null) {
-
-                                goToLocationWithAnimation(result.getLatitude(), result.getLongitude());
-
-                            } else {
-
-                                Toast.makeText(MapActivity.this, "Click again On Location Button! GPS setup is not Ready", Toast.LENGTH_SHORT).show();
-
-                            }
-
-                        }
-                    });
 
                 } else {
 
+                    if(Mylatitude!=0 && Mylongitude!=0)
+                        goToLocationWithAnimation(Mylatitude,Mylongitude);
+
+                    mLocationClient.removeLocationUpdates(mLocationCallBack);
+                    locationRequest=null;
                     getCurrentLocation();
 
                 }
@@ -305,51 +322,22 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private void doLocationWork() {
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
             return;
         }
 
         mGoogleMap.setMyLocationEnabled(true);
         mGoogleMap.getUiSettings().setMyLocationButtonEnabled(false);
 
-        new Handler(getMainLooper()).postDelayed(new Runnable() {
-            @Override
-            public void run() {
+        if(locationRequest==null) {
 
-                mLocationClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Location> task) {
+            isStart=true;
 
-                        if (task.isSuccessful()) {
-
-
-                            Location location = task.getResult();
-
-                            LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-                            boolean isGpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-
-                            if (isGpsEnabled && location!=null) {
-
-                                getoLocation(location.getLatitude(), location.getLongitude());
-
-                            } else {
-
-                                Toast.makeText(MapActivity.this, "Click On Location Button! GPS setup is not Ready", Toast.LENGTH_SHORT).show();
-
-                            }
-                        }
-
-                    }
-                });
-
-            }
-        },1000);
+            locationRequest = LocationRequest.create();
+            locationRequest.setInterval(120000); // two minute interval
+            locationRequest.setFastestInterval(10000);
+            locationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
+            mLocationClient.requestLocationUpdates(locationRequest,mLocationCallBack,null);
+        }
 
     }
 
@@ -391,12 +379,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         LatLng latLng = new LatLng(latituteOfTajMahal, longitudeOfTajMahal);
 
-        TextView text = new TextView(MapActivity.this);
-        text.setTypeface(Typeface.DEFAULT_BOLD);
-        text.setGravity(Gravity.CENTER);
-
         IconGenerator iconFactory = new IconGenerator(this);
-        iconFactory.setColor(Color.parseColor("#ff0000"));
         iconFactory.setStyle(IconGenerator.STYLE_RED);
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
@@ -407,6 +390,22 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         marker.setIcon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon(locationAddress)));
 
         marker.setTag(postion);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(Mylatitude!=0 && Mylongitude!=0)
+            goToLocationWithAnimation(Mylatitude,Mylongitude);
+
+    }
+
+
+    @Override
+    protected void onStop() {
+        super.onStop();
 
     }
 

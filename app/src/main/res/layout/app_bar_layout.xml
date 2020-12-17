@@ -48,9 +48,10 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="center"
+            android:visibility="gone"
             android:layout_marginTop="-13dp"
-            android:src="@drawable/location_icon"
-            />
+            android:src="@drawable/ic_baseline_location_on_24"
+            app:tint="#ff0000" />
 
     </FrameLayout>
 
