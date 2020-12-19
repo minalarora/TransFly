@@ -37,7 +37,7 @@
             android:layout_centerInParent="true"
             android:textStyle="bold"
             android:layout_toEndOf="@+id/back"
-            android:fontFamily="@font/font_opensans"
+            android:fontFamily="@font/poppinsbold"
             android:text="Get Feedback"
             android:textColor="@color/white"
             android:textSize="15dp" />
@@ -85,8 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:gravity="center"
-                android:layout_marginStart="10dp"
-                android:fontFamily="@font/font_opensans"
+                android:fontFamily="@font/poppinsbold"
                 android:text="Add Rating"
                 android:textColor="@color/project_color"
                 android:textSize="14dp" />
@@ -108,7 +107,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="@dimen/_25ssp"
-                android:fontFamily="@font/font_opensans"
+                android:fontFamily="@font/poppinsbold"
                 android:text="What would like to improve"
                 android:textColor="@color/project_color"
                 android:textSize="14dp" />
@@ -134,7 +133,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="@dimen/_25ssp"
-                android:fontFamily="@font/font_opensans"
+                android:fontFamily="@font/poppinsbold"
                 android:text="Location Details"
                 android:textColor="@color/project_color"
                 android:textSize="14dp" />
@@ -163,7 +162,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:fontFamily="@font/candal"
+                android:fontFamily="@font/poppinsbold"
                 android:text="Submit"
                 android:textColor="@color/white"
                 android:textSize="14dp" />

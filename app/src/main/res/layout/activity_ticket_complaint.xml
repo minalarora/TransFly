@@ -36,7 +36,7 @@
             android:layout_centerVertical="true"
             android:layout_centerInParent="true"
             android:layout_toEndOf="@+id/back"
-            android:fontFamily="@font/font_opensans"
+            android:fontFamily="@font/poppinsbold"
             android:text="Complain Ticket"
             android:textColor="@color/white"
             android:textSize="15dp" />
@@ -73,10 +73,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="10dp"
-                android:fontFamily="@font/font_opensans"
+                android:fontFamily="@font/poppinsbold"
                 android:text="Select Complaint"
                 android:textColor="@color/project_color"
-                android:textSize="14dp" />
+                android:textSize="13dp" />
 
             <androidx.appcompat.widget.AppCompatSpinner
                 android:layout_width="match_parent"
@@ -92,10 +92,10 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="@dimen/_25ssp"
-                android:fontFamily="@font/font_opensans"
+                android:fontFamily="@font/poppinsbold"
                 android:text="Add Complaint"
                 android:textColor="@color/project_color"
-                android:textSize="14dp" />
+                android:textSize="13dp" />
 
             <EditText
                 android:layout_width="match_parent"
@@ -118,10 +118,10 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="@dimen/_25ssp"
-                android:fontFamily="@font/font_opensans"
+                android:fontFamily="@font/poppinsbold"
                 android:text="Location Details"
                 android:textColor="@color/project_color"
-                android:textSize="14dp" />
+                android:textSize="13dp" />
 
             <EditText
                 android:layout_width="match_parent"
@@ -147,7 +147,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:fontFamily="@font/candal"
+                android:fontFamily="@font/poppinsbold"
                 android:text="Submit"
                 android:textColor="@color/white"
                 android:textSize="14dp" />
