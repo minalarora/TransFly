@@ -1,113 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/root_layout"
-    android:background="@color/white"
-    android:orientation="vertical">
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginTop="50dp"
-        android:contentDescription="otp"
-        app:srcCompat="@drawable/ic_otp" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="22dp"
-        android:gravity="center"
-        android:padding="4dp"
-        android:lineSpacingExtra="7dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginEnd="12dp"
-        android:textSize="16dp"
-        android:fontFamily="@font/worksansregular"
-        android:text="@string/verification_code_sent_to_your_mobile_number" />
-
-    <TextView
-        android:id="@+id/mobile_no_Tv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="4dp"
-        android:text=""
-        android:textColor="@android:color/black"
-        android:textSize="14dp" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:background="@drawable/round_edittext">
-
-        <EditText
-            android:id="@+id/otp"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@android:color/transparent"
-            android:hint="Enter Otp number"
-            android:inputType="number"
-            android:textSize="14dp"
-            android:paddingStart="22dp"
-            android:paddingEnd="16dp"
-            android:textColorHint="#817A7A" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="320dp"
-        android:layout_marginTop="28dp"
-        android:background="@drawable/design_as_edittext_gradient"
-        android:layout_gravity="center_horizontal"
-        android:elevation="6dp"
-        android:layout_height="45dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Submit"
-            android:layout_centerInParent="true"
-            android:fontFamily="@font/candal"
-            android:textSize="14dp"
-            android:textColor="@color/white"
-            />
-
-    </RelativeLayout>
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".Activty.EnterMobileNumberActivty">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginTop="15dp"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="6dp"
-            android:textStyle="bold"
-            android:text="Did not Recieve"
-            android:fontFamily="@font/worksansregular"
-            android:textColor="@color/quantum_grey"
-            android:textSize="14dp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:elevation="8dp"
+            android:background="@drawable/round_as_project_code"
+            android:orientation="vertical"
+            android:layout_weight="0.3">
 
-        <TextView
-            android:id="@+id/resend_otp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="6dp"
-            android:textStyle="bold"
-            android:text="Resend OTP"
-            android:fontFamily="@font/worksansregular"
-            android:textColor="@color/quantum_pink"
-            android:textSize="15dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="match_parent">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:fontFamily="@font/open_sans_semibold"
+                android:gravity="center"
+                android:maxLines="1"
+                android:paddingTop="8dp"
+                android:text="Verify Mobile Number"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:visibility="visible" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:fontFamily="@font/open_sans_semibold"
+                android:gravity="center"
+                android:lineSpacingExtra="6dp"
+                android:paddingTop="8dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:text="Otp has been send to your mobile number. \n Please enter it below"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:visibility="visible" />
+
+                <com.mukesh.OtpView
+                    android:id="@+id/otp_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:inputType="number"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="@android:color/white"
+                    app:OtpItemCount="4"
+                    app:OtpViewType="line"
+                    />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="6dp"
+                    android:textStyle="bold"
+                    android:text="Did not Recieve"
+                    android:fontFamily="@font/worksansregular"
+                    android:textColor="@color/white"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/resend_otp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="6dp"
+                    android:textStyle="bold"
+                    android:text="Resend OTP"
+                    android:fontFamily="@font/worksansregular"
+                    android:textColor="@color/quantum_yellow"
+                    android:textSize="14dp" />
+
+
+            </LinearLayout>
+
+            </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="50dp"
+                android:id="@+id/otpSubmit"
+                app:cardCornerRadius="30dp"
+                android:layout_marginBottom="25dp"
+                app:cardElevation="10dp"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="35dp"
+                app:cardBackgroundColor="@color/quantum_yellow"
+                android:layout_height="50dp">
+
+                <ImageView
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_action_next"
+                    />
+
+            </androidx.cardview.widget.CardView>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/otp_image_page" />
+
+        </RelativeLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>

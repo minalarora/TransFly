@@ -19,10 +19,20 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                startActivity(new Intent(LoginActivity.this,OtpValidation.class));
+                startActivity(new Intent(LoginActivity.this,MapActivity.class));
 
             }
         });
+
+        findViewById(R.id.signup).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(new Intent(LoginActivity.this,EnterMobileNumberActivty.class));
+
+            }
+        });
+
 
     }
 }

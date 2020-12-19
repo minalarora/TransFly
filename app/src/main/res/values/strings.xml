@@ -2,4 +2,15 @@
     <string name="app_name">TransFly</string>
     <string name="API_KEY">AIzaSyBOlojLzUDEVc_4GBixP35jFDheOZqHxNk</string>
     <string name="verification_code_sent_to_your_mobile_number">Verification Code Send to Your Mobile Number</string>
+    <string name="do_not_have_and_account_create_account">"Do not have an account?  Create Account "</string>
+
+
+    <string-array name="details_page">
+
+        <item> Aadhar Card </item>
+        <item> Pan Card </item>
+        <item> BanK number </item>
+
+    </string-array>
+
 </resources>

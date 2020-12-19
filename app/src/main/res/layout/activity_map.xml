@@ -20,7 +20,7 @@
         android:layout_gravity="start"
         app:itemTextColor="@color/white"
         app:itemIconTint="@color/white"
-        android:background="#363636"
+        android:background="@color/project_color"
         app:itemTextAppearance="@style/RobotoTextViewStyle"
         app:headerLayout="@layout/nav_header_home_screen"
         app:menu="@menu/activity_home_screen_drawer" />

@@ -13,10 +13,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TransFly">
-        <activity android:name=".Activty.OtpValidation"></activity>
-        <activity android:name=".Activty.SplashActivity">
+        <activity android:name=".Activty.ReferActivity">
+
         </activity>
-        <activity android:name=".Activty.LoginActivity"></activity>
+        <activity android:name=".Activty.FeedbackActivity">
+        </activity>
+        <activity android:name=".Activty.TicketComplaintActivity"></activity>
+        <activity android:name=".Activty.KycEditActivity" />
+        <activity android:name=".Activty.ProfileActivity" />
+        <activity android:name=".Activty.SignUpActivity" />
+        <activity android:name=".Activty.UserChangedActivity" />
+        <activity android:name=".Activty.EnterMobileNumberActivty" />
+        <activity android:name=".Activty.OtpValidation" />
+        <activity android:name=".Activty.SplashActivity" />
+        <activity android:name=".Activty.LoginActivity" />
         <activity android:name=".Activty.MapActivity" >
 
             <intent-filter>

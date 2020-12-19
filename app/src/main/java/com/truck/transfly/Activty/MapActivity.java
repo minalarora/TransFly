@@ -1,6 +1,7 @@
 package com.truck.transfly.Activty;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -15,6 +16,7 @@ import android.os.Handler;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -63,13 +65,13 @@ import java.util.ArrayList;
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mGoogleMap;
-    private double LatituteOfTajMahal = 27.173891;
-    private double LongitudeOfTajMahal = 78.042068;
+    private double LatituteOfTajMahal = 27.429707;
+    private double LongitudeOfTajMahal = 82.176804;
 
-    private double new1 = 27.209745239842444, new2 = 78.32392058136335;
-    private double new3 = 27.56650835174797, new4 = 78.65772736253567;
-    private double new5 = 27.52156896657124, new6 = 78.57223839225884;
-    private double tulsipurLat=27.5786526, tulsipurLong=82.4505776;
+    private double new1 = 27.333574, new2 = 82.697655;
+    private double new3 = 	26.822845, new4 = 82.763443;
+    private double new5 = 28.975210, new6 = 78.942970;
+    private double tulsipurLat=26.934889, tulsipurLong=82.499924;
     private DrawerLayout drawerLayout;
     private CardView viewById;
     private LocationCallback mLocationCallBack;
@@ -92,6 +94,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         NavigationView navigationView = findViewById(R.id.nav_view);
 //        navigationView.setNavigationItemSelectedListener(map);
+
+        navigationViewListener(navigationView);
 
         navigationView.setItemIconTintList(null);
 
@@ -132,7 +136,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
                 Mylatitude = lastLocation.getLatitude();
                 Mylongitude = lastLocation.getLongitude();
-                
+
                 LatLng latLng = new LatLng(Mylatitude, Mylongitude);
 
                 if(marker!=null)
@@ -178,6 +182,69 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         });
 
         getCurrentLocation();
+
+    }
+
+    private void navigationViewListener(NavigationView navigationView) {
+
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @SuppressLint("NonConstantResourceId")
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId()){
+
+                    case R.id.profile_drawer:
+
+                        Intent intent=new Intent(MapActivity.this,ProfileActivity.class);
+                        startActivity(intent);
+
+                        break;
+
+                    case R.id.kyc_drawer:
+
+                        Intent kyc_intent=new Intent(MapActivity.this,KycEditActivity.class);
+                        startActivity(kyc_intent);
+
+                        break;
+
+                    case R.id.ticket_drawer:
+
+                        Intent ticket_complain=new Intent(MapActivity.this,TicketComplaintActivity.class);
+                        startActivity(ticket_complain);
+
+                        break;
+
+                    case R.id.feedback_drawer:
+
+                        Intent feedback_intent=new Intent(MapActivity.this,FeedbackActivity.class);
+                        startActivity(feedback_intent);
+
+                        break;
+
+                    case R.id.refer_drawer:
+
+                        Intent refer_intent=new Intent(MapActivity.this,ReferActivity.class);
+                        startActivity(refer_intent);
+
+                        break;
+
+
+                    case R.id.logout:
+
+                        Intent logout_intent=new Intent(MapActivity.this,LoginActivity.class);
+                        startActivity(logout_intent);
+
+                        break;
+
+
+                }
+
+                drawerLayout.closeDrawer(GravityCompat.START);
+
+                return false;
+            }
+        });
 
     }
 
@@ -352,11 +419,11 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         mGoogleMap.getUiSettings().setMapToolbarEnabled(false);
 
-        showMarker(LatituteOfTajMahal, LongitudeOfTajMahal, 1, "Allahabad");
-        showMarker(new1, new2, 2, "Faizabad");
-        showMarker(new3, new4, 3, "Raibraily");
+        showMarker(LatituteOfTajMahal, LongitudeOfTajMahal, 1, "Balrampur 500 rupees");
+        showMarker(new1, new2, 2, "Itwa 100 rupess");
+        showMarker(new3, new4, 3, "Basti 3000 rupees");
         showMarker(new5, new6, 4, "Nanital");
-        showMarker(tulsipurLat, tulsipurLong, 5, "Tulsipur Mines\nPricing 500 Rupees");
+        showMarker(tulsipurLat, tulsipurLong, 5, "Babhnan Mines\nPricing 500 Rupees");
 
         mGoogleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override

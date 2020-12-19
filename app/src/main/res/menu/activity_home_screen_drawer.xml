@@ -6,30 +6,30 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_home"
-            android:title="Home"
-            android:icon="@drawable/location_icon" />
+            android:id="@+id/profile_drawer"
+            android:title="My Profile"
+            android:icon="@drawable/ic_action_my_profile" />
 
         <item
-            android:id="@+id/nav_my_wallet"
-            android:title="My Profile"
-            android:icon="@drawable/location_icon"/>
+            android:id="@+id/kyc_drawer"
+            android:title="Fill Kyc Details"
+            android:icon="@drawable/ic_action_fill_kyc_details"/>
         <item
-            android:id="@+id/my_view_order"
-            android:title="Miles Locate"
-            android:icon="@drawable/location_icon"/>
+            android:id="@+id/ticket_drawer"
+            android:title="Complain Ticket"
+            android:icon="@drawable/ic_action_complain_text"/>
         <item
-            android:id="@+id/my_health_kart"
-            android:title="Health Issues"
-            android:icon="@drawable/location_icon"/>
+            android:id="@+id/feedback_drawer"
+            android:title="Give Feedback"
+            android:icon="@drawable/ic_action_feedback"/>
         <item
-            android:title="Visit Hospitals"
-            android:id="@+id/nav_visit_lab"
-            android:icon="@drawable/location_icon" />
+            android:title="Refer program App"
+            android:id="@+id/refer_drawer"
+            android:icon="@drawable/ic_action_refer_program" />
         <item
-            android:id="@+id/nav_refer_a_friend"
-            android:title="Refer And Earn"
-            android:icon="@drawable/location_icon" />
+            android:id="@+id/logout"
+            android:title="Logout"
+            android:icon="@drawable/ic_action_logout" />
 
     </group>
 </menu>

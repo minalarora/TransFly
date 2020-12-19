@@ -49,6 +49,15 @@ dependencies {
     // run time permission
     implementation 'com.nabinbhandari.android:permissions:3.8'
 
+    // shape of view
+    implementation 'com.github.florent37:shapeofview:1.4.7'
+
+    //pinview
+    implementation 'com.github.mukeshsolanki:android-otpview-pinview:2.1.2'
+
+    //material view
+    implementation 'com.google.android.material:material:1.2.1'
+
 
 
 }
