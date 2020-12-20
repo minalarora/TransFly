@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".Activty.EnterMobileNumberActivty">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/otp_images" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/round_as_project_code_upper"
+        android:orientation="vertical"
+        android:elevation="8dp"
+        android:layout_weight="0.3">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:fontFamily="@font/open_sans_semibold"
+            android:gravity="center"
+            android:maxLines="1"
+            android:paddingTop="8dp"
+            android:text="India (+91)"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:visibility="visible" />
+
+        <View
+            android:layout_width="100dp"
+            android:layout_height="1dp"
+            android:background="@color/white"
+            android:layout_gravity="center_horizontal"
+            android:alpha="0.7"
+            android:layout_marginTop="3dp"
+            />
+
+        <RelativeLayout
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="28dp"
+            android:background="@drawable/design_as_edittext"
+            android:elevation="6dp"
+            android:padding="5dp">
+
+            <ImageView
+                android:id="@+id/password_lock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="12dp"
+                android:alpha="0.6"
+                android:src="@drawable/ic_action_phone_number"
+                app:tint="@color/black" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:layout_toEndOf="@+id/password_lock"
+                android:background="@color/white"
+                android:fontFamily="@font/font_opensans"
+                android:hint="Enter Mobile Number"
+                android:paddingStart="16dp"
+                android:paddingEnd="12dp"
+                android:textSize="14dp" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:fontFamily="@font/open_sans_semibold"
+            android:gravity="center"
+            android:lineSpacingExtra="8dp"
+            android:paddingTop="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="Add your phone number. we'll send you a verification code so you know you are real"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/white"
+            android:textSize="14dp"
+            android:visibility="visible" />
+
+    </LinearLayout>
+
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="50dp"
+        app:cardCornerRadius="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="25dp"
+        app:cardElevation="10dp"
+        android:id="@+id/mobile_number_enter"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="35dp"
+        app:cardBackgroundColor="#FFA200"
+        android:layout_height="50dp">
+
+        <ImageView
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_action_next"
+            />
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>
