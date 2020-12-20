@@ -13,12 +13,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TransFly">
-        <activity android:name=".Activty.ReferActivity">
-
-        </activity>
-        <activity android:name=".Activty.FeedbackActivity">
-        </activity>
-        <activity android:name=".Activty.TicketComplaintActivity"></activity>
+        <activity android:name=".Activty.EmailScreen"></activity>
+        <activity android:name=".Activty.WhoScreen" />
+        <activity android:name=".Activty.OtpScreen" />
+        <activity android:name=".Activty.MobileScreen" />
+        <activity android:name=".Activty.LoginScreen" />
+        <activity android:name=".Activty.ReferActivity" />
+        <activity android:name=".Activty.FeedbackActivity" />
+        <activity android:name=".Activty.TicketComplaintActivity" />
         <activity android:name=".Activty.KycEditActivity" />
         <activity android:name=".Activty.ProfileActivity" />
         <activity android:name=".Activty.SignUpActivity" />
@@ -27,14 +29,12 @@
         <activity android:name=".Activty.OtpValidation" />
         <activity android:name=".Activty.SplashActivity" />
         <activity android:name=".Activty.LoginActivity" />
-        <activity android:name=".Activty.MapActivity" >
-
+        <activity android:name=".Activty.MapActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity android:name=".Activty.MainActivity" />
 
