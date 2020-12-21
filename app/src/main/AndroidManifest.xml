@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TransFly">
-        <activity android:name=".Activty.EmailScreen"></activity>
+        <activity android:name=".Activty.ProfileScreen"></activity>
+        <activity android:name=".Activty.EmailScreen" />
         <activity android:name=".Activty.WhoScreen" />
         <activity android:name=".Activty.OtpScreen" />
         <activity android:name=".Activty.MobileScreen" />
