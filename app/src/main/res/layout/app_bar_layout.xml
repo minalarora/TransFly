@@ -1,78 +1,182 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:map="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activty.MapActivity">
+    android:orientation="vertical"
+    tools:context=".Activty.HomeActivity">
 
     <ImageView
+        android:id="@+id/locationIcon"
         android:layout_width="22dp"
         android:layout_height="22dp"
-        android:id="@+id/locationIcon"
-        android:src="@drawable/location_icon"
-        />
+        android:src="@drawable/location_icon" />
 
     <androidx.cardview.widget.CardView
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_margin="20dp"
-        android:id="@+id/drawer_icon"
-        app:cardBackgroundColor="#ddffffff"
-        app:cardCornerRadius="20dp"
-        >
+        android:layout_width="match_parent"
+        app:cardBackgroundColor="@color/project_color"
+        android:id="@+id/card_parent_of_option"
+        android:layout_height="100dp">
 
         <ImageView
-            android:layout_width="22dp"
-            android:layout_height="22dp"
-            android:src="@drawable/ic_action_menu"
-            android:layout_gravity="center"
-            app:tint="@color/black" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/iceland_images"
+            android:scaleType="centerCrop"
+            />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.96"
+            android:background="#ee2e24"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_12ssp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:id="@+id/drawer_icon"
+                android:layout_marginStart="@dimen/_12ssp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_action_menu"
+                app:tint="@color/white" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/poppinsbold"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="TRANS FLY"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:visibility="visible" />
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="@dimen/_12ssp"
+                android:layout_gravity="end"
+                android:id="@+id/current_booking"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/ic_action_current_booking"
+                app:tint="@color/white" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/round_as_search"
+                android:hint="Search Research...."
+                android:id="@+id/search_bar"
+                android:layout_marginEnd="12dp"
+                android:paddingStart="12dp"
+                android:textSize="14sp"
+                android:focusable="false"
+                android:clickable="true"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/poppins"
+                android:paddingEnd="8dp"
+                android:drawableTint="#8c8c8c"
+                android:drawableStart="@drawable/ic_action_search"
+                android:drawablePadding="8dp"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="8dp"
+                />
+
+        </RelativeLayout>
+
+        </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/locationRecyclerView"
+        android:layout_below="@+id/card_parent_of_option"
+        />
+
+    <com.truck.transfly.MuUtils.MetalRecyclerViewPager
+        android:id="@+id/viewPager"
+        android:layout_below="@+id/locationRecyclerView"
+        android:layout_width="match_parent"
+        android:background="@android:color/transparent"
+        android:layout_height="@dimen/_72ssp"
+        app:itemMargin="32dp"/>
+
     <FrameLayout
         android:layout_width="match_parent"
+        android:layout_below="@+id/viewPager"
+        android:layout_above="@+id/navigation"
         android:layout_height="match_parent">
 
         <fragment
             android:id="@+id/map"
+            class="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            class="com.google.android.gms.maps.SupportMapFragment"/>
+            android:layout_height="match_parent" />
 
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="center"
-            android:visibility="gone"
             android:layout_marginTop="-13dp"
             android:src="@drawable/ic_baseline_location_on_24"
+            android:visibility="gone"
             app:tint="#ff0000" />
 
     </FrameLayout>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/my_location"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_margin="20dp"
-        android:id="@+id/my_location"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@+id/navigation"
         android:layout_alignParentEnd="true"
+        android:layout_margin="20dp"
         app:cardBackgroundColor="#ddffffff"
-        app:cardCornerRadius="20dp"
-        >
+        app:cardCornerRadius="20dp">
 
         <ImageView
             android:layout_width="22dp"
             android:layout_height="22dp"
-            android:src="@drawable/ic_action_location"
             android:layout_gravity="center"
+            android:src="@drawable/ic_action_location"
             app:tint="@color/blue" />
 
     </androidx.cardview.widget.CardView>
+
+    <com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
+        android:id="@+id/navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:itemIconTint="@drawable/select_color_bottom_nav"
+        app:itemTextColor="@drawable/color_bottom_nav_text"
+        app:itemTextAppearance="@style/bottom_typeface"
+        android:layout_gravity="bottom"
+        android:background="@android:color/white"
+        app:menu="@menu/navigation" />
 
 </RelativeLayout>

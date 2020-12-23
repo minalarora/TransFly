@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/home_checked"
+        android:visible="true"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/navigation_help"
+        android:icon="@drawable/need_help_checked"
+        android:visible="true"
+        android:title="Need Help" />
+
+
+    <item
+        android:id="@+id/navigation_contact"
+        android:icon="@drawable/contact_checked"
+        android:title="Referral"
+        />
+
+    <item
+        android:id="@+id/navigation_report"
+        android:icon="@drawable/report_checked"
+        android:title="Report"
+        />
+
+</menu>

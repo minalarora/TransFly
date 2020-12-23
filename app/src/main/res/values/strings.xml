@@ -14,4 +14,15 @@
 
     </string-array>
 
+    <string-array name="vehicle_number">
+
+        <item> Select Vehicle Number </item>
+        <item> 10010 </item>
+        <item> 20020 </item>
+        <item> 30030 </item>
+
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

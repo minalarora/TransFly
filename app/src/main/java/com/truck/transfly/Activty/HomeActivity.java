@@ -7,18 +7,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.graphics.Typeface;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
+import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Gravity;
+import android.view.Display;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,6 +27,8 @@ import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
@@ -50,19 +51,24 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCanceledListener;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.maps.android.ui.IconGenerator;
+import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.nabinbhandari.android.permissions.PermissionHandler;
 import com.nabinbhandari.android.permissions.Permissions;
+import com.truck.transfly.Adapter.LocationAdapter;
+import com.truck.transfly.Adapter.YourCoolAdapter;
+import com.truck.transfly.Model.PositionModel;
+import com.truck.transfly.Model.SliderModel;
+import com.truck.transfly.MuUtils.MetalRecyclerViewPager;
 import com.truck.transfly.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class MapActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class HomeActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mGoogleMap;
     private double LatituteOfTajMahal = 27.429707;
@@ -73,7 +79,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private double new5 = 28.975210, new6 = 78.942970;
     private double tulsipurLat=26.934889, tulsipurLong=82.499924;
     private DrawerLayout drawerLayout;
-    private CardView viewById;
+    private ImageView viewById;
     private LocationCallback mLocationCallBack;
     private SettingsClient mSettingsClient;
     private LocationSettingsRequest mLocationSettingsRequest;
@@ -86,6 +92,11 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
    private boolean isFirstTime=true;
     private LocationRequest locationRequest;
     private Marker marker;
+    private Handler handler;
+    private YourCoolAdapter fullMetalAdapter;
+    private MetalRecyclerViewPager viewPager;
+    private List<SliderModel> metalList=new ArrayList<>();
+    private BottomNavigationViewEx navigation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,11 +115,40 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         mapFragment.getMapAsync(this::onMapReady);
 
+        findViewById(R.id.current_booking).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(new Intent(HomeActivity.this,CurrentBookingActivity.class));
+
+            }
+        });
+        
+        navigation = findViewById(R.id.navigation);
+        navigation.enableAnimation(false);
+        navigation.enableItemShiftingMode(false);
+        navigation.enableShiftingMode(false);
+        navigation.setTextSize(12);
+        navigation.setPadding(0, 0, 0, 1);
+        navigation.setIconSize(26, 26);
+        navigation.setTextVisibility(true);
+
         drawerLayout = findViewById(R.id.drawer_layout);
 
         viewById = findViewById(R.id.drawer_icon);
 
-        mLocationClient = LocationServices.getFusedLocationProviderClient(MapActivity.this);
+        mLocationClient = LocationServices.getFusedLocationProviderClient(HomeActivity.this);
+
+        findViewById(R.id.search_bar).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent=new Intent(HomeActivity.this,SearchBarActivity.class);
+
+                startActivity(intent);
+
+            }
+        });
 
         viewById.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,6 +165,21 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
             }
         });
+
+        List<PositionModel> positionModelList=new ArrayList<>();
+
+        for (int i = 0; i < 10; i++) {
+
+            PositionModel positionModel=new PositionModel();
+            positionModelList.add(positionModel);
+
+        }
+
+        RecyclerView recyclerView=findViewById(R.id.locationRecyclerView);
+        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(HomeActivity.this,LinearLayoutManager.HORIZONTAL,false);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        LocationAdapter locationAdapter=new LocationAdapter(HomeActivity.this,positionModelList);
+        recyclerView.setAdapter(locationAdapter);
 
         mLocationCallBack=new LocationCallback(){
 
@@ -181,9 +236,61 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             }
         });
 
+        initViewImageCrousel();
+
         getCurrentLocation();
 
     }
+
+    private void initViewImageCrousel() {
+
+        handler = new Handler(getMainLooper());
+
+        for (int i = 0; i < 10; i++) {
+
+            SliderModel sliderModel=new SliderModel();
+            metalList.add(sliderModel);
+
+        }
+
+        DisplayMetrics metrics = getDisplayMetrics();
+        fullMetalAdapter = new YourCoolAdapter(metrics, metalList,HomeActivity.this);
+        viewPager = findViewById(R.id.viewPager);
+        viewPager.setAdapter(fullMetalAdapter);
+
+        handler.postDelayed(runnable,2500);
+
+    }
+
+    private DisplayMetrics getDisplayMetrics() {
+        Display display = getWindowManager().getDefaultDisplay();
+        DisplayMetrics metrics = new DisplayMetrics();
+        display.getMetrics(metrics);
+
+        return metrics;
+    }
+
+    static final int SPEED_SCROLL = 3000;
+    final Runnable runnable = new Runnable() {
+        int count = 0;
+        boolean flag = true;
+
+        @Override
+        public void run() {
+            if (count < fullMetalAdapter.getItemCount()) {
+                if (count == fullMetalAdapter.getItemCount() - 1) {
+                    flag = false;
+                } else if (count == 0) {
+                    flag = true;
+                }
+                if (flag) count++;
+                else count--;
+
+                viewPager.smoothScrollToPosition(count);
+                handler.postDelayed(this, SPEED_SCROLL);
+            }
+        }
+    };
 
     private void navigationViewListener(NavigationView navigationView) {
 
@@ -196,35 +303,35 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
                     case R.id.profile_drawer:
 
-                        Intent intent=new Intent(MapActivity.this,ProfileActivity.class);
+                        Intent intent=new Intent(HomeActivity.this,ProfileActivity.class);
                         startActivity(intent);
 
                         break;
 
                     case R.id.kyc_drawer:
 
-                        Intent kyc_intent=new Intent(MapActivity.this,KycEditActivity.class);
+                        Intent kyc_intent=new Intent(HomeActivity.this,KycEditActivity.class);
                         startActivity(kyc_intent);
 
                         break;
 
                     case R.id.ticket_drawer:
 
-                        Intent ticket_complain=new Intent(MapActivity.this,TicketComplaintActivity.class);
+                        Intent ticket_complain=new Intent(HomeActivity.this,TicketComplaintActivity.class);
                         startActivity(ticket_complain);
 
                         break;
 
                     case R.id.feedback_drawer:
 
-                        Intent feedback_intent=new Intent(MapActivity.this,FeedbackActivity.class);
+                        Intent feedback_intent=new Intent(HomeActivity.this,FeedbackActivity.class);
                         startActivity(feedback_intent);
 
                         break;
 
                     case R.id.refer_drawer:
 
-                        Intent refer_intent=new Intent(MapActivity.this,ReferActivity.class);
+                        Intent refer_intent=new Intent(HomeActivity.this,ReferActivity.class);
                         startActivity(refer_intent);
 
                         break;
@@ -232,7 +339,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
                     case R.id.logout:
 
-                        Intent logout_intent=new Intent(MapActivity.this,LoginActivity.class);
+                        Intent logout_intent=new Intent(HomeActivity.this,LoginActivity.class);
                         startActivity(logout_intent);
 
                         break;
@@ -339,7 +446,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         builder.setAlwaysShow(true);
         mLocationSettingsRequest = builder.build();
 
-        mSettingsClient = LocationServices.getSettingsClient(MapActivity.this);
+        mSettingsClient = LocationServices.getSettingsClient(HomeActivity.this);
 
         mSettingsClient
                 .checkLocationSettings(mLocationSettingsRequest)
@@ -359,7 +466,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                             case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
                                 try {
                                     ResolvableApiException rae = (ResolvableApiException) e;
-                                    rae.startResolutionForResult(MapActivity.this, REQUEST_CHECK_SETTINGS);
+                                    rae.startResolutionForResult(HomeActivity.this, REQUEST_CHECK_SETTINGS);
                                 } catch (IntentSender.SendIntentException sie) {
                                     Log.e("GPS", "Unable to execute request.");
                                 }
@@ -384,6 +491,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 Manifest.permission.ACCESS_FINE_LOCATION);
 
         return permissionState == PackageManager.PERMISSION_GRANTED;
+
     }
 
     private void doLocationWork() {
@@ -434,7 +542,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
                 int position = (int) (marker.getTag());
 
-                Toast.makeText(MapActivity.this, "" + position, Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(HomeActivity.this,SelectYourVehicleActivity.class));
 
                 return false;
             }
