@@ -68,6 +68,12 @@
             android:resizeableActivity="false"
             android:screenOrientation="portrait"
             />
+
+        <activity android:name=".Activty.ChangePasswordActivity"
+            android:resizeableActivity="false"
+            android:screenOrientation="portrait"
+            />
+
         <activity android:name=".Activty.EnterMobileNumberActivty"
             android:resizeableActivity="false"
             android:screenOrientation="portrait"
