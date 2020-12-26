@@ -4,50 +4,97 @@
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:requestLegacyExternalStorage="true"
         android:label="@string/app_name"
+        android:largeHeap="true"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:name=".utils.TransflyApplication"
         android:theme="@style/Theme.TransFly">
-        <activity android:name=".Activty.Screenshot"></activity>
-        <activity android:name=".Activty.ShowInvoiceActivity"></activity>
-        <activity android:name=".Activty.AreaManagerActivity">
+        <activity android:name=".Activty.ProfileScreen"
+            android:resizeableActivity="false"
+            android:screenOrientation="portrait"
+            ></activity>
+        <activity android:name=".Activty.EmailScreen"
+            android:resizeableActivity="false"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".Activty.WhoScreen"
+            android:resizeableActivity="false"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".Activty.OtpScreen"
+            android:resizeableActivity="false"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".Activty.MobileScreen"
+            android:resizeableActivity="false"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".Activty.LoginScreen"
+            android:resizeableActivity="false"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".Activty.ReferActivity"
+            android:resizeableActivity="false"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".Activty.FeedbackActivity"
+            android:resizeableActivity="false"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".Activty.TicketComplaintActivity"
+            android:resizeableActivity="false"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".Activty.KycEditActivity"
+            android:resizeableActivity="false"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".Activty.ProfileActivity"
+            android:resizeableActivity="false"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".Activty.SignUpActivity"
+            android:resizeableActivity="false"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".Activty.UserChangedActivity"
+            android:resizeableActivity="false"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".Activty.EnterMobileNumberActivty"
+            android:resizeableActivity="false"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".Activty.OtpValidation"
+            android:resizeableActivity="false"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".Activty.SplashActivity"
+            android:resizeableActivity="false"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activty.TransporterActivity" />
-        <activity android:name=".Activty.FieldStafBookingConfirmationActivity" />
-        <activity android:name=".Activty.SelectYourVehicleActivity" />
-        <activity android:name=".Activty.CurrentBookingActivity" />
-        <activity android:name=".Activty.SearchBarActivity" />
-        <activity android:name=".Activty.EmailScreen" />
-        <activity android:name=".Activty.WhoScreen" />
-        <activity android:name=".Activty.OtpScreen" />
-        <activity android:name=".Activty.MobileScreen" />
-        <activity android:name=".Activty.LoginScreen" />
-        <activity android:name=".Activty.ReferActivity" />
-        <activity android:name=".Activty.FeedbackActivity" />
-        <activity android:name=".Activty.TicketComplaintActivity" />
-        <activity android:name=".Activty.KycEditActivity" />
-        <activity android:name=".Activty.ProfileActivity" />
-        <activity android:name=".Activty.SignUpActivity" />
-        <activity android:name=".Activty.UserChangedActivity" />
-        <activity android:name=".Activty.EnterMobileNumberActivty" />
-        <activity android:name=".Activty.OtpValidation" />
-        <activity android:name=".Activty.SplashActivity" />
-        <activity android:name=".Activty.LoginActivity" />
-        <activity android:name=".Activty.HomeActivity" />
-        <activity android:name=".Activty.FieldStafActivity"></activity>
+        <activity android:name=".Activty.LoginActivity"
+            android:resizeableActivity="false"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".Activty.MapActivity">
+
+        </activity>
+        <activity android:name=".Activty.MainActivity" />
 
         <uses-library
             android:name="org.apache.http.legacy"
@@ -59,19 +106,6 @@
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="@string/API_KEY" />
-
-        <provider
-            android:name="androidx.core.content.FileProvider"
-            android:authorities="com.truck.transfly.provider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <!-- ressource file to create -->
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths">
-            </meta-data>
-        </provider>
-
     </application>
 
 </manifest>

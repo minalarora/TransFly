@@ -7,8 +7,16 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.truck.transfly.R;
+import com.truck.transfly.utils.ApiClient;
+import com.truck.transfly.utils.ApiEndpoints;
+
+import retrofit2.Retrofit;
 
 public class LoginActivity extends AppCompatActivity {
+
+    private Retrofit retrofit = null;
+    private ApiEndpoints api = null;
+    private String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +40,12 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+
+        retrofit = ApiClient.getRetrofitClient();
+        if(retrofit!=null)
+        {
+            api = retrofit.create(ApiEndpoints.class);
+        }
 
 
     }
