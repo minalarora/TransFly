@@ -527,11 +527,11 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         mGoogleMap.getUiSettings().setMapToolbarEnabled(false);
 
-        showMarker(LatituteOfTajMahal, LongitudeOfTajMahal, 1, "Balrampur 500 rupees");
-        showMarker(new1, new2, 2, "Itwa 100 rupess");
-        showMarker(new3, new4, 3, "Basti 3000 rupees");
-        showMarker(new5, new6, 4, "Nanital");
-        showMarker(tulsipurLat, tulsipurLong, 5, "Babhnan Mines\nPricing 500 Rupees");
+        showMarker(LatituteOfTajMahal, LongitudeOfTajMahal, 1, "Rate: 4\nEtl:4");
+        showMarker(new1, new2, 2, "Rate: 5\nEtl:5");
+        showMarker(new3, new4, 3, "Rate: 3\nEtl:3");
+        showMarker(new5, new6, 4, "Rate: 4\nEtl:4");
+        showMarker(tulsipurLat, tulsipurLong, 5, "Rate: 4\nEtl:4");
 
         mGoogleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override

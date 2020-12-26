@@ -177,7 +177,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:fontFamily="@font/poppins"
-                            android:text="John deo"
+                            android:text="Minal gareeb Driver"
                             android:textColor="@color/black"
                             android:textSize="13dp" />
 
