@@ -89,7 +89,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
     private double Mylongitude;
     private double Mylatitude;
     private boolean isStart=true;
-   private boolean isFirstTime=true;
+    private boolean isFirstTime=true;
     private LocationRequest locationRequest;
     private Marker marker;
     private Handler handler;
