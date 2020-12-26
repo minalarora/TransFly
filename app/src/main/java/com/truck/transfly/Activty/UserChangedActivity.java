@@ -7,25 +7,29 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 import com.truck.transfly.R;
+import com.truck.transfly.databinding.ActivityUserChangedBinding;
 
 public class UserChangedActivity extends AppCompatActivity {
 
     private ImageView check1, check2, check3, check4;
     private int i=0;
+    private ActivityUserChangedBinding activity;
+    private String type = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_changed);
+        activity = DataBindingUtil.setContentView(this,R.layout.activity_user_changed);
 
-        check1 = findViewById(R.id.check1);
-        check2 = findViewById(R.id.check2);
-        check3 = findViewById(R.id.check3);
-        check4 = findViewById(R.id.check4);
+        check1 = activity.check1;
+        check2 = activity.check2;
+        check3 =activity.check3;
+        check4 = activity.check4;
 
-        findViewById(R.id.checkedRound).setOnClickListener(new View.OnClickListener() {
+        activity.checkedRound.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -42,7 +46,7 @@ public class UserChangedActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.card1).setOnClickListener(new View.OnClickListener() {
+        activity.card1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -55,7 +59,7 @@ public class UserChangedActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.card2).setOnClickListener(new View.OnClickListener() {
+        activity.card2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -68,7 +72,7 @@ public class UserChangedActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.card3).setOnClickListener(new View.OnClickListener() {
+        activity.card3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -81,7 +85,7 @@ public class UserChangedActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.card4).setOnClickListener(new View.OnClickListener() {
+        activity.card4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -103,5 +107,11 @@ public class UserChangedActivity extends AppCompatActivity {
         check3.setVisibility(View.GONE);
         check4.setVisibility(View.GONE);
 
+    }
+
+
+    private void onSelectedUser(String type)
+    {
+        //give user type to next activity
     }
 }
