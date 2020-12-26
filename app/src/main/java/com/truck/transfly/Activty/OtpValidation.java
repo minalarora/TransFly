@@ -13,10 +13,16 @@ import com.truck.transfly.databinding.ActivityOtpValidationBinding;
 public class OtpValidation extends AppCompatActivity {
 
     private ActivityOtpValidationBinding activity;
+    private boolean fromForgot;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity = DataBindingUtil.setContentView(this,R.layout.activity_otp_validation);
+
+        Intent intent = getIntent();
+
+         fromForgot = intent.getBooleanExtra("fromForgot", false);
 
         activity.otpSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,12 +44,17 @@ public class OtpValidation extends AppCompatActivity {
     private void confirmOtp(String text)
     {
 
-        if(true)
-        {
-            startActivity(new Intent(OtpValidation.this,UserChangedActivity.class));
+        if(true) {
+
+            if(!fromForgot) {
+                startActivity(new Intent(OtpValidation.this, UserChangedActivity.class));
+                return;
+            }
+
+            startActivity(new Intent(OtpValidation.this, ChangePasswordActivity.class));
+
         }
-        else
-        {
+        else {
             //invalid otp
         }
 

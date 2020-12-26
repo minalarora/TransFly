@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/profile_drawer"
+            android:title="My Profile"
+            android:icon="@drawable/ic_action_my_profile" />
+
+        <item
+            android:id="@+id/kyc_drawer"
+            android:title="Fill Kyc Details"
+            android:icon="@drawable/ic_action_fill_kyc_details"/>
+        <item
+            android:id="@+id/ticket_drawer"
+            android:title="Complain Ticket"
+            android:icon="@drawable/ic_action_complain_text"/>
+
+        <item
+            android:title="Add Vehicle"
+            android:id="@+id/add_vehicle"
+            android:icon="@drawable/ic_action_add_vehicle" />
+
+        <item
+            android:title="My Vehicle"
+            android:id="@+id/my_vehicle"
+            android:icon="@drawable/ic_action_my_vehicle" />
+        <item
+            android:id="@+id/feedback_drawer"
+            android:title="Give Feedback"
+            android:icon="@drawable/ic_action_feedback"/>
+        <item
+            android:title="Refer program App"
+            android:id="@+id/refer_drawer"
+            android:icon="@drawable/ic_action_refer_program" />
+
+        <item
+            android:title="Emergency Details"
+            android:id="@+id/emergency_details"
+            android:icon="@drawable/ic_action_emergency_contact" />
+
+        <item
+            android:id="@+id/logout"
+            android:title="Logout"
+            android:icon="@drawable/ic_action_logout" />
+
+    </group>
+</menu>

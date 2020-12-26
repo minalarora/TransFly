@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools">
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Activty.KycEditActivity">
+    tools:context=".Activty.VehicleOwnerKycActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
@@ -67,7 +68,7 @@
                 android:layout_marginTop="-40dp"
                 android:layout_height="wrap_content">
 
-                <Spinner android:entries="@array/details_page"
+                <Spinner android:entries="@array/vehicle_owner"
                     android:id="@+id/register_category"
                     android:layout_width="260dp"
                     android:layout_marginStart="@dimen/_12ssp"
@@ -113,8 +114,102 @@
 
             </RelativeLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:id="@+id/bank_parent"
+                android:visibility="gone"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_marginTop="@dimen/_30ssp"
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="@dimen/_12ssp"
+                    android:layout_marginEnd="@dimen/_12ssp"
+                    app:boxBackgroundColor="@color/white"
+                    android:padding="@dimen/_4ssp"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter Bank Name">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:id="@+id/bank_name"
+                        android:fontFamily="@font/opensansregular"
+                        android:textSize="@dimen/_15ssp"
+                        android:layout_height="wrap_content"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_marginTop="@dimen/_30ssp"
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="@dimen/_12ssp"
+                    android:layout_marginEnd="@dimen/_12ssp"
+                    app:boxBackgroundColor="@color/white"
+                    android:padding="@dimen/_4ssp"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter Account Number">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:id="@+id/bank_number"
+                        android:fontFamily="@font/opensansregular"
+                        android:textSize="@dimen/_15ssp"
+                        android:layout_height="wrap_content"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_marginTop="@dimen/_30ssp"
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="@dimen/_12ssp"
+                    android:layout_marginEnd="@dimen/_12ssp"
+                    app:boxBackgroundColor="@color/white"
+                    android:padding="@dimen/_4ssp"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter Bank IFC">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:id="@+id/bank_ifc"
+                        android:fontFamily="@font/opensansregular"
+                        android:textSize="@dimen/_15ssp"
+                        android:layout_height="wrap_content"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </LinearLayout>
+
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/email"
+                android:id="@+id/pan_edit_layout"
+                android:layout_marginTop="@dimen/_30ssp"
+                android:layout_width="match_parent"
+                android:layout_marginStart="@dimen/_12ssp"
+                android:layout_marginEnd="@dimen/_12ssp"
+                app:boxBackgroundColor="@color/white"
+                android:padding="@dimen/_4ssp"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:hint="Enter Pan Number">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:id="@+id/email_edittext"
+                    android:fontFamily="@font/opensansregular"
+                    android:textSize="@dimen/_15ssp"
+                    android:layout_height="wrap_content"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tds_editLayout"
                 android:layout_marginTop="@dimen/_30ssp"
                 android:layout_width="match_parent"
                 android:layout_marginStart="@dimen/_12ssp"
@@ -122,11 +217,11 @@
                 app:boxBackgroundColor="@color/white"
                 android:padding="@dimen/_4ssp"
                 android:layout_height="wrap_content"
-                android:hint="Enter Number">
+                android:hint="Enter TDS Number">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:id="@+id/email_edittext"
+                    android:id="@+id/enter_tds_number"
                     android:fontFamily="@font/opensansregular"
                     android:textSize="@dimen/_15ssp"
                     android:layout_height="wrap_content"
@@ -140,6 +235,7 @@
                 android:layout_height="45dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="40dp"
+                android:layout_marginBottom="@dimen/_25ssp"
                 android:background="@drawable/design_as_edittext_gradient"
                 android:elevation="6dp">
 
@@ -159,3 +255,5 @@
     </androidx.core.widget.NestedScrollView>
 
 </LinearLayout>
+
+</layout>

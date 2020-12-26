@@ -12,5 +12,6 @@
     <color name="blue">#0000ff</color>
     <color name="quantum_yellow">#FFA200</color>
     <color name="project_color">@color/quantum_pink</color>
+    <color name="red_900">#B71C1C</color>
     <color name="project_color2">@color/quantum_pink</color>
 </resources>

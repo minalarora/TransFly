@@ -199,6 +199,7 @@
                 android:layout_marginStart="@dimen/_10ssp"
                 android:layout_marginTop="@dimen/_4ssp"
                 android:layout_marginEnd="@dimen/_10ssp"
+                android:visibility="gone"
                 android:textColorHint="#8c8c8c"
                 app:hintAnimationEnabled="true">
 

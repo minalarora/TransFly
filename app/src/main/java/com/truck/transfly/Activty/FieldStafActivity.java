@@ -90,9 +90,15 @@ public class FieldStafActivity extends AppCompatActivity {
 
                         break;
 
+                    case R.id.emergency_details:
+
+                        startActivity(new Intent(FieldStafActivity.this,EmergencyContactActivity.class));
+
+                        break;
+
                     case R.id.kyc_drawer:
 
-                        Intent kyc_intent=new Intent(FieldStafActivity.this,KycEditActivity.class);
+                        Intent kyc_intent=new Intent(FieldStafActivity.this, AreaFieldStafActivity.class);
                         startActivity(kyc_intent);
 
                         break;

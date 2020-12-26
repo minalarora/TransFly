@@ -118,6 +118,7 @@
             android:fontFamily="@font/open_sans_semibold"
             android:gravity="center"
             android:maxLines="1"
+            android:id="@+id/forgotPassword"
             android:textStyle="bold"
             android:paddingTop="8dp"
             android:text="Forgot Password?"

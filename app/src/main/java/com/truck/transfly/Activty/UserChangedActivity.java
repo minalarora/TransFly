@@ -8,110 +8,63 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.truck.transfly.Adapter.ChangeUserAdapter;
+import com.truck.transfly.Model.WhoModel;
 import com.truck.transfly.R;
 import com.truck.transfly.databinding.ActivityUserChangedBinding;
+import com.truck.transfly.utils.MyUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserChangedActivity extends AppCompatActivity {
 
-    private ImageView check1, check2, check3, check4;
-    private int i=0;
     private ActivityUserChangedBinding activity;
-    private String type = null;
+    private List<WhoModel> whoModelList=new ArrayList<>();
+    private WhoModel whoModelGlobal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity = DataBindingUtil.setContentView(this,R.layout.activity_user_changed);
 
-        check1 = activity.check1;
-        check2 = activity.check2;
-        check3 =activity.check3;
-        check4 = activity.check4;
+        whoModelList.add(MyUtils.returnModel(R.drawable.vehicleowner,"Vehicle Owner","Kyc Needed","Full name - Address"));
+        whoModelList.add(MyUtils.returnModel(R.drawable.vehicleowner,"Transporter","Kyc Needed","Full name - Address"));
+        whoModelList.add(MyUtils.returnModel(R.drawable.vehicleowner,"Field Staf","Kyc Needed","Full name - Address"));
+        whoModelList.add(MyUtils.returnModel(R.drawable.vehicleowner,"Area Manager","Kyc Needed","Full name - Address"));
+
+        RecyclerView recyclerViewUserType = activity.recyclerViewUserType;
+        ChangeUserAdapter changeUserAdapter=new ChangeUserAdapter(UserChangedActivity.this,whoModelList);
+        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(UserChangedActivity.this,LinearLayoutManager.VERTICAL,false);
+        recyclerViewUserType.setLayoutManager(linearLayoutManager);
+        recyclerViewUserType.setAdapter(changeUserAdapter);
+
+        changeUserAdapter.setOnClickListener(new ChangeUserAdapter.onClickListener() {
+
+            @Override
+            public void onClick(WhoModel whoModel) {
+
+                whoModelGlobal=whoModel;
+
+            }
+        });
 
         activity.checkedRound.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(i==0){
+                if(whoModelGlobal!=null){
 
-                    Toast.makeText(UserChangedActivity.this, "Please Select a user", Toast.LENGTH_SHORT).show();
-
-                    return;
+                    // send next activity
 
                 }
 
-                startActivity(new Intent(UserChangedActivity.this,SignUpActivity.class));
-
-            }
-        });
-
-        activity.card1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                hideAllCheckImages();
-
-                check1.setVisibility(View.VISIBLE);
-
-                i=1;
-
-            }
-        });
-
-        activity.card2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                hideAllCheckImages();
-
-                check2.setVisibility(View.VISIBLE);
-
-                i=2;
-
-            }
-        });
-
-        activity.card3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                hideAllCheckImages();
-
-                check3.setVisibility(View.VISIBLE);
-
-                i=3;
-
-            }
-        });
-
-        activity.card4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                hideAllCheckImages();
-
-                check4.setVisibility(View.VISIBLE);
-
-                i=4;
-
             }
         });
 
     }
 
-    private void hideAllCheckImages() {
-
-        check1.setVisibility(View.GONE);
-        check2.setVisibility(View.GONE);
-        check3.setVisibility(View.GONE);
-        check4.setVisibility(View.GONE);
-
-    }
-
-
-    private void onSelectedUser(String type)
-    {
-        //give user type to next activity
-    }
 }
