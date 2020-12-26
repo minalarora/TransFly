@@ -1,17 +1,34 @@
 package com.truck.transfly.utils;
 
+import com.truck.transfly.Model.RequestAadhaarDetails;
+import com.truck.transfly.Model.RequestBankDetails;
+import com.truck.transfly.Model.RequestBooking;
 import com.truck.transfly.Model.RequestCredentials;
+import com.truck.transfly.Model.RequestEmergencyDetails;
+import com.truck.transfly.Model.RequestFeedback;
+import com.truck.transfly.Model.RequestGstDetails;
+import com.truck.transfly.Model.RequestInvoice;
+import com.truck.transfly.Model.RequestPanDetails;
+import com.truck.transfly.Model.RequestStaDetails;
+import com.truck.transfly.Model.RequestTdsDetails;
+import com.truck.transfly.Model.RequestUser;
+import com.truck.transfly.Model.RequestVehicle;
 import com.truck.transfly.Model.ResponseAreaManager;
+import com.truck.transfly.Model.ResponseBooking;
 import com.truck.transfly.Model.ResponseFieldStaff;
 import com.truck.transfly.Model.ResponseTransporter;
 import com.truck.transfly.Model.ResponseVehicleOwner;
 
+import okhttp3.Request;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.HEAD;
 import retrofit2.http.Header;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface ApiEndpoints {
     //api
@@ -30,19 +47,150 @@ public interface ApiEndpoints {
     Call<ResponseFieldStaff> getFieldStaff(@Header("Authorization")String token);
 
     @POST("/login")
-    Call<ResponseBody> login(@Body RequestCredentials credentials);
+    Call<ResponseBody> login(@Header("Authorization")String token,@Body RequestCredentials credentials);
 
     @POST("/vehicleowner/login")
-    Call<ResponseVehicleOwner> vehicleOwnerLogin(@Body RequestCredentials credentials);
+    Call<ResponseVehicleOwner> vehicleOwnerLogin(@Header("Authorization")String token,@Body RequestCredentials credentials);
 
     @POST("/areamanager/login")
-    Call<ResponseAreaManager> areaManagerLogin(@Body RequestCredentials credentials);
+    Call<ResponseAreaManager> areaManagerLogin(@Header("Authorization")String token,@Body RequestCredentials credentials);
 
     @POST("/transporter/login")
-    Call<ResponseTransporter> transporterLogin(@Body RequestCredentials credentials);
+    Call<ResponseTransporter> transporterLogin(@Header("Authorization")String token,@Body RequestCredentials credentials);
 
     @POST("/fieldstaff/login")
-    Call<ResponseFieldStaff> fieldStaffLogin(@Body RequestCredentials credentials);
+    Call<ResponseFieldStaff> fieldStaffLogin(@Header("Authorization")String token,@Body RequestCredentials credentials);
+
+    @PATCH("/vehicleowner/me")
+    Call<ResponseBody> aadhaarUpdateVehicleOwner(@Header("Authorization")String token,@Body RequestAadhaarDetails aadhaarDetails);
+
+    @PATCH("/areamanager/me")
+    Call<ResponseBody> aadhaarUpdateAreaManager(@Header("Authorization")String token,@Body RequestAadhaarDetails aadhaarDetails);
+
+    @PATCH("/transporter/me")
+    Call<ResponseBody> aadhaarUpdateTransporter(@Header("Authorization")String token,@Body RequestAadhaarDetails aadhaarDetails);
+
+    @PATCH("/fieldstaff/me")
+    Call<ResponseBody> aadhaarUpdateFieldStaff(@Header("Authorization")String token,@Body RequestAadhaarDetails aadhaarDetails);
+
+    @PATCH("/vehicleowner/me")
+    Call<ResponseBody> panUpdateVehicleOwner(@Header("Authorization")String token,@Body RequestPanDetails panDetails);
+
+    @PATCH("/areamanager/me")
+    Call<ResponseBody> panUpdateAreaManager(@Header("Authorization")String token,@Body RequestPanDetails panDetails);
+
+    @PATCH("/transporter/me")
+    Call<ResponseBody> panUpdateTransporter(@Header("Authorization")String token,@Body RequestPanDetails panDetails);
+
+    @PATCH("/fieldstaff/me")
+    Call<ResponseBody> panUpdateFieldStaff(@Header("Authorization")String token,@Body RequestPanDetails panDetails);
+
+    @PATCH("/vehicleowner/me")
+    Call<ResponseBody> bankUpdateVehicleOwner(@Header("Authorization")String token,@Body RequestBankDetails bankDetails);
+
+    @PATCH("/areamanager/me")
+    Call<ResponseBody> bankUpdateAreaManager(@Header("Authorization")String token,@Body RequestBankDetails bankDetails);
+
+    @PATCH("/transporter/me")
+    Call<ResponseBody> bankUpdateTransporter(@Header("Authorization")String token,@Body RequestBankDetails bankDetails);
+
+    @PATCH("/fieldstaff/me")
+    Call<ResponseBody> bankUpdateFieldStaff(@Header("Authorization")String token,@Body RequestBankDetails bankDetails);
+
+    @PATCH("/vehicleowner/me")
+    Call<ResponseBody> emergencyContactUpdateVehicleOwner(@Header("Authorization")String token,@Body RequestEmergencyDetails emergencyContactDetails);
+
+    @PATCH("/areamanager/me")
+    Call<ResponseBody> emergencyContactUpdateAreaManager(@Header("Authorization")String token,@Body RequestEmergencyDetails emergencyContactDetails);
+
+    @PATCH("/transporter/me")
+    Call<ResponseBody> emergencyContactUpdateTransporter(@Header("Authorization")String token,@Body RequestEmergencyDetails emergencyContactDetails);
+
+    @PATCH("/fieldstaff/me")
+    Call<ResponseBody> emergencyContactUpdateFieldStaff(@Header("Authorization")String token,@Body RequestEmergencyDetails emergencyContactDetails);
+
+    @PATCH("/vehicleowner/me")
+    Call<ResponseBody> gstUpdateVehicleOwner(@Header("Authorization")String token,@Body RequestGstDetails gstDetails);
+
+    @PATCH("/areamanager/me")
+    Call<ResponseBody> gstUpdateAreaManager(@Header("Authorization")String token,@Body RequestGstDetails gstDetails);
+
+    @PATCH("/transporter/me")
+    Call<ResponseBody> gstUpdateTransporter(@Header("Authorization")String token,@Body RequestGstDetails gstDetails);
+
+    @PATCH("/fieldstaff/me")
+    Call<ResponseBody> gstUpdateFieldStaff(@Header("Authorization")String token,@Body RequestGstDetails gstDetails);
+
+
+    @PATCH("/vehicleowner/me")
+    Call<ResponseBody> staUpdateVehicleOwner(@Header("Authorization")String token,@Body RequestStaDetails staDetails);
+
+    @PATCH("/areamanager/me")
+    Call<ResponseBody> staUpdateAreaManager(@Header("Authorization")String token,@Body RequestStaDetails staDetails);
+
+    @PATCH("/transporter/me")
+    Call<ResponseBody> staUpdateTransporter(@Header("Authorization")String token,@Body RequestStaDetails staDetails);
+
+    @PATCH("/fieldstaff/me")
+    Call<ResponseBody> staUpdateFieldStaff(@Header("Authorization")String token,@Body RequestStaDetails staDetails);
+
+    @PATCH("/vehicleowner/me")
+    Call<ResponseBody> tdsUpdateVehicleOwner(@Header("Authorization")String token,@Body RequestTdsDetails tdsDetails);
+
+    @POST("/vehicleowner")
+    Call<ResponseBody> createVehicleOwner(@Header("Authorization")String token,@Body RequestUser user);
+
+    @POST("/areamanager")
+    Call<ResponseBody> createAreaManager(@Header("Authorization")String token,@Body RequestUser user);
+
+    @POST("/transporter")
+    Call<ResponseBody> createTransporter(@Header("Authorization")String token,@Body RequestUser user);
+
+    @POST("/fieldstaff")
+    Call<ResponseBody> createFieldStaff(@Header("Authorization")String token,@Body RequestUser user);
+
+    @POST("/booking")
+    Call<ResponseBody> createBooking(@Header("Authorization")String token,@Body RequestBooking booking);
+
+    @POST("/feedback")
+    Call<ResponseBody> createFeedback(@Header("Authorization")String token,@Body RequestFeedback feedback);
+
+    @PATCH("/booking/{id}")
+    Call<ResponseBody> updateBooking(@Header("Authorization")String token, @Body RequestInvoice invoice, @Path("id") int id);
+
+    @GET("/booking/{id}")
+    Call<ResponseBooking> getSingleBooking(@Header("Authorization")String token, @Path("id") int id);
+
+    @GET("/invoice/{id}")
+    Call<ResponseBooking> getSingleInvoice(@Header("Authorization")String token, @Path("id") int id);
+
+    @GET("/invoice/me")
+    Call<ResponseBody> getVehicleOwnerInvoice(@Header("Authorization")String token);
+
+    @GET("/booking/me")
+    Call<ResponseBody> getVehicleOwnerBooking(@Header("Authorization")String token);
+
+    @POST("/vehicle")
+    Call<ResponseBody> addVehicle(@Header("Authorization")String token, @Body RequestVehicle vehicle);
+
+    @GET("/vehicle/me")
+    Call<ResponseBody> getVehicleOwnerVehicle(@Header("Authorization")String token);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }
