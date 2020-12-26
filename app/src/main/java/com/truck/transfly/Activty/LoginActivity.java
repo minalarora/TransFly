@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.truck.transfly.Frament.ForgotPasswordDialog;
 import com.truck.transfly.Model.RequestCredentials;
 import com.truck.transfly.Model.ResponseAreaManager;
 import com.truck.transfly.Model.ResponseFieldStaff;
@@ -35,7 +36,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         activity = DataBindingUtil.setContentView(this,R.layout.activity_login);
 
-
         activity.loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -44,6 +44,16 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        activity.forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                ForgotPasswordDialog forgotPasswordDialog=new ForgotPasswordDialog();
+                forgotPasswordDialog.setCancelable(false);
+                forgotPasswordDialog.show(getSupportFragmentManager(),"forgotPasswordDialog");
+
+            }
+        });
 
         activity.signup.setOnClickListener(new View.OnClickListener() {
             @Override

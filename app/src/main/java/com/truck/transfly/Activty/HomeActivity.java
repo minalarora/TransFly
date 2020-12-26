@@ -15,15 +15,14 @@ import android.provider.Settings;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -109,6 +108,10 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         navigationViewListener(navigationView);
 
         navigationView.setItemIconTintList(null);
+
+        Menu menu = navigationView.getMenu();
+        MenuItem item = menu.findItem(R.id.emergency_details);
+        item.setVisible(false);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -310,8 +313,22 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                     case R.id.kyc_drawer:
 
-                        Intent kyc_intent=new Intent(HomeActivity.this,KycEditActivity.class);
+                        Intent kyc_intent=new Intent(HomeActivity.this, VehicleOwnerKycActivity.class);
                         startActivity(kyc_intent);
+
+                        break;
+
+                    case R.id.add_vehicle:
+
+                        Intent addVehicleActivity=new Intent(HomeActivity.this, AddVehicleActivity.class);
+                        startActivity(addVehicleActivity);
+
+                        break;
+
+                    case R.id.my_vehicle:
+
+                        Intent vehicleOwnerKyc=new Intent(HomeActivity.this, VehicleOwnerKycActivity.class);
+                        startActivity(vehicleOwnerKyc);
 
                         break;
 

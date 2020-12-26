@@ -26,6 +26,12 @@
             android:title="Refer program App"
             android:id="@+id/refer_drawer"
             android:icon="@drawable/ic_action_refer_program" />
+
+        <item
+            android:title="Emergency Details"
+            android:id="@+id/emergency_details"
+            android:icon="@drawable/ic_action_emergency_contact" />
+
         <item
             android:id="@+id/logout"
             android:title="Logout"

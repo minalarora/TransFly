@@ -1,102 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:openDrawer="start">
 
-    <androidx.appcompat.widget.Toolbar
+    <include
+        layout="@layout/area_manager_app_layout"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        app:contentInsetStart="0dp">
+        android:layout_height="match_parent" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:itemTextColor="@color/white"
+        app:itemIconTint="@color/white"
+        android:background="@color/project_color"
+        app:itemTextAppearance="@style/RobotoTextViewStyle"
+        app:headerLayout="@layout/nav_header_home_screen"
+        app:menu="@menu/activity_home_screen_drawer" />
 
-            <ImageView
-                android:id="@+id/drawer_icon"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:layout_gravity="center"
-                android:visibility="gone"
-                android:layout_marginStart="15dp"
-                android:src="@drawable/ic_action_menu"
-                app:tint="@color/black" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="20dp"
-                android:layout_toEndOf="@+id/drawer_icon"
-                android:fontFamily="@font/poppins"
-                android:text="Area Manager"
-                android:textColor="@android:color/black"
-                android:textSize="16dp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#dcdcdc"
-                android:layout_alignParentBottom="true"
-                />
-
-        </RelativeLayout>
-
-    </androidx.appcompat.widget.Toolbar>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_marginTop="@dimen/_12ssp"
-        android:layout_height="wrap_content">
-
-        <com.google.android.material.tabs.TabLayout
-            android:layout_width="wrap_content"
-            android:layout_centerInParent="true"
-            app:tabIndicatorHeight="0dp"
-            app:tabPaddingStart="30dp"
-            app:tabMinWidth="160dp"
-            app:tabPaddingEnd="30dp"
-            app:tabPaddingBottom="1dp"
-            android:id="@+id/tabLayout"
-            app:tabMode="auto"
-            app:tabTextAppearance="@style/MineCustomTabText"
-            app:tabSelectedTextColor="@color/white"
-            android:theme="@style/Base.Widget.Design.TabLayout"
-            app:tabGravity="fill"
-            app:tabTextColor="@color/black"
-            android:clipToPadding="false"
-            android:layout_height="35dp"
-            >
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Jobs"
-                />
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Invitations (3)"
-                />
-
-        </com.google.android.material.tabs.TabLayout>
-
-    </RelativeLayout>
-
-    <androidx.viewpager.widget.ViewPager
-        android:layout_width="match_parent"
-        android:id="@+id/viewpager"
-        android:layout_height="match_parent">
-
-
-
-    </androidx.viewpager.widget.ViewPager>
-
-</LinearLayout>
+</androidx.drawerlayout.widget.DrawerLayout>
