@@ -17,6 +17,7 @@ import com.truck.transfly.R;
 import com.truck.transfly.databinding.ActivityLoginBinding;
 import com.truck.transfly.utils.ApiClient;
 import com.truck.transfly.utils.ApiEndpoints;
+import com.truck.transfly.utils.TransflyApplication;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -76,6 +77,9 @@ public class LoginActivity extends AppCompatActivity {
     {
         try {
             RequestCredentials credentials = new RequestCredentials();
+
+            //c
+
             //fill mobile or password in this object
 
             api.login(credentials).enqueue(new Callback<ResponseBody>() {
@@ -84,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
                     if(response.code() == 200)
                     {
                         //user found
-                        String type = null;
+                        String type = response.body().toString();
                         switch (type)
                         {
                             case "vehicleowner" :{
@@ -143,6 +147,8 @@ public class LoginActivity extends AppCompatActivity {
                     if(response.code() == 200)
                     {
                         //user found
+                        ResponseVehicleOwner v = response.body();
+
                     }
                     else
                     {
@@ -172,7 +178,19 @@ public class LoginActivity extends AppCompatActivity {
                 public void onResponse(Call<ResponseTransporter> call, Response<ResponseTransporter> response) {
                     if(response.code() == 200)
                     {
+                        ResponseTransporter t =response.body();
+
+                        ((TransflyApplication)getApplication()).setResponseTransporterOwner(t);
+
+                       //ResponseTransporter t = ((TransflyApplication)getApplication()).getResponseTransporterOwner();
+
+
+
+
+
                         //user found
+                        //ResponseTransporter
+
                     }
                     else
                     {

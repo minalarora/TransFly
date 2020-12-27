@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginStart="@dimen/_12ssp"
+    android:layout_marginEnd="@dimen/_12ssp"
+    android:layout_marginTop="@dimen/_12ssp"
+    app:cardCornerRadius="@dimen/_8ssp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8ssp"
+        android:layout_marginBottom="@dimen/_8ssp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/_50ssp"
+                android:layout_height="@dimen/_50ssp"
+                android:src="@drawable/box_animation" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/_15ssp"
+                android:fontFamily="@font/poppins"
+                android:text="Anand(GJ) - Kamrej(GJ)"
+                android:textColor="@color/black"
+                android:textSize="15dp" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/_5ssp"
+            android:layout_marginStart="@dimen/_15ssp"
+            android:layout_marginEnd="@dimen/_15ssp"
+            android:background="#dcdcdc" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_12ssp"
+            android:layout_marginStart="@dimen/_13ssp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/_20ssp"
+                android:layout_height="@dimen/_20ssp"
+                android:src="@drawable/estimate_rate" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/_15ssp"
+                android:fontFamily="@font/poppins"
+                android:text="400"
+                android:textColor="@color/black"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/_4ssp"
+                android:fontFamily="@font/poppins"
+                android:text="(Estimate Rate)"
+                android:textColor="#8c8c8c"
+                android:textSize="12dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_12ssp"
+            android:layout_marginStart="@dimen/_13ssp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/_20ssp"
+                android:layout_height="@dimen/_20ssp"
+                android:src="@drawable/loading_time" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/_15ssp"
+                android:fontFamily="@font/poppins"
+                android:text="45 min"
+                android:textColor="@color/black"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/_4ssp"
+                android:fontFamily="@font/poppins"
+                android:text="(Loading Time)"
+                android:textColor="#8c8c8c"
+                android:textSize="12dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

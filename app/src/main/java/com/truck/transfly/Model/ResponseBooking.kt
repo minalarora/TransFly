@@ -3,6 +3,7 @@ package com.truck.transfly.Model
 import com.google.gson.annotations.SerializedName
 
 class ResponseBooking {
+
     @SerializedName("id")
     var id: Int? = null
 
@@ -23,4 +24,5 @@ class ResponseBooking {
 
     @SerializedName("createdAt")
     var date: String? = null
+
 }

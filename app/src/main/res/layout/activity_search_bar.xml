@@ -11,13 +11,13 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_marginTop="@dimen/_12ssp"
-        android:layout_marginStart="@dimen/_12ssp"
+        android:layout_marginTop="@dimen/_8ssp"
         android:layout_height="wrap_content">
 
             <ImageView
                 android:layout_width="@dimen/_22ssp"
                 android:layout_height="@dimen/_22ssp"
+                android:layout_marginStart="@dimen/_8ssp"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_action_back"
                 />
@@ -28,7 +28,6 @@
             android:layout_centerVertical="true"
             android:layout_centerInParent="true"
             android:textStyle="bold"
-            android:layout_toEndOf="@+id/back"
             android:fontFamily="@font/poppinsbold"
             android:text="My Search"
             android:textColor="@color/white"
@@ -39,7 +38,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="vertical"
-        android:layout_marginTop="@dimen/_50ssp"
+        android:layout_marginTop="@dimen/_35ssp"
         android:background="@drawable/round_as_project_code_upper_white"
         android:layout_height="match_parent">
 
@@ -98,39 +97,45 @@
 
     </RelativeLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_marginTop="@dimen/_15ssp"
-        android:id="@+id/recyclerView"
-        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:id="@+id/recyclerView"
+                android:layout_above="@+id/creaate_booking"
+                android:layout_height="match_parent">
 
 
 
-    </androidx.recyclerview.widget.RecyclerView>
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <RelativeLayout
+                android:id="@+id/creaate_booking"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="@dimen/_15ssp"
+                android:layout_marginEnd="@dimen/_15ssp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/_15ssp"
+                android:background="@drawable/design_as_edittext_gradient"
+                android:elevation="6dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/poppinsbold"
+                    android:text="Create Booking"
+                    android:textColor="@color/white"
+                    android:textSize="14dp" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
 
     </LinearLayout>
-
-    <RelativeLayout
-        android:id="@+id/creaate_booking"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_marginStart="@dimen/_15ssp"
-        android:layout_marginEnd="@dimen/_15ssp"
-        android:layout_gravity="center_horizontal"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/_15ssp"
-        android:background="@drawable/design_as_edittext_gradient"
-        android:elevation="6dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:fontFamily="@font/poppinsbold"
-            android:text="Create Booking"
-            android:textColor="@color/white"
-            android:textSize="14dp" />
-
-    </RelativeLayout>
 
 </RelativeLayout>
