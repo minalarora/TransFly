@@ -24,11 +24,14 @@ class ResponseTransporter {
     @SerializedName("sta")
     var sta: String? = null
 
-    @SerializedName("pan")
+    @SerializedName("aadhaar")
     var aadhaar: String? = null
 
     @SerializedName("mininglicense")
     var mininglicense: String? = null
+
+    @SerializedName("pan")
+    var pan: String?  = null
 
 
 }

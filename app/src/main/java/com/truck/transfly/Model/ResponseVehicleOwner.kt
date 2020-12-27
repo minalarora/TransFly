@@ -30,12 +30,13 @@ class ResponseVehicleOwner {
     @SerializedName("pan")
     var pan: String? = null
 
-    @SerializedName("email")
+    @SerializedName("tds")
     var tds: String? = null
 
     @SerializedName("emergencycontact")
     var emergencycontact: String? = null
 
-
+    @SerializedName("token")
+    var token: String? = null
 
 }
