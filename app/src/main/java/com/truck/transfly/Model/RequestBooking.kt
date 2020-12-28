@@ -4,8 +4,9 @@ import com.google.gson.annotations.SerializedName
 
 class RequestBooking {
 
-    @SerializedName("vehicleid")
-    var vehicleid: Int? =0
+
+    @SerializedName("vehicle")
+    var vehiclenumber: String? = null
 
     @SerializedName("mineid")
     var mineid: Int?=0
