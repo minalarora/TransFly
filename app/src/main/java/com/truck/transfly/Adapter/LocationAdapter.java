@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -49,6 +50,43 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.viewho
             return;
         }
 
+        if(position==1){
+
+            holder.cityName.setText("Bhopal");
+            holder.circularImageText.setText("Bh");
+
+        } else if(position==2){
+
+            holder.cityName.setText("Hydrabad");
+            holder.circularImageText.setText("Hy");
+
+        }else if(position==3){
+
+            holder.cityName.setText("Nepal");
+            holder.circularImageText.setText("Ne");
+
+        } else if(position==4){
+
+            holder.cityName.setText("Kolkatta");
+            holder.circularImageText.setText("Ko");
+
+        } else if(position==5){
+
+            holder.cityName.setText("Agra");
+            holder.circularImageText.setText("Ag");
+
+        } else if(position==6){
+
+            holder.cityName.setText("Raybrali");
+            holder.circularImageText.setText("Ra");
+
+        } else if(position==7){
+
+            holder.cityName.setText("Lucknow");
+            holder.circularImageText.setText("Lu");
+
+        }
+
         holder.position_any.setVisibility(View.VISIBLE);
 
     }
@@ -61,12 +99,15 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.viewho
     public class viewholder extends RecyclerView.ViewHolder {
 
         private LinearLayout position_any,position_zero;
+        private TextView circularImageText,cityName;
 
         public viewholder(@NonNull View itemView) {
             super(itemView);
 
             position_zero=itemView.findViewById(R.id.position_zero);
             position_any=itemView.findViewById(R.id.postion_any);
+            circularImageText=itemView.findViewById(R.id.circularImageText);
+            cityName=itemView.findViewById(R.id.cityName);
 
         }
     }

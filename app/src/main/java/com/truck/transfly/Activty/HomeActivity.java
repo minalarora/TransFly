@@ -29,6 +29,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.Request;
+import com.android.volley.toolbox.StringRequest;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -64,6 +66,7 @@ import com.truck.transfly.Model.SliderModel;
 import com.truck.transfly.MuUtils.MetalRecyclerViewPager;
 import com.truck.transfly.R;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -171,7 +174,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         List<PositionModel> positionModelList=new ArrayList<>();
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i <8; i++) {
 
             PositionModel positionModel=new PositionModel();
             positionModelList.add(positionModel);

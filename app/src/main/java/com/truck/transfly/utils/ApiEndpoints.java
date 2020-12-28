@@ -47,19 +47,19 @@ public interface ApiEndpoints {
     Call<ResponseFieldStaff> getFieldStaff(@Header("Authorization")String token);
 
     @POST("/login")
-    Call<ResponseBody> login(@Header("Authorization")String token,@Body RequestCredentials credentials);
+    Call<ResponseBody> login(@Body RequestCredentials credentials);
 
     @POST("/vehicleowner/login")
-    Call<ResponseVehicleOwner> vehicleOwnerLogin(@Header("Authorization")String token,@Body RequestCredentials credentials);
+    Call<ResponseVehicleOwner> vehicleOwnerLogin(@Body RequestCredentials credentials);
 
     @POST("/areamanager/login")
-    Call<ResponseAreaManager> areaManagerLogin(@Header("Authorization")String token,@Body RequestCredentials credentials);
+    Call<ResponseAreaManager> areaManagerLogin(@Body RequestCredentials credentials);
 
     @POST("/transporter/login")
-    Call<ResponseTransporter> transporterLogin(@Header("Authorization")String token,@Body RequestCredentials credentials);
+    Call<ResponseTransporter> transporterLogin(@Body RequestCredentials credentials);
 
     @POST("/fieldstaff/login")
-    Call<ResponseFieldStaff> fieldStaffLogin(@Header("Authorization")String token,@Body RequestCredentials credentials);
+    Call<ResponseFieldStaff> fieldStaffLogin(@Body RequestCredentials credentials);
 
     @PATCH("/vehicleowner/me")
     Call<ResponseBody> aadhaarUpdateVehicleOwner(@Header("Authorization")String token,@Body RequestAadhaarDetails aadhaarDetails);

@@ -81,7 +81,7 @@ public class SplashActivity extends AppCompatActivity {
 
                             if(response.code() == 200)
                             {
-
+///
                             }
                             else
                             {
