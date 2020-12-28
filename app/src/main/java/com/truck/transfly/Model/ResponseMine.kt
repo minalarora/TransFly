@@ -43,5 +43,108 @@ class ResponseMine {
     @SerializedName("landmark")
     var landmark: String? = null
 
+    @SerializedName("transporter")
+    var transporter: String? = null
+
+    @SerializedName("fieldstaff")
+    var fieldstaff: String? = null
+
+    @SerializedName("areamanager")
+    var areamanager: String? = null
+
+    /* id:
+    {
+     type: Number,
+     default: () => {
+        return parseInt(nanoid())
+     }
+    },
+     name:{
+         type: String,
+         unique: true,
+         required: true
+     },
+     area:{
+         type: String,
+         required: true
+     },
+     trailer:
+     {
+         type: Boolean,
+         default: true,
+     },
+     active:
+     {
+         type: Boolean,
+         default: true,
+     },
+     tyres:
+     {
+         type: Number,
+         required: true
+     },
+     bodytype:
+     {
+         type: String,
+         enum : ['ATTACHED','NON-ATTACHED','BOTH'],
+         default: 'ATTACHED'
+     },
+     loading:
+     {
+         type: [String],
+         required: true,
+         validate: [arrayLimit, 'Atleast one loading is required']
+     },
+     rate:
+     {
+         type: Number,
+         required: true
+     },
+     etl:
+     {
+         type: Number,
+         required: true,
+         validate(value)
+         {
+            if(value > 24)
+            {
+                throw new Error("Invalid Estimate Time of Loading")
+            }
+         }
+     },
+     latitude:
+     {
+         type: String,
+         required: true
+     },
+     longitude:
+     {
+         type: String,
+         required: true
+     },
+     landmark:{
+         type: String,
+         default: "NOT AVAILABLE"
+     },
+     transporter:
+    {
+        type: String,
+        default: undefined,
+        ref: 'Transporter'
+    },
+    areamanager:
+    {
+        type: String,
+        default: undefined,
+        ref: 'AreaManager'
+    },
+    fieldstaff:
+    {
+        type:String,
+        default: undefined,
+        ref: 'Fieldstaff'
+    }
+    * */
+
 
 }
