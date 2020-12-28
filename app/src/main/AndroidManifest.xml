@@ -20,12 +20,6 @@
         android:theme="@style/Theme.TransFly" >
         <activity android:name=".Activty.MyVehicleActivity" >
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
         </activity>
         <activity android:name=".Activty.AddVehicleActivity" />
         <activity android:name=".Activty.EmergencyContactActivity" />
@@ -117,7 +111,19 @@
             android:name=".Activty.LoginActivity"
             android:resizeableActivity="false"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".Activty.SearchBarActivity"
+            android:resizeableActivity="false"
+            android:screenOrientation="portrait" />
+
         <activity android:name=".Activty.HomeActivity" >
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
         <activity android:name=".Activty.FieldStafActivity" />

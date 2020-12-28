@@ -53,7 +53,7 @@
             android:layout_height="match_parent"
             android:background="@drawable/round_as_eddittext_search"
             android:hint="From Destination"
-            android:id="@+id/search_bar"
+            android:id="@+id/from_search"
             android:layout_marginEnd="12dp"
             android:paddingStart="12dp"
             android:textSize="14sp"
