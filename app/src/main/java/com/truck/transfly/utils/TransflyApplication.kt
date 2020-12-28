@@ -6,15 +6,15 @@ import com.truck.transfly.Model.*
 class TransflyApplication : Application() {
 
 
-//    var  vehicleOwner = RequestVehicleOwner()
-//    var  responseVehicleOwner= ResponseVehicleOwner()
-//
-//    var  transporterOwner = RequestTransporter()
+  var  vehicleOwner = RequestVehicleOwner()
+    var  responseVehicleOwner= ResponseVehicleOwner()
+
+    var  transporterOwner = RequestTransporter()
     var  responseTransporterOwner= ResponseTransporter()
-//
-//    var  fieldStaff = RequestFieldStaff()
-//    var  responseFieldStaff= ResponseFieldStaff()
-//
-//    var  areaManager = RequestAreaManager()
+
+    var  fieldStaff = RequestFieldStaff()
+    var  responseFieldStaff= ResponseFieldStaff()
+
+    var  areaManager = RequestAreaManager()
     var  responseAreaManager = ResponseAreaManager()
 }

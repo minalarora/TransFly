@@ -330,7 +330,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                     case R.id.my_vehicle:
 
-                        Intent vehicleOwnerKyc=new Intent(HomeActivity.this, VehicleOwnerKycActivity.class);
+                        Intent vehicleOwnerKyc=new Intent(HomeActivity.this, MyVehicleActivity.class);
                         startActivity(vehicleOwnerKyc);
 
                         break;

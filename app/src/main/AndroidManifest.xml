@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.truck.transfly" >
+    package="com.truck.transfly">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
@@ -17,10 +18,9 @@
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TransFly" >
-        <activity android:name=".Activty.MyVehicleActivity" >
-
-        </activity>
+        android:theme="@style/Theme.TransFly">
+        <activity android:name=".Activty.PlaygroundActivity"></activity>
+        <activity android:name=".Activty.MyVehicleActivity"></activity>
         <activity android:name=".Activty.AddVehicleActivity" />
         <activity android:name=".Activty.EmergencyContactActivity" />
         <activity android:name=".Activty.AreaFieldStafActivity" />
@@ -111,20 +111,16 @@
             android:name=".Activty.LoginActivity"
             android:resizeableActivity="false"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".Activty.SearchBarActivity"
             android:resizeableActivity="false"
             android:screenOrientation="portrait" />
-
-        <activity android:name=".Activty.HomeActivity" >
-
+        <activity android:name=".Activty.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity android:name=".Activty.FieldStafActivity" />
         <activity android:name=".Activty.CurrentBookingActivity" />
@@ -144,7 +140,7 @@
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.truck.transfly.provider"
             android:exported="false"
-            android:grantUriPermissions="true" >
+            android:grantUriPermissions="true">
 
             <!-- ressource file to create -->
             <meta-data

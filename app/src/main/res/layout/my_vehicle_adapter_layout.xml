@@ -34,6 +34,7 @@
                 android:fontFamily="@font/poppins"
                 android:layout_marginStart="@dimen/_8ssp"
                 android:text="Tracktor"
+                android:id="@+id/vehicle_name"
                 android:textColor="@color/black"
                 android:textSize="13dp" />
 
@@ -67,6 +68,7 @@
                 android:layout_gravity="center_vertical"
                 android:fontFamily="@font/poppins"
                 android:text="Pending"
+                android:id="@+id/status"
                 android:layout_marginStart="@dimen/_8ssp"
                 android:textColor="@color/black"
                 android:textSize="13dp" />
@@ -101,6 +103,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="@dimen/_12ssp"
                 android:fontFamily="@font/poppins"
+                android:id="@+id/vehicle_number"
                 android:text="21020202"
                 android:textColor="@color/black"
                 android:textSize="13dp" />

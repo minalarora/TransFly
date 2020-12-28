@@ -16,8 +16,8 @@ class ResponseMine {
     @SerializedName("trailer")
     var trailer: Boolean? = null
 
-    @SerializedName("active")
-    var active: Boolean? = null
+//    @SerializedName("active")
+//    var active: Boolean? = null
 
     @SerializedName("tyres")
     var tyres: Int? = 0

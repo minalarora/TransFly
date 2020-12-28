@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout  xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools">
+
+<RelativeLayout
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,6 +12,7 @@
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:id="@+id/toolbar"
         app:contentInsetStart="0dp">
 
         <RelativeLayout
@@ -53,6 +55,7 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
+        android:layout_below="@+id/toolbar"
         android:layout_height="match_parent">
 
         <LinearLayout
@@ -65,6 +68,7 @@
                 android:layout_height="@dimen/_90ssp"
                 android:layout_marginStart="@dimen/_12ssp"
                 android:layout_marginEnd="@dimen/_12ssp"
+                android:id="@+id/add_rc_image"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="30dp"
                 android:background="@drawable/round_dotted_line_pink"
@@ -115,6 +119,7 @@
                     android:background="@android:color/transparent"
                     android:fontFamily="@font/poppins"
                     android:hint="Vehicle Number"
+                    android:id="@+id/vehicle_number"
                     android:imeOptions="actionNext"
                     android:inputType="textCapWords"
                     android:textSize="@dimen/_12ssp" />
@@ -136,6 +141,7 @@
                     android:background="@android:color/transparent"
                     android:fontFamily="@font/poppins"
                     android:hint="Vehicle Name"
+                    android:id="@+id/vehicle_name"
                     android:imeOptions="actionNext"
                     android:inputType="textCapWords"
                     android:textSize="@dimen/_12ssp" />
@@ -158,13 +164,14 @@
                     android:fontFamily="@font/poppins"
                     android:hint="R.c Number"
                     android:imeOptions="actionNext"
+                    android:id="@+id/rcnumber"
                     android:inputType="textCapWords"
                     android:textSize="@dimen/_12ssp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <RelativeLayout
-                android:id="@+id/creaate_booking"
+                android:id="@+id/add_vehicle"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_gravity="center_horizontal"
@@ -190,4 +197,8 @@
 
     </androidx.core.widget.NestedScrollView>
 
-</LinearLayout>
+    <include layout="@layout/loading_view_transparent"/>
+
+</RelativeLayout>
+
+</layout>
