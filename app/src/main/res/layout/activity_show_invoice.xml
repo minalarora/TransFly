@@ -51,7 +51,7 @@
                             android:layout_marginStart="20dp"
                             android:layout_toEndOf="@+id/drawer_icon"
                             android:fontFamily="@font/poppins"
-                            android:text="Trans Fly"
+                            android:text="TransFly"
                             android:textColor="@android:color/black"
                             android:textSize="16dp" />
 

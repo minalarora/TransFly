@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.truck.transfly.R;
+
 public class PlaygroundActivity extends AppCompatActivity {
 
     @Override

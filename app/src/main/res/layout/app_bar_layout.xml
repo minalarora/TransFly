@@ -60,7 +60,7 @@
                 android:fontFamily="@font/poppinsbold"
                 android:gravity="center"
                 android:maxLines="1"
-                android:text="TRANS FLY"
+                android:text="TRANSFLY"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:textStyle="bold"

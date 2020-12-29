@@ -2,19 +2,27 @@ package com.truck.transfly.utils
 
 import android.app.Application
 import com.truck.transfly.Model.*
+import net.gotev.uploadservice.BuildConfig
+import net.gotev.uploadservice.UploadService
 
 class TransflyApplication : Application() {
 
+    override fun onCreate() {
+        super.onCreate()
 
-  var  vehicleOwner = RequestVehicleOwner()
-    var  responseVehicleOwner= ResponseVehicleOwner()
+        UploadService.NAMESPACE = BuildConfig.APPLICATION_ID
 
-    var  transporterOwner = RequestTransporter()
-    var  responseTransporterOwner= ResponseTransporter()
+    }
 
-    var  fieldStaff = RequestFieldStaff()
-    var  responseFieldStaff= ResponseFieldStaff()
+    var vehicleOwner = RequestVehicleOwner()
+    var responseVehicleOwner = ResponseVehicleOwner()
 
-    var  areaManager = RequestAreaManager()
-    var  responseAreaManager = ResponseAreaManager()
+    var transporterOwner = RequestTransporter()
+    var responseTransporterOwner = ResponseTransporter()
+
+    var fieldStaff = RequestFieldStaff()
+    var responseFieldStaff = ResponseFieldStaff()
+
+    var areaManager = RequestAreaManager()
+    var responseAreaManager = ResponseAreaManager()
 }

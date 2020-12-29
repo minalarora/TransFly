@@ -127,6 +127,8 @@ public class AddVehicleActivity extends AppCompatActivity {
 
             if (requestCode == REQUEST_CODE_CHOOSE && data != null) {
 
+                storageList.clear();
+
                 storageList.addAll(Matisse.obtainPathResult(data));
 //                upload_logo.setText(SelectableLOGO.size() + " Image");
 
@@ -168,7 +170,7 @@ public class AddVehicleActivity extends AppCompatActivity {
             multipartUploadRequest = new MultipartUploadRequest(this, EndApi.ADD_VEHICLE)
                     .setNotificationConfig(new UploadNotificationConfig())
                     .setMaxRetries(5)
-                    .addHeader("AUTHORIZATION", PreferenceUtil.getData(AddVehicleActivity.this,"token"))
+                    .addHeader("Authorization", PreferenceUtil.getData(AddVehicleActivity.this,"token"))
                     .addParameter("number", activity.vehicleNumber.getText().toString())
                     .addParameter("rc", activity.rcnumber.getText().toString())
                     .addParameter("vehiclename", activity.vehicleName.getText().toString())
