@@ -118,12 +118,13 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
     private LocationRequest locationRequest;
     private Marker marker;
     private Handler handler;
-    private ArrayList<ResponseMine> mines  =  new ArrayList<>();
+    private ArrayList<ResponseMine> mines = new ArrayList<>();
     private YourCoolAdapter fullMetalAdapter;
     private MetalRecyclerViewPager viewPager;
     private List<SliderModel> metalList = new ArrayList<>();
     private BottomNavigationViewEx navigation;
     private LocationAdapter locationAdapter;
+    private RequestArea requestArea;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -225,15 +226,17 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 if (requestArea != null) {
 
-                    showMarker(Double.parseDouble(requestArea.getArealatitude()), Double.parseDouble(requestArea.getArealongitude()), 2, requestArea.getName());
+                    HomeActivity.this.requestArea = requestArea;
 
-                    ShowLoadingDialogFragment showLoadingDialogFragment=new ShowLoadingDialogFragment();
+                    showMarker(Double.parseDouble(requestArea.getArealatitude()), Double.parseDouble(requestArea.getArealongitude()), 1, requestArea.getName());
 
-                    Bundle bundle=new Bundle();
-                    bundle.putStringArrayList("loadingList",loadinglist);
+                    ShowLoadingDialogFragment showLoadingDialogFragment = new ShowLoadingDialogFragment();
+
+                    Bundle bundle = new Bundle();
+                    bundle.putStringArrayList("loadingList", loadinglist);
                     showLoadingDialogFragment.setArguments(bundle);
 
-                    showLoadingDialogFragment.show(getSupportFragmentManager(),"showLoadingFragment");
+                    showLoadingDialogFragment.show(getSupportFragmentManager(), "showLoadingFragment");
 
                     showLoadingDialogFragment.setOnClickListener(new ShowLoadingDialogFragment.onClickListener() {
                         @Override
@@ -243,7 +246,8 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                             for (ResponseMine responseMine : allMineOfSingleArea) {
 
-                                showMarker(Double.parseDouble(responseMine.getLatitude()), Double.parseDouble(responseMine.getLongitude()), 2, responseMine.getName());
+                                showMarkerOfArea(Double.parseDouble(responseMine.getLatitude()), Double.parseDouble(responseMine.getLongitude()), responseMine, responseMine.getName());
+
 
                             }
 
@@ -421,23 +425,18 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
     };
 
-    private ArrayList<ResponseMine> getAllMineOfSingleArea(String area,String loading)
-    {
+    private ArrayList<ResponseMine> getAllMineOfSingleArea(String area, String loading) {
         ArrayList<ResponseMine> selectedmines = new ArrayList<>();
-        for(ResponseMine m: mines)
-        {
-            if(m.getArea().equalsIgnoreCase(area))
-            {
-                for(String l: m.getLoading())
-                {
-                    if(l.equalsIgnoreCase(loading))
-                    {
+        for (ResponseMine m : mines) {
+            if (m.getArea().equalsIgnoreCase(area)) {
+                for (String l : m.getLoading()) {
+                    if (l.equalsIgnoreCase(loading)) {
                         selectedmines.add(m);
                     }
                 }
             }
         }
-        return  selectedmines;
+        return selectedmines;
     }
 
     private void navigationViewListener(NavigationView navigationView) {
@@ -703,13 +702,41 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                 if (marker.getTag() == null)
                     return false;
 
-                int position = (int) (marker.getTag());
+                ResponseMine responseMine = (ResponseMine) (marker.getTag());
 
-                startActivity(new Intent(HomeActivity.this, SelectYourVehicleActivity.class));
+                if (responseMine != null) {
+
+                    Intent intent = new Intent(HomeActivity.this, SelectYourVehicleActivity.class);
+
+                    intent.putExtra("mineid",responseMine.getId());
+                    intent.putExtra("minename",responseMine.getName());
+                    intent.putExtra("loading",responseMine.getLoading());
+
+                    startActivity(intent);
+
+                }
 
                 return false;
             }
         });
+
+    }
+
+    private void showMarkerOfArea(double latituteOfTajMahal, double longitudeOfTajMahal, ResponseMine responseMine, String locationAddress) {
+
+        LatLng latLng = new LatLng(latituteOfTajMahal, longitudeOfTajMahal);
+
+        IconGenerator iconFactory = new IconGenerator(this);
+        iconFactory.setStyle(IconGenerator.STYLE_RED);
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(latLng);
+        markerOptions.title(locationAddress);
+        markerOptions.snippet("This is my spot!");
+        Marker marker = mGoogleMap.addMarker(markerOptions);
+
+        marker.setIcon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon(locationAddress)));
+
+        marker.setTag(responseMine);
 
     }
 
@@ -726,8 +753,6 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         Marker marker = mGoogleMap.addMarker(markerOptions);
 
         marker.setIcon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon(locationAddress)));
-
-        marker.setTag(postion);
 
     }
 

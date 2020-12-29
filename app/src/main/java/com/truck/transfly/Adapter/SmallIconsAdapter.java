@@ -1,29 +1,44 @@
 package com.truck.transfly.Adapter;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.truck.transfly.Model.ResponseVehicle;
 import com.truck.transfly.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SmallIconsAdapter extends RecyclerView.Adapter<SmallIconsAdapter.viewholder> {
 
     private final Context context;
-    private List<String> stringList;
+    private List<ResponseVehicle> vehicleList;
     private int row_index;
+    private onClickListener onClickListener;
 
-    public SmallIconsAdapter(Context context, List<String> stringList){
+    public SmallIconsAdapter(Context context, ArrayList<ResponseVehicle> vehicleList){
 
         this.context=context;
-        this.stringList=stringList;
+        this.vehicleList=vehicleList;
+
+    }
+
+    public interface onClickListener{
+
+        void onClick(ResponseVehicle responseVehicle);
+
+    }
+
+    public void setOnClickListener(onClickListener onClickListener){
+
+        this.onClickListener=onClickListener;
 
     }
 
@@ -40,6 +55,11 @@ public class SmallIconsAdapter extends RecyclerView.Adapter<SmallIconsAdapter.vi
     @Override
     public void onBindViewHolder(@NonNull viewholder holder, int position) {
 
+        ResponseVehicle responseVehicle = vehicleList.get(position);
+
+        holder.vehicle_name.setText(responseVehicle.getVehiclename());
+        holder.vehicle_number.setText(responseVehicle.getNumber());
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,6 +72,7 @@ public class SmallIconsAdapter extends RecyclerView.Adapter<SmallIconsAdapter.vi
 
         if(row_index==position){
             holder.small_parent.setBackgroundResource(R.drawable.round_blue_tick);
+            onClickListener.onClick(responseVehicle);
 //            circleImageView.setBorderWidth(3);
 //            circleImageView.setBorderColor(Color.parseColor("#000000"));
         } else {
@@ -64,17 +85,20 @@ public class SmallIconsAdapter extends RecyclerView.Adapter<SmallIconsAdapter.vi
 
     @Override
     public int getItemCount() {
-        return stringList.size();
+        return vehicleList.size();
     }
 
     public class viewholder extends RecyclerView.ViewHolder {
 
         private RelativeLayout small_parent;
+        private TextView vehicle_name,vehicle_number;
 
         public viewholder(@NonNull View itemView) {
             super(itemView);
 
             small_parent=itemView.findViewById(R.id.parent_of_small_icons);
+            vehicle_name=itemView.findViewById(R.id.vehicle_name);
+            vehicle_number=itemView.findViewById(R.id.vehicle_number);
 
         }
     }
