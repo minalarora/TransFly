@@ -146,6 +146,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="@dimen/_25ssp"
                 android:fontFamily="@font/poppinsbold"
+                android:visibility="gone"
                 android:text="Location Details"
                 android:textColor="@color/project_color"
                 android:textSize="14dp" />
@@ -157,6 +158,7 @@
                 android:layout_marginTop="@dimen/_14ssp"
                 android:hint="Add Location Details"
                 android:fontFamily="@font/font_opensans"
+                android:visibility="gone"
                 />
 
         </LinearLayout>

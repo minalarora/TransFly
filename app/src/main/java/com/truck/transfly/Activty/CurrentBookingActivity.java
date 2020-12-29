@@ -64,7 +64,7 @@ public class CurrentBookingActivity extends AppCompatActivity {
 
         currentBookingAdapter.setOnClickListener(new CurrentBookingAdapter.onClickListener() {
             @Override
-            public void onClick(ResponseBooking responseBooking) {
+            public void onClick(ResponseBooking responseBooking, int position) {
 
                 RemoveDialogFragment removeDialogFragment=new RemoveDialogFragment();
                 removeDialogFragment.setCancelable(false);
@@ -74,7 +74,7 @@ public class CurrentBookingActivity extends AppCompatActivity {
                     @Override
                     public void onClick() {
 
-
+                         deleteBooking(PreferenceUtil.getData(CurrentBookingActivity.this,"token"),responseBooking.getId(),position);
 
                     }
                 });
@@ -84,6 +84,38 @@ public class CurrentBookingActivity extends AppCompatActivity {
 
         getAllBookingVehicleOwner(PreferenceUtil.getData(CurrentBookingActivity.this,"token"));
 
+    }
+
+    private void deleteBooking(String token, int id, int position)
+    {
+
+        parent_of_loading.setVisibility(View.VISIBLE);
+
+        api.deleteBooking(token,id).enqueue(new Callback<ResponseBooking>() {
+            @Override
+            public void onResponse(Call<ResponseBooking> call, Response<ResponseBooking> response) {
+
+                parent_of_loading.setVisibility(View.GONE);
+
+                if(response.code() == 200)
+                {
+                    bookingList.remove(position);
+                    currentBookingAdapter.notifyDataSetChanged();
+
+                    Toast.makeText(CurrentBookingActivity.this, "Delete Successfully", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBooking> call, Throwable t) {
+
+                parent_of_loading.setVisibility(View.GONE);
+
+                Toast.makeText(CurrentBookingActivity.this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+
+            }
+        });
     }
 
     private void getAllBookingVehicleOwner(String token) {

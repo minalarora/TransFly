@@ -10,7 +10,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.truck.transfly.Model.ResponseBooking;
 import com.truck.transfly.R;
@@ -33,7 +32,7 @@ public class CurrentBookingAdapter extends RecyclerView.Adapter<CurrentBookingAd
 
     public interface onClickListener{
 
-        void onClick(ResponseBooking responseBooking);
+        void onClick(ResponseBooking responseBooking, int position);
 
     }
 
@@ -66,7 +65,7 @@ public class CurrentBookingAdapter extends RecyclerView.Adapter<CurrentBookingAd
             @Override
             public void onClick(View v) {
 
-                onClickListener.onClick(responseBooking);
+                onClickListener.onClick(responseBooking,position);
 
             }
         });

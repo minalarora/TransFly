@@ -16,6 +16,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.nabinbhandari.android.permissions.PermissionHandler;
 import com.nabinbhandari.android.permissions.Permissions;
 import com.truck.transfly.R;
@@ -130,7 +132,8 @@ public class AddVehicleActivity extends AppCompatActivity {
                 storageList.clear();
 
                 storageList.addAll(Matisse.obtainPathResult(data));
-//                upload_logo.setText(SelectableLOGO.size() + " Image");
+                Glide.with(AddVehicleActivity.this).load(storageList.get(0)).skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.NONE).into(activity.imageLink);
+                activity.chooseTextView.setText("1 Image Selected");
 
             }
         }
@@ -203,11 +206,13 @@ public class AddVehicleActivity extends AppCompatActivity {
 
                                     parent_of_loading.setVisibility(View.GONE);
 
+                                    finish();
+
 //                                    Intent intent = new Intent(StepThreeActivity.this, StepFourActivity.class);
 //                                    intent.putExtra("listing_id", listing_id);
 //                                    startActivity(intent);
 
-                                    Toast.makeText(context, "Update Successfully", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(context, "Add Vehicle Successfully", Toast.LENGTH_SHORT).show();
 
                                 }
                             }, 2000);
