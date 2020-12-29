@@ -296,7 +296,7 @@ public class PlaygroundActivity extends AppCompatActivity {
     }
 
     //top level
-    ArrayList<ResponseMine> mines  =  new ArrayList<>();
+
     private void getAllMineVehicleOwner(String token)
     {
         api.getAllMineVehicleOwner(token).enqueue(new Callback<ResponseBody>() {
@@ -305,7 +305,8 @@ public class PlaygroundActivity extends AppCompatActivity {
                 if(response.code() == 200)
                 {
 
-                    mines.clear();
+                    ArrayList<ResponseMine> mines  =  new ArrayList<>();
+
                     Type collectionType = new TypeToken<ArrayList<ResponseMine>>(){}.getType();
                     try {
                         mines.addAll(new Gson().fromJson(response.body().string().toString(),collectionType));
@@ -319,25 +320,26 @@ public class PlaygroundActivity extends AppCompatActivity {
                     else
                     {
                         Log.d("minal",mines.toString());
+                        //for area name
+                        HashMap<String , RequestArea> areas = new HashMap<>();
+                        //for destination
+                        Set<String> loadings = new HashSet<>();
+                        Set<RequestArea> areass = new HashSet<>();
+                        for(ResponseMine mine: mines) {
+                            areas.put(mine.getArea(), new RequestArea(mine.getArea(),mine.getArealatitude(), mine.getArealongitude()));
+                            for(String loading: mine.getLoading())
+                            {
+                                loadings.add(loading);
+                            }
+                        }
 
-//                        //for area name
-//                        Set<RequestArea> areas = new HashSet<>();
-//                        //for destination
-//                        Set<String> loadings = new HashSet<String>();
-//                        for(ResponseMine mine: mines) {
-//                            areas.put(mine.getArea(), new RequestArea(mine.getArealatitude(), mine.getArealongitude()));
-//                            for(String loading: mine.getLoading())
-//                            {
-//                                loadings.add(loading);
-//                            }
-//                        }
-//
-//                        //for shani
-//                        for(Map.Entry<String, RequestArea> a: areas.entrySet())
-//                        {
-//                            Log.d("minal","area=" + a.getKey() + "lat = " + a.getValue().getArealatitude() + "long = " + a.getValue().getArealongitude() );
-//
-//                        }
+                        for(Map.Entry<String, RequestArea> a: areas.entrySet())
+                        {
+                            areass.add(a.getValue());
+                        }
+
+                        ArrayList<String> loadinglist = new ArrayList<>(loadings);
+                        ArrayList<RequestArea> arealist = new ArrayList<>(areass);
 
                     }
 
@@ -350,6 +352,7 @@ public class PlaygroundActivity extends AppCompatActivity {
             }
         });
     }
+    ArrayList<ResponseMine> mines  =  new ArrayList<>();
 
     private ArrayList<ResponseMine> getAllMineOfSingleArea(String area,String loading)
     {
@@ -369,6 +372,11 @@ public class PlaygroundActivity extends AppCompatActivity {
         }
         return  mines;
     }
+
+
+
+
+
 
 
 
