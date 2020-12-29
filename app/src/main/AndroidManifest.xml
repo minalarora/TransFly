@@ -128,6 +128,11 @@
 
 
         </activity>
+        <activity android:name=".Activty.SelectYourVehicleActivity">
+
+
+
+        </activity>
 
         <activity android:name=".Activty.FieldStafActivity" >
 
