@@ -103,6 +103,13 @@ public class AreaManagerActivity extends AppCompatActivity {
 
                         break;
 
+                    case R.id.bank_details:
+
+                        Intent bankDetails=new Intent(AreaManagerActivity.this,BankDetailsActivity.class);
+                        startActivity(bankDetails);
+
+                        break;
+
                     case R.id.feedback_drawer:
 
                         Intent feedback_intent=new Intent(AreaManagerActivity.this,FeedbackActivity.class);

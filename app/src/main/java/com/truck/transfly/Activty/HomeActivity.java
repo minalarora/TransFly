@@ -29,8 +29,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.volley.Request;
-import com.android.volley.toolbox.StringRequest;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -55,33 +53,56 @@ import com.google.android.gms.tasks.OnCanceledListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.google.maps.android.ui.IconGenerator;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.nabinbhandari.android.permissions.PermissionHandler;
 import com.nabinbhandari.android.permissions.Permissions;
 import com.truck.transfly.Adapter.LocationAdapter;
 import com.truck.transfly.Adapter.YourCoolAdapter;
+import com.truck.transfly.Frament.ShowLoadingDialogFragment;
 import com.truck.transfly.Model.PositionModel;
+import com.truck.transfly.Model.RequestArea;
+import com.truck.transfly.Model.ResponseMine;
 import com.truck.transfly.Model.SliderModel;
 import com.truck.transfly.MuUtils.MetalRecyclerViewPager;
 import com.truck.transfly.R;
+import com.truck.transfly.utils.ApiClient;
+import com.truck.transfly.utils.ApiEndpoints;
 import com.truck.transfly.utils.PreferenceUtil;
 
-import java.lang.reflect.Method;
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class HomeActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mGoogleMap;
     private double LatituteOfTajMahal = 22.106364561666886;
     private double LongitudeOfTajMahal = 85.37934426698966;
+    private Retrofit retrofit = null;
+    private ArrayList<String> loadinglist = new ArrayList<>();
 
+    private ApiEndpoints api = null;
+
+    private ArrayList<RequestArea> arealist = new ArrayList<>();
     private double new1 = 22.163690366420184, new2 = 85.41610695158445;
-    private double new3 = 	22.018251428199196, new4 = 85.40548247296358;
+    private double new3 = 22.018251428199196, new4 = 85.40548247296358;
     private double new5 = 21.908011041198012, new6 = 85.2509771962851;
-    private double tulsipurLat=26.216539779866235, tulsipurLong=81.25079189586448;
-    private double rugudi_lat=21.887970812746232, rugudi_log=85.81699947599559;
+    private double tulsipurLat = 26.216539779866235, tulsipurLong = 81.25079189586448;
+    private double rugudi_lat = 21.887970812746232, rugudi_log = 85.81699947599559;
     private DrawerLayout drawerLayout;
     private ImageView viewById;
     private LocationCallback mLocationCallBack;
@@ -92,15 +113,17 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
     private static final int REQUEST_ENABLE_GPS = 516;
     private double Mylongitude;
     private double Mylatitude;
-    private boolean isStart=true;
-    private boolean isFirstTime=true;
+    private boolean isStart = true;
+    private boolean isFirstTime = true;
     private LocationRequest locationRequest;
     private Marker marker;
     private Handler handler;
+    private ArrayList<ResponseMine> mines  =  new ArrayList<>();
     private YourCoolAdapter fullMetalAdapter;
     private MetalRecyclerViewPager viewPager;
-    private List<SliderModel> metalList=new ArrayList<>();
+    private List<SliderModel> metalList = new ArrayList<>();
     private BottomNavigationViewEx navigation;
+    private LocationAdapter locationAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +133,11 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         NavigationView navigationView = findViewById(R.id.nav_view);
 //        navigationView.setNavigationItemSelectedListener(map);
 
+        retrofit = ApiClient.getRetrofitClient();
+        if (retrofit != null) {
+            api = retrofit.create(ApiEndpoints.class);
+        }
+
         navigationViewListener(navigationView);
 
         navigationView.setItemIconTintList(null);
@@ -118,7 +146,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         MenuItem item = menu.findItem(R.id.emergency_details);
         item.setVisible(false);
 
-        PreferenceUtil.putData(HomeActivity.this,"token","vehicleowner:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIxMTc3Nzc3NTQ0NSIsImlhdCI6MTYwOTIyNjIwOCwiZXhwIjoxNjExODE4MjA4fQ.qEGlO0IAKibuhLWa1EzIX16Dtn6TDF8bZo1JYTin6vU");
+        PreferenceUtil.putData(HomeActivity.this, "token", "vehicleowner:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIxMTc3Nzc3NTQ0NSIsImlhdCI6MTYwOTIyNjIwOCwiZXhwIjoxNjExODE4MjA4fQ.qEGlO0IAKibuhLWa1EzIX16Dtn6TDF8bZo1JYTin6vU");
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -129,11 +157,11 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void onClick(View v) {
 
-                startActivity(new Intent(HomeActivity.this,CurrentBookingActivity.class));
+                startActivity(new Intent(HomeActivity.this, CurrentBookingActivity.class));
 
             }
         });
-        
+
         navigation = findViewById(R.id.navigation);
         navigation.enableAnimation(false);
         navigation.enableItemShiftingMode(false);
@@ -153,7 +181,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void onClick(View v) {
 
-                Intent intent=new Intent(HomeActivity.this,SearchBarActivity.class);
+                Intent intent = new Intent(HomeActivity.this, SearchBarActivity.class);
 
                 startActivity(intent);
 
@@ -176,22 +204,60 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
-        List<PositionModel> positionModelList=new ArrayList<>();
+        List<PositionModel> positionModelList = new ArrayList<>();
 
-        for (int i = 0; i <8; i++) {
+        for (int i = 0; i < 8; i++) {
 
-            PositionModel positionModel=new PositionModel();
+            PositionModel positionModel = new PositionModel();
             positionModelList.add(positionModel);
 
         }
 
-        RecyclerView recyclerView=findViewById(R.id.locationRecyclerView);
-        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(HomeActivity.this,LinearLayoutManager.HORIZONTAL,false);
+        RecyclerView recyclerView = findViewById(R.id.locationRecyclerView);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(HomeActivity.this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
-        LocationAdapter locationAdapter=new LocationAdapter(HomeActivity.this,positionModelList);
+        locationAdapter = new LocationAdapter(HomeActivity.this, arealist);
         recyclerView.setAdapter(locationAdapter);
 
-        mLocationCallBack=new LocationCallback(){
+        locationAdapter.setOnClickListener(new LocationAdapter.onClickListener() {
+            @Override
+            public void onClick(RequestArea requestArea) {
+
+                if (requestArea != null) {
+
+                    showMarker(Double.parseDouble(requestArea.getArealatitude()), Double.parseDouble(requestArea.getArealongitude()), 2, requestArea.getName());
+
+                    ShowLoadingDialogFragment showLoadingDialogFragment=new ShowLoadingDialogFragment();
+
+                    Bundle bundle=new Bundle();
+                    bundle.putStringArrayList("loadingList",loadinglist);
+                    showLoadingDialogFragment.setArguments(bundle);
+
+                    showLoadingDialogFragment.show(getSupportFragmentManager(),"showLoadingFragment");
+
+                    showLoadingDialogFragment.setOnClickListener(new ShowLoadingDialogFragment.onClickListener() {
+                        @Override
+                        public void onClick(String loading) {
+
+                            ArrayList<ResponseMine> allMineOfSingleArea = getAllMineOfSingleArea(requestArea.getName(), loading);
+
+                            for (ResponseMine responseMine : allMineOfSingleArea) {
+
+                                showMarker(Double.parseDouble(responseMine.getLatitude()), Double.parseDouble(responseMine.getLongitude()), 2, responseMine.getName());
+
+                            }
+
+                        }
+                    });
+
+                    goToLocationWithAnimation(Double.parseDouble(requestArea.getArealatitude()), Double.parseDouble(requestArea.getArealongitude()));
+
+                }
+
+            }
+        });
+
+        mLocationCallBack = new LocationCallback() {
 
             @Override
             public void onLocationResult(LocationResult locationResult) {
@@ -204,7 +270,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 LatLng latLng = new LatLng(Mylatitude, Mylongitude);
 
-                if(marker!=null)
+                if (marker != null)
                     marker.remove();
 
                 MarkerOptions markerOptions = new MarkerOptions();
@@ -212,9 +278,9 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                 markerOptions.title("My Location");
                 marker = mGoogleMap.addMarker(markerOptions);
 
-                if(isStart) {
+                if (isStart) {
                     getoLocation(Mylatitude, Mylongitude);
-                    isStart=false;
+                    isStart = false;
                 }
 
             }
@@ -228,17 +294,17 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 if (permissionIsGranted() && manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
 
-                    if(Mylatitude!=0 && Mylongitude!=0)
-                        goToLocationWithAnimation(Mylatitude,Mylongitude);
+                    if (Mylatitude != 0 && Mylongitude != 0)
+                        goToLocationWithAnimation(Mylatitude, Mylongitude);
 
 
                 } else {
 
-                    if(Mylatitude!=0 && Mylongitude!=0)
-                        goToLocationWithAnimation(Mylatitude,Mylongitude);
+                    if (Mylatitude != 0 && Mylongitude != 0)
+                        goToLocationWithAnimation(Mylatitude, Mylongitude);
 
                     mLocationClient.removeLocationUpdates(mLocationCallBack);
-                    locationRequest=null;
+                    locationRequest = null;
                     getCurrentLocation();
 
                 }
@@ -250,7 +316,60 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         getCurrentLocation();
 
+        getMinesFromServer(PreferenceUtil.getData(HomeActivity.this, "token"));
+
     }
+
+    private void getMinesFromServer(String token) {
+
+        api.getAllMineVehicleOwner(token).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.code() == 200) {
+
+                    Type collectionType = new TypeToken<ArrayList<ResponseMine>>() {
+                    }.getType();
+                    try {
+                        mines.addAll(new Gson().fromJson(response.body().string().toString(), collectionType));
+                    } catch (IOException e) {
+
+                    }
+                    if (mines.isEmpty()) {
+                        Log.d("minal", "mine not found");
+                    } else {
+                        Log.d("minal", mines.toString());
+                        //for area name
+                        HashMap<String, RequestArea> areas = new HashMap<>();
+                        //for destination
+                        Set<String> loadings = new HashSet<>();
+                        Set<RequestArea> areass = new HashSet<>();
+                        for (ResponseMine mine : mines) {
+                            areas.put(mine.getArea(), new RequestArea(mine.getArea(), mine.getArealatitude(), mine.getArealongitude()));
+                            for (String loading : mine.getLoading()) {
+                                loadings.add(loading);
+                            }
+                        }
+
+                        for (Map.Entry<String, RequestArea> a : areas.entrySet()) {
+                            areass.add(a.getValue());
+                        }
+
+                        loadinglist.addAll(loadings);
+                        arealist.addAll(areass);
+                        locationAdapter.notifyDataSetChanged();
+
+                    }
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+    }
+
 
     private void initViewImageCrousel() {
 
@@ -258,17 +377,17 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         for (int i = 0; i < 10; i++) {
 
-            SliderModel sliderModel=new SliderModel();
+            SliderModel sliderModel = new SliderModel();
             metalList.add(sliderModel);
 
         }
 
         DisplayMetrics metrics = getDisplayMetrics();
-        fullMetalAdapter = new YourCoolAdapter(metrics, metalList,HomeActivity.this);
+        fullMetalAdapter = new YourCoolAdapter(metrics, metalList, HomeActivity.this);
         viewPager = findViewById(R.id.viewPager);
         viewPager.setAdapter(fullMetalAdapter);
 
-        handler.postDelayed(runnable,2500);
+        handler.postDelayed(runnable, 2500);
 
     }
 
@@ -302,6 +421,25 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
     };
 
+    private ArrayList<ResponseMine> getAllMineOfSingleArea(String area,String loading)
+    {
+        ArrayList<ResponseMine> selectedmines = new ArrayList<>();
+        for(ResponseMine m: mines)
+        {
+            if(m.getArea().equalsIgnoreCase(area))
+            {
+                for(String l: m.getLoading())
+                {
+                    if(l.equalsIgnoreCase(loading))
+                    {
+                        selectedmines.add(m);
+                    }
+                }
+            }
+        }
+        return  selectedmines;
+    }
+
     private void navigationViewListener(NavigationView navigationView) {
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -309,53 +447,53 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
 
                     case R.id.profile_drawer:
 
-                        Intent intent=new Intent(HomeActivity.this,ProfileActivity.class);
+                        Intent intent = new Intent(HomeActivity.this, ProfileActivity.class);
                         startActivity(intent);
 
                         break;
 
                     case R.id.kyc_drawer:
 
-                        Intent kyc_intent=new Intent(HomeActivity.this, VehicleOwnerKycActivity.class);
+                        Intent kyc_intent = new Intent(HomeActivity.this, VehicleOwnerKycActivity.class);
                         startActivity(kyc_intent);
 
                         break;
 
                     case R.id.add_vehicle:
 
-                        Intent addVehicleActivity=new Intent(HomeActivity.this, AddVehicleActivity.class);
+                        Intent addVehicleActivity = new Intent(HomeActivity.this, AddVehicleActivity.class);
                         startActivity(addVehicleActivity);
 
                         break;
 
                     case R.id.my_vehicle:
 
-                        Intent vehicleOwnerKyc=new Intent(HomeActivity.this, MyVehicleActivity.class);
+                        Intent vehicleOwnerKyc = new Intent(HomeActivity.this, MyVehicleActivity.class);
                         startActivity(vehicleOwnerKyc);
 
                         break;
 
                     case R.id.ticket_drawer:
 
-                        Intent ticket_complain=new Intent(HomeActivity.this,TicketComplaintActivity.class);
+                        Intent ticket_complain = new Intent(HomeActivity.this, TicketComplaintActivity.class);
                         startActivity(ticket_complain);
 
                         break;
 
                     case R.id.feedback_drawer:
 
-                        Intent feedback_intent=new Intent(HomeActivity.this,FeedbackActivity.class);
+                        Intent feedback_intent = new Intent(HomeActivity.this, FeedbackActivity.class);
                         startActivity(feedback_intent);
 
                         break;
 
                     case R.id.refer_drawer:
 
-                        Intent refer_intent=new Intent(HomeActivity.this,ReferActivity.class);
+                        Intent refer_intent = new Intent(HomeActivity.this, ReferActivity.class);
                         startActivity(refer_intent);
 
                         break;
@@ -363,7 +501,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                     case R.id.logout:
 
-                        Intent logout_intent=new Intent(HomeActivity.this,LoginActivity.class);
+                        Intent logout_intent = new Intent(HomeActivity.this, LoginActivity.class);
                         startActivity(logout_intent);
 
                         break;
@@ -527,15 +665,15 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         mGoogleMap.setMyLocationEnabled(true);
         mGoogleMap.getUiSettings().setMyLocationButtonEnabled(false);
 
-        if(locationRequest==null) {
+        if (locationRequest == null) {
 
-            isStart=true;
+            isStart = true;
 
             locationRequest = LocationRequest.create();
             locationRequest.setInterval(120000); // two minute interval
             locationRequest.setFastestInterval(10000);
             locationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
-            mLocationClient.requestLocationUpdates(locationRequest,mLocationCallBack,null);
+            mLocationClient.requestLocationUpdates(locationRequest, mLocationCallBack, null);
         }
 
     }
@@ -551,12 +689,12 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         mGoogleMap.getUiSettings().setMapToolbarEnabled(false);
 
-        showMarker(LatituteOfTajMahal, LongitudeOfTajMahal, 1, "Rate: 4\nEtl:4");
-        showMarker(new1, new2, 2, "Rate: 5\nEtl:5");
-        showMarker(new3, new4, 3, "Rate: 3\nEtl:3");
-        showMarker(new5, new6, 4, "Rate: 4\nEtl:4");
-        showMarker(tulsipurLat, tulsipurLong, 5, "Rate: 4\nEtl:4");
-        showMarker(rugudi_lat, rugudi_log, 6, "Rate: 4\nEtl:4");
+//        showMarker(LatituteOfTajMahal, LongitudeOfTajMahal, 1, "Rate: 4\nEtl:4");
+//        showMarker(new1, new2, 2, "Rate: 5\nEtl:5");
+//        showMarker(new3, new4, 3, "Rate: 3\nEtl:3");
+//        showMarker(new5, new6, 4, "Rate: 4\nEtl:4");
+//        showMarker(tulsipurLat, tulsipurLong, 5, "Rate: 4\nEtl:4");
+//        showMarker(rugudi_lat, rugudi_log, 6, "Rate: 4\nEtl:4");
 
         mGoogleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
@@ -567,7 +705,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 int position = (int) (marker.getTag());
 
-                startActivity(new Intent(HomeActivity.this,SelectYourVehicleActivity.class));
+                startActivity(new Intent(HomeActivity.this, SelectYourVehicleActivity.class));
 
                 return false;
             }
@@ -597,8 +735,8 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
     protected void onResume() {
         super.onResume();
 
-        if(Mylatitude!=0 && Mylongitude!=0)
-            goToLocationWithAnimation(Mylatitude,Mylongitude);
+        if (Mylatitude != 0 && Mylongitude != 0)
+            goToLocationWithAnimation(Mylatitude, Mylongitude);
 
     }
 

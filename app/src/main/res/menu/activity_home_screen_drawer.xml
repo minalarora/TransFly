@@ -14,6 +14,12 @@
             android:id="@+id/kyc_drawer"
             android:title="Fill Kyc Details"
             android:icon="@drawable/ic_action_fill_kyc_details"/>
+
+        <item
+            android:id="@+id/bank_details"
+            android:title="Bank Details"
+            android:icon="@drawable/ic_action_update_bank_details"/>
+
         <item
             android:id="@+id/ticket_drawer"
             android:title="Complain Ticket"

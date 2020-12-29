@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.truck.transfly.Model.PositionModel;
+import com.truck.transfly.Model.RequestArea;
 import com.truck.transfly.R;
 
 import java.util.List;
@@ -18,12 +19,25 @@ import java.util.List;
 public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.viewholder> {
 
     private final Context context;
-    private List<PositionModel> positionModelList;
+    private List<RequestArea> positionModelList;
+    private onClickListener onClickListener;
 
-    public LocationAdapter(Context context,List<PositionModel> positionModels){
+    public LocationAdapter(Context context,List<RequestArea> positionModels){
 
         this.context=context;
         this.positionModelList=positionModels;
+
+    }
+
+    public interface onClickListener{
+
+        void onClick(RequestArea requestArea);
+
+    }
+
+    public void setOnClickListener(onClickListener onClickListener){
+
+        this.onClickListener=onClickListener;
 
     }
 
@@ -50,50 +64,26 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.viewho
             return;
         }
 
-        if(position==1){
-
-            holder.cityName.setText("Barbil");
-            holder.circularImageText.setText("Ba");
-
-        } else if(position==2){
-
-            holder.cityName.setText("Jamda");
-            holder.circularImageText.setText("Ja");
-
-        }else if(position==3){
-
-            holder.cityName.setText("Joda");
-            holder.circularImageText.setText("jo");
-
-        } else if(position==4){
-
-            holder.cityName.setText("Koira");
-            holder.circularImageText.setText("Ko");
-
-        } else if(position==5){
-
-            holder.cityName.setText("Unnao");
-            holder.circularImageText.setText("Un");
-
-        } else if(position==6){
-
-            holder.cityName.setText("Raybrali");
-            holder.circularImageText.setText("Ra");
-
-        } else if(position==7){
-
-            holder.cityName.setText("Rugudi");
-            holder.circularImageText.setText("Ru");
-
-        }
-
+        RequestArea requestArea = positionModelList.get(position-1);
         holder.position_any.setVisibility(View.VISIBLE);
+
+        holder.cityName.setText(requestArea.getName());
+        holder.circularImageText.setText(requestArea.getName().substring(0,2));
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                onClickListener.onClick(requestArea);
+
+            }
+        });
 
     }
 
     @Override
     public int getItemCount() {
-        return positionModelList.size();
+        return positionModelList.size()+1;
     }
 
     public class viewholder extends RecyclerView.ViewHolder {
