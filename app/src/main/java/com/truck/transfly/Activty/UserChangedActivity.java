@@ -25,16 +25,19 @@ public class UserChangedActivity extends AppCompatActivity {
     private ActivityUserChangedBinding activity;
     private List<WhoModel> whoModelList=new ArrayList<>();
     private WhoModel whoModelGlobal;
+    private String mobileNo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity = DataBindingUtil.setContentView(this,R.layout.activity_user_changed);
 
-        whoModelList.add(MyUtils.returnModel(R.drawable.vehicleowner,"Vehicle Owner","Kyc Needed","Full name - Address"));
-        whoModelList.add(MyUtils.returnModel(R.drawable.vehicleowner,"Transporter","Kyc Needed","Full name - Address"));
-        whoModelList.add(MyUtils.returnModel(R.drawable.vehicleowner,"Field Staf","Kyc Needed","Full name - Address"));
-        whoModelList.add(MyUtils.returnModel(R.drawable.vehicleowner,"Area Manager","Kyc Needed","Full name - Address"));
+        mobileNo = getIntent().getStringExtra("mobileNo");
+
+        whoModelList.add(MyUtils.returnModel(R.drawable.vehicleowner,"Vehicle Owner","Kyc Needed","Full name - Address","vehicleowner"));
+        whoModelList.add(MyUtils.returnModel(R.drawable.vehicleowner,"Transporter","Kyc Needed","Full name - Address","transporter"));
+        whoModelList.add(MyUtils.returnModel(R.drawable.vehicleowner,"Field Staf","Kyc Needed","Full name - Address","fieldstaff"));
+        whoModelList.add(MyUtils.returnModel(R.drawable.vehicleowner,"Area Manager","Kyc Needed","Full name - Address","areamanager"));
 
         RecyclerView recyclerViewUserType = activity.recyclerViewUserType;
         ChangeUserAdapter changeUserAdapter=new ChangeUserAdapter(UserChangedActivity.this,whoModelList);
@@ -58,7 +61,10 @@ public class UserChangedActivity extends AppCompatActivity {
 
                 if(whoModelGlobal!=null){
 
-                    // send next activity
+                    Intent intent=new Intent(UserChangedActivity.this,SignUpActivity.class);
+                    intent.putExtra("mobileNo",mobileNo);
+                    intent.putExtra("type",whoModelGlobal.getKeyword());
+                    startActivity(intent);
 
                 }
 

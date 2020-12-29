@@ -12,7 +12,8 @@ class ResponseTransporter {
     @SerializedName("email")
     var email: String? = null
 
-
+    @SerializedName("token")
+    var token: String? = null
 
     @SerializedName("status")
     var status: Int? = null

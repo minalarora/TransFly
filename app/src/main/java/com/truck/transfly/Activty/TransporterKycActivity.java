@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,10 +21,14 @@ import androidx.databinding.DataBindingUtil;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.nabinbhandari.android.permissions.PermissionHandler;
 import com.nabinbhandari.android.permissions.Permissions;
 import com.truck.transfly.R;
 import com.truck.transfly.databinding.ActivityTransporterKycBinding;
+import com.truck.transfly.utils.ApiClient;
+import com.truck.transfly.utils.ApiEndpoints;
 import com.truck.transfly.utils.EndApi;
 import com.truck.transfly.utils.PreferenceUtil;
 import com.zhihu.matisse.Matisse;
@@ -38,9 +43,17 @@ import net.gotev.uploadservice.UploadNotificationConfig;
 import net.gotev.uploadservice.UploadStatusDelegate;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.UUID;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class TransporterKycActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_CHOOSE = 99;
@@ -49,16 +62,26 @@ public class TransporterKycActivity extends AppCompatActivity {
     private ActivityTransporterKycBinding activity;
     private ArrayList<String> storageList=new ArrayList<>();
     private FrameLayout parent_of_loading;
+    private Retrofit retrofit = null;
+    private ApiEndpoints api = null;
+    private ArrayAdapter<String> adapter;
+    private ArrayList<String> pendingList  =  new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity = DataBindingUtil.setContentView(this, R.layout.activity_transporter_kyc);
 
-        PreferenceUtil.putData(TransporterKycActivity.this,"transporter","transporter:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI5MTU4MTc0ODI0MyIsImlhdCI6MTYwODg4MDExNSwiZXhwIjoxNjExNDcyMTE1fQ.ktRPIBiL_hnPDuNHF0NW1TgIDJ4bS9HSvx3jpOaJ6Ys");
+        PreferenceUtil.putData(TransporterKycActivity.this,"token","transporter:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIxMzMzNjY2NjY2NjEiLCJpYXQiOjE2MDkyMjczMDIsImV4cCI6MTYxMTgxOTMwMn0.zkmUjQE8OiLeY3nE46v6lZrQszxa6D17pgJAR_2Vfog");
 
         parent_of_loading = findViewById(R.id.parent_of_loading);
         parent_of_loading.setVisibility(View.GONE);
+
+        retrofit = ApiClient.getRetrofitClient();
+        if(retrofit!=null)
+        {
+            api = retrofit.create(ApiEndpoints.class);
+        }
 
         activity.chooseImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,23 +98,23 @@ public class TransporterKycActivity extends AppCompatActivity {
 
                 int position = activity.registerCategory.getSelectedItemPosition();
 
-                if(position==0){
+                if(activity.registerCategory.getSelectedItem().toString().equals("aadhaar")){
 
                     callValidationAndMultipart(activity.enterTdsNumber.getText().toString(),"aadhaar","aadhaarimage","Enter Aadhar Number");
 
-                } else if(position==1){
+                } else if(activity.registerCategory.getSelectedItem().toString().equals("pan")){
 
                     callValidationAndMultipart(activity.enterTdsNumber.getText().toString(),"pan","panimage","Enter Pan Number");
 
-                } else if(position==2) {
+                } else if(activity.registerCategory.getSelectedItem().toString().equals("gst")) {
 
                     callValidationAndMultipart(activity.enterTdsNumber.getText().toString(),"gst","gstimage","Enter Gst Number");
 
-                }else if(position==3) {
+                }else if(activity.registerCategory.getSelectedItem().toString().equals("sta")) {
 
                     callValidationAndMultipart(activity.enterTdsNumber.getText().toString(),"sta","staimage","Enter Sta Number");
 
-                }else if(position==4) {
+                }else if(activity.registerCategory.getSelectedItem().toString().equals("mininglicense")) {
 
                     callValidationAndMultipart(activity.enterTdsNumber.getText().toString(),"mininglicense","mininglicenseimage","Enter Mining License Number");
 
@@ -100,27 +123,34 @@ public class TransporterKycActivity extends AppCompatActivity {
             }
         });
 
+        adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, android.R.id.text1, pendingList);
+
+        activity.registerCategory.setAdapter(adapter);
+
+        getPendingList(PreferenceUtil.getData(TransporterKycActivity.this,"token"));
+
         activity.registerCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                if(position==0){
+                if(activity.registerCategory.getSelectedItem().toString().equals("aadhaar")){
 
                     activity.tdsEditLayout.setHint("Enter Aadhar Number");
 
-                } else if(position==1){
+                } else if(activity.registerCategory.getSelectedItem().toString().equals("pan")){
 
                     activity.tdsEditLayout.setHint("Enter Pan Number");
 
-                } else if(position==2) {
+                } else if(activity.registerCategory.getSelectedItem().toString().equals("gst")) {
 
                     activity.tdsEditLayout.setHint("Enter Gst Number");
 
-                }else if(position==3) {
+                }else if(activity.registerCategory.getSelectedItem().toString().equals("sta")) {
 
                     activity.tdsEditLayout.setHint("Enter STA Number");
 
-                }else if(position==4) {
+                }else if(activity.registerCategory.getSelectedItem().toString().equals("mininglicense")) {
 
                     activity.tdsEditLayout.setHint("Enter Mining License Number");
                 }
@@ -147,6 +177,51 @@ public class TransporterKycActivity extends AppCompatActivity {
 
         }
 
+    }
+
+    private void getPendingList(String token)
+    {
+        parent_of_loading.setVisibility(View.VISIBLE);
+
+        api.getPendingList(token).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                parent_of_loading.setVisibility(View.GONE);
+
+                if(response.code() == 200)
+                {
+
+                    Type collectionType = new TypeToken<ArrayList<String>>(){}.getType();
+                    try {
+                        pendingList.addAll(new Gson().fromJson(response.body().string().toString(),collectionType));
+                    } catch (IOException e) {
+
+                    }
+                    if(pendingList.isEmpty())
+                    {
+
+                        Log.d("minal","kyc completed");
+                    }
+                    else
+                    {
+                        //['pan','aadhaar','bank']
+
+                        adapter.notifyDataSetChanged();
+                        Log.d("minal",pendingList.toString());
+                    }
+
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                parent_of_loading.setVisibility(View.GONE);
+
+            }
+        });
     }
 
     private void uploadMultipartSingle(String number_us, String numberName, String imageName) {
@@ -176,7 +251,7 @@ public class TransporterKycActivity extends AppCompatActivity {
 
                             Log.i("TAG", "onError: " + serverResponse.getBodyAsString());
 
-                            Toast.makeText(context, "Error" + serverResponse.getBody(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "Error" + serverResponse.getBodyAsString(), Toast.LENGTH_SHORT).show();
 
                         }
 
@@ -189,11 +264,9 @@ public class TransporterKycActivity extends AppCompatActivity {
 
                                     parent_of_loading.setVisibility(View.GONE);
 
-//                                    Intent intent = new Intent(StepThreeActivity.this, StepFourActivity.class);
-//                                    intent.putExtra("listing_id", listing_id);
-//                                    startActivity(intent);
-
                                     Toast.makeText(context, "Update Successfully", Toast.LENGTH_SHORT).show();
+
+                                    finish();
 
                                 }
                             }, 2000);

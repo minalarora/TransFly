@@ -18,15 +18,21 @@ import com.google.android.material.navigation.NavigationView;
 import com.truck.transfly.Adapter.FieldStafAdapter;
 import com.truck.transfly.Adapter.TransporterAdapter;
 import com.truck.transfly.R;
+import com.truck.transfly.utils.ApiClient;
+import com.truck.transfly.utils.ApiEndpoints;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Retrofit;
 
 public class TransporterActivity extends AppCompatActivity {
 
     private List<String> stringList=new ArrayList<>();
     private RecyclerView areaManagerRecycler;
     private ImageView viewById;
+    private Retrofit retrofit = null;
+    private ApiEndpoints api = null;
     private DrawerLayout drawerLayout;
 
     @Override

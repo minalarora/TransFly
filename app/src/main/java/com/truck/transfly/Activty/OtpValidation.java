@@ -14,6 +14,7 @@ public class OtpValidation extends AppCompatActivity {
 
     private ActivityOtpValidationBinding activity;
     private boolean fromForgot;
+    private String mobileNo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +24,7 @@ public class OtpValidation extends AppCompatActivity {
         Intent intent = getIntent();
 
          fromForgot = intent.getBooleanExtra("fromForgot", false);
+         mobileNo = intent.getStringExtra("mobileNo");
 
         activity.otpSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,11 +49,16 @@ public class OtpValidation extends AppCompatActivity {
         if(true) {
 
             if(!fromForgot) {
-                startActivity(new Intent(OtpValidation.this, UserChangedActivity.class));
+
+                Intent intent = new Intent(OtpValidation.this, UserChangedActivity.class);
+                intent.putExtra("mobileNo",mobileNo);
+                startActivity(intent);
                 return;
             }
 
-            startActivity(new Intent(OtpValidation.this, ChangePasswordActivity.class));
+            Intent intent = new Intent(OtpValidation.this, ChangePasswordActivity.class);
+            intent.putExtra("mobileNo",mobileNo);
+            startActivity(intent);
 
         }
         else {

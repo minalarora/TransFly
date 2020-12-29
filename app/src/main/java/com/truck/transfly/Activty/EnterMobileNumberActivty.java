@@ -5,6 +5,7 @@ import androidx.databinding.DataBindingUtil;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.truck.transfly.R;
@@ -22,8 +23,22 @@ public class EnterMobileNumberActivty extends AppCompatActivity {
         activity.mobileNumberEnter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendOtpConfirmation("8871748278");
-                startActivity(new Intent(EnterMobileNumberActivty.this,OtpValidation.class));
+
+                if(TextUtils.isEmpty(activity.mobileNumber.getText().toString())){
+
+                    activity.mobileNumber.setError("Enter Mobile Number");
+                    activity.mobileNumber.requestFocus();
+
+                    return;
+
+                }
+
+
+                sendOtpConfirmation(activity.mobileNumber.getText().toString());
+
+                Intent intent = new Intent(EnterMobileNumberActivty.this, OtpValidation.class);
+                intent.putExtra("mobileNo",activity.mobileNumber.getText().toString());
+                startActivity(intent);
 
             }
         });

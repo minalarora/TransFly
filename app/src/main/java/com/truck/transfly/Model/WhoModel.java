@@ -2,9 +2,17 @@ package com.truck.transfly.Model;
 
 public class WhoModel {
 
-    private String OwnerType,belowOwner,below2Owner;
+    private String OwnerType,belowOwner,below2Owner,keyword;
 
     private int image_url;
+
+    public String getKeyword() {
+        return keyword;
+    }
+
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
+    }
 
     public String getOwnerType() {
         return OwnerType;

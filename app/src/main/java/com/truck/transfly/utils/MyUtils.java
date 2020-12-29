@@ -4,12 +4,13 @@ import com.truck.transfly.Model.WhoModel;
 
 public class MyUtils {
 
-    public static WhoModel returnModel(int drawableId,String OwnerName,String belowOwner,String belowOwner2){
+    public static WhoModel returnModel(int drawableId,String OwnerName,String belowOwner,String belowOwner2,String keyword){
 
         WhoModel whoModel=new WhoModel();
         whoModel.setImage_url(drawableId);
         whoModel.setOwnerType(OwnerName);
         whoModel.setBelowOwner(belowOwner);
+        whoModel.setKeyword(keyword);
         whoModel.setBelow2Owner(belowOwner2);
 
         return whoModel;

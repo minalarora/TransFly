@@ -82,9 +82,11 @@
                 android:layout_height="38dp"
                 android:layout_toEndOf="@+id/password_lock"
                 android:background="@color/white"
+                android:id="@+id/mobileNumber"
                 android:fontFamily="@font/font_opensans"
                 android:hint="Enter Mobile Number"
                 android:paddingStart="16dp"
+                android:inputType="phone"
                 android:paddingEnd="12dp"
                 android:textSize="14dp" />
 

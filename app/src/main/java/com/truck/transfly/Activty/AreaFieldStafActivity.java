@@ -14,15 +14,20 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.nabinbhandari.android.permissions.PermissionHandler;
 import com.nabinbhandari.android.permissions.Permissions;
 import com.truck.transfly.R;
 import com.truck.transfly.databinding.ActivityAreaFieldStafBinding;
+import com.truck.transfly.utils.ApiClient;
+import com.truck.transfly.utils.ApiEndpoints;
 import com.truck.transfly.utils.EndApi;
 import com.truck.transfly.utils.PreferenceUtil;
 import com.zhihu.matisse.Matisse;
@@ -37,26 +42,44 @@ import net.gotev.uploadservice.UploadNotificationConfig;
 import net.gotev.uploadservice.UploadStatusDelegate;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.UUID;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class AreaFieldStafActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE_CHOOSE = 99;
     private ActivityAreaFieldStafBinding activity;
     private FrameLayout parent_of_loading;
+    private Retrofit retrofit = null;
+    private ApiEndpoints api = null;
     private ArrayList<String> storageList=new ArrayList<>();
+    private ArrayAdapter<String> adapter;
+    private ArrayList<String> pendingList=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity = DataBindingUtil.setContentView(this, R.layout.activity_area_field_staf);
 
-        PreferenceUtil.putData(AreaFieldStafActivity.this,"token","areamanager:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI5MTU4MTc0ODI0MSIsImlhdCI6MTYwODg4NTQ4NSwiZXhwIjoxNjExNDc3NDg1fQ.Ji__cSxVguUglGy0cgq-p3uJP_wppxGU2G7HgRUUBgs");
+        PreferenceUtil.putData(AreaFieldStafActivity.this,"token","fieldstaff:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIyMjIyNTUyMjEiLCJpYXQiOjE2MDkyMjc1ODMsImV4cCI6MTYxMTgxOTU4M30.dKSSU7LvtVFkFcEoeb586uK2s74BHhBZsoRcnumcbro");
 
         parent_of_loading = findViewById(R.id.parent_of_loading);
         parent_of_loading.setVisibility(View.GONE);
+
+        retrofit = ApiClient.getRetrofitClient();
+        if(retrofit!=null)
+        {
+            api = retrofit.create(ApiEndpoints.class);
+        }
 
         activity.chooseImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,7 +96,7 @@ public class AreaFieldStafActivity extends AppCompatActivity {
 
                 int position=activity.registerCategory.getSelectedItemPosition();
 
-                if (position == 0) {
+                if (activity.registerCategory.getSelectedItem().toString().equals("pan")) {
 
                     if(!TextUtils.isEmpty(activity.enterTdsNumber.getText().toString())){
 
@@ -86,7 +109,7 @@ public class AreaFieldStafActivity extends AppCompatActivity {
                     }
 
 
-                } else if (position == 1) {
+                } else if (activity.registerCategory.getSelectedItem().toString().equals("aadhaar")) {
 
                     if(!TextUtils.isEmpty(activity.enterTdsNumber.getText().toString())){
 
@@ -94,11 +117,11 @@ public class AreaFieldStafActivity extends AppCompatActivity {
 
                     } else {
 
-                        Toast.makeText(AreaFieldStafActivity.this, "Enter Pan Number", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AreaFieldStafActivity.this, "Enter Aadhar Number", Toast.LENGTH_SHORT).show();
 
                     }
 
-                } else if (position == 2) {
+                } else if (activity.registerCategory.getSelectedItem().toString().equals("bank")) {
 
                     if(TextUtils.isEmpty(activity.bankName.getText().toString())){
 
@@ -123,6 +146,12 @@ public class AreaFieldStafActivity extends AppCompatActivity {
             }
         });
 
+        adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, android.R.id.text1, pendingList);
+
+        activity.registerCategory.setAdapter(adapter);
+
+        getPendingList(PreferenceUtil.getData(AreaFieldStafActivity.this,"token"));
 
         activity.registerCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -131,17 +160,17 @@ public class AreaFieldStafActivity extends AppCompatActivity {
                 activity.tdsEditLayout.setVisibility(View.GONE);
                 activity.bankParent.setVisibility(View.GONE);
 
-                if(position==0){
+                if(activity.registerCategory.getSelectedItem().toString().equals("pan")){
 
                     activity.tdsEditLayout.setHint("Enter Pan Number");
                     activity.tdsEditLayout.setVisibility(View.VISIBLE);
 
-                } else if(position==1){
+                } else if(activity.registerCategory.getSelectedItem().toString().equals("aadhaar")){
 
                     activity.tdsEditLayout.setHint("Enter Aadhar Number");
                     activity.tdsEditLayout.setVisibility(View.VISIBLE);
 
-                } else if(position==2) {
+                } else if(activity.registerCategory.getSelectedItem().toString().equals("bank")) {
 
                     activity.bankParent.setVisibility(View.VISIBLE);
 
@@ -155,6 +184,51 @@ public class AreaFieldStafActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void getPendingList(String token)
+    {
+        parent_of_loading.setVisibility(View.VISIBLE);
+
+        api.getPendingList(token).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                parent_of_loading.setVisibility(View.GONE);
+
+                if(response.code() == 200)
+                {
+
+                    Type collectionType = new TypeToken<ArrayList<String>>(){}.getType();
+                    try {
+                        pendingList.addAll(new Gson().fromJson(response.body().string().toString(),collectionType));
+                    } catch (IOException e) {
+
+                    }
+                    if(pendingList.isEmpty())
+                    {
+
+                        Log.d("minal","kyc completed");
+                    }
+                    else
+                    {
+                        //['pan','aadhaar','bank']
+
+                        adapter.notifyDataSetChanged();
+                        Log.d("minal",pendingList.toString());
+                    }
+
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                parent_of_loading.setVisibility(View.GONE);
+
+            }
+        });
     }
 
     private void askPermissions() {
@@ -254,6 +328,7 @@ public class AreaFieldStafActivity extends AppCompatActivity {
 //                                    startActivity(intent);
 
                                     Toast.makeText(context, "Update Successfully", Toast.LENGTH_SHORT).show();
+                                    finish();
 
                                 }
                             }, 2000);

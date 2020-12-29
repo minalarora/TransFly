@@ -1,224 +1,243 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".Activty.SignUpActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <com.github.florent37.shapeofview.shapes.ArcView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="140dp"
-        app:shape_arc_height="60dp"
-        app:shape_arc_position="bottom">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".Activty.SignUpActivity">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/transluentView"
             android:orientation="vertical"
-            android:background="@color/project_color" />
+            android:layout_height="wrap_content">
 
-        <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_gravity="center"
-            android:src="@drawable/ic_baseline_login_imp_images"
-            app:tint="@color/white" />
-
-    </com.github.florent37.shapeofview.shapes.ArcView>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/poppinsbold"
-        android:text="Create Account"
-        android:layout_marginTop="40dp"
-        android:layout_gravity="center_horizontal"
-        android:textColor="@color/project_color"
-        android:textSize="@dimen/_18ssp" />
-
-    <RelativeLayout
-        android:layout_width="320dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/design_as_edittext"
-        android:elevation="6dp"
-        android:padding="5dp">
-
-        <ImageView
-            android:id="@+id/first_name_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="12dp"
-            android:alpha="0.6"
-            android:src="@drawable/ic_action_user_icon"
-            app:tint="@color/black" />
-
-        <EditText
+        <com.github.florent37.shapeofview.shapes.ArcView
             android:layout_width="match_parent"
-            android:layout_height="38dp"
-            android:layout_toEndOf="@+id/first_name_icon"
-            android:background="@color/white"
-            android:fontFamily="@font/font_opensans"
-            android:hint="Name"
-            android:paddingStart="16dp"
-            android:paddingEnd="12dp"
-            android:textSize="14dp" />
+            android:layout_height="140dp"
+            app:shape_arc_height="60dp"
+            app:shape_arc_position="bottom">
 
-    </RelativeLayout>
+            <LinearLayout
+                android:id="@+id/transluentView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/project_color"
+                android:orientation="vertical" />
 
-    <RelativeLayout
-        android:layout_width="320dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="28dp"
-        android:visibility="gone"
-        android:background="@drawable/design_as_edittext"
-        android:elevation="6dp"
-        android:padding="5dp">
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_baseline_login_imp_images"
+                app:tint="@color/white" />
 
-        <ImageView
-            android:id="@+id/second_name_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="12dp"
-            android:alpha="0.6"
-            android:src="@drawable/ic_action_user_icon"
-            app:tint="@color/black" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="38dp"
-            android:layout_toEndOf="@+id/second_name_icon"
-            android:background="@color/white"
-            android:fontFamily="@font/font_opensans"
-            android:hint="Last Name"
-            android:paddingStart="16dp"
-            android:paddingEnd="12dp"
-            android:textSize="14dp" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="320dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="28dp"
-        android:background="@drawable/design_as_edittext"
-        android:elevation="6dp"
-        android:padding="5dp">
-
-        <ImageView
-            android:id="@+id/email_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="12dp"
-            android:alpha="0.6"
-            android:src="@drawable/ic_action_email"
-            app:tint="@color/black" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="38dp"
-            android:layout_toEndOf="@+id/email_icon"
-            android:background="@color/white"
-            android:fontFamily="@font/font_opensans"
-            android:hint="Email"
-            android:paddingStart="16dp"
-            android:paddingEnd="12dp"
-            android:textSize="14dp" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="320dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="28dp"
-        android:background="@drawable/design_as_edittext"
-        android:elevation="6dp"
-        android:padding="5dp">
-
-        <ImageView
-            android:id="@+id/password_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="12dp"
-            android:alpha="0.6"
-            android:src="@drawable/ic_action_password_lock"
-            app:tint="@color/black" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="38dp"
-            android:layout_toEndOf="@+id/password_icon"
-            android:background="@color/white"
-            android:fontFamily="@font/font_opensans"
-            android:hint="Password"
-            android:paddingStart="16dp"
-            android:paddingEnd="12dp"
-            android:textSize="14dp" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="320dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="28dp"
-        android:background="@drawable/design_as_edittext"
-        android:elevation="6dp"
-        android:padding="5dp">
-
-        <ImageView
-            android:id="@+id/password_lock"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="12dp"
-            android:alpha="0.6"
-            android:src="@drawable/ic_action_password_lock"
-            app:tint="@color/black" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="38dp"
-            android:layout_toEndOf="@+id/password_lock"
-            android:background="@color/white"
-            android:fontFamily="@font/font_opensans"
-            android:hint="Re Type Password"
-            android:paddingStart="16dp"
-            android:paddingEnd="12dp"
-            android:textSize="14dp" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/sign_button"
-        android:layout_width="220dp"
-        android:layout_height="45dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/design_as_edittext_gradient"
-        android:elevation="6dp">
+        </com.github.florent37.shapeofview.shapes.ArcView>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="40dp"
             android:fontFamily="@font/poppinsbold"
-            android:text="Sign Up"
-            android:textColor="@color/white"
-            android:textSize="14dp" />
+            android:text="Create Account"
+            android:textColor="@color/project_color"
+            android:textSize="@dimen/_18ssp" />
+
+        <RelativeLayout
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/design_as_edittext"
+            android:elevation="6dp"
+            android:padding="5dp">
+
+            <ImageView
+                android:id="@+id/first_name_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="12dp"
+                android:alpha="0.6"
+                android:src="@drawable/ic_action_user_icon"
+                app:tint="@color/black" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:layout_toEndOf="@+id/first_name_icon"
+                android:background="@color/white"
+                android:id="@+id/full_name"
+                android:fontFamily="@font/font_opensans"
+                android:hint="Name"
+                android:paddingStart="16dp"
+                android:paddingEnd="12dp"
+                android:textSize="14dp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="28dp"
+            android:background="@drawable/design_as_edittext"
+            android:elevation="6dp"
+            android:padding="5dp"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/second_name_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="12dp"
+                android:alpha="0.6"
+                android:src="@drawable/ic_action_user_icon"
+                app:tint="@color/black" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:layout_toEndOf="@+id/second_name_icon"
+                android:background="@color/white"
+                android:fontFamily="@font/font_opensans"
+                android:hint="Last Name"
+                android:paddingStart="16dp"
+                android:paddingEnd="12dp"
+                android:textSize="14dp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="28dp"
+            android:background="@drawable/design_as_edittext"
+            android:elevation="6dp"
+            android:padding="5dp">
+
+            <ImageView
+                android:id="@+id/email_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="12dp"
+                android:alpha="0.6"
+                android:src="@drawable/ic_action_email"
+                app:tint="@color/black" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:layout_toEndOf="@+id/email_icon"
+                android:background="@color/white"
+                android:id="@+id/email"
+                android:inputType="textEmailAddress"
+                android:fontFamily="@font/font_opensans"
+                android:hint="Email"
+                android:paddingStart="16dp"
+                android:paddingEnd="12dp"
+                android:textSize="14dp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="28dp"
+            android:background="@drawable/design_as_edittext"
+            android:elevation="6dp"
+            android:padding="5dp">
+
+            <ImageView
+                android:id="@+id/password_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="12dp"
+                android:alpha="0.6"
+                android:src="@drawable/ic_action_password_lock"
+                app:tint="@color/black" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:layout_toEndOf="@+id/password_icon"
+                android:background="@color/white"
+                android:fontFamily="@font/font_opensans"
+                android:id="@+id/password"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:paddingStart="16dp"
+                android:paddingEnd="12dp"
+                android:textSize="14dp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="28dp"
+            android:background="@drawable/design_as_edittext"
+            android:elevation="6dp"
+            android:padding="5dp">
+
+            <ImageView
+                android:id="@+id/password_lock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="12dp"
+                android:alpha="0.6"
+                android:src="@drawable/ic_action_password_lock"
+                app:tint="@color/black" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:layout_toEndOf="@+id/password_lock"
+                android:background="@color/white"
+                android:fontFamily="@font/font_opensans"
+                android:hint="Re Type Password"
+                android:id="@+id/retypePassword"
+                android:inputType="textPassword"
+                android:paddingStart="16dp"
+                android:paddingEnd="12dp"
+                android:textSize="14dp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/sign_button"
+            android:layout_width="220dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/design_as_edittext_gradient"
+            android:elevation="6dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/poppinsbold"
+                android:text="Sign Up"
+                android:textColor="@color/white"
+                android:textSize="14dp" />
+
+        </RelativeLayout>
+
+        </LinearLayout>
+
+        <include layout="@layout/loading_view_transparent"/>
 
     </RelativeLayout>
 
-</LinearLayout>
+</layout>

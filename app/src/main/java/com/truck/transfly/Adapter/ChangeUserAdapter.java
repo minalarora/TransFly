@@ -87,7 +87,6 @@ public class ChangeUserAdapter extends RecyclerView.Adapter<ChangeUserAdapter.vi
             holder.belowOwner.setTextColor(ContextCompat.getColor(context,R.color.black));
             holder.belowOwner2.setTextColor(ContextCompat.getColor(context,R.color.black));
             holder.checkView.setVisibility(View.GONE);
-            onClickListener.onClick(whoModel);
         }
 
     }

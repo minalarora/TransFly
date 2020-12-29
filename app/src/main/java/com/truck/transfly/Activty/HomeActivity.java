@@ -118,7 +118,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         MenuItem item = menu.findItem(R.id.emergency_details);
         item.setVisible(false);
 
-        PreferenceUtil.putData(HomeActivity.this,"token","vehicleowner:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIxMTExMTExMSIsImlhdCI6MTYwOTE3OTgyOSwiZXhwIjoxNjExNzcxODI5fQ.YUibiAIPlx8L5VtRFbpPNtjWP0oNLg-91aPE64elLq8");
+        PreferenceUtil.putData(HomeActivity.this,"token","vehicleowner:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIxMTc3Nzc3NTQ0NSIsImlhdCI6MTYwOTIyNjIwOCwiZXhwIjoxNjExODE4MjA4fQ.qEGlO0IAKibuhLWa1EzIX16Dtn6TDF8bZo1JYTin6vU");
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
