@@ -409,6 +409,59 @@ public class PlaygroundActivity extends AppCompatActivity {
         });
     }
 
+    private void createBooking(String token, RequestBooking booking)
+    {
+        api.createBooking(token,booking).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response.code() == 200)
+                {
+                    Log.d("minal","booking created");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void getAllBookingVehicleOwner(String token)
+    {
+        api.getAllVehicles(token).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response.code() == 200)
+                {
+                    ArrayList<ResponseBooking> bookingList  =  new ArrayList<>();
+                    Type collectionType = new TypeToken<ArrayList<ResponseBooking>>(){}.getType();
+                    try {
+                        bookingList.addAll(new Gson().fromJson(response.body().string().toString(),collectionType));
+                    } catch (IOException e) {
+
+                    }
+                    if(bookingList.isEmpty())
+                    {
+
+                        Log.d("minal","no vehicle");
+                    }
+                    else
+                    {
+                        //['pan','aadhaar','bank']
+
+                        Log.d("minal",bookingList.toString());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+    }
+
 
 
 }

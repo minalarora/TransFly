@@ -76,6 +76,14 @@ public interface ApiEndpoints {
     @GET("/allvehicle")
     Call<ResponseBody> getAllVehicles(@Header("Authorization")String token);
 
+    //create booking
+    @POST("/booking")
+    Call<ResponseBody> createBooking(@Header("Authorization")String token,@Body RequestBooking booking);
+
+    //get all booking of vehicleowner
+    @GET("/allbooking/vehicleowner")
+    Call<ResponseBody> getBookingVehicleOwner(@Header("Authorization")String token);
+
 
 
     @POST("/login")
@@ -181,8 +189,8 @@ public interface ApiEndpoints {
     @POST("/fieldstaff")
     Call<ResponseBody> createFieldStaff(@Header("Authorization")String token,@Body RequestUser user);
 
-    @POST("/booking")
-    Call<ResponseBody> createBooking(@Header("Authorization")String token,@Body RequestBooking booking);
+//    @POST("/booking")
+//    Call<ResponseBody> createBooking(@Header("Authorization")String token,@Body RequestBooking booking);
 
     @POST("/feedback")
     Call<ResponseBody> createFeedback(@Header("Authorization")String token,@Body RequestFeedback feedback);
