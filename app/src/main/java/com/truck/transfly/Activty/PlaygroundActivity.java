@@ -30,9 +30,9 @@ import com.truck.transfly.R;
 
 public class PlaygroundActivity extends AppCompatActivity {
 
-    private static Retrofit retrofit = null;
-    private static ApiEndpoints api = null;
-    private static String token = "vehicleowner:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIxMTExMTExMSIsImlhdCI6MTYwOTE3OTgyOSwiZXhwIjoxNjExNzcxODI5fQ.YUibiAIPlx8L5VtRFbpPNtjWP0oNLg-91aPE64elLq8";
+    private  Retrofit retrofit = null;
+    private  ApiEndpoints api = null;
+    private  String token = "vehicleowner:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIxMTExMTExMSIsImlhdCI6MTYwOTE3OTgyOSwiZXhwIjoxNjExNzcxODI5fQ.YUibiAIPlx8L5VtRFbpPNtjWP0oNLg-91aPE64elLq8";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +43,7 @@ public class PlaygroundActivity extends AppCompatActivity {
             api = retrofit.create(ApiEndpoints.class);
         }
 
-       // createVehicleOwner(new RequestUser("Minal Arora","minalvehicleowner@gmail.com","11111111","password"));
+       createVehicleOwner(new RequestUser("Minal Arora","minalvehicleowner@gmail.com","11111111","password"));
         //createFieldStaff(new RequestUser("Minal Arora","minalfieldstaff@gmail.com","2222222","password"));
        // createTransporter(new RequestUser("Minal Arora","minaltransporter@gmail.com","333333333","password"));
         //createAreaManager(new RequestUser("Minal Arora","minalareamanager@gmail.com","44444444","password"));
@@ -55,7 +55,7 @@ public class PlaygroundActivity extends AppCompatActivity {
         //getFieldStaff(token);
 
 
-        getPendingList(token);
+       // getPendingList(token);
 
 
 
@@ -72,14 +72,19 @@ public class PlaygroundActivity extends AppCompatActivity {
                     if(response.code() == 200)
                     {
                         ResponseVehicleOwner vehicleOwner = response.body();
+                        //line 1
                        Log.d("minal",vehicleOwner.toString());
 
+                    }
+                    else
+                    {
+                        //user create failed
                     }
                 }
 
                 @Override
                 public void onFailure(Call<ResponseVehicleOwner> call, Throwable t) {
-
+                    //no internet connection
                 }
             });
     }
@@ -95,6 +100,10 @@ public class PlaygroundActivity extends AppCompatActivity {
                 {
                     ResponseFieldStaff fieldStaff = response.body();
                     Log.d("minal",fieldStaff.toString());
+
+                }
+                else
+                {
 
                 }
             }
@@ -118,6 +127,10 @@ public class PlaygroundActivity extends AppCompatActivity {
                    ResponseTransporter transporter = response.body();
                    Log.d("minal",transporter.toString());
                }
+               else
+               {
+
+               }
            }
 
            @Override
@@ -136,6 +149,10 @@ public class PlaygroundActivity extends AppCompatActivity {
                     {
                         ResponseAreaManager areaManager = response.body();
                         Log.d("minal",areaManager.toString());
+                    }
+                    else
+                    {
+
                     }
                 }
 
@@ -158,6 +175,10 @@ public class PlaygroundActivity extends AppCompatActivity {
                     ResponseVehicleOwner vehicleOwner = response.body();
                     Log.d("minal",vehicleOwner.toString());
                 }
+                else
+                {
+
+                }
             }
 
             @Override
@@ -176,6 +197,10 @@ public class PlaygroundActivity extends AppCompatActivity {
                 {
                     ResponseFieldStaff fieldStaff = response.body();
                     Log.d("minal",fieldStaff.toString());
+                }
+                else
+                {
+
                 }
             }
 
@@ -196,6 +221,10 @@ public class PlaygroundActivity extends AppCompatActivity {
                     ResponseTransporter transporter = response.body();
                     Log.d("minal",transporter.toString());
                 }
+                else
+                {
+
+                }
             }
 
             @Override
@@ -214,6 +243,10 @@ public class PlaygroundActivity extends AppCompatActivity {
                 {
                     ResponseAreaManager areaManager = response.body();
                     Log.d("minal",areaManager.toString());
+                }
+                else
+                {
+
                 }
             }
 
@@ -241,10 +274,13 @@ public class PlaygroundActivity extends AppCompatActivity {
                     }
                     if(pendingList.isEmpty())
                     {
+
                         Log.d("minal","kyc completed");
                     }
                     else
                     {
+                        //['pan','aadhaar','bank']
+
                         Log.d("minal",pendingList.toString());
                     }
 
@@ -284,23 +320,24 @@ public class PlaygroundActivity extends AppCompatActivity {
                     {
                         Log.d("minal",mines.toString());
 
-                        //for area name
-                        HashMap<String , RequestArea> areas = new HashMap<>();
-                        //for destination
-                        Set<String> loadings = new HashSet<>();
-                        for(ResponseMine mine: mines) {
-                            areas.put(mine.getArea(), new RequestArea(mine.getArealatitude(), mine.getArealongitude()));
-                            for(String loading: mine.getLoading())
-                            {
-                                loadings.add(loading);
-                            }
-                        }
-
-                        for(Map.Entry<String, RequestArea> a: areas.entrySet())
-                        {
-                            Log.d("minal","area=" + a.getKey() + "lat = " + a.getValue().getArealatitude() + "long = " + a.getValue().getArealongitude() );
-
-                        }
+//                        //for area name
+//                        Set<RequestArea> areas = new HashSet<>();
+//                        //for destination
+//                        Set<String> loadings = new HashSet<String>();
+//                        for(ResponseMine mine: mines) {
+//                            areas.put(mine.getArea(), new RequestArea(mine.getArealatitude(), mine.getArealongitude()));
+//                            for(String loading: mine.getLoading())
+//                            {
+//                                loadings.add(loading);
+//                            }
+//                        }
+//
+//                        //for shani
+//                        for(Map.Entry<String, RequestArea> a: areas.entrySet())
+//                        {
+//                            Log.d("minal","area=" + a.getKey() + "lat = " + a.getValue().getArealatitude() + "long = " + a.getValue().getArealongitude() );
+//
+//                        }
 
                     }
 

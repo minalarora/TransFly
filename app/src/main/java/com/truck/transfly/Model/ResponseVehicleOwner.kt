@@ -14,6 +14,9 @@ class ResponseVehicleOwner {
 
     @SerializedName("status")
     var status: Int? = null
+    //0 document upload pending
+    //1 kyc pending
+    //2 approved
 
     @SerializedName("accountno")
     var accountno: String? = null
