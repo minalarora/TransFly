@@ -429,7 +429,7 @@ public class PlaygroundActivity extends AppCompatActivity {
 
     private void getAllBookingVehicleOwner(String token)
     {
-        api.getAllVehicles(token).enqueue(new Callback<ResponseBody>() {
+        api.getBookingVehicleOwner(token).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if(response.code() == 200)
@@ -480,5 +480,25 @@ public class PlaygroundActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void createBooking(String token, RequestTicket ticket)
+    {
+        api.createTicket(token, ticket).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response.code() == 200)
+                {
+                    //ticket created
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+    }
+
+
 
 }

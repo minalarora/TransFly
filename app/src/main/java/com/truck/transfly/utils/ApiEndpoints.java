@@ -11,6 +11,7 @@ import com.truck.transfly.Model.RequestInvoice;
 import com.truck.transfly.Model.RequestPanDetails;
 import com.truck.transfly.Model.RequestStaDetails;
 import com.truck.transfly.Model.RequestTdsDetails;
+import com.truck.transfly.Model.RequestTicket;
 import com.truck.transfly.Model.RequestUser;
 import com.truck.transfly.Model.RequestVehicle;
 import com.truck.transfly.Model.ResponseAreaManager;
@@ -88,6 +89,9 @@ public interface ApiEndpoints {
     //delete booking
     @DELETE("/booking/{id}")
     Call<ResponseBooking> deleteBooking(@Header("Authorization")String token, @Path("id") int id);
+
+    @POST("/ticket")
+    Call<ResponseBody> createTicket(@Header("Authorization")String token, @Body RequestTicket ticket);
 
 
 
