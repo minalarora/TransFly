@@ -73,7 +73,6 @@ public class MyVehicleActivity extends AppCompatActivity {
                             ResponseVehicle responseVehicle=new ResponseVehicle();
 
                             JSONObject jsonObject=jsonArray.getJSONObject(i);
-                            responseVehicle.setId(jsonObject.getInt("id"));
                             responseVehicle.setNumber(jsonObject.getString("number"));
                             responseVehicle.setRc(jsonObject.getString("rc"));
                             responseVehicle.setVehiclename(jsonObject.getString("vehiclename"));

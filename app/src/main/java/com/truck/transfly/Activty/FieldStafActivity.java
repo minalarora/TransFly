@@ -103,6 +103,13 @@ public class FieldStafActivity extends AppCompatActivity {
 
                         break;
 
+                    case R.id.bank_details:
+
+                        Intent bankDetails=new Intent(FieldStafActivity.this,BankDetailsActivity.class);
+                        startActivity(bankDetails);
+
+                        break;
+
                     case R.id.ticket_drawer:
 
                         Intent ticket_complain=new Intent(FieldStafActivity.this,TicketComplaintActivity.class);

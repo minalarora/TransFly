@@ -19,19 +19,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TransFly">
-        <activity android:name=".Activty.PlaygroundActivity"></activity>
-        <activity android:name=".Activty.MyVehicleActivity"></activity>
-        <activity android:name=".Activty.AddVehicleActivity" />
-        <activity android:name=".Activty.EmergencyContactActivity" />
-        <activity android:name=".Activty.AreaFieldStafActivity" >
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        <activity android:name=".Activty.BankDetailsActivity">
 
         </activity>
+        <activity android:name=".Activty.PlaygroundActivity" />
+        <activity android:name=".Activty.MyVehicleActivity" />
+        <activity android:name=".Activty.AddVehicleActivity" />
+        <activity android:name=".Activty.EmergencyContactActivity" />
+        <activity android:name=".Activty.AreaFieldStafActivity"></activity>
         <!--
                Set to true if your app is Standalone, that is, it does not require the handheld
                app to run.
@@ -42,13 +37,9 @@
 
         <activity
             android:name=".Activty.TransporterKycActivity"
-            android:label="@string/title_activity_transporter_kyc" >
-
-        </activity>
+            android:label="@string/title_activity_transporter_kyc"></activity>
         <activity android:name=".Activty.ShowInvoiceActivity" />
-        <activity android:name=".Activty.TransporterActivity" >
-
-        </activity>
+        <activity android:name=".Activty.TransporterActivity"></activity>
         <activity
             android:name=".Activty.ChangePasswordActivity"
             android:resizeableActivity="false"
@@ -129,8 +120,18 @@
             android:screenOrientation="portrait" />
         <activity android:name=".Activty.HomeActivity">
 
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+
         </activity>
-        <activity android:name=".Activty.FieldStafActivity" />
+
+        <activity android:name=".Activty.FieldStafActivity" >
+
+        </activity>
         <activity android:name=".Activty.CurrentBookingActivity" />
 
         <uses-library

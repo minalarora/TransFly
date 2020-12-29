@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:minWidth="330dp"
+    android:background="@drawable/round_dialog_background"
+    >
+
+    <RelativeLayout
+        android:id="@+id/relative"
+        android:layout_width="wrap_content"
+        android:layout_height="42dp"
+        android:layout_gravity="center"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/personAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="8dp"
+            android:alpha="0.9"
+            android:src="@drawable/ic_action_choose_iloading_location"
+            app:tint="@color/quantum_pink" />
+
+        <TextView
+            android:id="@+id/showText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="7dp"
+            android:layout_toEndOf="@+id/personAdd"
+            android:alpha="0.9"
+            android:fontFamily="@font/poppins"
+            android:letterSpacing="0.03"
+            android:text="Choose a loading"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            tools:ignore="RelativeOverlap" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#dcdcdc" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/list_item_loading"
+        />
+
+</LinearLayout>

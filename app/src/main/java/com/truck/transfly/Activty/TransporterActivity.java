@@ -117,6 +117,13 @@ public class TransporterActivity extends AppCompatActivity {
 
                         break;
 
+                    case R.id.bank_details:
+
+                        Intent bankDetails=new Intent(TransporterActivity.this,BankDetailsActivity.class);
+                        startActivity(bankDetails);
+
+                        break;
+
                     case R.id.feedback_drawer:
 
                         Intent feedback_intent=new Intent(TransporterActivity.this,FeedbackActivity.class);
