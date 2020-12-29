@@ -9,6 +9,7 @@ import com.truck.transfly.Model.RequestFeedback;
 import com.truck.transfly.Model.RequestGstDetails;
 import com.truck.transfly.Model.RequestInvoice;
 import com.truck.transfly.Model.RequestPanDetails;
+import com.truck.transfly.Model.RequestRating;
 import com.truck.transfly.Model.RequestStaDetails;
 import com.truck.transfly.Model.RequestTdsDetails;
 import com.truck.transfly.Model.RequestTicket;
@@ -92,6 +93,9 @@ public interface ApiEndpoints {
 
     @POST("/ticket")
     Call<ResponseBody> createTicket(@Header("Authorization")String token, @Body RequestTicket ticket);
+
+    @POST("/rating")
+    Call<ResponseBody> createRating(@Header("Authorization")String token, @Body RequestRating rating);
 
 
 

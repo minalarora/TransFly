@@ -481,7 +481,7 @@ public class PlaygroundActivity extends AppCompatActivity {
         });
     }
 
-    private void createBooking(String token, RequestTicket ticket)
+    private void createTicket(String token, RequestTicket ticket)
     {
         api.createTicket(token, ticket).enqueue(new Callback<ResponseBody>() {
             @Override
@@ -489,6 +489,25 @@ public class PlaygroundActivity extends AppCompatActivity {
                 if(response.code() == 200)
                 {
                     //ticket created
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+    }
+
+
+    private void createRating(String token, RequestRating rating)
+    {
+        api.createRating(token, rating).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response.code() == 200)
+                {
+                    //rating done
                 }
             }
 
