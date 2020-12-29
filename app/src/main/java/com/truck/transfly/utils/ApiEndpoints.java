@@ -23,6 +23,7 @@ import okhttp3.Request;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.HEAD;
 import retrofit2.http.Header;
@@ -83,6 +84,10 @@ public interface ApiEndpoints {
     //get all booking of vehicleowner
     @GET("/allbooking/vehicleowner")
     Call<ResponseBody> getBookingVehicleOwner(@Header("Authorization")String token);
+
+    //delete booking
+    @DELETE("/booking/{id}")
+    Call<ResponseBooking> deleteBooking(@Header("Authorization")String token, @Path("id") int id);
 
 
 

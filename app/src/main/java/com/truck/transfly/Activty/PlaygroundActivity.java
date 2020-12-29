@@ -1,32 +1,32 @@
 package com.truck.transfly.Activty;
 
-import androidx.appcompat.app.AppCompatActivity;
+        import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Bundle;
-import android.util.Log;
+        import android.os.Bundle;
+        import android.util.Log;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.truck.transfly.R;
-import com.truck.transfly.utils.ApiClient;
-import com.truck.transfly.utils.ApiEndpoints;
+        import com.google.gson.Gson;
+        import com.google.gson.reflect.TypeToken;
+        import com.truck.transfly.R;
+        import com.truck.transfly.utils.ApiClient;
+        import com.truck.transfly.utils.ApiEndpoints;
 
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import com.truck.transfly.Model.*;
+        import okhttp3.ResponseBody;
+        import retrofit2.Call;
+        import retrofit2.Callback;
+        import retrofit2.Response;
+        import retrofit2.Retrofit;
+        import com.truck.transfly.Model.*;
 
-import java.io.IOException;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+        import java.io.IOException;
+        import java.lang.reflect.Type;
+        import java.util.ArrayList;
+        import java.util.HashMap;
+        import java.util.HashSet;
+        import java.util.Map;
+        import java.util.Set;
 
-import com.truck.transfly.R;
+        import com.truck.transfly.R;
 
 public class PlaygroundActivity extends AppCompatActivity {
 
@@ -43,19 +43,19 @@ public class PlaygroundActivity extends AppCompatActivity {
             api = retrofit.create(ApiEndpoints.class);
         }
 
-       createVehicleOwner(new RequestUser("Minal Arora","minalvehicleowner@gmail.com","11111111","password"));
+        createVehicleOwner(new RequestUser("Minal Arora","minalvehicleowner@gmail.com","11111111","password"));
         //createFieldStaff(new RequestUser("Minal Arora","minalfieldstaff@gmail.com","2222222","password"));
-       // createTransporter(new RequestUser("Minal Arora","minaltransporter@gmail.com","333333333","password"));
+        // createTransporter(new RequestUser("Minal Arora","minaltransporter@gmail.com","333333333","password"));
         //createAreaManager(new RequestUser("Minal Arora","minalareamanager@gmail.com","44444444","password"));
 
 
-       // getVehicleOwner(token);
-       // getAreaManager(token);
+        // getVehicleOwner(token);
+        // getAreaManager(token);
         //getTransporter(token);
         //getFieldStaff(token);
 
 
-       // getPendingList(token);
+        // getPendingList(token);
 
 
 
@@ -66,27 +66,27 @@ public class PlaygroundActivity extends AppCompatActivity {
     {
 
 
-            api.createVehicleOwner(user).enqueue(new Callback<ResponseVehicleOwner>() {
-                @Override
-                public void onResponse(Call<ResponseVehicleOwner> call, Response<ResponseVehicleOwner> response) {
-                    if(response.code() == 200)
-                    {
-                        ResponseVehicleOwner vehicleOwner = response.body();
-                        //line 1
-                       Log.d("minal",vehicleOwner.toString());
+        api.createVehicleOwner(user).enqueue(new Callback<ResponseVehicleOwner>() {
+            @Override
+            public void onResponse(Call<ResponseVehicleOwner> call, Response<ResponseVehicleOwner> response) {
+                if(response.code() == 200)
+                {
+                    ResponseVehicleOwner vehicleOwner = response.body();
+                    //line 1
+                    Log.d("minal",vehicleOwner.toString());
 
-                    }
-                    else
-                    {
-                        //user create failed
-                    }
                 }
+                else
+                {
+                    //user create failed
+                }
+            }
 
-                @Override
-                public void onFailure(Call<ResponseVehicleOwner> call, Throwable t) {
-                    //no internet connection
-                }
-            });
+            @Override
+            public void onFailure(Call<ResponseVehicleOwner> call, Throwable t) {
+                //no internet connection
+            }
+        });
     }
 
     private  void createFieldStaff(RequestUser user)
@@ -119,48 +119,48 @@ public class PlaygroundActivity extends AppCompatActivity {
     {
 
 
-       api.createTransporter(user).enqueue(new Callback<ResponseTransporter>() {
-           @Override
-           public void onResponse(Call<ResponseTransporter> call, Response<ResponseTransporter> response) {
-               if(response.code() == 200)
-               {
-                   ResponseTransporter transporter = response.body();
-                   Log.d("minal",transporter.toString());
-               }
-               else
-               {
+        api.createTransporter(user).enqueue(new Callback<ResponseTransporter>() {
+            @Override
+            public void onResponse(Call<ResponseTransporter> call, Response<ResponseTransporter> response) {
+                if(response.code() == 200)
+                {
+                    ResponseTransporter transporter = response.body();
+                    Log.d("minal",transporter.toString());
+                }
+                else
+                {
 
-               }
-           }
+                }
+            }
 
-           @Override
-           public void onFailure(Call<ResponseTransporter> call, Throwable t) {
+            @Override
+            public void onFailure(Call<ResponseTransporter> call, Throwable t) {
 
-           }
-       });
+            }
+        });
     }
 
     private  void createAreaManager(RequestUser user)
     {
-            api.createAreaManager(user).enqueue(new Callback<ResponseAreaManager>() {
-                @Override
-                public void onResponse(Call<ResponseAreaManager> call, Response<ResponseAreaManager> response) {
-                    if(response.code() == 200)
-                    {
-                        ResponseAreaManager areaManager = response.body();
-                        Log.d("minal",areaManager.toString());
-                    }
-                    else
-                    {
-
-                    }
+        api.createAreaManager(user).enqueue(new Callback<ResponseAreaManager>() {
+            @Override
+            public void onResponse(Call<ResponseAreaManager> call, Response<ResponseAreaManager> response) {
+                if(response.code() == 200)
+                {
+                    ResponseAreaManager areaManager = response.body();
+                    Log.d("minal",areaManager.toString());
                 }
-
-                @Override
-                public void onFailure(Call<ResponseAreaManager> call, Throwable t) {
+                else
+                {
 
                 }
-            });
+            }
+
+            @Override
+            public void onFailure(Call<ResponseAreaManager> call, Throwable t) {
+
+            }
+        });
 
 
     }
@@ -463,6 +463,23 @@ public class PlaygroundActivity extends AppCompatActivity {
     }
 
 
+    private void deleteBooking(String token,int id)
+    {
+        api.deleteBooking(token,id).enqueue(new Callback<ResponseBooking>() {
+            @Override
+            public void onResponse(Call<ResponseBooking> call, Response<ResponseBooking> response) {
+                if(response.code() == 200)
+                {
+                    //booking deleted
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBooking> call, Throwable t) {
+
+            }
+        });
+    }
 
 
 
