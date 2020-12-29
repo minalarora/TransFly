@@ -12,9 +12,6 @@ class ResponseVehicleOwner {
     @SerializedName("email")
     var email: String? = null
 
-    @SerializedName("password")
-    var password: String? = null
-
     @SerializedName("status")
     var status: Int? = null
 
@@ -38,5 +35,10 @@ class ResponseVehicleOwner {
 
     @SerializedName("token")
     var token: String? = null
+
+    override fun toString(): String {
+        return "ResponseVehicleOwner(name=$name, mobile=$mobile, email=$email, status=$status, accountno=$accountno, ifsc=$ifsc, bankname=$bankname, pan=$pan, tds=$tds, emergencycontact=$emergencycontact, token=$token)"
+    }
+
 
 }

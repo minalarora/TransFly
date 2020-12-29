@@ -40,6 +40,12 @@ class ResponseMine {
     @SerializedName("longitude")
     var longitude: String? = null
 
+    @SerializedName("arealatitude")
+    var arealatitude: String? = null
+
+    @SerializedName("arealongitude")
+    var arealongitude: String? = null
+
     @SerializedName("landmark")
     var landmark: String? = null
 
@@ -51,6 +57,31 @@ class ResponseMine {
 
     @SerializedName("areamanager")
     var areamanager: String? = null
+
+    constructor(id: Int?, name: String?, area: String?, trailer: Boolean?, tyres: Int?, bodytype: String?, loading: ArrayList<String>?, rate: Int?, etl: Int?, latitude: String?, longitude: String?, arealatitude: String?, arealongitude: String?, landmark: String?, transporter: String?, fieldstaff: String?, areamanager: String?) {
+        this.id = id
+        this.name = name
+        this.area = area
+        this.trailer = trailer
+        this.tyres = tyres
+        this.bodytype = bodytype
+        this.loading = loading
+        this.rate = rate
+        this.etl = etl
+        this.latitude = latitude
+        this.longitude = longitude
+        this.arealatitude = arealatitude
+        this.arealongitude = arealongitude
+        this.landmark = landmark
+        this.transporter = transporter
+        this.fieldstaff = fieldstaff
+        this.areamanager = areamanager
+    }
+
+    override fun toString(): String {
+        return "ResponseMine(id=$id, name=$name, area=$area, trailer=$trailer, tyres=$tyres, bodytype=$bodytype, loading=$loading, rate=$rate, etl=$etl, latitude=$latitude, longitude=$longitude, arealatitude=$arealatitude, arealongitude=$arealongitude, landmark=$landmark, transporter=$transporter, fieldstaff=$fieldstaff, areamanager=$areamanager)"
+    }
+
 
     /* id:
     {

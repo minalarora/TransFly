@@ -33,7 +33,21 @@ import retrofit2.http.Path;
 public interface ApiEndpoints {
     //api
 
+    //create user apis
+    @POST("/vehicleowner")
+    Call<ResponseVehicleOwner> createVehicleOwner(@Body RequestUser user);
 
+    @POST("/transporter")
+    Call<ResponseTransporter> createTransporter(@Body RequestUser user);
+
+    @POST("/fieldstaff")
+    Call<ResponseFieldStaff> createFieldStaff(@Body RequestUser user);
+
+    @POST("/areamanager")
+    Call<ResponseAreaManager> createAreaManager(@Body RequestUser user);
+
+
+    //get user by token
     @GET("/vehicleowner/me")
      Call<ResponseVehicleOwner> getVehicleOwner(@Header("Authorization")String token);
 
@@ -45,6 +59,20 @@ public interface ApiEndpoints {
 
     @GET("/fieldstaff/me")
     Call<ResponseFieldStaff> getFieldStaff(@Header("Authorization")String token);
+
+
+
+    //getting list of pending documents
+    @GET("/me/pending")
+    Call<ResponseBody> getPendingList(@Header("Authorization")String token);
+
+
+
+    @GET("/allmine/vehicleowner")
+    Call<ResponseBody> getAllMineVehicleOwner(@Header("Authorization")String token);
+
+
+
 
     @POST("/login")
     Call<ResponseBody> login(@Body RequestCredentials credentials);

@@ -12,8 +12,7 @@ class ResponseTransporter {
     @SerializedName("email")
     var email: String? = null
 
-    @SerializedName("password")
-    var password: String? = null
+
 
     @SerializedName("status")
     var status: Int? = null
@@ -32,6 +31,9 @@ class ResponseTransporter {
 
     @SerializedName("pan")
     var pan: String?  = null
+    override fun toString(): String {
+        return "ResponseTransporter(name=$name, mobile=$mobile, email=$email, status=$status, gst=$gst, sta=$sta, aadhaar=$aadhaar, mininglicense=$mininglicense, pan=$pan)"
+    }
 
 
 }

@@ -15,4 +15,11 @@ class RequestUser {
 
     @SerializedName("password")
     var password: String?  =null
+
+    constructor(name: String?, email: String?, mobile: String?, password: String?) {
+        this.name = name
+        this.email = email
+        this.mobile = mobile
+        this.password = password
+    }
 }
