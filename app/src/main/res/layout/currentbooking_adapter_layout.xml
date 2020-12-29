@@ -29,6 +29,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="@dimen/_15ssp"
+                android:id="@+id/to_from"
                 android:fontFamily="@font/poppins"
                 android:text="Anand(GJ) - Kamrej(GJ)"
                 android:textColor="@color/black"
@@ -42,6 +43,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginStart="@dimen/_15ssp"
             android:fontFamily="@font/poppins"
+            android:id="@+id/created_date"
             android:text="Posted at 21 Dec, 10:12 AM | Expires in 45 hours"
             android:textColor="#8c8c8c"
             android:textSize="13dp" />
@@ -67,8 +69,9 @@
                 android:src="@drawable/delivery_truck" />
 
             <TextView
+                android:id="@+id/vehicle_number"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="15dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="@dimen/_15ssp"
                 android:fontFamily="@font/poppins"
@@ -92,6 +95,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12ssp"
+            android:visibility="gone"
             android:layout_marginStart="@dimen/_13ssp"
             android:orientation="horizontal">
 
@@ -107,6 +111,7 @@
                 android:layout_marginStart="@dimen/_15ssp"
                 android:fontFamily="@font/poppins"
                 android:text="45 min"
+                android:id="@+id/etl"
                 android:textColor="@color/black"
                 android:textSize="13dp" />
 
@@ -135,14 +140,14 @@
                 android:foreground="?attr/selectableItemBackground"
                 android:clickable="true"
                 android:focusable="true"
-                android:id="@+id/cancel"
+                android:id="@+id/remove"
                 android:layout_height="match_parent">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:fontFamily="@font/open_sans_semibold"
-                    android:text="Cancel"
+                    android:text="Remove"
                     android:layout_centerInParent="true"
                     android:drawablePadding="@dimen/_7ssp"
                     android:gravity="center_horizontal|center_vertical"

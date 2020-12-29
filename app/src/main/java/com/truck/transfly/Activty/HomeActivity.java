@@ -125,6 +125,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
     private BottomNavigationViewEx navigation;
     private LocationAdapter locationAdapter;
     private RequestArea requestArea;
+    private String loading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -147,7 +148,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         MenuItem item = menu.findItem(R.id.emergency_details);
         item.setVisible(false);
 
-        PreferenceUtil.putData(HomeActivity.this, "token", "vehicleowner:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIxMTc3Nzc3NTQ0NSIsImlhdCI6MTYwOTIyNjIwOCwiZXhwIjoxNjExODE4MjA4fQ.qEGlO0IAKibuhLWa1EzIX16Dtn6TDF8bZo1JYTin6vU");
+        PreferenceUtil.putData(HomeActivity.this, "token", "vehicleowner:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIxMTExMTExMSIsImlhdCI6MTYwOTE3OTgyOSwiZXhwIjoxNjExNzcxODI5fQ.YUibiAIPlx8L5VtRFbpPNtjWP0oNLg-91aPE64elLq8");
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -241,6 +242,8 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                     showLoadingDialogFragment.setOnClickListener(new ShowLoadingDialogFragment.onClickListener() {
                         @Override
                         public void onClick(String loading) {
+
+                            HomeActivity.this.loading=loading;
 
                             ArrayList<ResponseMine> allMineOfSingleArea = getAllMineOfSingleArea(requestArea.getName(), loading);
 
@@ -710,7 +713,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                     intent.putExtra("mineid",responseMine.getId());
                     intent.putExtra("minename",responseMine.getName());
-                    intent.putExtra("loading",responseMine.getLoading());
+                    intent.putExtra("loading",loading);
 
                     startActivity(intent);
 

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.truck.transfly.Adapter.SmallIconsAdapter;
+import com.truck.transfly.Model.RequestBooking;
 import com.truck.transfly.Model.ResponseVehicle;
 import com.truck.transfly.R;
 import com.truck.transfly.databinding.ActivitySelectYourVehicleBinding;
@@ -45,6 +47,7 @@ public class SelectYourVehicleActivity extends AppCompatActivity {
     private String loading;
     private ArrayList<ResponseVehicle> vehicleList = new ArrayList<>();
     private FrameLayout parent_of_loading;
+    private ResponseVehicle responseVehicle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,9 +66,25 @@ public class SelectYourVehicleActivity extends AppCompatActivity {
         minename = getIntent().getStringExtra("minename");
         loading = getIntent().getStringExtra("loading");
 
+        activity.fromDest.setText(minename);
+        activity.fromDest.setEnabled(false);
+
+        activity.toDest.setText(loading);
+        activity.toDest.setEnabled(false);
+
         initSmallIconAdapter();
 
         getAllVehicles(PreferenceUtil.getData(SelectYourVehicleActivity.this, "token"));
+
+        activity.creaateBooking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(responseVehicle!=null)
+                sendDataOnServer(responseVehicle.getActive(),responseVehicle.getStatus());
+
+            }
+        });
 
     }
 
@@ -120,24 +139,66 @@ public class SelectYourVehicleActivity extends AppCompatActivity {
             @Override
             public void onClick(ResponseVehicle responseVehicle) {
 
-                if(responseVehicle!=null)
-                sendDataOnServer(Objects.requireNonNull(responseVehicle.getActive()));
+                SelectYourVehicleActivity.this.responseVehicle=responseVehicle;
 
             }
         });
 
     }
 
-    private void sendDataOnServer(Boolean active) {
+    private void sendDataOnServer(Boolean active, int status) {
 
-        if(active){
+        if(status==0){
 
+            Toast.makeText(this, "This vehicle is Not Approved", Toast.LENGTH_SHORT).show();
+
+        } else if(!active) {
+
+            Toast.makeText(this, "This vehicle is Already in booking", Toast.LENGTH_SHORT).show();
 
         } else {
 
-
+            RequestBooking requestBooking=new RequestBooking();
+            requestBooking.setLoading(loading);
+            requestBooking.setMineid(mineid);
+            requestBooking.setMinename(minename);
+            requestBooking.setVehiclenumber(responseVehicle.getNumber());
+            createBooking(PreferenceUtil.getData(SelectYourVehicleActivity.this,"token"),requestBooking);
 
         }
 
     }
+
+    private void createBooking(String token, RequestBooking booking)
+    {
+        parent_of_loading.setVisibility(View.VISIBLE);
+
+        api.createBooking(token,booking).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                parent_of_loading.setVisibility(View.GONE);
+
+                if(response.code() == 200)
+                {
+                    Toast.makeText(SelectYourVehicleActivity.this, "Booking Created Successfully", Toast.LENGTH_SHORT).show();
+                    finish();
+                } else {
+
+                    Toast.makeText(SelectYourVehicleActivity.this, "Something Went Wrong! Try Again", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                parent_of_loading.setVisibility(View.GONE);
+
+                Toast.makeText(SelectYourVehicleActivity.this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
+
 }
