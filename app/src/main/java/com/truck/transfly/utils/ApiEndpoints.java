@@ -68,9 +68,13 @@ public interface ApiEndpoints {
 
 
 
+    //getting mines
     @GET("/allmine/vehicleowner")
     Call<ResponseBody> getAllMineVehicleOwner(@Header("Authorization")String token);
 
+    //getting vehicles
+    @GET("/allvehicle")
+    Call<ResponseBody> getAllVehicles(@Header("Authorization")String token);
 
 
 

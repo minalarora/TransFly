@@ -374,6 +374,40 @@ public class PlaygroundActivity extends AppCompatActivity {
     }
 
 
+    private void getAllVehicles(String token)
+    {
+        api.getAllVehicles(token).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response.code() == 200)
+                {
+                    ArrayList<ResponseVehicle> vehicleList  =  new ArrayList<>();
+                    Type collectionType = new TypeToken<ArrayList<ResponseVehicle>>(){}.getType();
+                    try {
+                        vehicleList.addAll(new Gson().fromJson(response.body().string().toString(),collectionType));
+                    } catch (IOException e) {
+
+                    }
+                    if(vehicleList.isEmpty())
+                    {
+
+                        Log.d("minal","no vehicle");
+                    }
+                    else
+                    {
+                        //['pan','aadhaar','bank']
+
+                        Log.d("minal",vehicleList.toString());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+    }
 
 
 
