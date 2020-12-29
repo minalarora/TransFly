@@ -11,11 +11,12 @@ class RequestArea {
     @SerializedName("arealongitude")
     var arealongitude: String? = null
 
-    constructor( arealatitude: String?, arealongitude: String?) {
-
+    constructor(name: String?, arealatitude: String?, arealongitude: String?) {
+        this.name = name
         this.arealatitude = arealatitude
         this.arealongitude = arealongitude
     }
+
 
     override fun toString(): String {
         return "RequestArea(arealatitude=$arealatitude, arealongitude=$arealongitude)"
