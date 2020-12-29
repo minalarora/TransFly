@@ -43,19 +43,26 @@ public class FeedbackActivity extends AppCompatActivity {
         parent_of_loading = findViewById(R.id.parent_of_loading);
         parent_of_loading.setVisibility(View.GONE);
 
-        if(activity.ratingBar.getRating()>0){
+        activity.submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-            Toast.makeText(this, "Select an rating", Toast.LENGTH_SHORT).show();
+                if(activity.ratingBar.getRating()==0){
 
-        } else if(TextUtils.isEmpty(activity.feedbackText.getText().toString())){
+                    Toast.makeText(FeedbackActivity.this, "Select an rating", Toast.LENGTH_SHORT).show();
 
-            Toast.makeText(this, "Write A Feedback", Toast.LENGTH_SHORT).show();
+                } else if(TextUtils.isEmpty(activity.feedbackText.getText().toString())){
 
-        } else {
+                    Toast.makeText(FeedbackActivity.this, "Write A Feedback", Toast.LENGTH_SHORT).show();
 
-            uploadAFeedback();
+                } else {
 
-        }
+                    uploadAFeedback();
+
+                }
+
+            }
+        });
 
     }
 
@@ -81,7 +88,7 @@ public class FeedbackActivity extends AppCompatActivity {
 
                 parent_of_loading.setVisibility(View.GONE);
 
-                Toast.makeText(FeedbackActivity.this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+                Toast.makeText(FeedbackActivity.this, "No Internet Connection"+error.getMessage(), Toast.LENGTH_SHORT).show();
 
             }
         }){
@@ -89,7 +96,7 @@ public class FeedbackActivity extends AppCompatActivity {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String,String> map=new HashMap<>();
-                map.put("AUTHORIZATION", PreferenceUtil.getData(FeedbackActivity.this,"token"));
+                map.put("Authorization", PreferenceUtil.getData(FeedbackActivity.this,"token"));
 
                 return map;
             }

@@ -52,28 +52,28 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.viewho
 
         if(position==1){
 
-            holder.cityName.setText("Bhopal");
-            holder.circularImageText.setText("Bh");
+            holder.cityName.setText("Barbil");
+            holder.circularImageText.setText("Ba");
 
         } else if(position==2){
 
-            holder.cityName.setText("Hydrabad");
-            holder.circularImageText.setText("Hy");
+            holder.cityName.setText("Jamda");
+            holder.circularImageText.setText("Ja");
 
         }else if(position==3){
 
-            holder.cityName.setText("Nepal");
-            holder.circularImageText.setText("Ne");
+            holder.cityName.setText("Joda");
+            holder.circularImageText.setText("jo");
 
         } else if(position==4){
 
-            holder.cityName.setText("Kolkatta");
+            holder.cityName.setText("Koira");
             holder.circularImageText.setText("Ko");
 
         } else if(position==5){
 
-            holder.cityName.setText("Agra");
-            holder.circularImageText.setText("Ag");
+            holder.cityName.setText("Unnao");
+            holder.circularImageText.setText("Un");
 
         } else if(position==6){
 
@@ -82,8 +82,8 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.viewho
 
         } else if(position==7){
 
-            holder.cityName.setText("Lucknow");
-            holder.circularImageText.setText("Lu");
+            holder.cityName.setText("Rugudi");
+            holder.circularImageText.setText("Ru");
 
         }
 

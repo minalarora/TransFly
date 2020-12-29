@@ -65,6 +65,7 @@ import com.truck.transfly.Model.PositionModel;
 import com.truck.transfly.Model.SliderModel;
 import com.truck.transfly.MuUtils.MetalRecyclerViewPager;
 import com.truck.transfly.R;
+import com.truck.transfly.utils.PreferenceUtil;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -73,13 +74,14 @@ import java.util.List;
 public class HomeActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mGoogleMap;
-    private double LatituteOfTajMahal = 27.429707;
-    private double LongitudeOfTajMahal = 82.176804;
+    private double LatituteOfTajMahal = 22.106364561666886;
+    private double LongitudeOfTajMahal = 85.37934426698966;
 
-    private double new1 = 27.333574, new2 = 82.697655;
-    private double new3 = 	26.822845, new4 = 82.763443;
-    private double new5 = 28.975210, new6 = 78.942970;
-    private double tulsipurLat=26.934889, tulsipurLong=82.499924;
+    private double new1 = 22.163690366420184, new2 = 85.41610695158445;
+    private double new3 = 	22.018251428199196, new4 = 85.40548247296358;
+    private double new5 = 21.908011041198012, new6 = 85.2509771962851;
+    private double tulsipurLat=26.216539779866235, tulsipurLong=81.25079189586448;
+    private double rugudi_lat=21.887970812746232, rugudi_log=85.81699947599559;
     private DrawerLayout drawerLayout;
     private ImageView viewById;
     private LocationCallback mLocationCallBack;
@@ -115,6 +117,8 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         Menu menu = navigationView.getMenu();
         MenuItem item = menu.findItem(R.id.emergency_details);
         item.setVisible(false);
+
+        PreferenceUtil.putData(HomeActivity.this,"token","vehicleowner:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIxMTExMTExMSIsImlhdCI6MTYwOTE3OTgyOSwiZXhwIjoxNjExNzcxODI5fQ.YUibiAIPlx8L5VtRFbpPNtjWP0oNLg-91aPE64elLq8");
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -552,6 +556,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         showMarker(new3, new4, 3, "Rate: 3\nEtl:3");
         showMarker(new5, new6, 4, "Rate: 4\nEtl:4");
         showMarker(tulsipurLat, tulsipurLong, 5, "Rate: 4\nEtl:4");
+        showMarker(rugudi_lat, rugudi_log, 6, "Rate: 4\nEtl:4");
 
         mGoogleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override

@@ -26,6 +26,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import com.truck.transfly.R;
+
 public class PlaygroundActivity extends AppCompatActivity {
 
     private static Retrofit retrofit = null;
