@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -66,6 +67,7 @@ public class TransporterKycActivity extends AppCompatActivity {
     private ApiEndpoints api = null;
     private ArrayAdapter<String> adapter;
     private ArrayList<String> pendingList  =  new ArrayList<>();
+    private RelativeLayout no_internet_connection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +78,19 @@ public class TransporterKycActivity extends AppCompatActivity {
 
         parent_of_loading = findViewById(R.id.parent_of_loading);
         parent_of_loading.setVisibility(View.GONE);
+
+        no_internet_connection = findViewById(R.id.no_internet_connection);
+        findViewById(R.id.pullToRefresh_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                pendingList.clear();
+                no_internet_connection.setVisibility(View.GONE);
+                adapter.notifyDataSetChanged();
+                getPendingList(PreferenceUtil.getData(TransporterKycActivity.this,"token"));
+
+            }
+        });
 
         retrofit = ApiClient.getRetrofitClient();
         if(retrofit!=null)

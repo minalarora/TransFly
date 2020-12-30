@@ -15,11 +15,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.truck.transfly.Activty.CurrentBookingActivity;
 import com.truck.transfly.Activty.FieldStafActivity;
 import com.truck.transfly.Adapter.FieldStafAdapter;
 import com.truck.transfly.Model.ResponseBooking;
@@ -53,6 +55,7 @@ public class ShowBooking extends Fragment {
     private TextView noDataFound;
     private FieldStafAdapter fieldStafAdapter;
     private PullToRefreshView pullToRefreshView;
+    private RelativeLayout no_internet_connection;
 
     public ShowBooking() {
         // Required empty public constructor
@@ -81,6 +84,18 @@ public class ShowBooking extends Fragment {
 
         parent_of_loading = inflate.findViewById(R.id.parent_of_loading);
         parent_of_loading.setVisibility(View.GONE);
+
+        no_internet_connection = inflate.findViewById(R.id.no_internet_connection);
+        inflate.findViewById(R.id.pullToRefresh_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                responseBookingList.clear();
+                fieldStafAdapter.notifyDataSetChanged();
+                no_internet_connection.setVisibility(View.GONE);
+                getAllBookingFieldStaff(PreferenceUtil.getData(fragmentActivity,"token"));
+            }
+        });
 
         noDataFound =inflate.findViewById(R.id.no_data_found);
         noDataFound.setVisibility(View.GONE);
@@ -123,6 +138,7 @@ public class ShowBooking extends Fragment {
     {
 
         parent_of_loading.setVisibility(View.VISIBLE);
+        no_internet_connection.setVisibility(View.GONE);
 
         api.getBookingFieldStaff(token).enqueue(new Callback<ResponseBody>() {
             @Override
@@ -161,6 +177,8 @@ public class ShowBooking extends Fragment {
             public void onFailure(Call<ResponseBody> call, Throwable t) {
 
                 parent_of_loading.setVisibility(View.GONE);
+
+                no_internet_connection.setVisibility(View.VISIBLE);
 
                 Toast.makeText(fragmentActivity, "No internet Connection", Toast.LENGTH_SHORT).show();
             }

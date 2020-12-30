@@ -69,6 +69,9 @@
                 android:layout_height="38dp"
                 android:layout_toEndOf="@+id/phone_icon"
                 android:background="@color/white"
+                android:id="@+id/mobileNumber"
+                android:maxLength="10"
+                android:inputType="number"
                 android:fontFamily="@font/font_opensans"
                 android:hint="Enter Mobile Number"
                 android:paddingStart="16dp"
@@ -101,6 +104,8 @@
                 android:layout_height="38dp"
                 android:layout_toEndOf="@+id/password_lock"
                 android:background="@color/white"
+                android:inputType="textPassword"
+                android:id="@+id/password"
                 android:fontFamily="@font/font_opensans"
                 android:hint="Enter Password"
                 android:paddingStart="16dp"
@@ -167,6 +172,8 @@
 
 
     </RelativeLayout>
+
+    <include layout="@layout/loading_view_transparent"/>
 
 </RelativeLayout>
 </layout>

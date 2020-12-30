@@ -86,7 +86,7 @@
                 android:fontFamily="@font/font_opensans"
                 android:hint="Enter Mobile Number"
                 android:paddingStart="16dp"
-                android:inputType="phone"
+                android:inputType="number"
                 android:paddingEnd="12dp"
                 android:textSize="14dp" />
 

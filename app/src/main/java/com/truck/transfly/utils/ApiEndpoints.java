@@ -115,8 +115,6 @@ public interface ApiEndpoints {
     @GET("/booking/vehicle/{mobile}")
     Call<ResponseBody> getVehicleFieldStaff(@Header("Authorization")String token, @Path("mobile") String mobile);
 
-
-
     @POST("/login")
     Call<ResponseBody> login(@Body RequestCredentials credentials);
 

@@ -215,6 +215,7 @@ public class FieldStafActivity extends AppCompatActivity {
     {
 
         parent_of_loading.setVisibility(View.VISIBLE);
+        no_internet_connection.setVisibility(View.GONE);
 
         api.getBookingFieldStaff(token).enqueue(new Callback<ResponseBody>() {
             @Override

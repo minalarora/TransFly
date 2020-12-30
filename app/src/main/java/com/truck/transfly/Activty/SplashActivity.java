@@ -1,12 +1,12 @@
 package com.truck.transfly.Activty;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Window;
 import android.view.WindowManager;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.truck.transfly.Model.ResponseAreaManager;
 import com.truck.transfly.Model.ResponseFieldStaff;
@@ -16,8 +16,8 @@ import com.truck.transfly.R;
 import com.truck.transfly.utils.ApiClient;
 import com.truck.transfly.utils.ApiEndpoints;
 import com.truck.transfly.utils.PreferenceUtil;
+import com.truck.transfly.utils.TransflyApplication;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -34,145 +34,196 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_splash);
 
         retrofit = ApiClient.getRetrofitClient();
-        if(retrofit!=null)
-        {
+        if (retrofit != null) {
             api = retrofit.create(ApiEndpoints.class);
         }
 
         validateToken();
-//        new Handler(getMainLooper()).postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//
-//                Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
-//                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-//                startActivity(intent);
-//
-//                finish();
-//
-//            }
-//        },2000);
-
     }
 
 
-    private void validateToken()
-    {
+    private void validateToken() {
         try {
 
-            token = PreferenceUtil.getData(this,"token");
-            if(token == null)
-            {
-                throw new Error("Token not available");
+            token = PreferenceUtil.getData(this, "token");
+            if (token == null) {
+
+               new Handler(getMainLooper()).postDelayed(new Runnable() {
+                   @Override
+                   public void run() {
+
+                       Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+                       intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                       startActivity(intent);
+
+                       finish();
+
+                   }
+               },2500);
+
+               return;
+
             }
             String type = token.split(":")[0];
-            switch (type)
-            {
+            switch (type) {
                 case "vehicleowner": {
 
                     api.getVehicleOwner(token).enqueue(new Callback<ResponseVehicleOwner>() {
                         @Override
                         public void onResponse(Call<ResponseVehicleOwner> call, Response<ResponseVehicleOwner> response) {
 
-                            if(response.code() == 200)
-                            {
+                            if (response.code() == 200) {
 ///
-                            }
-                            else
-                            {
+                                ResponseVehicleOwner responseVehicleOwner = response.body();
+                                ((TransflyApplication) getApplication()).setResponseVehicleOwner(responseVehicleOwner);
+
+                                new Handler(getMainLooper()).postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+
+                                        Intent intent = new Intent(SplashActivity.this, HomeActivity.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        startActivity(intent);
+
+                                        finish();
+
+                                    }
+                                }, 1000);
+
+
+                            } else {
                                 throw new Error("Token not available");
                             }
                         }
 
                         @Override
                         public void onFailure(Call<ResponseVehicleOwner> call, Throwable t) {
-                                serverError();
+                            serverError();
                         }
                     });
 
                     break;
                 }
-                case "transporter":{
+                case "transporter": {
                     api.getTransporter(token).enqueue(new Callback<ResponseTransporter>() {
                         @Override
                         public void onResponse(Call<ResponseTransporter> call, Response<ResponseTransporter> response) {
 
-                            if(response.code() == 200)
-                            {
+                            if (response.code() == 200) {
 
-                            }
-                            else
-                            {
+                                ResponseTransporter responseTransporter = response.body();
+                                ((TransflyApplication) getApplication()).setResponseTransporterOwner(responseTransporter);
+
+                                new Handler(getMainLooper()).postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+
+                                        Intent intent = new Intent(SplashActivity.this, TransporterActivity.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        startActivity(intent);
+
+                                        finish();
+
+                                    }
+                                }, 1000);
+
+
+                            } else {
                                 throw new Error("Token not available");
                             }
                         }
 
                         @Override
                         public void onFailure(Call<ResponseTransporter> call, Throwable t) {
-                                serverError();
+                            serverError();
                         }
                     });
                     break;
                 }
-                case "areamanager":{
+                case "areamanager": {
                     api.getAreaManager(token).enqueue(new Callback<ResponseAreaManager>() {
                         @Override
                         public void onResponse(Call<ResponseAreaManager> call, Response<ResponseAreaManager> response) {
 
-                            if(response.code() == 200)
-                            {
+                            if (response.code() == 200) {
 
-                            }
-                            else
-                            {
+                                ResponseAreaManager responseAreaManager = response.body();
+                                ((TransflyApplication) getApplication()).setResponseAreaManager(responseAreaManager);
+
+                                new Handler(getMainLooper()).postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+
+                                        Intent intent = new Intent(SplashActivity.this, AreaManagerActivity.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        startActivity(intent);
+
+                                        finish();
+
+                                    }
+                                }, 1000);
+
+
+
+                            } else {
                                 throw new Error("Token not available");
                             }
                         }
 
                         @Override
                         public void onFailure(Call<ResponseAreaManager> call, Throwable t) {
-                                serverError();
+                            serverError();
                         }
                     });
                     break;
                 }
-                case "fieldstaff":
-                {
+                case "fieldstaff": {
                     api.getFieldStaff(token).enqueue(new Callback<ResponseFieldStaff>() {
                         @Override
                         public void onResponse(Call<ResponseFieldStaff> call, Response<ResponseFieldStaff> response) {
 
-                            if(response.code() == 200)
-                            {
+                            if (response.code() == 200) {
 
-                            }
-                            else
-                            {
+                                ResponseFieldStaff responseFieldStaff = response.body();
+                                ((TransflyApplication) getApplication()).setResponseFieldStaff(responseFieldStaff);
+
+                                new Handler(getMainLooper()).postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+
+                                        Intent intent = new Intent(SplashActivity.this, FieldStafActivity.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        startActivity(intent);
+
+                                        finish();
+
+                                    }
+                                }, 1000);
+
+
+                            } else {
                                 throw new Error("Token not available");
                             }
                         }
 
                         @Override
                         public void onFailure(Call<ResponseFieldStaff> call, Throwable t) {
-                                serverError();
+                            serverError();
                         }
                     });
                     break;
                 }
-                default:
-                {
+                default: {
                     throw new Error("Token not available");
                 }
             }
-        }
-        catch(Exception e)
-        {
-                //redirect to login screen
+        } catch (Exception e) {
+            //redirect to login screen
         }
     }
 
@@ -181,9 +232,13 @@ public class SplashActivity extends AppCompatActivity {
 
     }
 
-    private void serverError()
-    {
-        //no inernet
+    private void serverError() {
+
+        Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+
+        finish();
     }
 
 }

@@ -1,11 +1,14 @@
 package com.truck.transfly.Activty;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 import com.truck.transfly.Frament.ForgotPasswordDialog;
 import com.truck.transfly.Model.RequestCredentials;
@@ -31,17 +34,37 @@ public class LoginActivity extends AppCompatActivity {
     private ApiEndpoints api = null;
     private String token;
     private ActivityLoginBinding activity;
+    private FrameLayout parent_of_loading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity = DataBindingUtil.setContentView(this,R.layout.activity_login);
 
+        parent_of_loading=findViewById(R.id.parent_of_loading);
+        parent_of_loading.setVisibility(View.GONE);
+
         activity.loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onLoginButton();
-               // startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+
+                if(TextUtils.isEmpty(activity.mobileNumber.getText().toString())){
+
+                    activity.mobileNumber.setError("Mobile number is Required*");
+                    activity.mobileNumber.requestFocus();
+
+                } else if(TextUtils.isEmpty(activity.password.getText().toString())){
+
+                    activity.password.setError("password is Required*");
+                    activity.password.requestFocus();
+
+                } else {
+
+                    parent_of_loading.setVisibility(View.VISIBLE);
+                    onLoginButton();
+
+                }
+
             }
         });
 
@@ -77,10 +100,8 @@ public class LoginActivity extends AppCompatActivity {
     {
         try {
             RequestCredentials credentials = new RequestCredentials();
-
-            //c
-
-            //fill mobile or password in this object
+            credentials.setMobile(activity.mobileNumber.getText().toString());
+            credentials.setPassword(activity.password.getText().toString());
 
             api.login(credentials).enqueue(new Callback<ResponseBody>() {
                 @Override
@@ -88,7 +109,11 @@ public class LoginActivity extends AppCompatActivity {
                     if(response.code() == 200)
                     {
                         //user found
+
                         String type = response.body().toString();
+
+                        Toast.makeText(LoginActivity.this, ""+type, Toast.LENGTH_SHORT).show();
+
                         switch (type)
                         {
                             case "vehicleowner" :{
@@ -112,7 +137,10 @@ public class LoginActivity extends AppCompatActivity {
                             }
                             default:
                             {
-                                throw new Error("user not found");
+                                activity.mobileNumber.setError("User not found");
+                                activity.mobileNumber.requestFocus();
+
+                                parent_of_loading.setVisibility(View.GONE);
                             }
 
                         }
@@ -120,7 +148,9 @@ public class LoginActivity extends AppCompatActivity {
                     }
                     else
                     {
-                            throw new Error("user not found!");
+                        Toast.makeText(LoginActivity.this, "Something went wrong! Try Again", Toast.LENGTH_SHORT).show();
+
+                        parent_of_loading.setVisibility(View.GONE);
 
                     }
                 }
@@ -133,7 +163,11 @@ public class LoginActivity extends AppCompatActivity {
         }
         catch (Exception e)
         {
-            //user not found
+            activity.mobileNumber.setError("User not found");
+            activity.mobileNumber.requestFocus();
+
+            parent_of_loading.setVisibility(View.GONE);
+
         }
     }
 
@@ -147,12 +181,23 @@ public class LoginActivity extends AppCompatActivity {
                     if(response.code() == 200)
                     {
                         //user found
-                        ResponseVehicleOwner v = response.body();
+                        ResponseVehicleOwner responseVehicleOwner = response.body();
+                        ((TransflyApplication) getApplication()).setResponseVehicleOwner(responseVehicleOwner);
+
+                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+
+                        finish();
+
 
                     }
                     else
                     {
-                        throw new Error("wrong password");
+                        activity.password.setError("Password is Wrong");
+                        activity.password.requestFocus();
+
+                        parent_of_loading.setVisibility(View.GONE);
 
                     }
                 }
@@ -165,7 +210,11 @@ public class LoginActivity extends AppCompatActivity {
         }
         catch (Exception e)
         {
-            //wrong password
+            activity.password.setError("Password is Wrong");
+            activity.password.requestFocus();
+
+            parent_of_loading.setVisibility(View.GONE);
+
         }
     }
 
@@ -178,24 +227,23 @@ public class LoginActivity extends AppCompatActivity {
                 public void onResponse(Call<ResponseTransporter> call, Response<ResponseTransporter> response) {
                     if(response.code() == 200)
                     {
-                        ResponseTransporter t =response.body();
-
-                        ((TransflyApplication)getApplication()).setResponseTransporterOwner(t);
-
-                       //ResponseTransporter t = ((TransflyApplication)getApplication()).getResponseTransporterOwner();
+                        ResponseTransporter responseTransporter = response.body();
+                        ((TransflyApplication) getApplication()).setResponseTransporterOwner(responseTransporter);
 
 
+                        Intent intent = new Intent(LoginActivity.this, TransporterActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
 
-
-
-                        //user found
-                        //ResponseTransporter
+                        finish();
 
                     }
                     else
                     {
-                        throw new Error("wrong password");
+                        activity.password.setError("Password is Wrong");
+                        activity.password.requestFocus();
 
+                        parent_of_loading.setVisibility(View.GONE);
                     }
                 }
 
@@ -207,7 +255,11 @@ public class LoginActivity extends AppCompatActivity {
         }
         catch (Exception e)
         {
-            //wrong password
+            activity.password.setError("Password is Wrong");
+            activity.password.requestFocus();
+
+            parent_of_loading.setVisibility(View.GONE);
+
         }
     }
 
@@ -219,11 +271,23 @@ public class LoginActivity extends AppCompatActivity {
                     public void onResponse(Call<ResponseAreaManager> call, Response<ResponseAreaManager> response) {
                         if(response.code() == 200)
                         {
-                            //user found
+
+                            ResponseAreaManager responseAreaManager = response.body();
+                            ((TransflyApplication) getApplication()).setResponseAreaManager(responseAreaManager);
+
+
+                            Intent intent = new Intent(LoginActivity.this, AreaManagerActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+
+                            finish();
                         }
                         else
                         {
-                            throw new Error("wrong password");
+                            activity.password.setError("Password is Wrong");
+                            activity.password.requestFocus();
+
+                            parent_of_loading.setVisibility(View.GONE);
 
                         }
                     }
@@ -236,7 +300,12 @@ public class LoginActivity extends AppCompatActivity {
             }
             catch (Exception e)
             {
-                    //wrong password
+                activity.password.setError("Password is Wrong");
+                activity.password.requestFocus();
+
+                parent_of_loading.setVisibility(View.GONE);
+
+
             }
     }
 
@@ -248,11 +317,22 @@ public class LoginActivity extends AppCompatActivity {
                     public void onResponse(Call<ResponseFieldStaff> call, Response<ResponseFieldStaff> response) {
                         if(response.code() == 200)
                         {
-                            //user found
+                            ResponseFieldStaff responseFieldStaff = response.body();
+                            ((TransflyApplication) getApplication()).setResponseFieldStaff(responseFieldStaff);
+
+
+                            Intent intent = new Intent(LoginActivity.this, FieldStafActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+
+                            finish();
                         }
                         else
                         {
-                            throw new Error("wrong password");
+                            activity.password.setError("Password is Wrong");
+                            activity.password.requestFocus();
+
+                            parent_of_loading.setVisibility(View.GONE);
 
                         }
                     }
@@ -265,14 +345,19 @@ public class LoginActivity extends AppCompatActivity {
             }
             catch(Exception e)
             {
-                //wrong password
+                activity.password.setError("Password is Wrong");
+                activity.password.requestFocus();
+
+                parent_of_loading.setVisibility(View.GONE);
+
             }
     }
 
 
 
-    private void serverError()
-    {
-        //no inernet
+    private void serverError() {
+
+        parent_of_loading.setVisibility(View.GONE);
+        Toast.makeText(this, "No Internet connection", Toast.LENGTH_SHORT).show();
     }
 }

@@ -259,6 +259,8 @@
 
         </androidx.core.widget.NestedScrollView>
 
+        <include layout="@layout/no_internet_connection"/>
+
         <include layout="@layout/loading_view_transparent"/>
 
     </RelativeLayout>

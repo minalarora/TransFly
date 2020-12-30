@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -64,6 +65,7 @@ public class AreaFieldStafActivity extends AppCompatActivity {
     private ArrayList<String> storageList=new ArrayList<>();
     private ArrayAdapter<String> adapter;
     private ArrayList<String> pendingList=new ArrayList<>();
+    private RelativeLayout no_internet_connection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +76,20 @@ public class AreaFieldStafActivity extends AppCompatActivity {
 
         parent_of_loading = findViewById(R.id.parent_of_loading);
         parent_of_loading.setVisibility(View.GONE);
+
+        no_internet_connection = findViewById(R.id.no_internet_connection);
+        findViewById(R.id.pullToRefresh_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                no_internet_connection.setVisibility(View.GONE);
+                getPendingList(PreferenceUtil.getData(AreaFieldStafActivity.this,"token"));
+                pendingList.clear();
+                adapter.notifyDataSetChanged();
+
+
+            }
+        });
 
         retrofit = ApiClient.getRetrofitClient();
         if(retrofit!=null)
@@ -224,6 +240,8 @@ public class AreaFieldStafActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                no_internet_connection.setVisibility(View.VISIBLE);
 
                 parent_of_loading.setVisibility(View.GONE);
 
