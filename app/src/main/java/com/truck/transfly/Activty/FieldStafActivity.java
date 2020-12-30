@@ -10,19 +10,34 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.truck.transfly.Adapter.FieldStafAdapter;
 import com.truck.transfly.Model.ResponseBooking;
 import com.truck.transfly.R;
+import com.truck.transfly.utils.ApiClient;
+import com.truck.transfly.utils.ApiEndpoints;
 import com.truck.transfly.utils.PreferenceUtil;
 
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class FieldStafActivity extends AppCompatActivity {
 
@@ -30,8 +45,12 @@ public class FieldStafActivity extends AppCompatActivity {
     private List<String> stringList=new ArrayList<>();
     private ImageView viewById;
     private DrawerLayout drawerLayout;
+    private Retrofit retrofit = null;
+    private ApiEndpoints api = null;
     private ArrayList<ResponseBooking> responseBookingList=new ArrayList<>();
     private FrameLayout parent_of_loading;
+    private FieldStafAdapter fieldStafAdapter;
+    private TextView noDataFound;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,19 +60,28 @@ public class FieldStafActivity extends AppCompatActivity {
         NavigationView navigationView = findViewById(R.id.nav_view);
 //        navigationView.setNavigationItemSelectedListener(map);
 
+
+        retrofit = ApiClient.getRetrofitClient();
+        if(retrofit!=null)
+        {
+            api = retrofit.create(ApiEndpoints.class);
+        }
+
         parent_of_loading = findViewById(R.id.parent_of_loading);
         parent_of_loading.setVisibility(View.GONE);
 
-        PreferenceUtil.putData(FieldStafActivity.this,"token","fieldstaff:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIyMjIyNTUyMjEiLCJpYXQiOjE2MDkyMjc1ODMsImV4cCEcbcfccfccfccfc5cvc5cvc5c5cvc5cvc5cvc5cvc5cvc5cvcfcvc5cvc5cvc5cvc5cvcvc5cvcfcvc5cvc5kcvcccfcvc5cvctheirChcWcWcrcrrrrc");
+        PreferenceUtil.putData(FieldStafActivity.this,"token","fieldstaff:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIyMjIyNTUyMjEiLCJpYXQiOjE2MDkyMjc1ODMsImV4cCI6MTYxMTgxOTU4M30.dKSSU7LvtVFkFcEoeb586uK2s74BHhBZsoRcnumcbro");
         
         navigationViewListener(navigationView);
 
         navigationView.setItemIconTintList(null);
+        noDataFound =findViewById(R.id.no_data_found);
+        noDataFound.setVisibility(View.GONE);
 
         fieldStafRecylcer =findViewById(R.id.fieldStafRecylcer);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(FieldStafActivity.this,LinearLayoutManager.VERTICAL,false);
         fieldStafRecylcer.setLayoutManager(linearLayoutManager);
-        FieldStafAdapter fieldStafAdapter=new FieldStafAdapter(this,responseBookingList);
+        fieldStafAdapter=new FieldStafAdapter(this,responseBookingList);
         fieldStafRecylcer.setAdapter(fieldStafAdapter);
 
         viewById = findViewById(R.id.drawer_icon);
@@ -75,6 +103,19 @@ public class FieldStafActivity extends AppCompatActivity {
 
             }
         });
+
+        findViewById(R.id.refresh).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                responseBookingList.clear();
+                getAllBookingFieldStaff(PreferenceUtil.getData(FieldStafActivity.this,"token"));
+                noDataFound.setVisibility(View.GONE);
+
+            }
+        });
+
+        getAllBookingFieldStaff(PreferenceUtil.getData(FieldStafActivity.this,"token"));
 
     }
 
@@ -151,7 +192,54 @@ public class FieldStafActivity extends AppCompatActivity {
                 return false;
             }
         });
-        
+
 
     }
+
+    private void getAllBookingFieldStaff(String token)
+    {
+
+        parent_of_loading.setVisibility(View.VISIBLE);
+
+        api.getBookingFieldStaff(token).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                parent_of_loading.setVisibility(View.GONE);
+
+                if(response.code() == 200)
+                {
+                    Type collectionType = new TypeToken<ArrayList<ResponseBooking>>(){}.getType();
+                    try {
+                        responseBookingList.addAll(new Gson().fromJson(response.body().string().toString(),collectionType));
+                    } catch (IOException e) {
+
+                    }
+                    if(responseBookingList.isEmpty())
+                    {
+
+                        noDataFound.setVisibility(View.VISIBLE);
+                        Log.d("minal","no vehicle");
+                    }
+                    else
+                    {
+                        //['pan','aadhaar','bank']
+
+                        noDataFound.setVisibility(View.GONE);
+                        fieldStafAdapter.notifyDataSetChanged();
+
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                parent_of_loading.setVisibility(View.GONE);
+
+                Toast.makeText(FieldStafActivity.this, "No internet Connection", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 }

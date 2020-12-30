@@ -45,15 +45,17 @@ public class FieldStafAdapter extends RecyclerView.Adapter<FieldStafAdapter.view
 
         ResponseBooking responseBooking = responseBookingList.get(position);
 
-        holder.to_from_dest.setText(responseBooking.getMinename()+" - "+responseBooking.getLoading());
-        holder.number.setText(responseBooking.getVehiclename());
+        holder.to_from_dest.setText(responseBooking.getLoading()+" - "+responseBooking.getMinename());
+        holder.number.setText(responseBooking.getVehicleownermobile());
         holder.name_of_owner.setText(responseBooking.getVehicleowner());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                context.startActivity(new Intent(context, FieldStafBookingConfirmationActivity.class));
+                Intent intent = new Intent(context, FieldStafBookingConfirmationActivity.class);
+                intent.putExtra("responseBooking",responseBooking);
+                context.startActivity(intent);
 
             }
         });

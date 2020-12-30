@@ -96,6 +96,10 @@ dependencies {
     // upload files by server
     implementation 'net.gotev:uploadservice:3.5.1'
 
+    // pull to refresh
+    implementation 'com.yalantis:phoenix:1.2.3'
+
+
 }
 repositories {
     maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
