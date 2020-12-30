@@ -58,6 +58,8 @@ public class RemoveDialogFragment extends DialogFragment {
 
                 onClickListener.onClick();
 
+                dismiss();
+
             }
         });
 

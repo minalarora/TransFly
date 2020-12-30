@@ -5,26 +5,28 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.truck.transfly.Activty.FieldStafBookingConfirmationActivity;
+import com.truck.transfly.Model.ResponseBooking;
 import com.truck.transfly.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FieldStafAdapter extends RecyclerView.Adapter<FieldStafAdapter.viewholder> {
 
     private final Context context;
-    private List<String> stringList;
+    private List<ResponseBooking> responseBookingList;
 
-    public FieldStafAdapter(Context context,List<String> stringList){
+    public FieldStafAdapter(Context context, ArrayList<ResponseBooking> responseBookingList){
 
         this.context=context;
-        this.stringList=stringList;
+        this.responseBookingList=responseBookingList;
 
     }
 
@@ -40,6 +42,12 @@ public class FieldStafAdapter extends RecyclerView.Adapter<FieldStafAdapter.view
 
     @Override
     public void onBindViewHolder(@NonNull viewholder holder, int position) {
+
+        ResponseBooking responseBooking = responseBookingList.get(position);
+
+        holder.to_from_dest.setText(responseBooking.getMinename()+" - "+responseBooking.getLoading());
+        holder.number.setText(responseBooking.getVehiclename());
+        holder.name_of_owner.setText(responseBooking.getVehicleowner());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,17 +71,21 @@ public class FieldStafAdapter extends RecyclerView.Adapter<FieldStafAdapter.view
 
     @Override
     public int getItemCount() {
-        return stringList.size();
+        return responseBookingList.size();
     }
 
     public class viewholder extends RecyclerView.ViewHolder {
 
         private RelativeLayout confirm_booking;
+        private TextView to_from_dest,name_of_owner,number;
 
         public viewholder(@NonNull View itemView) {
             super(itemView);
 
             confirm_booking=itemView.findViewById(R.id.confirm_booking);
+            to_from_dest=itemView.findViewById(R.id.to_from_dest);
+            name_of_owner=itemView.findViewById(R.id.name_of_owner);
+            number=itemView.findViewById(R.id.number);
 
         }
     }

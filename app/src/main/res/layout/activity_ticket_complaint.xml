@@ -130,6 +130,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="@dimen/_25ssp"
+                        android:visibility="gone"
                         android:fontFamily="@font/poppinsbold"
                         android:text="Location Details"
                         android:textColor="@color/project_color"
@@ -138,6 +139,7 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:visibility="gone"
                         android:textSize="@dimen/_14ssp"
                         android:layout_marginTop="@dimen/_14ssp"
                         android:hint="Add Location Details"

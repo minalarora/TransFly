@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 
 import com.truck.transfly.Activty.FieldStafActivity;
 import com.truck.transfly.Adapter.FieldStafAdapter;
+import com.truck.transfly.Model.ResponseBooking;
 import com.truck.transfly.R;
 
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ public class ShowBooking extends Fragment {
 
     private List<String> stringList=new ArrayList<>();
     private View inflate;
+    private ArrayList<ResponseBooking> responseBookingList=new ArrayList<>();
     private RecyclerView fieldStafRecylcer;
     private FragmentActivity fragmentActivity;
 
@@ -55,7 +57,7 @@ public class ShowBooking extends Fragment {
         fieldStafRecylcer =inflate.findViewById(R.id.fieldStafRecylcer);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
         fieldStafRecylcer.setLayoutManager(linearLayoutManager);
-        FieldStafAdapter fieldStafAdapter=new FieldStafAdapter(fragmentActivity,stringList);
+        FieldStafAdapter fieldStafAdapter=new FieldStafAdapter(fragmentActivity,responseBookingList);
         fieldStafRecylcer.setAdapter(fieldStafAdapter);
 
         return inflate;

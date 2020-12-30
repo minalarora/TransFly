@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import com.truck.transfly.Model.RequestRating;
 import com.truck.transfly.R;
 import com.truck.transfly.databinding.ActivityFeedbackBinding;
 
@@ -22,6 +23,8 @@ import com.android.volley.toolbox.Volley;
 import com.truck.transfly.Adapter.MyVehicleAdapter;
 import com.truck.transfly.Model.ResponseVehicle;
 import com.truck.transfly.R;
+import com.truck.transfly.utils.ApiClient;
+import com.truck.transfly.utils.ApiEndpoints;
 import com.truck.transfly.utils.EndApi;
 import com.truck.transfly.utils.PreferenceUtil;
 
@@ -30,15 +33,28 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Retrofit;
+
 public class FeedbackActivity extends AppCompatActivity {
 
     private ActivityFeedbackBinding activity;
+    private Retrofit retrofit = null;
+    private ApiEndpoints api = null;
     private FrameLayout parent_of_loading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity = DataBindingUtil.setContentView(this,R.layout.activity_feedback);
+
+        retrofit = ApiClient.getRetrofitClient();
+        if(retrofit!=null)
+        {
+            api = retrofit.create(ApiEndpoints.class);
+        }
 
         parent_of_loading = findViewById(R.id.parent_of_loading);
         parent_of_loading.setVisibility(View.GONE);
@@ -57,7 +73,11 @@ public class FeedbackActivity extends AppCompatActivity {
 
                 } else {
 
-                    uploadAFeedback();
+                    RequestRating requestRating=new RequestRating();
+                    requestRating.setMessage(activity.feedbackText.getText().toString());
+                    requestRating.setRating((int) activity.ratingBar.getRating());
+
+                    createRating(PreferenceUtil.getData(FeedbackActivity.this,"token"),requestRating);
 
                 }
 
@@ -114,4 +134,35 @@ public class FeedbackActivity extends AppCompatActivity {
         Volley.newRequestQueue(FeedbackActivity.this).add(stringRequest);
 
     }
+
+    private void createRating(String token, RequestRating rating)
+    {
+        parent_of_loading.setVisibility(View.VISIBLE);
+
+        api.createRating(token, rating).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
+
+                parent_of_loading.setVisibility(View.GONE);
+
+                if(response.code() == 200)
+                {
+                    Toast.makeText(FeedbackActivity.this, "Feedback Update Successful", Toast.LENGTH_SHORT).show();
+
+                    finish();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                parent_of_loading.setVisibility(View.GONE);
+
+                Toast.makeText(FeedbackActivity.this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+
+
+            }
+        });
+    }
+
 }

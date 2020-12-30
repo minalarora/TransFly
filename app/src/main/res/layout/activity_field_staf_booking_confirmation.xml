@@ -1,350 +1,354 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".Activty.FieldStafBookingConfirmationActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.appcompat.widget.Toolbar
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        app:contentInsetStart="0dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".Activty.FieldStafBookingConfirmationActivity">
 
-        <RelativeLayout
+        <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/back"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:layout_gravity="center"
-                android:layout_marginStart="15dp"
-                android:src="@drawable/ic_action_back"
-                app:tint="@color/black" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="10dp"
-                android:layout_toEndOf="@+id/back"
-                android:fontFamily="@font/poppins"
-                android:text="Booking Confirmation"
-                android:textColor="@android:color/black"
-                android:textSize="16dp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_alignParentBottom="true"
-                android:background="#dcdcdc" />
-
-        </RelativeLayout>
-
-    </androidx.appcompat.widget.Toolbar>
-
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_12ssp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_12ssp"
-                android:orientation="vertical"
-                app:cardCornerRadius="@dimen/_8ssp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="@dimen/_50ssp"
-                            android:layout_height="@dimen/_50ssp"
-                            android:src="@drawable/box_animation" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginStart="@dimen/_15ssp"
-                            android:fontFamily="@font/poppins"
-                            android:text="Anand(GJ) - Kamrej(GJ)"
-                            android:textColor="@color/black"
-                            android:textSize="15dp" />
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginStart="@dimen/_15ssp"
-                        android:layout_marginEnd="@dimen/_15ssp"
-                        android:background="#dcdcdc" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_13ssp"
-                        android:layout_marginTop="@dimen/_8ssp"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="@dimen/_30ssp"
-                            android:layout_height="@dimen/_30ssp"
-                            android:src="@drawable/ic_vehicle_owner_name" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:fontFamily="@font/poppins"
-                            android:text="John deo"
-                            android:textColor="@color/black"
-                            android:textSize="13dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginStart="@dimen/_4ssp"
-                            android:fontFamily="@font/poppins"
-                            android:text="(Owner name)"
-                            android:textColor="#8c8c8c"
-                            android:textSize="12dp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_13ssp"
-                        android:layout_marginTop="@dimen/_8ssp"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="@dimen/_30ssp"
-                            android:layout_height="@dimen/_30ssp"
-                            android:src="@drawable/ic_smartphone_number" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:fontFamily="@font/poppins"
-                            android:text="+91 9399104906"
-                            android:textColor="@color/black"
-                            android:textSize="13dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginStart="@dimen/_4ssp"
-                            android:fontFamily="@font/poppins"
-                            android:text="(Owner Number)"
-                            android:textColor="#8c8c8c"
-                            android:textSize="12dp" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
+            android:layout_height="50dp"
+            app:contentInsetStart="0dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginStart="@dimen/_12ssp"
-                android:layout_marginTop="@dimen/_20ssp"
-                android:layout_marginEnd="@dimen/_12ssp"
-                android:background="@drawable/round_eddittext_round">
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
-                <Spinner
-                    android:id="@+id/register_category"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/field_height"
-                    android:layout_marginStart="@dimen/_5ssp"
-                    android:entries="@array/vehicle_number"
-                    android:fontFamily="@font/poppins"
-                    android:theme="@style/SpinnerTheme" />
-
-            </RelativeLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/layoutTextInput"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10ssp"
-                android:layout_marginTop="@dimen/_4ssp"
-                android:layout_marginEnd="@dimen/_10ssp"
-                android:visibility="gone"
-                android:textColorHint="#8c8c8c"
-                app:hintAnimationEnabled="true">
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    android:fontFamily="@font/poppins"
-                    android:hint="Vehicle Number"
-                    android:imeOptions="actionNext"
-                    android:inputType="textCapWords"
-                    android:textSize="@dimen/_12ssp" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10ssp"
-                android:layout_marginTop="@dimen/_4ssp"
-                android:layout_marginEnd="@dimen/_10ssp"
-                android:textColorHint="#8c8c8c"
-                app:hintAnimationEnabled="true">
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    android:fontFamily="@font/poppins"
-                    android:hint="Tonnege (in Kg*)"
-                    android:imeOptions="actionNext"
-                    android:inputType="textCapWords"
-                    android:textSize="@dimen/_12ssp" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10ssp"
-                android:layout_marginTop="@dimen/_4ssp"
-                android:layout_marginEnd="@dimen/_10ssp"
-                android:textColorHint="#8c8c8c"
-                app:hintAnimationEnabled="true">
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    android:fontFamily="@font/poppins"
-                    android:hint="Rate*"
-                    android:imeOptions="actionNext"
-                    android:inputType="textCapWords"
-                    android:textSize="@dimen/_12ssp" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10ssp"
-                android:layout_marginTop="@dimen/_4ssp"
-                android:layout_marginEnd="@dimen/_10ssp"
-                android:textColorHint="#8c8c8c"
-                app:hintAnimationEnabled="true">
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    android:fontFamily="@font/poppins"
-                    android:hint="HSD"
-                    android:imeOptions="actionNext"
-                    android:inputType="textCapWords"
-                    android:textSize="@dimen/_12ssp" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10ssp"
-                android:layout_marginTop="@dimen/_4ssp"
-                android:layout_marginEnd="@dimen/_10ssp"
-                android:textColorHint="#8c8c8c"
-                app:hintAnimationEnabled="true">
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    android:fontFamily="@font/poppins"
-                    android:hint="Amount"
-                    android:imeOptions="actionNext"
-                    android:inputType="textCapWords"
-                    android:textSize="@dimen/_12ssp" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10ssp"
-                android:layout_marginTop="@dimen/_4ssp"
-                android:layout_marginEnd="@dimen/_10ssp"
-                android:textColorHint="#8c8c8c"
-                app:hintAnimationEnabled="true">
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    android:fontFamily="@font/poppins"
-                    android:hint="Cash"
-                    android:imeOptions="actionNext"
-                    android:inputType="textCapWords"
-                    android:textSize="@dimen/_12ssp" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <RelativeLayout
-                android:id="@+id/creaate_booking"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginStart="@dimen/_15ssp"
-                android:layout_marginTop="@dimen/_30ssp"
-                android:layout_marginEnd="@dimen/_15ssp"
-                android:layout_marginBottom="@dimen/_15ssp"
-                android:background="@drawable/design_as_edittext_gradient"
-                android:elevation="6dp">
+                <ImageView
+                    android:id="@+id/back"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="15dp"
+                    android:src="@drawable/ic_action_back"
+                    app:tint="@color/black" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:fontFamily="@font/poppinsbold"
-                    android:text="Confirm Booking"
-                    android:textColor="@color/white"
-                    android:textSize="14dp" />
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@+id/back"
+                    android:fontFamily="@font/poppins"
+                    android:text="Booking Confirmation"
+                    android:textColor="@android:color/black"
+                    android:textSize="16dp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="#dcdcdc" />
 
             </RelativeLayout>
 
-        </LinearLayout>
+        </androidx.appcompat.widget.Toolbar>
 
-    </androidx.core.widget.NestedScrollView>
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-</LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_12ssp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_12ssp"
+                    android:orientation="vertical"
+                    app:cardCornerRadius="@dimen/_8ssp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="@dimen/_50ssp"
+                                android:layout_height="@dimen/_50ssp"
+                                android:src="@drawable/box_animation" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="@dimen/_15ssp"
+                                android:fontFamily="@font/poppins"
+                                android:text="Anand(GJ) - Kamrej(GJ)"
+                                android:textColor="@color/black"
+                                android:textSize="15dp" />
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginStart="@dimen/_15ssp"
+                            android:layout_marginEnd="@dimen/_15ssp"
+                            android:background="#dcdcdc" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_13ssp"
+                            android:layout_marginTop="@dimen/_8ssp"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="@dimen/_30ssp"
+                                android:layout_height="@dimen/_30ssp"
+                                android:src="@drawable/ic_vehicle_owner_name" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:fontFamily="@font/poppins"
+                                android:text="John deo"
+                                android:textColor="@color/black"
+                                android:textSize="13dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="@dimen/_4ssp"
+                                android:fontFamily="@font/poppins"
+                                android:text="(Owner name)"
+                                android:textColor="#8c8c8c"
+                                android:textSize="12dp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_13ssp"
+                            android:layout_marginTop="@dimen/_8ssp"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="@dimen/_30ssp"
+                                android:layout_height="@dimen/_30ssp"
+                                android:src="@drawable/ic_smartphone_number" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:fontFamily="@font/poppins"
+                                android:text="+91 9399104906"
+                                android:textColor="@color/black"
+                                android:textSize="13dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="@dimen/_4ssp"
+                                android:fontFamily="@font/poppins"
+                                android:text="(Owner Number)"
+                                android:textColor="#8c8c8c"
+                                android:textSize="12dp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginStart="@dimen/_12ssp"
+                    android:layout_marginTop="@dimen/_20ssp"
+                    android:layout_marginEnd="@dimen/_12ssp"
+                    android:background="@drawable/round_eddittext_round">
+
+                    <Spinner
+                        android:id="@+id/register_category"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/field_height"
+                        android:layout_marginStart="@dimen/_5ssp"
+                        android:entries="@array/vehicle_number"
+                        android:fontFamily="@font/poppins"
+                        android:theme="@style/SpinnerTheme" />
+
+                </RelativeLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layoutTextInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10ssp"
+                    android:layout_marginTop="@dimen/_4ssp"
+                    android:layout_marginEnd="@dimen/_10ssp"
+                    android:textColorHint="#8c8c8c"
+                    android:visibility="gone"
+                    app:hintAnimationEnabled="true">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:fontFamily="@font/poppins"
+                        android:hint="Vehicle Number"
+                        android:imeOptions="actionNext"
+                        android:inputType="textCapWords"
+                        android:textSize="@dimen/_12ssp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10ssp"
+                    android:layout_marginTop="@dimen/_4ssp"
+                    android:layout_marginEnd="@dimen/_10ssp"
+                    android:textColorHint="#8c8c8c"
+                    app:hintAnimationEnabled="true">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:fontFamily="@font/poppins"
+                        android:hint="Tonnege (in Kg*)"
+                        android:imeOptions="actionNext"
+                        android:inputType="textCapWords"
+                        android:textSize="@dimen/_12ssp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10ssp"
+                    android:layout_marginTop="@dimen/_4ssp"
+                    android:layout_marginEnd="@dimen/_10ssp"
+                    android:textColorHint="#8c8c8c"
+                    app:hintAnimationEnabled="true">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:fontFamily="@font/poppins"
+                        android:hint="Rate*"
+                        android:imeOptions="actionNext"
+                        android:inputType="textCapWords"
+                        android:textSize="@dimen/_12ssp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10ssp"
+                    android:layout_marginTop="@dimen/_4ssp"
+                    android:layout_marginEnd="@dimen/_10ssp"
+                    android:textColorHint="#8c8c8c"
+                    app:hintAnimationEnabled="true">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:fontFamily="@font/poppins"
+                        android:hint="HSD"
+                        android:imeOptions="actionNext"
+                        android:inputType="textCapWords"
+                        android:textSize="@dimen/_12ssp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10ssp"
+                    android:layout_marginTop="@dimen/_4ssp"
+                    android:layout_marginEnd="@dimen/_10ssp"
+                    android:textColorHint="#8c8c8c"
+                    app:hintAnimationEnabled="true">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:fontFamily="@font/poppins"
+                        android:hint="Amount"
+                        android:imeOptions="actionNext"
+                        android:inputType="textCapWords"
+                        android:textSize="@dimen/_12ssp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10ssp"
+                    android:layout_marginTop="@dimen/_4ssp"
+                    android:layout_marginEnd="@dimen/_10ssp"
+                    android:textColorHint="#8c8c8c"
+                    app:hintAnimationEnabled="true">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:fontFamily="@font/poppins"
+                        android:hint="Cash"
+                        android:imeOptions="actionNext"
+                        android:inputType="textCapWords"
+                        android:textSize="@dimen/_12ssp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <RelativeLayout
+                    android:id="@+id/creaate_booking"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginStart="@dimen/_15ssp"
+                    android:layout_marginTop="@dimen/_30ssp"
+                    android:layout_marginEnd="@dimen/_15ssp"
+                    android:layout_marginBottom="@dimen/_15ssp"
+                    android:background="@drawable/design_as_edittext_gradient"
+                    android:elevation="6dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:fontFamily="@font/poppinsbold"
+                        android:text="Confirm Booking"
+                        android:textColor="@color/white"
+                        android:textSize="14dp" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </LinearLayout>
+
+</layout>
