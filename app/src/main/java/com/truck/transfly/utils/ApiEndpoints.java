@@ -87,6 +87,14 @@ public interface ApiEndpoints {
     @GET("/allbooking/vehicleowner")
     Call<ResponseBody> getBookingVehicleOwner(@Header("Authorization")String token);
 
+    //get all booking of fieldstaff
+    @GET("/allbooking/fieldstaff")
+    Call<ResponseBody> getBookingFieldStaff(@Header("Authorization")String token);
+
+    //get all booking of areamanager
+    @GET("/allbooking/fieldstaff")
+    Call<ResponseBody> getBookingAreaManager(@Header("Authorization")String token);
+
     //delete booking
     @DELETE("/booking/{id}")
     Call<ResponseBooking> deleteBooking(@Header("Authorization")String token, @Path("id") int id);
