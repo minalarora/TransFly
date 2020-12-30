@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:id="@+id/toolbar"
         app:contentInsetStart="0dp">
 
         <RelativeLayout
@@ -39,24 +39,50 @@
                 android:textColor="@android:color/black"
                 android:textSize="16dp" />
 
+            <TextView
+                android:id="@+id/refresh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="@dimen/_12ssp"
+                android:fontFamily="@font/poppins"
+                android:text="Refresh"
+                android:textColor="@color/quantum_pink"
+                android:textSize="14dp" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#dcdcdc"
                 android:layout_alignParentBottom="true"
-                />
+                android:background="#dcdcdc" />
 
         </RelativeLayout>
 
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_below="@+id/toolbar"
-        android:layout_height="wrap_content"
         android:id="@+id/fieldStafRecylcer"
-        />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar" />
 
-    <include layout="@layout/loading_view"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@+id/drawer_icon"
+        android:id="@+id/no_data_found"
+        android:visibility="gone"
+        android:fontFamily="@font/poppins"
+        android:text="No Booking Found"
+        android:textColor="@android:color/black"
+        android:textSize="18dp" />
+
+    <include layout="@layout/loading_view" />
 
 </RelativeLayout>

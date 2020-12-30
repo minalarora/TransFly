@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Frament.ShowBooking">
+
+   <com.yalantis.phoenix.PullToRefreshView
+       android:layout_width="match_parent"
+       android:id="@+id/pullToRefresh"
+       android:layout_height="wrap_content">
 
    <androidx.recyclerview.widget.RecyclerView
        android:layout_width="match_parent"
@@ -14,4 +19,22 @@
 
    </androidx.recyclerview.widget.RecyclerView>
 
-</LinearLayout>
+   </com.yalantis.phoenix.PullToRefreshView>
+
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_centerInParent="true"
+       android:layout_centerVertical="true"
+       android:layout_marginStart="10dp"
+       android:layout_toEndOf="@+id/drawer_icon"
+       android:id="@+id/no_data_found"
+       android:visibility="gone"
+       android:fontFamily="@font/poppins"
+       android:text="No Booking Found"
+       android:textColor="@android:color/black"
+       android:textSize="18dp" />
+
+   <include layout="@layout/loading_view"/>
+
+</RelativeLayout>

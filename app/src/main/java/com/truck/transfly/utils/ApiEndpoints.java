@@ -92,7 +92,7 @@ public interface ApiEndpoints {
     Call<ResponseBody> getBookingFieldStaff(@Header("Authorization")String token);
 
     //get all booking of areamanager
-    @GET("/allbooking/fieldstaff")
+    @GET("/allbooking/areamanager")
     Call<ResponseBody> getBookingAreaManager(@Header("Authorization")String token);
 
     //delete booking

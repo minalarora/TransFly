@@ -104,7 +104,16 @@
             android:name=".Activty.OtpValidation"
             android:resizeableActivity="false"
             android:screenOrientation="portrait" />
-        <activity android:name=".Activty.AreaManagerActivity" />
+        <activity android:name=".Activty.AreaManagerActivity" >
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+
         <activity
             android:name=".Activty.SplashActivity"
             android:resizeableActivity="false"
@@ -134,12 +143,6 @@
         </activity>
 
         <activity android:name=".Activty.FieldStafActivity" >
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
         </activity>
         <activity android:name=".Activty.CurrentBookingActivity" />

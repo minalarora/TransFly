@@ -46,8 +46,7 @@ public class EnterMobileNumberActivty extends AppCompatActivity {
 
     }
 
-     private void sendOtpConfirmation(String number)
-     {
+     private void sendOtpConfirmation(String number){
          //send otp
      }
 }

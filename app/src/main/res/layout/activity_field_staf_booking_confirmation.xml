@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -12,6 +12,7 @@
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:id="@+id/toolbar"
             app:contentInsetStart="0dp">
 
             <RelativeLayout
@@ -54,6 +55,7 @@
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
+            android:layout_below="@+id/toolbar"
             android:layout_height="wrap_content">
 
             <LinearLayout
@@ -90,6 +92,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginStart="@dimen/_15ssp"
+                                android:id="@+id/to_from_dest"
                                 android:fontFamily="@font/poppins"
                                 android:text="Anand(GJ) - Kamrej(GJ)"
                                 android:textColor="@color/black"
@@ -122,6 +125,7 @@
                                 android:layout_gravity="center_vertical"
                                 android:fontFamily="@font/poppins"
                                 android:text="John deo"
+                                android:id="@+id/owner_name"
                                 android:textColor="@color/black"
                                 android:textSize="13dp" />
 
@@ -152,6 +156,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:id="@+id/mobileNumber"
                                 android:layout_gravity="center_vertical"
                                 android:fontFamily="@font/poppins"
                                 android:text="+91 9399104906"
@@ -233,6 +238,7 @@
                         android:fontFamily="@font/poppins"
                         android:hint="Tonnege (in Kg*)"
                         android:imeOptions="actionNext"
+                        android:id="@+id/tonnege"
                         android:inputType="textCapWords"
                         android:textSize="@dimen/_12ssp" />
 
@@ -253,6 +259,7 @@
                         android:background="@android:color/transparent"
                         android:fontFamily="@font/poppins"
                         android:hint="Rate*"
+                        android:id="@+id/rate"
                         android:imeOptions="actionNext"
                         android:inputType="textCapWords"
                         android:textSize="@dimen/_12ssp" />
@@ -274,6 +281,7 @@
                         android:background="@android:color/transparent"
                         android:fontFamily="@font/poppins"
                         android:hint="HSD"
+                        android:id="@+id/hsd"
                         android:imeOptions="actionNext"
                         android:inputType="textCapWords"
                         android:textSize="@dimen/_12ssp" />
@@ -295,6 +303,7 @@
                         android:background="@android:color/transparent"
                         android:fontFamily="@font/poppins"
                         android:hint="Amount"
+                        android:id="@+id/amount"
                         android:imeOptions="actionNext"
                         android:inputType="textCapWords"
                         android:textSize="@dimen/_12ssp" />
@@ -316,6 +325,7 @@
                         android:background="@android:color/transparent"
                         android:fontFamily="@font/poppins"
                         android:hint="Cash"
+                        android:id="@+id/cash"
                         android:imeOptions="actionNext"
                         android:inputType="textCapWords"
                         android:textSize="@dimen/_12ssp" />
@@ -349,6 +359,8 @@
 
         </androidx.core.widget.NestedScrollView>
 
-    </LinearLayout>
+        <include layout="@layout/loading_view"/>
+
+    </RelativeLayout>
 
 </layout>
