@@ -553,6 +553,96 @@ public class PlaygroundActivity extends AppCompatActivity {
         });
     }
 
+    private void getAllBookingAreaManager(String token)
+    {
+        api.getBookingAreaManager(token).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response.code() == 200)
+                {
+                    ArrayList<ResponseBooking> bookingList  =  new ArrayList<>();
+                    Type collectionType = new TypeToken<ArrayList<ResponseBooking>>(){}.getType();
+                    try {
+                        bookingList.addAll(new Gson().fromJson(response.body().string().toString(),collectionType));
+                    } catch (IOException e) {
+
+                    }
+                    if(bookingList.isEmpty())
+                    {
+
+                        Log.d("minal","no vehicle");
+                    }
+                    else
+                    {
+                        //['pan','aadhaar','bank']
+
+                        Log.d("minal",bookingList.toString());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void confirmBooking(String token, RequestInvoice invoice)
+    {
+        api.confirmBooking(token,invoice).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response.code() == 200)
+                {
+                    //booking confirmed
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+    }
+
+
+    private void getVehicleFieldStaff(String token,String mobileofvehicleowner)
+    {
+        api.getVehicleFieldStaff(token,mobileofvehicleowner).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response.code() == 200)
+                {
+                    ArrayList<String> vehicleList  =  new ArrayList<>();
+                    Type collectionType = new TypeToken<ArrayList<String>>(){}.getType();
+                    try {
+                        vehicleList.addAll(new Gson().fromJson(response.body().string().toString(),collectionType));
+                    } catch (IOException e) {
+
+                    }
+                    if(vehicleList.isEmpty())
+                    {
+
+                        //no vehicle
+                        //show booking vehicle
+                    }
+                    else
+                    {
+                       //list of all vehicle
+
+
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+    }
+
 
 
 }

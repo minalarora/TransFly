@@ -106,6 +106,16 @@ public interface ApiEndpoints {
     Call<ResponseBody> createRating(@Header("Authorization")String token, @Body RequestRating rating);
 
 
+    //create invoice
+    @POST("/invoice")
+    Call<ResponseBody> confirmBooking(@Header("Authorization")String token, @Body RequestInvoice invoice);
+
+
+    //get list of all vehicle in single booking
+    @GET("/booking/vehicle/{mobile}")
+    Call<ResponseBody> getVehicleFieldStaff(@Header("Authorization")String token, @Path("mobile") String mobile);
+
+
 
     @POST("/login")
     Call<ResponseBody> login(@Body RequestCredentials credentials);
