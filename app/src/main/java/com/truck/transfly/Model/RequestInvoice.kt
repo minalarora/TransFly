@@ -3,17 +3,17 @@ package com.truck.transfly.Model
 import com.google.gson.annotations.SerializedName
 
 class RequestInvoice {
+    @SerializedName("id")
+    var id: Int? = 0
+
+    @SerializedName("mineid")
+    var mineid: Int? = null
+
     @SerializedName("minename")
     var minename: String? = null
 
     @SerializedName("loading")
     var loading: String? = null
-
-    @SerializedName("status")
-    var status: String? = null
-
-    @SerializedName("mineid")
-    var mineid: Int? = null
 
     @SerializedName("vehicle")
     var vehiclenumber: String? = null
@@ -35,4 +35,6 @@ class RequestInvoice {
 
     @SerializedName("cash")
     var cash: Int? = 0
+
+
 }
