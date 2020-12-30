@@ -106,12 +106,6 @@
             android:screenOrientation="portrait" />
         <activity android:name=".Activty.AreaManagerActivity" >
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
         </activity>
 
         <activity
@@ -132,8 +126,6 @@
         </activity>
         <activity android:name=".Activty.SelectYourVehicleActivity">
 
-
-
         </activity>
 
         <activity android:name=".Activty.FieldStafBookingConfirmationActivity">
@@ -143,6 +135,13 @@
         </activity>
 
         <activity android:name=".Activty.FieldStafActivity" >
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
 
         </activity>
         <activity android:name=".Activty.CurrentBookingActivity" />

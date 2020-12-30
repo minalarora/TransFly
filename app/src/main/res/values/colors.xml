@@ -14,4 +14,5 @@
     <color name="project_color">@color/quantum_pink</color>
     <color name="red_900">#B71C1C</color>
     <color name="project_color2">@color/quantum_pink</color>
+    <color name="quantum_googgreen900">#055524</color>
 </resources>

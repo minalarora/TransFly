@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -48,6 +49,7 @@ public class SelectYourVehicleActivity extends AppCompatActivity {
     private ArrayList<ResponseVehicle> vehicleList = new ArrayList<>();
     private FrameLayout parent_of_loading;
     private ResponseVehicle responseVehicle;
+    private RelativeLayout no_internet_connection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,20 @@ public class SelectYourVehicleActivity extends AppCompatActivity {
 
         parent_of_loading = findViewById(R.id.parent_of_loading);
         parent_of_loading.setVisibility(View.GONE);
+        activity.noVehicleFound.setVisibility(View.GONE);
+
+        no_internet_connection = findViewById(R.id.no_internet_connection);
+        findViewById(R.id.pullToRefresh_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                vehicleList.clear();
+                no_internet_connection.setVisibility(View.GONE);
+                smallIconsAdapter.notifyDataSetChanged();
+                getAllVehicles(PreferenceUtil.getData(SelectYourVehicleActivity.this, "token"));
+
+            }
+        });
 
         retrofit = ApiClient.getRetrofitClient();
         if (retrofit != null) {
@@ -109,11 +125,15 @@ public class SelectYourVehicleActivity extends AppCompatActivity {
                     if (vehicleList.isEmpty()) {
 
                         Log.d("minal", "no vehicle");
+                        activity.noVehicleFound.setVisibility(View.VISIBLE);
                     } else {
                         //['pan','aadhaar','bank']
 
                         smallIconsAdapter.notifyDataSetChanged();
                         Log.d("minal", vehicleList.toString());
+
+                        activity.noVehicleFound.setVisibility(View.GONE);
+
                     }
                 }
             }
@@ -122,6 +142,8 @@ public class SelectYourVehicleActivity extends AppCompatActivity {
             public void onFailure(Call<ResponseBody> call, Throwable t) {
 
                 parent_of_loading.setVisibility(View.GONE);
+
+                no_internet_connection.setVisibility(View.VISIBLE);
 
             }
         });

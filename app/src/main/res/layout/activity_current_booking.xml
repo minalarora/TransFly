@@ -59,7 +59,24 @@
             android:layout_below="@+id/toolbar"
             android:layout_height="wrap_content" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:id="@+id/no_booking_data"
+            android:layout_centerInParent="true"
+            android:layout_toEndOf="@+id/back"
+            android:fontFamily="@font/poppins"
+            android:text="No Current Booking"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/_16ssp" />
+
+
         <include layout="@layout/loading_view"/>
+
+        <include layout="@layout/no_internet_connection"/>
 
     </RelativeLayout>
 

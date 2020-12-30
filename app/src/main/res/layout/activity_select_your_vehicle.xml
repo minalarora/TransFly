@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -64,13 +63,32 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/show_small_icons"
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/show_small_icons"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-                </androidx.recyclerview.widget.RecyclerView>
+
+                    </androidx.recyclerview.widget.RecyclerView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="10dp"
+                        android:id="@+id/no_vehicle_found"
+                        android:layout_centerInParent="true"
+                        android:fontFamily="@font/poppins"
+                        android:text="No Vehicle Found"
+                        android:textColor="@android:color/black"
+                        android:textSize="16dp" />
+
+                </RelativeLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/layoutTextInput"
@@ -214,6 +232,8 @@
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>
+
+        <include layout="@layout/no_internet_connection"/>
 
         <include layout="@layout/loading_view_transparent"/>
 

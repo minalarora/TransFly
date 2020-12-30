@@ -64,7 +64,9 @@ public class FieldStafAdapter extends RecyclerView.Adapter<FieldStafAdapter.view
             @Override
             public void onClick(View v) {
 
-                context.startActivity(new Intent(context, FieldStafBookingConfirmationActivity.class));
+                Intent intent = new Intent(context, FieldStafBookingConfirmationActivity.class);
+                intent.putExtra("responseBooking",responseBooking);
+                context.startActivity(intent);
 
             }
         });

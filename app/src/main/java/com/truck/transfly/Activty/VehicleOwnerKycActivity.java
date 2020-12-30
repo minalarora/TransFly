@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -64,6 +65,7 @@ public class VehicleOwnerKycActivity extends AppCompatActivity {
     private ApiEndpoints api = null;
     private ArrayAdapter<String> adapter;
     ArrayList<String> pendingList  =  new ArrayList<>();
+    private RelativeLayout no_internet_connection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +74,19 @@ public class VehicleOwnerKycActivity extends AppCompatActivity {
 
         parent_of_loading = findViewById(R.id.parent_of_loading);
         parent_of_loading.setVisibility(View.VISIBLE);
+
+        no_internet_connection = findViewById(R.id.no_internet_connection);
+        findViewById(R.id.pullToRefresh_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                no_internet_connection.setVisibility(View.GONE);
+                pendingList.clear();
+                adapter.notifyDataSetChanged();
+                getPendingList(PreferenceUtil.getData(VehicleOwnerKycActivity.this,"token"));
+
+            }
+        });
 
         retrofit = ApiClient.getRetrofitClient();
         if(retrofit!=null)
@@ -223,6 +238,8 @@ public class VehicleOwnerKycActivity extends AppCompatActivity {
             public void onFailure(Call<ResponseBody> call, Throwable t) {
 
                 parent_of_loading.setVisibility(View.GONE);
+
+                no_internet_connection.setVisibility(View.VISIBLE);
 
             }
         });

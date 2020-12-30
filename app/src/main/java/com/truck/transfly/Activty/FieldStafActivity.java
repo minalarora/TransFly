@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,6 +52,7 @@ public class FieldStafActivity extends AppCompatActivity {
     private FrameLayout parent_of_loading;
     private FieldStafAdapter fieldStafAdapter;
     private TextView noDataFound;
+    private RelativeLayout no_internet_connection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +71,19 @@ public class FieldStafActivity extends AppCompatActivity {
 
         parent_of_loading = findViewById(R.id.parent_of_loading);
         parent_of_loading.setVisibility(View.GONE);
+
+        no_internet_connection = findViewById(R.id.no_internet_connection);
+        findViewById(R.id.pullToRefresh_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                responseBookingList.clear();
+                no_internet_connection.setVisibility(View.GONE);
+                fieldStafAdapter.notifyDataSetChanged();
+                getAllBookingFieldStaff(PreferenceUtil.getData(FieldStafActivity.this,"token"));
+
+            }
+        });
 
         PreferenceUtil.putData(FieldStafActivity.this,"token","fieldstaff:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIyMjIyNTUyMjEiLCJpYXQiOjE2MDkyMjc1ODMsImV4cCI6MTYxMTgxOTU4M30.dKSSU7LvtVFkFcEoeb586uK2s74BHhBZsoRcnumcbro");
         
@@ -236,6 +251,8 @@ public class FieldStafActivity extends AppCompatActivity {
             public void onFailure(Call<ResponseBody> call, Throwable t) {
 
                 parent_of_loading.setVisibility(View.GONE);
+
+                no_internet_connection.setVisibility(View.VISIBLE);
 
                 Toast.makeText(FieldStafActivity.this, "No internet Connection", Toast.LENGTH_SHORT).show();
             }

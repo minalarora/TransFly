@@ -83,6 +83,8 @@
         android:textColor="@android:color/black"
         android:textSize="18dp" />
 
+    <include layout="@layout/no_internet_connection"/>
+
     <include layout="@layout/loading_view" />
 
 </RelativeLayout>

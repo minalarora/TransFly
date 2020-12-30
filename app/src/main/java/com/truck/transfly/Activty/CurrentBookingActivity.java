@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -42,6 +44,8 @@ public class CurrentBookingActivity extends AppCompatActivity {
     private ApiEndpoints api = null;
     private ArrayList<ResponseBooking> bookingList = new ArrayList<>();
     private CurrentBookingAdapter currentBookingAdapter;
+    private TextView no_booking_data;
+    private RelativeLayout no_internet_connection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +59,30 @@ public class CurrentBookingActivity extends AppCompatActivity {
 
         parent_of_loading = findViewById(R.id.parent_of_loading);
         parent_of_loading.setVisibility(View.GONE);
+
+        findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                onBackPressed();
+
+            }
+        });
+
+        no_internet_connection = findViewById(R.id.no_internet_connection);
+        findViewById(R.id.pullToRefresh_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                bookingList.clear();
+                no_internet_connection.setVisibility(View.GONE);
+                getAllBookingVehicleOwner(PreferenceUtil.getData(CurrentBookingActivity.this,"token"));
+
+            }
+        });
+
+        no_booking_data = findViewById(R.id.no_booking_data);
+        no_booking_data.setVisibility(View.GONE);
 
         RecyclerView current_booking_recycler = findViewById(R.id.current_booking_recycler);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
@@ -138,9 +166,13 @@ public class CurrentBookingActivity extends AppCompatActivity {
                     }
                     if (bookingList.isEmpty()) {
 
+                        no_booking_data.setVisibility(View.VISIBLE);
+
                         Log.d("minal", "no vehicle");
                     } else {
                         //['pan','aadhaar','bank']
+
+                        no_booking_data.setVisibility(View.GONE);
 
                         currentBookingAdapter.notifyDataSetChanged();
 
@@ -152,6 +184,8 @@ public class CurrentBookingActivity extends AppCompatActivity {
             public void onFailure(Call<ResponseBody> call, Throwable t) {
 
                 parent_of_loading.setVisibility(View.GONE);
+
+                no_internet_connection.setVisibility(View.VISIBLE);
 
                 Toast.makeText(CurrentBookingActivity.this, "No Internet Connection", Toast.LENGTH_SHORT).show();
 
