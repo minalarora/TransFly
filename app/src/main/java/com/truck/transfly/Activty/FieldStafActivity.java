@@ -12,11 +12,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.google.android.material.navigation.NavigationView;
 import com.truck.transfly.Adapter.FieldStafAdapter;
+import com.truck.transfly.Model.ResponseBooking;
 import com.truck.transfly.R;
+import com.truck.transfly.utils.PreferenceUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +30,8 @@ public class FieldStafActivity extends AppCompatActivity {
     private List<String> stringList=new ArrayList<>();
     private ImageView viewById;
     private DrawerLayout drawerLayout;
+    private ArrayList<ResponseBooking> responseBookingList=new ArrayList<>();
+    private FrameLayout parent_of_loading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,20 +41,19 @@ public class FieldStafActivity extends AppCompatActivity {
         NavigationView navigationView = findViewById(R.id.nav_view);
 //        navigationView.setNavigationItemSelectedListener(map);
 
+        parent_of_loading = findViewById(R.id.parent_of_loading);
+        parent_of_loading.setVisibility(View.GONE);
+
+        PreferenceUtil.putData(FieldStafActivity.this,"token","fieldstaff:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIyMjIyNTUyMjEiLCJpYXQiOjE2MDkyMjc1ODMsImV4cCEcbcfccfccfccfc5cvc5cvc5c5cvc5cvc5cvc5cvc5cvc5cvcfcvc5cvc5cvc5cvc5cvcvc5cvcfcvc5cvc5kcvcccfcvc5cvctheirChcWcWcrcrrrrc");
+        
         navigationViewListener(navigationView);
 
         navigationView.setItemIconTintList(null);
-        
-        for (int i = 0; i < 10; i++) {
-
-            stringList.add("s");
-
-        }
 
         fieldStafRecylcer =findViewById(R.id.fieldStafRecylcer);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(FieldStafActivity.this,LinearLayoutManager.VERTICAL,false);
         fieldStafRecylcer.setLayoutManager(linearLayoutManager);
-        FieldStafAdapter fieldStafAdapter=new FieldStafAdapter(this,stringList);
+        FieldStafAdapter fieldStafAdapter=new FieldStafAdapter(this,responseBookingList);
         fieldStafRecylcer.setAdapter(fieldStafAdapter);
 
         viewById = findViewById(R.id.drawer_icon);
