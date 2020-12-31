@@ -54,6 +54,9 @@ class ResponseInvoice {
     @SerializedName("date")
     var date : String?  = null
 
+    @SerializedName("transporter")
+    var transporterMobile: String?  =null
+
 
 
 }

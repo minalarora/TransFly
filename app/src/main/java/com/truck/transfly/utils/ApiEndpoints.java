@@ -18,6 +18,7 @@ import com.truck.transfly.Model.RequestVehicle;
 import com.truck.transfly.Model.ResponseAreaManager;
 import com.truck.transfly.Model.ResponseBooking;
 import com.truck.transfly.Model.ResponseFieldStaff;
+import com.truck.transfly.Model.ResponseToken;
 import com.truck.transfly.Model.ResponseTransporter;
 import com.truck.transfly.Model.ResponseVehicleOwner;
 
@@ -49,6 +50,9 @@ public interface ApiEndpoints {
     @POST("/areamanager")
     Call<ResponseAreaManager> createAreaManager(@Body RequestUser user);
 
+    //login
+    @POST("/who")
+    Call<ResponseToken> login(@Body RequestCredentials credentials);
 
     //get user by token
     @GET("/vehicleowner/me")
@@ -115,8 +119,27 @@ public interface ApiEndpoints {
     @GET("/booking/vehicle/{mobile}")
     Call<ResponseBody> getVehicleFieldStaff(@Header("Authorization")String token, @Path("mobile") String mobile);
 
-    @POST("/login")
-    Call<ResponseBody> login(@Body RequestCredentials credentials);
+    //get list of all transporters in single booking
+    @GET("/alltransporter")
+    Call<ResponseBody> getTransporterList(@Header("Authorization")String token);
+
+
+    //get  invoice of vehicleowner
+    @GET("/allinvoice/vehicleowner")
+    Call<ResponseBody> getInvoiceVehicleOwner(@Header("Authorization")String token);
+
+    //get  invoice of areamanager
+    @GET("/allinvoice/areamanager")
+    Call<ResponseBody> getInvoiceAreaManager(@Header("Authorization")String token);
+
+    //get  invoice of vehicleowner
+    @GET("/allinvoice/transporter")
+    Call<ResponseBody> getInvoiceTransporter(@Header("Authorization")String token);
+
+
+
+
+    ///////////////////////////////////////
 
     @POST("/vehicleowner/login")
     Call<ResponseVehicleOwner> vehicleOwnerLogin(@Body RequestCredentials credentials);

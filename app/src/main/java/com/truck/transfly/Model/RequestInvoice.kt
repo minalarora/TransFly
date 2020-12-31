@@ -36,5 +36,8 @@ class RequestInvoice {
     @SerializedName("cash")
     var cash: Int? = 0
 
+    @SerializedName("transporter")
+    var transporterMobile: String?  =null
+
 
 }

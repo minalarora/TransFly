@@ -643,6 +643,174 @@ public class PlaygroundActivity extends AppCompatActivity {
         });
     }
 
+    private void onLogin(RequestCredentials credentials)
+    {
+        api.login(credentials).enqueue(new Callback<ResponseToken>() {
+            @Override
+            public void onResponse(Call<ResponseToken> call, Response<ResponseToken> response) {
+                if(response.code() == 200)
+                {
+                    ResponseToken tokenobj = response.body();
+                    String token  = tokenobj.getToken();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseToken> call, Throwable t) {
+
+            }
+        });
+    }
+
+
+    private void onTransporterList(String token)
+    {
+        api.getTransporterList(token).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response.code() == 200)
+                {
+                    ArrayList<ResponseTransporter> transportersList  =  new ArrayList<>();
+                    Type collectionType = new TypeToken<ArrayList<ResponseTransporter>>(){}.getType();
+                    try {
+                        transportersList.addAll(new Gson().fromJson(response.body().string().toString(),collectionType));
+                    } catch (IOException e) {
+
+                    }
+                    if(transportersList.isEmpty())
+                    {
+
+                        Log.d("minal","no vehicle");
+                    }
+                    else
+                    {
+                        //['pan','aadhaar','bank']
+
+                        Log.d("minal",transportersList.toString());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+    }
+
+
+    private void getInvoiceVehicleowner(String token)
+    {
+        api.getInvoiceVehicleOwner(token).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response.code() == 200)
+                {
+                    ArrayList<ResponseInvoice> invoices = new ArrayList<>();
+                    Type collectionType = new TypeToken<ArrayList<ResponseInvoice>>(){}.getType();
+                    try {
+                        invoices.addAll(new Gson().fromJson(response.body().string().toString(),collectionType));
+                    } catch (IOException e) {
+
+                    }
+                    if(invoices.isEmpty())
+                    {
+
+                        Log.d("minal","no vehicle");
+                    }
+                    else
+                    {
+                        //['pan','aadhaar','bank']
+
+                        Log.d("minal",invoices.toString());
+                    }
+
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+    }
+
+
+    private void getInvoiceAreaManager(String token)
+    {
+        api.getInvoiceAreaManager(token).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response.code() == 200)
+                {
+                    ArrayList<ResponseInvoice> invoices = new ArrayList<>();
+                    Type collectionType = new TypeToken<ArrayList<ResponseInvoice>>(){}.getType();
+                    try {
+                        invoices.addAll(new Gson().fromJson(response.body().string().toString(),collectionType));
+                    } catch (IOException e) {
+
+                    }
+                    if(invoices.isEmpty())
+                    {
+
+                        Log.d("minal","no vehicle");
+                    }
+                    else
+                    {
+                        //['pan','aadhaar','bank']
+
+                        Log.d("minal",invoices.toString());
+                    }
+
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+    }
+
+
+    private void getInvoiceTransporter(String token)
+    {
+        api.getInvoiceTransporter(token).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response.code() == 200)
+                {
+                    ArrayList<ResponseInvoice> invoices = new ArrayList<>();
+                    Type collectionType = new TypeToken<ArrayList<ResponseInvoice>>(){}.getType();
+                    try {
+                        invoices.addAll(new Gson().fromJson(response.body().string().toString(),collectionType));
+                    } catch (IOException e) {
+
+                    }
+                    if(invoices.isEmpty())
+                    {
+
+                        Log.d("minal","no vehicle");
+                    }
+                    else
+                    {
+                        //['pan','aadhaar','bank']
+
+                        Log.d("minal",invoices.toString());
+                    }
+
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+    }
 
 
 }
