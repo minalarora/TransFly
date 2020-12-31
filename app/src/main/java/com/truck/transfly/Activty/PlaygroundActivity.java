@@ -813,4 +813,82 @@ public class PlaygroundActivity extends AppCompatActivity {
     }
 
 
+
+    private void getReward(String token)
+    {
+        api.getRewardList(token).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response.code() == 200)
+                {
+                    ArrayList<ResponseReward> i = new ArrayList<>();
+                    Type collectionType = new TypeToken<ArrayList<ResponseReward>>(){}.getType();
+                    try {
+                        i.addAll(new Gson().fromJson(response.body().string().toString(),collectionType));
+                    } catch (IOException e) {
+
+                    }
+                    if(i.isEmpty())
+                    {
+
+                        Log.d("minal","no vehicle");
+                    }
+                    else
+                    {
+                        //['pan','aadhaar','bank']
+
+                        for(ResponseReward reward: i)
+                        {
+                            reward.setImage("https://transfly-ftr2t.ondigitalocean.app/rewardimage/" + reward.getId());
+                        }
+                        Log.d("minal",i.toString());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+    }
+
+
+  private void getReferral(String token)
+  {
+      api.getReferralList(token).enqueue(new Callback<ResponseBody>() {
+          @Override
+          public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+              ArrayList<ResponseReferral> i = new ArrayList<>();
+              Type collectionType = new TypeToken<ArrayList<ResponseReferral>>(){}.getType();
+              try {
+                  i.addAll(new Gson().fromJson(response.body().string().toString(),collectionType));
+              } catch (IOException e) {
+
+              }
+              if(i.isEmpty())
+              {
+
+                  Log.d("minal","no vehicle");
+              }
+              else
+              {
+                  //['pan','aadhaar','bank']
+
+                  for(ResponseReferral reward: i)
+                  {
+                      reward.setImage("https://transfly-ftr2t.ondigitalocean.app/referralimage/" + reward.getId());
+                  }
+                  Log.d("minal",i.toString());
+              }
+          }
+
+          @Override
+          public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+          }
+      });
+  }
+
 }
