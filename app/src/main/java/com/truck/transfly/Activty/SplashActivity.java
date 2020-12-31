@@ -1,10 +1,23 @@
 package com.truck.transfly.Activty;
 
+import android.app.Application;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
+import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -28,6 +41,7 @@ public class SplashActivity extends AppCompatActivity {
     private Retrofit retrofit = null;
     private ApiEndpoints api = null;
     private String token;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,9 +57,103 @@ public class SplashActivity extends AppCompatActivity {
             api = retrofit.create(ApiEndpoints.class);
         }
 
-        validateToken();
+        progressBar =findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
+
+        RelativeLayout refresh_button=findViewById(R.id.no_internet_connection);
+        refresh_button.setVisibility(View.GONE);
+        TextView noConnectionText=findViewById(R.id.no_connection_text);
+        noConnectionText.setVisibility(View.GONE);
+
+        refresh_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                refresh_button.setVisibility(View.GONE);
+                noConnectionText.setVisibility(View.GONE);
+                progressBar.setVisibility(View.VISIBLE);
+
+                new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        if(isNetworkAvailable(getApplication())) {
+
+                            validateToken();
+
+                            progressBar.setVisibility(View.VISIBLE);
+
+                        } else {
+
+                            progressBar.setVisibility(View.GONE);
+                            refresh_button.setVisibility(View.VISIBLE);
+                            noConnectionText.setVisibility(View.VISIBLE);
+
+                            Toast.makeText(SplashActivity.this, "no Connection Available", Toast.LENGTH_SHORT).show();
+
+                        }
+
+                    }
+                },1000);
+
+            }
+        });
+
+        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                token = PreferenceUtil.getData(SplashActivity.this, "token");
+                if (token == null) {
+
+                    new Handler(getMainLooper()).postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+
+                            finish();
+
+                        }
+                    }, 2500);
+
+                    return;
+
+                }
+
+                if(isNetworkAvailable(getApplication())) {
+
+                    validateToken();
+
+                    progressBar.setVisibility(View.VISIBLE);
+
+                } else {
+
+                     progressBar.setVisibility(View.GONE);
+                    refresh_button.setVisibility(View.VISIBLE);
+                    noConnectionText.setVisibility(View.VISIBLE);
+
+                }
+
+            }
+        },1000);
     }
 
+
+    private Boolean isNetworkAvailable(Application application) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) application.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            Network nw = connectivityManager.getActiveNetwork();
+            if (nw == null) return false;
+            NetworkCapabilities actNw = connectivityManager.getNetworkCapabilities(nw);
+            return actNw != null && (actNw.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) || actNw.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) || actNw.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) || actNw.hasTransport(NetworkCapabilities.TRANSPORT_BLUETOOTH));
+        } else {
+            NetworkInfo nwInfo = connectivityManager.getActiveNetworkInfo();
+            return nwInfo != null && nwInfo.isConnected();
+        }
+    }
 
     private void validateToken() {
         try {
@@ -53,20 +161,20 @@ public class SplashActivity extends AppCompatActivity {
             token = PreferenceUtil.getData(this, "token");
             if (token == null) {
 
-               new Handler(getMainLooper()).postDelayed(new Runnable() {
-                   @Override
-                   public void run() {
+                new Handler(getMainLooper()).postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
 
-                       Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
-                       intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                       startActivity(intent);
+                        Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
 
-                       finish();
+                        finish();
 
-                   }
-               },2500);
+                    }
+                }, 2500);
 
-               return;
+                return;
 
             }
             String type = token.split(":")[0];
@@ -97,7 +205,7 @@ public class SplashActivity extends AppCompatActivity {
 
 
                             } else {
-                                throw new Error("Token not available");
+                                serverError();
                             }
                         }
 
@@ -134,8 +242,10 @@ public class SplashActivity extends AppCompatActivity {
 
 
                             } else {
-                                throw new Error("Token not available");
+
+                                serverError();
                             }
+
                         }
 
                         @Override
@@ -169,9 +279,8 @@ public class SplashActivity extends AppCompatActivity {
                                 }, 1000);
 
 
-
                             } else {
-                                throw new Error("Token not available");
+                                serverError();
                             }
                         }
 
@@ -207,7 +316,7 @@ public class SplashActivity extends AppCompatActivity {
 
 
                             } else {
-                                throw new Error("Token not available");
+                                serverError();
                             }
                         }
 
@@ -219,11 +328,15 @@ public class SplashActivity extends AppCompatActivity {
                     break;
                 }
                 default: {
-                    throw new Error("Token not available");
+                    serverError();
                 }
             }
         } catch (Exception e) {
-            //redirect to login screen
+            Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+
+            finish();
         }
     }
 

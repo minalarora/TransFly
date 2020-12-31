@@ -1,15 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".Frament.ShowInvoiceFragment">
+    android:layout_height="match_parent">
 
-    <androidx.recyclerview.widget.RecyclerView
+    <com.yalantis.phoenix.PullToRefreshView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/show_invoice_recycler"
-        />
+        android:id="@+id/pullToRefresh"
+        android:layout_below="@+id/toolbar"
+        android:layout_height="wrap_content">
 
-</LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/areaManagerRecycler"
+            />
+
+    </com.yalantis.phoenix.PullToRefreshView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="10dp"
+        android:id="@+id/no_booking_data"
+        android:layout_centerInParent="true"
+        android:layout_toEndOf="@+id/back"
+        android:fontFamily="@font/poppins"
+        android:text="No Invoices Found"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/_16ssp" />
+
+
+    <include layout="@layout/loading_view"/>
+
+    <include layout="@layout/no_internet_connection"/>
+
+</RelativeLayout>

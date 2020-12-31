@@ -74,8 +74,6 @@ public class TransporterKycActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         activity = DataBindingUtil.setContentView(this, R.layout.activity_transporter_kyc);
 
-        PreferenceUtil.putData(TransporterKycActivity.this,"token","transporter:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIxMzMzNjY2NjY2NjEiLCJpYXQiOjE2MDkyMjczMDIsImV4cCI6MTYxMTgxOTMwMn0.zkmUjQE8OiLeY3nE46v6lZrQszxa6D17pgJAR_2Vfog");
-
         parent_of_loading = findViewById(R.id.parent_of_loading);
         parent_of_loading.setVisibility(View.GONE);
 

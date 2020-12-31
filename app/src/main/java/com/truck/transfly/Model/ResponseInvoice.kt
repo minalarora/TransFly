@@ -33,6 +33,12 @@ class ResponseInvoice {
     @SerializedName("cash")
     var cash : Int?  = null
 
+    @SerializedName("vehicleownermobile")
+    var vehicleownermobile: String? = null
+
+    @SerializedName("vehicle")
+    var vehiclenumber: String? = null
+
     @SerializedName("tds")
     var tds : Int?  = null
 

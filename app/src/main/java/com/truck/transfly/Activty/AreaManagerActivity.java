@@ -84,7 +84,8 @@ public class AreaManagerActivity extends AppCompatActivity {
 
                     case R.id.profile_drawer:
 
-                        Intent intent=new Intent(AreaManagerActivity.this,ProfileActivity.class);
+                        Intent intent = new Intent(AreaManagerActivity.this, ProfileActivity.class);
+                        intent.putExtra("stringText","areaManager");
                         startActivity(intent);
 
                         break;

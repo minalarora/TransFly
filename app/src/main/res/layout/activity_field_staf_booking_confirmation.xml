@@ -189,6 +189,25 @@
                     android:background="@drawable/round_eddittext_round">
 
                     <Spinner
+                        android:id="@+id/transporter_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/field_height"
+                        android:layout_marginStart="@dimen/_5ssp"
+                        android:fontFamily="@font/poppins"
+                        android:theme="@style/SpinnerTheme" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginStart="@dimen/_12ssp"
+                    android:layout_marginTop="@dimen/_20ssp"
+                    android:layout_marginEnd="@dimen/_12ssp"
+                    android:background="@drawable/round_eddittext_round">
+
+                    <Spinner
                         android:id="@+id/register_category"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/field_height"
@@ -359,6 +378,8 @@
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>
+
+        <include layout="@layout/no_internet_connection"/>
 
         <include layout="@layout/loading_view_transparent"/>
 

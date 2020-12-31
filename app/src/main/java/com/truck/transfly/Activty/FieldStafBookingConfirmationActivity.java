@@ -2,12 +2,12 @@ package com.truck.transfly.Activty;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,8 +15,10 @@ import androidx.databinding.DataBindingUtil;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.truck.transfly.Adapter.SpinnerTraspoterAdapter;
 import com.truck.transfly.Model.RequestInvoice;
 import com.truck.transfly.Model.ResponseBooking;
+import com.truck.transfly.Model.ResponseTransporter;
 import com.truck.transfly.R;
 import com.truck.transfly.databinding.ActivityFieldStafBookingConfirmationBinding;
 import com.truck.transfly.utils.ApiClient;
@@ -40,8 +42,11 @@ public class FieldStafBookingConfirmationActivity extends AppCompatActivity {
     private FrameLayout parent_of_loading;
     private ArrayList<String> vehicleList = new ArrayList<>();
     private Retrofit retrofit = null;
+    private ArrayList<ResponseTransporter> transportersList = new ArrayList<>();
     private ApiEndpoints api = null;
     private ResponseBooking responseBooking;
+    private SpinnerTraspoterAdapter spinnerTraspoterAdapter;
+    private RelativeLayout no_internet_connection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +68,23 @@ public class FieldStafBookingConfirmationActivity extends AppCompatActivity {
         parent_of_loading = findViewById(R.id.parent_of_loading);
         parent_of_loading.setVisibility(View.GONE);
 
+        no_internet_connection = findViewById(R.id.no_internet_connection);
+        findViewById(R.id.pullToRefresh_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                no_internet_connection.setVisibility(View.GONE);
+                adapter.notifyDataSetChanged();
+                 spinnerTraspoterAdapter.notifyDataSetChanged();
+
+                 vehicleList.clear();
+                 transportersList.clear();
+
+                getVehicleFieldStaff(PreferenceUtil.getData(FieldStafBookingConfirmationActivity.this, "token"), responseBooking.getVehicleownermobile());
+
+            }
+        });
+
         activity.back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,12 +96,16 @@ public class FieldStafBookingConfirmationActivity extends AppCompatActivity {
 
         vehicleList.add(responseBooking.getVehiclename());
 
+        spinnerTraspoterAdapter = new SpinnerTraspoterAdapter(this, transportersList);
+
+        activity.transporterName.setAdapter(spinnerTraspoterAdapter);
+
         adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, android.R.id.text1, vehicleList);
 
         activity.registerCategory.setAdapter(adapter);
 
-        getVehicleFieldStaff(PreferenceUtil.getData(FieldStafBookingConfirmationActivity.this,"token"),responseBooking.getVehicleownermobile());
+        getVehicleFieldStaff(PreferenceUtil.getData(FieldStafBookingConfirmationActivity.this, "token"), responseBooking.getVehicleownermobile());
 
         activity.creaateBooking.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,7 +133,7 @@ public class FieldStafBookingConfirmationActivity extends AppCompatActivity {
 
                 } else {
 
-                    RequestInvoice requestInvoice=new RequestInvoice();
+                    RequestInvoice requestInvoice = new RequestInvoice();
                     requestInvoice.setId(responseBooking.getId());
                     requestInvoice.setMineid(responseBooking.getMineid());
                     requestInvoice.setMinename(responseBooking.getMinename());
@@ -119,7 +145,12 @@ public class FieldStafBookingConfirmationActivity extends AppCompatActivity {
                     requestInvoice.setVehicleownermobile(responseBooking.getVehicleownermobile());
                     requestInvoice.setTonnage(Integer.valueOf(activity.tonnege.getText().toString()));
                     requestInvoice.setCash(Integer.valueOf(activity.cash.getText().toString()));
-                    confirmBooking(PreferenceUtil.getData(FieldStafBookingConfirmationActivity.this,"token"),requestInvoice);
+
+                    ResponseTransporter selectedItem = (ResponseTransporter) activity.transporterName.getSelectedItem();
+
+                    requestInvoice.setTransporterMobile(selectedItem.getMobile());
+
+                    confirmBooking(PreferenceUtil.getData(FieldStafBookingConfirmationActivity.this, "token"), requestInvoice);
 
                 }
 
@@ -128,18 +159,54 @@ public class FieldStafBookingConfirmationActivity extends AppCompatActivity {
 
     }
 
-    private void confirmBooking(String token, RequestInvoice invoice)
-    {
-        parent_of_loading.setVisibility(View.VISIBLE);
-
-        api.confirmBooking(token,invoice).enqueue(new Callback<ResponseBody>() {
+    private void onTransporterList(String token) {
+        api.getTransporterList(token).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
                 parent_of_loading.setVisibility(View.GONE);
 
-                if(response.code() == 200)
-                {
+                if (response.code() == 200) {
+                    Type collectionType = new TypeToken<ArrayList<ResponseTransporter>>() {
+                    }.getType();
+                    try {
+                        transportersList.addAll(new Gson().fromJson(response.body().string().toString(), collectionType));
+                    } catch (IOException e) {
+
+                    }
+                    if (transportersList.isEmpty()) {
+
+                        activity.transporterName.setVisibility(View.GONE);
+                        Log.d("minal", "no vehicle");
+                    } else {
+                        //['pan','aadhaar','bank']
+
+                        spinnerTraspoterAdapter.notifyDataSetChanged();
+                        Log.d("minal", transportersList.toString());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                no_internet_connection.setVisibility(View.VISIBLE);
+                parent_of_loading.setVisibility(View.GONE);
+
+            }
+        });
+    }
+
+    private void confirmBooking(String token, RequestInvoice invoice) {
+        parent_of_loading.setVisibility(View.VISIBLE);
+
+        api.confirmBooking(token, invoice).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                parent_of_loading.setVisibility(View.GONE);
+
+                if (response.code() == 200) {
                     Toast.makeText(FieldStafBookingConfirmationActivity.this, "Booking Confirmation Successful", Toast.LENGTH_SHORT).show();
 
                     finish();
@@ -163,9 +230,16 @@ public class FieldStafBookingConfirmationActivity extends AppCompatActivity {
     }
 
     private void getVehicleFieldStaff(String token, String mobileofvehicleowner) {
+
+        parent_of_loading.setVisibility(View.VISIBLE);
+
         api.getVehicleFieldStaff(token, mobileofvehicleowner).enqueue(new Callback<ResponseBody>() {
+
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                onTransporterList(PreferenceUtil.getData(FieldStafBookingConfirmationActivity.this,"token"));
+
                 if (response.code() == 200) {
                     Type collectionType = new TypeToken<ArrayList<String>>() {
                     }.getType();
@@ -194,6 +268,10 @@ public class FieldStafBookingConfirmationActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                no_internet_connection.setVisibility(View.VISIBLE);
+
+                parent_of_loading.setVisibility(View.GONE);
 
             }
         });

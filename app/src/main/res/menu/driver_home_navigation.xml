@@ -28,6 +28,12 @@
             android:title="My Vehicle"
             android:id="@+id/my_vehicle"
             android:icon="@drawable/ic_action_my_vehicle" />
+
+        <item
+            android:title="Current Invoices"
+            android:id="@+id/current_invoices"
+            android:icon="@drawable/ic_action_update_current_invoices" />
+
         <item
             android:id="@+id/feedback_drawer"
             android:title="Give Feedback"

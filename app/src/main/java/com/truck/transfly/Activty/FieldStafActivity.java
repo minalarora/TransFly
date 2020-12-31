@@ -85,8 +85,6 @@ public class FieldStafActivity extends AppCompatActivity {
             }
         });
 
-        PreferenceUtil.putData(FieldStafActivity.this,"token","fieldstaff:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIyMjIyNTUyMjEiLCJpYXQiOjE2MDkyMjc1ODMsImV4cCI6MTYxMTgxOTU4M30.dKSSU7LvtVFkFcEoeb586uK2s74BHhBZsoRcnumcbro");
-        
         navigationViewListener(navigationView);
 
         navigationView.setItemIconTintList(null);
@@ -145,7 +143,8 @@ public class FieldStafActivity extends AppCompatActivity {
 
                     case R.id.profile_drawer:
 
-                        Intent intent=new Intent(FieldStafActivity.this,ProfileActivity.class);
+                        Intent intent = new Intent(FieldStafActivity.this, ProfileActivity.class);
+                        intent.putExtra("stringText","fieldStaff");
                         startActivity(intent);
 
                         break;

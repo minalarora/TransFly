@@ -148,8 +148,6 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         MenuItem item = menu.findItem(R.id.emergency_details);
         item.setVisible(false);
 
-        PreferenceUtil.putData(HomeActivity.this, "token", "vehicleowner:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIxMTExMTExMSIsImlhdCI6MTYwOTE3OTgyOSwiZXhwIjoxNjExNzcxODI5fQ.YUibiAIPlx8L5VtRFbpPNtjWP0oNLg-91aPE64elLq8");
-
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
 
@@ -454,6 +452,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                     case R.id.profile_drawer:
 
                         Intent intent = new Intent(HomeActivity.this, ProfileActivity.class);
+                        intent.putExtra("stringText","vehicleOwner");
                         startActivity(intent);
 
                         break;
@@ -490,6 +489,13 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                         Intent feedback_intent = new Intent(HomeActivity.this, FeedbackActivity.class);
                         startActivity(feedback_intent);
+
+                        break;
+
+                    case R.id.current_invoices:
+
+                        Intent currentInvoices = new Intent(HomeActivity.this, CurrentInvoicesActivity.class);
+                        startActivity(currentInvoices);
 
                         break;
 

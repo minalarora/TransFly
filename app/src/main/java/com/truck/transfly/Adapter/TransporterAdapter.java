@@ -7,10 +7,12 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
 import com.truck.transfly.Activty.ShowInvoiceActivity;
+import com.truck.transfly.Model.ResponseInvoice;
 import com.truck.transfly.R;
 
 import java.util.List;
@@ -18,12 +20,12 @@ import java.util.List;
 public class TransporterAdapter extends RecyclerView.Adapter<TransporterAdapter.viewholder> {
 
     private final Context context;
-    private List<String> stringList;
+    private List<ResponseInvoice> responseInvoiceList;
 
-    public TransporterAdapter(Context context, List<String> stringList){
+    public TransporterAdapter(Context context, List<ResponseInvoice> responseInvoiceList){
 
         this.context=context;
-        this.stringList=stringList;
+        this.responseInvoiceList=responseInvoiceList;
 
     }
 
@@ -40,6 +42,14 @@ public class TransporterAdapter extends RecyclerView.Adapter<TransporterAdapter.
     @Override
     public void onBindViewHolder(@NonNull viewholder holder, int position) {
 
+        ResponseInvoice responseInvoice = responseInvoiceList.get(position);
+        holder.price_rate.setText(""+responseInvoice.getRate());
+        holder.vehicle_number.setText(responseInvoice.getVehiclenumber());
+        holder.mobileNumber.setText(responseInvoice.getVehicleownermobile());
+        holder.vehile_owner.setText(responseInvoice.getVehicleOwnerName());
+        holder.date_created.setText(responseInvoice.getDate());
+        holder.to_from_dest.setText(responseInvoice.getLoading() +" - "+responseInvoice.getMinename());
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,12 +63,23 @@ public class TransporterAdapter extends RecyclerView.Adapter<TransporterAdapter.
 
     @Override
     public int getItemCount() {
-        return stringList.size();
+        return responseInvoiceList.size();
     }
 
     public class viewholder extends RecyclerView.ViewHolder {
+
+        private TextView to_from_dest,date_created,vehile_owner,mobileNumber,vehicle_number,price_rate;
+
         public viewholder(@NonNull View itemView) {
             super(itemView);
+
+            to_from_dest=itemView.findViewById(R.id.to_from_dest);
+            date_created=itemView.findViewById(R.id.date_created);
+            vehile_owner=itemView.findViewById(R.id.vehile_owner);
+            mobileNumber=itemView.findViewById(R.id.mobileNumber);
+            vehicle_number=itemView.findViewById(R.id.vehicle_number);
+            price_rate=itemView.findViewById(R.id.price_rate);
+
         }
     }
 
