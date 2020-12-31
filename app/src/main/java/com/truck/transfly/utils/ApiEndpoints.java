@@ -18,6 +18,9 @@ import com.truck.transfly.Model.RequestVehicle;
 import com.truck.transfly.Model.ResponseAreaManager;
 import com.truck.transfly.Model.ResponseBooking;
 import com.truck.transfly.Model.ResponseFieldStaff;
+import com.truck.transfly.Model.ResponseRefer;
+import com.truck.transfly.Model.ResponseReferral;
+import com.truck.transfly.Model.ResponseReward;
 import com.truck.transfly.Model.ResponseToken;
 import com.truck.transfly.Model.ResponseTransporter;
 import com.truck.transfly.Model.ResponseVehicleOwner;
@@ -137,6 +140,13 @@ public interface ApiEndpoints {
     Call<ResponseBody> getInvoiceTransporter(@Header("Authorization")String token);
 
 
+    //get reward
+    @GET("/allreward")
+    Call<ResponseBody> getRewardList(@Header("Authorization")String token);
+
+    //get referral
+    @GET("/allreferral")
+    Call<ResponseBody> getReferralList(@Header("Authorization")String token);
 
 
     ///////////////////////////////////////
