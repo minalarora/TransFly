@@ -121,8 +121,6 @@ public class ShowBooking extends Fragment {
             }
         });
 
-        PreferenceUtil.putData(fragmentActivity,"token","fieldstaff:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIyMjIyNTUyMjEiLCJpYXQiOjE2MDkyMjc1ODMsImV4cCI6MTYxMTgxOTU4M30.dKSSU7LvtVFkFcEoeb586uK2s74BHhBZsoRcnumcbro");
-
         fieldStafRecylcer =inflate.findViewById(R.id.fieldStafRecylcer);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
         fieldStafRecylcer.setLayoutManager(linearLayoutManager);

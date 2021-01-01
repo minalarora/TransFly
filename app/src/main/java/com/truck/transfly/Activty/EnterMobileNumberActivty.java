@@ -6,8 +6,12 @@ import androidx.databinding.DataBindingUtil;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 
+import com.msg91.sendotpandroid.library.listners.VerificationListener;
+import com.msg91.sendotpandroid.library.roots.SendOTPConfigBuilder;
+import com.msg91.sendotpandroid.library.roots.SendOTPResponseCode;
 import com.truck.transfly.R;
 import com.truck.transfly.databinding.ActivityEnterMobileNumberActivtyBinding;
 
@@ -33,9 +37,6 @@ public class EnterMobileNumberActivty extends AppCompatActivity {
 
                 }
 
-
-                sendOtpConfirmation(activity.mobileNumber.getText().toString());
-
                 Intent intent = new Intent(EnterMobileNumberActivty.this, OtpValidation.class);
                 intent.putExtra("mobileNo",activity.mobileNumber.getText().toString());
                 startActivity(intent);
@@ -46,7 +47,4 @@ public class EnterMobileNumberActivty extends AppCompatActivity {
 
     }
 
-     private void sendOtpConfirmation(String number){
-         //send otp
-     }
 }

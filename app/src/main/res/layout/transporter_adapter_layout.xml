@@ -29,6 +29,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="@dimen/_15ssp"
+                android:id="@+id/to_from_dest"
                 android:fontFamily="@font/poppins"
                 android:text="Anand(GJ) - Kamrej(GJ)"
                 android:textColor="@color/black"
@@ -40,6 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:id="@+id/date_created"
             android:layout_marginStart="@dimen/_15ssp"
             android:fontFamily="@font/poppins"
             android:text="Posted at 21 Dec, 10:12 AM | Expires in 45 hours"
@@ -73,6 +75,7 @@
                 android:fontFamily="@font/poppins"
                 android:text="Minal gareeb Driver"
                 android:textColor="@color/black"
+                android:id="@+id/vehile_owner"
                 android:textSize="13dp" />
 
             <TextView
@@ -103,6 +106,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:fontFamily="@font/poppins"
+                android:id="@+id/mobileNumber"
                 android:text="+91 9399104906"
                 android:textColor="@color/black"
                 android:textSize="13dp" />
@@ -135,6 +139,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:id="@+id/vehicle_number"
                 android:layout_marginStart="@dimen/_12ssp"
                 android:fontFamily="@font/poppins"
                 android:text="21020202"
@@ -171,6 +176,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="@dimen/_12ssp"
                 android:fontFamily="@font/poppins"
+                android:id="@+id/price_rate"
                 android:text="5000"
                 android:textColor="@color/black"
                 android:textSize="13dp" />

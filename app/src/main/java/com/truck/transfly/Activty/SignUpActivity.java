@@ -22,6 +22,7 @@ import com.truck.transfly.databinding.ActivitySignUpBinding;
 import com.truck.transfly.utils.ApiClient;
 import com.truck.transfly.utils.ApiEndpoints;
 import com.truck.transfly.utils.PreferenceUtil;
+import com.truck.transfly.utils.TransflyApplication;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -138,6 +139,9 @@ public class SignUpActivity extends AppCompatActivity {
                 if(response.code() == 200)
                 {
                     ResponseVehicleOwner vehicleOwner = response.body();
+
+                    ((TransflyApplication) getApplication()).setResponseVehicleOwner(vehicleOwner);
+
                     PreferenceUtil.putData(SignUpActivity.this,"token",vehicleOwner.getToken());
                     Intent intent = new Intent(SignUpActivity.this, HomeActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -173,6 +177,8 @@ public class SignUpActivity extends AppCompatActivity {
                 {
                     ResponseFieldStaff fieldStaff = response.body();
 
+                    ((TransflyApplication) getApplication()).setResponseFieldStaff(fieldStaff);
+
                     PreferenceUtil.putData(SignUpActivity.this,"token",fieldStaff.getToken());
 
                     Intent intent = new Intent(SignUpActivity.this, FieldStafActivity.class);
@@ -207,6 +213,9 @@ public class SignUpActivity extends AppCompatActivity {
                 if(response.code() == 200)
                 {
                     ResponseTransporter transporter = response.body();
+
+                    ((TransflyApplication) getApplication()).setResponseTransporterOwner(transporter);
+
                     PreferenceUtil.putData(SignUpActivity.this,"token",transporter.getToken());
                     Intent intent = new Intent(SignUpActivity.this, TransporterActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -237,6 +246,9 @@ public class SignUpActivity extends AppCompatActivity {
                 if(response.code() == 200)
                 {
                     ResponseAreaManager areaManager = response.body();
+
+                    ((TransflyApplication) getApplication()).setResponseAreaManager(areaManager);
+
                     PreferenceUtil.putData(SignUpActivity.this,"token",areaManager.getToken());
 
                     Intent intent = new Intent(SignUpActivity.this, AreaManagerActivity.class);

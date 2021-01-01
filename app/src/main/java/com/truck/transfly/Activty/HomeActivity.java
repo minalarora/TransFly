@@ -19,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -64,13 +65,16 @@ import com.truck.transfly.Adapter.YourCoolAdapter;
 import com.truck.transfly.Frament.ShowLoadingDialogFragment;
 import com.truck.transfly.Model.PositionModel;
 import com.truck.transfly.Model.RequestArea;
+import com.truck.transfly.Model.ResponseFieldStaff;
 import com.truck.transfly.Model.ResponseMine;
+import com.truck.transfly.Model.ResponseVehicleOwner;
 import com.truck.transfly.Model.SliderModel;
 import com.truck.transfly.MuUtils.MetalRecyclerViewPager;
 import com.truck.transfly.R;
 import com.truck.transfly.utils.ApiClient;
 import com.truck.transfly.utils.ApiEndpoints;
 import com.truck.transfly.utils.PreferenceUtil;
+import com.truck.transfly.utils.TransflyApplication;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -135,6 +139,16 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         NavigationView navigationView = findViewById(R.id.nav_view);
 //        navigationView.setNavigationItemSelectedListener(map);
 
+        View headerLayout = navigationView.getHeaderView(0);
+        TextView customerName = headerLayout.findViewById(R.id.customer_name);
+        TextView number=headerLayout.findViewById(R.id.number);
+
+        ResponseVehicleOwner responseFieldStaff = ((TransflyApplication) getApplication()).getResponseVehicleOwner();
+
+        customerName.setText(responseFieldStaff.getName());
+        number.setText(responseFieldStaff.getMobile());
+
+
         retrofit = ApiClient.getRetrofitClient();
         if (retrofit != null) {
             api = retrofit.create(ApiEndpoints.class);
@@ -147,8 +161,6 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         Menu menu = navigationView.getMenu();
         MenuItem item = menu.findItem(R.id.emergency_details);
         item.setVisible(false);
-
-        PreferenceUtil.putData(HomeActivity.this, "token", "vehicleowner:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIxMTExMTExMSIsImlhdCI6MTYwOTE3OTgyOSwiZXhwIjoxNjExNzcxODI5fQ.YUibiAIPlx8L5VtRFbpPNtjWP0oNLg-91aPE64elLq8");
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -454,6 +466,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                     case R.id.profile_drawer:
 
                         Intent intent = new Intent(HomeActivity.this, ProfileActivity.class);
+                        intent.putExtra("stringText","vehicleOwner");
                         startActivity(intent);
 
                         break;
@@ -493,21 +506,39 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                         break;
 
+                    case R.id.current_invoices:
+
+                        Intent currentInvoices = new Intent(HomeActivity.this, CurrentInvoicesActivity.class);
+                        startActivity(currentInvoices);
+
+                        break;
+
                     case R.id.refer_drawer:
 
                         Intent refer_intent = new Intent(HomeActivity.this, ReferActivity.class);
+                        refer_intent.putExtra("keyword","refer");
                         startActivity(refer_intent);
 
                         break;
 
+                    case R.id.reward_program:
 
-                    case R.id.logout:
-
-                        Intent logout_intent = new Intent(HomeActivity.this, LoginActivity.class);
-                        startActivity(logout_intent);
+                        Intent rewardIntent = new Intent(HomeActivity.this, ReferActivity.class);
+                        rewardIntent.putExtra("keyword","reward");
+                        startActivity(rewardIntent);
 
                         break;
 
+                    case R.id.logout:
+
+                        Intent logoutIntent = new Intent(HomeActivity.this, LoginActivity.class);
+                        logoutIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(logoutIntent);
+                        finish();
+
+                        PreferenceUtil.putData(HomeActivity.this,"token","");
+
+                        break;
 
                 }
 

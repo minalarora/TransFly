@@ -13,13 +13,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.truck.transfly.Adapter.ViewPagerAdapter;
 import com.truck.transfly.Frament.ShowBooking;
 import com.truck.transfly.Frament.ShowInvoiceFragment;
+import com.truck.transfly.Model.ResponseAreaManager;
+import com.truck.transfly.Model.ResponseFieldStaff;
 import com.truck.transfly.R;
+import com.truck.transfly.utils.PreferenceUtil;
+import com.truck.transfly.utils.TransflyApplication;
 
 public class AreaManagerActivity extends AppCompatActivity {
 
@@ -42,6 +47,15 @@ public class AreaManagerActivity extends AppCompatActivity {
 
         NavigationView navigationView = findViewById(R.id.nav_view);
 //        navigationView.setNavigationItemSelectedListener(map);
+
+        View headerLayout = navigationView.getHeaderView(0);
+        TextView customerName = headerLayout.findViewById(R.id.customer_name);
+        TextView number=headerLayout.findViewById(R.id.number);
+
+        ResponseAreaManager responseFieldStaff = ((TransflyApplication) getApplication()).getResponseAreaManager();
+
+        customerName.setText(responseFieldStaff.getName());
+        number.setText(responseFieldStaff.getMobile());
 
         navigationViewListener(navigationView);
 
@@ -84,7 +98,8 @@ public class AreaManagerActivity extends AppCompatActivity {
 
                     case R.id.profile_drawer:
 
-                        Intent intent=new Intent(AreaManagerActivity.this,ProfileActivity.class);
+                        Intent intent = new Intent(AreaManagerActivity.this, ProfileActivity.class);
+                        intent.putExtra("stringText","areaManager");
                         startActivity(intent);
 
                         break;
@@ -119,8 +134,17 @@ public class AreaManagerActivity extends AppCompatActivity {
 
                     case R.id.refer_drawer:
 
-                        Intent refer_intent=new Intent(AreaManagerActivity.this,ReferActivity.class);
+                        Intent refer_intent = new Intent(AreaManagerActivity.this, ReferActivity.class);
+                        refer_intent.putExtra("keyword","refer");
                         startActivity(refer_intent);
+
+                        break;
+
+                    case R.id.reward_program:
+
+                        Intent rewardIntent = new Intent(AreaManagerActivity.this, ReferActivity.class);
+                        rewardIntent.putExtra("keyword","reward");
+                        startActivity(rewardIntent);
 
                         break;
 
@@ -132,8 +156,12 @@ public class AreaManagerActivity extends AppCompatActivity {
 
                     case R.id.logout:
 
-                        Intent logout_intent=new Intent(AreaManagerActivity.this,LoginActivity.class);
-                        startActivity(logout_intent);
+                        Intent logoutIntent = new Intent(AreaManagerActivity.this, LoginActivity.class);
+                        logoutIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(logoutIntent);
+                        finish();
+
+                        PreferenceUtil.putData(AreaManagerActivity.this,"token","");
 
                         break;
 

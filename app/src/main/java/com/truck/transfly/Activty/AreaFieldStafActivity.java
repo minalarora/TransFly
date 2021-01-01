@@ -72,10 +72,17 @@ public class AreaFieldStafActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         activity = DataBindingUtil.setContentView(this, R.layout.activity_area_field_staf);
 
-        PreferenceUtil.putData(AreaFieldStafActivity.this,"token","fieldstaff:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIyMjIyNTUyMjEiLCJpYXQiOjE2MDkyMjc1ODMsImV4cCI6MTYxMTgxOTU4M30.dKSSU7LvtVFkFcEoeb586uK2s74BHhBZsoRcnumcbro");
-
         parent_of_loading = findViewById(R.id.parent_of_loading);
         parent_of_loading.setVisibility(View.GONE);
+
+        findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                onBackPressed();
+
+            }
+        });
 
         no_internet_connection = findViewById(R.id.no_internet_connection);
         findViewById(R.id.pullToRefresh_button).setOnClickListener(new View.OnClickListener() {

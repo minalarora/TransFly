@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:aapt="http://schemas.android.com/aapt"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -22,22 +22,67 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="25dp"
-                    android:fontFamily="@font/candal"
+                    android:fontFamily="@font/baloo"
                     android:gravity="center"
                     android:maxLines="1"
                     android:alpha="0.8"
                     android:paddingTop="8dp"
-                    android:text="TransFly"
+                    android:text="Transfly"
                     android:layout_gravity="center_horizontal"
                     android:textColor="@color/white"
-                    android:textSize="34sp"
+                    android:textSize="38sp"
                     android:visibility="visible" />
 
             </LinearLayout>
-
 
         </RelativeLayout>
 
     </FrameLayout>
 
-</LinearLayout>
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/progressBar"
+        android:layout_centerInParent="true"
+        android:indeterminateTint="@color/quantum_yellow"
+        android:layout_marginBottom="@dimen/_70ssp"
+        android:progressTintMode="multiply"
+        />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:fontFamily="@font/poppinsbold"
+        android:id="@+id/no_connection_text"
+        android:text="No Internet Connection"
+        android:textColor="@color/quantum_yellow"
+        android:layout_above="@+id/no_internet_connection"
+        android:textSize="18dp" />
+
+    <RelativeLayout
+        android:id="@+id/no_internet_connection"
+        android:layout_width="150dp"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="@dimen/_70ssp"
+        android:layout_alignParentBottom="true"
+        android:layout_height="45dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/round_login_design"
+        android:elevation="6dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/poppinsbold"
+            android:text="Refresh"
+            android:textColor="@color/white"
+            android:textSize="14dp" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

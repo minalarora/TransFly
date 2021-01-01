@@ -24,10 +24,12 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.truck.transfly.Adapter.FieldStafAdapter;
 import com.truck.transfly.Model.ResponseBooking;
+import com.truck.transfly.Model.ResponseFieldStaff;
 import com.truck.transfly.R;
 import com.truck.transfly.utils.ApiClient;
 import com.truck.transfly.utils.ApiEndpoints;
 import com.truck.transfly.utils.PreferenceUtil;
+import com.truck.transfly.utils.TransflyApplication;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -62,6 +64,14 @@ public class FieldStafActivity extends AppCompatActivity {
         NavigationView navigationView = findViewById(R.id.nav_view);
 //        navigationView.setNavigationItemSelectedListener(map);
 
+        View headerLayout = navigationView.getHeaderView(0);
+        TextView customerName = headerLayout.findViewById(R.id.customer_name);
+        TextView number=headerLayout.findViewById(R.id.number);
+
+        ResponseFieldStaff responseFieldStaff = ((TransflyApplication) getApplication()).getResponseFieldStaff();
+
+        customerName.setText(responseFieldStaff.getName());
+        number.setText(responseFieldStaff.getMobile());
 
         retrofit = ApiClient.getRetrofitClient();
         if(retrofit!=null)
@@ -85,8 +95,6 @@ public class FieldStafActivity extends AppCompatActivity {
             }
         });
 
-        PreferenceUtil.putData(FieldStafActivity.this,"token","fieldstaff:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIyMjIyNTUyMjEiLCJpYXQiOjE2MDkyMjc1ODMsImV4cCI6MTYxMTgxOTU4M30.dKSSU7LvtVFkFcEoeb586uK2s74BHhBZsoRcnumcbro");
-        
         navigationViewListener(navigationView);
 
         navigationView.setItemIconTintList(null);
@@ -99,11 +107,11 @@ public class FieldStafActivity extends AppCompatActivity {
         fieldStafAdapter=new FieldStafAdapter(this,responseBookingList);
         fieldStafRecylcer.setAdapter(fieldStafAdapter);
 
-        viewById = findViewById(R.id.drawer_icon);
+        this.viewById = findViewById(R.id.drawer_icon);
 
         drawerLayout = findViewById(R.id.drawer_layout);
 
-        viewById.setOnClickListener(new View.OnClickListener() {
+        this.viewById.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -145,7 +153,8 @@ public class FieldStafActivity extends AppCompatActivity {
 
                     case R.id.profile_drawer:
 
-                        Intent intent=new Intent(FieldStafActivity.this,ProfileActivity.class);
+                        Intent intent = new Intent(FieldStafActivity.this, ProfileActivity.class);
+                        intent.putExtra("stringText","fieldStaff");
                         startActivity(intent);
 
                         break;
@@ -186,16 +195,29 @@ public class FieldStafActivity extends AppCompatActivity {
 
                     case R.id.refer_drawer:
 
-                        Intent refer_intent=new Intent(FieldStafActivity.this,ReferActivity.class);
+                        Intent refer_intent = new Intent(FieldStafActivity.this, ReferActivity.class);
+                        refer_intent.putExtra("keyword","refer");
                         startActivity(refer_intent);
+
+                        break;
+
+                    case R.id.reward_program:
+
+                        Intent rewardIntent = new Intent(FieldStafActivity.this, ReferActivity.class);
+                        rewardIntent.putExtra("keyword","reward");
+                        startActivity(rewardIntent);
 
                         break;
 
 
                     case R.id.logout:
 
-                        Intent logout_intent=new Intent(FieldStafActivity.this,LoginActivity.class);
-                        startActivity(logout_intent);
+                        Intent logoutIntent = new Intent(FieldStafActivity.this, LoginActivity.class);
+                        logoutIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(logoutIntent);
+                        finish();
+
+                        PreferenceUtil.putData(FieldStafActivity.this,"token","");
 
                         break;
 

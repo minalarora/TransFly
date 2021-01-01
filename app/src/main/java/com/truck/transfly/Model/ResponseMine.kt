@@ -49,9 +49,6 @@ class ResponseMine {
     @SerializedName("landmark")
     var landmark: String? = null
 
-    @SerializedName("transporter")
-    var transporter: String? = null
-
     @SerializedName("fieldstaff")
     var fieldstaff: String? = null
 
@@ -73,13 +70,12 @@ class ResponseMine {
         this.arealatitude = arealatitude
         this.arealongitude = arealongitude
         this.landmark = landmark
-        this.transporter = transporter
         this.fieldstaff = fieldstaff
         this.areamanager = areamanager
     }
 
     override fun toString(): String {
-        return "ResponseMine(id=$id, name=$name, area=$area, trailer=$trailer, tyres=$tyres, bodytype=$bodytype, loading=$loading, rate=$rate, etl=$etl, latitude=$latitude, longitude=$longitude, arealatitude=$arealatitude, arealongitude=$arealongitude, landmark=$landmark, transporter=$transporter, fieldstaff=$fieldstaff, areamanager=$areamanager)"
+        return "ResponseMine(id=$id, name=$name, area=$area, trailer=$trailer, tyres=$tyres, bodytype=$bodytype, loading=$loading, rate=$rate, etl=$etl, latitude=$latitude, longitude=$longitude, arealatitude=$arealatitude, arealongitude=$arealongitude, landmark=$landmark, fieldstaff=$fieldstaff, areamanager=$areamanager)"
     }
 
 

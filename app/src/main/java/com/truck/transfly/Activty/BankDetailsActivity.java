@@ -74,7 +74,14 @@ public class BankDetailsActivity extends AppCompatActivity {
         parent_of_loading = findViewById(R.id.parent_of_loading);
         parent_of_loading.setVisibility(View.GONE);
 
-        PreferenceUtil.putData(BankDetailsActivity.this,"token","transporter:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIxMzMzNjY2NjY2NjEiLCJpYXQiOjE2MDkyMjczMDIsImV4cCI6MTYxMTgxOTMwMn0.zkmUjQE8OiLeY3nE46v6lZrQszxa6D17pgJAR_2Vfog");
+        findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                onBackPressed();
+
+            }
+        });
 
         retrofit = ApiClient.getRetrofitClient();
         if(retrofit!=null)

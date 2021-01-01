@@ -19,14 +19,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TransFly">
-        <activity android:name=".Activty.BankDetailsActivity">
-
-        </activity>
+        <activity android:name=".Activty.CurrentInvoicesActivity"></activity>
+        <activity android:name=".Activty.BankDetailsActivity"></activity>
         <activity android:name=".Activty.PlaygroundActivity" />
         <activity android:name=".Activty.MyVehicleActivity" />
         <activity android:name=".Activty.AddVehicleActivity" />
         <activity android:name=".Activty.EmergencyContactActivity" />
-        <activity android:name=".Activty.AreaFieldStafActivity"></activity>
+        <activity android:name=".Activty.AreaFieldStafActivity" />
         <!--
                Set to true if your app is Standalone, that is, it does not require the handheld
                app to run.
@@ -37,9 +36,11 @@
 
         <activity
             android:name=".Activty.TransporterKycActivity"
-            android:label="@string/title_activity_transporter_kyc"></activity>
+            android:label="@string/title_activity_transporter_kyc" />
         <activity android:name=".Activty.ShowInvoiceActivity" />
-        <activity android:name=".Activty.TransporterActivity"></activity>
+        <activity android:name=".Activty.TransporterActivity">
+
+        </activity>
         <activity
             android:name=".Activty.ChangePasswordActivity"
             android:resizeableActivity="false"
@@ -104,15 +105,12 @@
             android:name=".Activty.OtpValidation"
             android:resizeableActivity="false"
             android:screenOrientation="portrait" />
-        <activity android:name=".Activty.AreaManagerActivity" >
-
-        </activity>
-
+        <activity android:name=".Activty.AreaManagerActivity"></activity>
         <activity
             android:name=".Activty.SplashActivity"
             android:resizeableActivity="false"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" >
+            android:windowSoftInputMode="stateHidden">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -132,20 +130,9 @@
         <activity android:name=".Activty.HomeActivity">
 
         </activity>
-        <activity android:name=".Activty.SelectYourVehicleActivity">
-
-        </activity>
-
-        <activity android:name=".Activty.FieldStafBookingConfirmationActivity">
-
-
-
-        </activity>
-
-        <activity android:name=".Activty.FieldStafActivity" >
-
-
-        </activity>
+        <activity android:name=".Activty.SelectYourVehicleActivity"></activity>
+        <activity android:name=".Activty.FieldStafBookingConfirmationActivity"></activity>
+        <activity android:name=".Activty.FieldStafActivity"></activity>
         <activity android:name=".Activty.CurrentBookingActivity" />
 
         <uses-library
