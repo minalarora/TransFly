@@ -41,6 +41,7 @@
         <item
             android:title="Emergency Details"
             android:id="@+id/emergency_details"
+            android:visible="false"
             android:icon="@drawable/ic_action_emergency_contact" />
 
         <item

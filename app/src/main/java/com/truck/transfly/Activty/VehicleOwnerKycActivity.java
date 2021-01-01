@@ -295,6 +295,7 @@ public class VehicleOwnerKycActivity extends AppCompatActivity {
 
                                     Toast.makeText(context, "Update Successfully", Toast.LENGTH_SHORT).show();
 
+                                    finish();
                                 }
                             }, 2000);
 

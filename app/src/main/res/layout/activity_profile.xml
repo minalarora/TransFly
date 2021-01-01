@@ -206,6 +206,7 @@
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
                         android:layout_marginEnd="@dimen/_12ssp"
+                        android:id="@+id/edit_email"
                         android:src="@drawable/ic_action_pencil"
                         app:tint="@color/black" />
 

@@ -11,7 +11,6 @@ class ResponseReward {
     var text: String? = null
 
 
-
     @SerializedName("status")
     var status: Int? = 0
 
@@ -19,6 +18,5 @@ class ResponseReward {
     var date: String? = null
 
 
-
-    var image: String? = null
+    var im: String? = null
 }

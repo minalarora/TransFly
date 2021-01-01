@@ -158,10 +158,6 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         navigationView.setItemIconTintList(null);
 
-        Menu menu = navigationView.getMenu();
-        MenuItem item = menu.findItem(R.id.emergency_details);
-        item.setVisible(false);
-
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
 
@@ -475,6 +471,12 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                         Intent kyc_intent = new Intent(HomeActivity.this, VehicleOwnerKycActivity.class);
                         startActivity(kyc_intent);
+
+                        break;
+
+                    case R.id.emergency_details:
+
+                        startActivity(new Intent(HomeActivity.this,EmergencyContactActivity.class));
 
                         break;
 
