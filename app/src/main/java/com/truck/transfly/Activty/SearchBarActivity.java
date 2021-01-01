@@ -12,9 +12,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.truck.transfly.Adapter.SearchAdapter;
+import com.truck.transfly.Model.ResponseMine;
 import com.truck.transfly.R;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class SearchBarActivity extends AppCompatActivity {
@@ -149,6 +151,50 @@ public class SearchBarActivity extends AppCompatActivity {
 
         Toast.makeText(this, "yes FROM Search", Toast.LENGTH_SHORT).show();
 
+    }
+
+    //all mines
+    ArrayList<ResponseMine> mines  =  new ArrayList<>();
+
+    private ArrayList<String> getLoading()
+    {
+        HashSet<String> set = new HashSet<>();
+        for(ResponseMine m : mines)
+        {
+            for(String loading: m.getLoading())
+            {
+                set.add(loading);
+            }
+        }
+
+
+
+        return new ArrayList<>(set);
+//        ArrayList<ResponseMine> selectedmines = new ArrayList<>();
+//        for(ResponseMine m: mines)
+//        {
+//            for(String l: m.getLoading())
+//            {
+//                if(l.equalsIgnoreCase(loading))
+//                {
+//                    selectedmines.add(m);
+//                }
+//            }
+//        }
+//        return selectedmines;
+    }
+
+    private ArrayList<ResponseMine> getMinesByMines(String mine,String loading)
+    {
+        ArrayList<ResponseMine> selectedmines = new ArrayList<>();
+        for(ResponseMine m: mines)
+        {
+            if(m.getName().contains(mine) && m.getLoading().contains(loading))
+            {
+                    selectedmines.add(m);
+            }
+        }
+        return selectedmines;
     }
 
 }

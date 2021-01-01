@@ -4,11 +4,13 @@ import com.truck.transfly.Model.RequestAadhaarDetails;
 import com.truck.transfly.Model.RequestBankDetails;
 import com.truck.transfly.Model.RequestBooking;
 import com.truck.transfly.Model.RequestCredentials;
+import com.truck.transfly.Model.RequestEmail;
 import com.truck.transfly.Model.RequestEmergencyDetails;
 import com.truck.transfly.Model.RequestFeedback;
 import com.truck.transfly.Model.RequestGstDetails;
 import com.truck.transfly.Model.RequestInvoice;
 import com.truck.transfly.Model.RequestPanDetails;
+import com.truck.transfly.Model.RequestPassword;
 import com.truck.transfly.Model.RequestRating;
 import com.truck.transfly.Model.RequestStaDetails;
 import com.truck.transfly.Model.RequestTdsDetails;
@@ -149,6 +151,15 @@ public interface ApiEndpoints {
     Call<ResponseBody> getReferralList(@Header("Authorization")String token);
 
 
+    //update email
+    @GET("/update/me")
+    Call<ResponseBody> updateEmail(@Header("Authorization")String token, @Body RequestEmail email);
+
+
+
+    //update password
+    @GET("/update/me")
+    Call<ResponseBody> updatePassword(@Header("Authorization")String token, @Body RequestPassword password);
     ///////////////////////////////////////
 
     @POST("/vehicleowner/login")
