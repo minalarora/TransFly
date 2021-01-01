@@ -11,14 +11,11 @@ class ResponseReward {
     var text: String? = null
 
 
-
     @SerializedName("status")
     var status: Int? = 0
 
     @SerializedName("createdAt")
     var date: String? = null
-
-
 
     var image: String? = null
 }

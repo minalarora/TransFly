@@ -891,4 +891,50 @@ public class PlaygroundActivity extends AppCompatActivity {
       });
   }
 
+
+  private void updateEmail(String token, RequestEmail email)
+  {
+      api.updateEmail(token,email).enqueue(new Callback<ResponseBody>() {
+          @Override
+          public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+              if(response.code() == 200)
+              {
+
+
+              }
+              else
+              {
+
+              }
+          }
+
+          @Override
+          public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+          }
+      });
+  }
+
+  private void updatePassword(String token, RequestPassword password)
+  {
+      api.updatePassword(token,password).enqueue(new Callback<ResponseBody>() {
+          @Override
+          public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+              if(response.code() == 200)
+              {
+
+              }
+              else
+              {
+
+              }
+          }
+
+          @Override
+          public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+          }
+      });
+  }
+
 }
