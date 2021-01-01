@@ -24,11 +24,14 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.truck.transfly.Adapter.TransporterAdapter;
+import com.truck.transfly.Model.ResponseFieldStaff;
 import com.truck.transfly.Model.ResponseInvoice;
+import com.truck.transfly.Model.ResponseTransporter;
 import com.truck.transfly.R;
 import com.truck.transfly.utils.ApiClient;
 import com.truck.transfly.utils.ApiEndpoints;
 import com.truck.transfly.utils.PreferenceUtil;
+import com.truck.transfly.utils.TransflyApplication;
 import com.yalantis.phoenix.PullToRefreshView;
 
 import java.io.IOException;
@@ -118,6 +121,15 @@ public class TransporterActivity extends AppCompatActivity {
         NavigationView navigationView = findViewById(R.id.nav_view);
 //        navigationView.setNavigationItemSelectedListener(map);
 
+        View headerLayout = navigationView.getHeaderView(0);
+        TextView customerName = headerLayout.findViewById(R.id.customer_name);
+        TextView number=headerLayout.findViewById(R.id.number);
+
+        ResponseTransporter responseFieldStaff = ((TransflyApplication) getApplication()).getResponseTransporterOwner();
+
+        customerName.setText(responseFieldStaff.getName());
+        number.setText(responseFieldStaff.getMobile());
+
         navigationViewListener(navigationView);
 
         navigationView.setItemIconTintList(null);
@@ -193,22 +205,34 @@ public class TransporterActivity extends AppCompatActivity {
 
                     case R.id.refer_drawer:
 
-                        Intent refer_intent=new Intent(TransporterActivity.this,ReferActivity.class);
+                        Intent refer_intent = new Intent(TransporterActivity.this, ReferActivity.class);
+                        refer_intent.putExtra("keyword","refer");
                         startActivity(refer_intent);
 
                         break;
 
+                    case R.id.reward_program:
 
-                    case R.id.logout:
-
-                        Intent logout_intent=new Intent(TransporterActivity.this,LoginActivity.class);
-                        startActivity(logout_intent);
+                        Intent rewardIntent = new Intent(TransporterActivity.this, ReferActivity.class);
+                        rewardIntent.putExtra("keyword","reward");
+                        startActivity(rewardIntent);
 
                         break;
 
                     case R.id.emergency_details:
 
                         startActivity(new Intent(TransporterActivity.this,EmergencyContactActivity.class));
+
+                        break;
+
+                    case R.id.logout:
+
+                        Intent logoutIntent = new Intent(TransporterActivity.this, LoginActivity.class);
+                        logoutIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(logoutIntent);
+                        finish();
+
+                        PreferenceUtil.putData(TransporterActivity.this,"token","");
 
                         break;
 

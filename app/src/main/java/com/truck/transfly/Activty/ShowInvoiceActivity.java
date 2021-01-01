@@ -10,6 +10,7 @@ import android.graphics.Canvas;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -20,10 +21,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
+import androidx.databinding.DataBindingUtil;
 
 import com.nabinbhandari.android.permissions.PermissionHandler;
 import com.nabinbhandari.android.permissions.Permissions;
+import com.truck.transfly.Model.ResponseInvoice;
 import com.truck.transfly.R;
+import com.truck.transfly.databinding.ActivityShowInvoiceBinding;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -40,13 +44,44 @@ public class ShowInvoiceActivity extends AppCompatActivity {
     private boolean boolean_save;
     private boolean boolean_permission;
     private LinearLayout linearLayout;
+    private ActivityShowInvoiceBinding activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_show_invoice);
+        activity = DataBindingUtil.setContentView(this, R.layout.activity_show_invoice);
 
         linearLayout = findViewById(R.id.ll_linear);
+
+        Intent intent = getIntent();
+        ResponseInvoice responseInvoice = intent.getParcelableExtra("responseInvoice");
+
+        findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                onBackPressed();
+
+            }
+        });
+
+        activity.toFromDest.setText(responseInvoice.getLoading() +" - "+responseInvoice.getMinename());
+        activity.dateCreated.setText(responseInvoice.getDate());
+        activity.ownerName.setText(responseInvoice.getVehicleOwnerName());
+        activity.ownerMobile.setText(responseInvoice.getVehicleownermobile());
+        activity.vehicleNumber.setText(responseInvoice.getVehiclenumber());
+        activity.tonnege.setText(String.valueOf(responseInvoice.getTonnage()));
+        activity.rate.setText(String.valueOf(responseInvoice.getRate()));
+        activity.amount.setText(String.valueOf(responseInvoice.getAmount()));
+        activity.hsd.setText(String.valueOf(responseInvoice.getHsd()));
+        activity.cash.setText(String.valueOf(responseInvoice.getCash()));
+        activity.tds.setText(String.valueOf(responseInvoice.getTds()));
+        activity.officeCharge.setText(String.valueOf(responseInvoice.getOfficecharge()));
+        activity.shortage.setText(String.valueOf(responseInvoice.getShortage()));
+        activity.balanceAmount.setText(String.valueOf(responseInvoice.getBalanceamount()));
+        activity.challanTransporter.setText(responseInvoice.getChallanToTransporter());
+        activity.balanceAmountCleared.setText(responseInvoice.getBalanceAmountCleared());
+        activity.status.setText(responseInvoice.getStatus());
 
         findViewById(R.id.share_screenshots).setOnClickListener(new View.OnClickListener() {
             @Override

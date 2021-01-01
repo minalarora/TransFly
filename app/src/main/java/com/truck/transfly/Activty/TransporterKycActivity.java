@@ -77,6 +77,15 @@ public class TransporterKycActivity extends AppCompatActivity {
         parent_of_loading = findViewById(R.id.parent_of_loading);
         parent_of_loading.setVisibility(View.GONE);
 
+        findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                onBackPressed();
+
+            }
+        });
+
         no_internet_connection = findViewById(R.id.no_internet_connection);
         findViewById(R.id.pullToRefresh_button).setOnClickListener(new View.OnClickListener() {
             @Override

@@ -74,6 +74,15 @@ public class BankDetailsActivity extends AppCompatActivity {
         parent_of_loading = findViewById(R.id.parent_of_loading);
         parent_of_loading.setVisibility(View.GONE);
 
+        findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                onBackPressed();
+
+            }
+        });
+
         retrofit = ApiClient.getRetrofitClient();
         if(retrofit!=null)
         {

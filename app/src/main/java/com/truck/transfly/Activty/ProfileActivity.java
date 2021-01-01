@@ -6,6 +6,7 @@ import androidx.databinding.ViewDataBinding;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import com.truck.transfly.Model.ResponseAreaManager;
@@ -30,13 +31,22 @@ public class ProfileActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String stringText = intent.getStringExtra("stringText");
 
+        findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                onBackPressed();
+
+            }
+        });
+
         if(stringText.equals("vehicleOwner")){
 
             ResponseVehicleOwner responseVehicleOwner = ((TransflyApplication) getApplication()).getResponseVehicleOwner();
 
             activity.nameOfUser.setText(responseVehicleOwner.getName());
             activity.email.setText(responseVehicleOwner.getEmail());
-            activity.phone.setText(responseVehicleOwner.getEmail());
+            activity.phone.setText(responseVehicleOwner.getMobile());
 
         } else if(stringText.equals("fieldStaff")){
 
@@ -44,7 +54,7 @@ public class ProfileActivity extends AppCompatActivity {
 
             activity.nameOfUser.setText(responseVehicleOwner.getName());
             activity.email.setText(responseVehicleOwner.getEmail());
-            activity.phone.setText(responseVehicleOwner.getEmail());
+            activity.phone.setText(responseVehicleOwner.getMobile());
 
 
         } else if(stringText.equals("areaManager")){
@@ -53,7 +63,7 @@ public class ProfileActivity extends AppCompatActivity {
 
             activity.nameOfUser.setText(responseVehicleOwner.getName());
             activity.email.setText(responseVehicleOwner.getEmail());
-            activity.phone.setText(responseVehicleOwner.getEmail());
+            activity.phone.setText(responseVehicleOwner.getMobile());
 
 
         } else if(stringText.equals("transporter")){
@@ -62,7 +72,7 @@ public class ProfileActivity extends AppCompatActivity {
 
             activity.nameOfUser.setText(responseVehicleOwner.getName());
             activity.email.setText(responseVehicleOwner.getEmail());
-            activity.phone.setText(responseVehicleOwner.getEmail());
+            activity.phone.setText(responseVehicleOwner.getMobile());
 
 
         }

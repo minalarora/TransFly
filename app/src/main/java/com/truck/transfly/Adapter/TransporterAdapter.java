@@ -54,7 +54,9 @@ public class TransporterAdapter extends RecyclerView.Adapter<TransporterAdapter.
             @Override
             public void onClick(View v) {
 
-                context.startActivity(new Intent(context, ShowInvoiceActivity.class));
+                Intent intent = new Intent(context, ShowInvoiceActivity.class);
+                intent.putExtra("responseInvoice",responseInvoice);
+                context.startActivity(intent);
 
             }
         });

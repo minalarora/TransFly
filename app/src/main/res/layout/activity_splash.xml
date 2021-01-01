@@ -22,15 +22,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="25dp"
-                    android:fontFamily="@font/candal"
+                    android:fontFamily="@font/baloo"
                     android:gravity="center"
                     android:maxLines="1"
                     android:alpha="0.8"
                     android:paddingTop="8dp"
-                    android:text="TransFly"
+                    android:text="Transfly"
                     android:layout_gravity="center_horizontal"
                     android:textColor="@color/white"
-                    android:textSize="34sp"
+                    android:textSize="38sp"
                     android:visibility="visible" />
 
             </LinearLayout>
