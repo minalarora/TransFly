@@ -9,9 +9,11 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.truck.transfly.Activty.OtpValidation;
 import com.truck.transfly.R;
@@ -43,12 +45,23 @@ public class ForgotPasswordDialog extends DialogFragment {
             getDialog().getWindow().setBackgroundDrawableResource(R.drawable.round_dialog_min);
         }
 
+        EditText mobileNumber = inflate.findViewById(R.id.mobileNumber);
+
         inflate.findViewById(R.id.send_otp).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+
+                if(TextUtils.isEmpty(mobileNumber.getText().toString())){
+
+                    mobileNumber.setError("Enter Mobile Number*");
+                    mobileNumber.requestFocus();
+                    return;
+
+                }
                 Intent intent = new Intent(fragmentActivity, OtpValidation.class);
                 intent.putExtra("fromForgot",true);
+                intent.putExtra("mobileNo",mobileNumber.getText().toString());
                 startActivity(intent);
 
             }

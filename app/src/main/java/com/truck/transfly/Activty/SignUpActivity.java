@@ -74,9 +74,9 @@ public class SignUpActivity extends AppCompatActivity {
                     activity.email.setError("Email is Not Valid*");
                     activity.email.requestFocus();
 
-                } else if(TextUtils.isEmpty(activity.password.getText().toString())){
+                } else if(TextUtils.isEmpty(activity.password.getText().toString()) || activity.password.getText().length()<4){
 
-                    activity.password.setError("Password is Empty*");
+                    activity.password.setError("Password Must Be 4 digits*");
                     activity.password.requestFocus();
 
                 } else if(TextUtils.isEmpty(activity.retypePassword.getText().toString())){

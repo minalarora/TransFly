@@ -17,5 +17,5 @@ class ResponseReward {
     @SerializedName("createdAt")
     var date: String? = null
 
-    var image: String? = null
+    var im: String? = null
 }

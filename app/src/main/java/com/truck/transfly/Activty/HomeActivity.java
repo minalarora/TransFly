@@ -15,7 +15,6 @@ import android.provider.Settings;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -65,7 +64,6 @@ import com.truck.transfly.Adapter.YourCoolAdapter;
 import com.truck.transfly.Frament.ShowLoadingDialogFragment;
 import com.truck.transfly.Model.PositionModel;
 import com.truck.transfly.Model.RequestArea;
-import com.truck.transfly.Model.ResponseFieldStaff;
 import com.truck.transfly.Model.ResponseMine;
 import com.truck.transfly.Model.ResponseVehicleOwner;
 import com.truck.transfly.Model.SliderModel;
@@ -158,10 +156,6 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         navigationView.setItemIconTintList(null);
 
-        Menu menu = navigationView.getMenu();
-        MenuItem item = menu.findItem(R.id.emergency_details);
-        item.setVisible(false);
-
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
 
@@ -239,6 +233,8 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 if (requestArea != null) {
 
+                    mGoogleMap.clear();
+
                     HomeActivity.this.requestArea = requestArea;
 
                     showMarker(Double.parseDouble(requestArea.getArealatitude()), Double.parseDouble(requestArea.getArealongitude()), 1, requestArea.getName());
@@ -269,7 +265,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                         }
                     });
 
-                    goToLocationWithAnimation(Double.parseDouble(requestArea.getArealatitude()), Double.parseDouble(requestArea.getArealongitude()));
+                    goToLocationWithAnimation(Double.parseDouble(requestArea.getArealatitude()), Double.parseDouble(requestArea.getArealongitude()),8);
 
                 }
 
@@ -314,13 +310,13 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                 if (permissionIsGranted() && manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
 
                     if (Mylatitude != 0 && Mylongitude != 0)
-                        goToLocationWithAnimation(Mylatitude, Mylongitude);
+                        goToLocationWithAnimation(Mylatitude, Mylongitude, 9);
 
 
                 } else {
 
                     if (Mylatitude != 0 && Mylongitude != 0)
-                        goToLocationWithAnimation(Mylatitude, Mylongitude);
+                        goToLocationWithAnimation(Mylatitude, Mylongitude, 9);
 
                     mLocationClient.removeLocationUpdates(mLocationCallBack);
                     locationRequest = null;
@@ -478,6 +474,12 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                         break;
 
+                    case R.id.emergency_details:
+
+                        startActivity(new Intent(HomeActivity.this,EmergencyContactActivity.class));
+
+                        break;
+
                     case R.id.add_vehicle:
 
                         Intent addVehicleActivity = new Intent(HomeActivity.this, AddVehicleActivity.class);
@@ -550,11 +552,11 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
-    private void goToLocationWithAnimation(double latitude, double longitude) {
+    private void goToLocationWithAnimation(double latitude, double longitude, int i) {
 
         LatLng latLng = new LatLng(latitude, longitude);
 
-        CameraUpdate cameraUpdateFactory = CameraUpdateFactory.newLatLngZoom(latLng, 9);
+        CameraUpdate cameraUpdateFactory = CameraUpdateFactory.newLatLngZoom(latLng, i);
 
         mGoogleMap.animateCamera(cameraUpdateFactory, 500, new GoogleMap.CancelableCallback() {
             @Override
@@ -795,7 +797,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         super.onResume();
 
         if (Mylatitude != 0 && Mylongitude != 0)
-            goToLocationWithAnimation(Mylatitude, Mylongitude);
+            goToLocationWithAnimation(Mylatitude, Mylongitude, 9);
 
     }
 

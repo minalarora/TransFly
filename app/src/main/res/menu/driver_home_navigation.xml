@@ -53,6 +53,7 @@
             android:id="@+id/emergency_details"
             android:icon="@drawable/ic_action_emergency_contact" />
 
+
         <item
             android:id="@+id/logout"
             android:title="Logout"

@@ -839,7 +839,7 @@ public class PlaygroundActivity extends AppCompatActivity {
 
                         for(ResponseReward reward: i)
                         {
-                            reward.setImage("https://transfly-ftr2t.ondigitalocean.app/rewardimage/" + reward.getId());
+                            reward.setIm("https://transfly-ftr2t.ondigitalocean.app/rewardimage/" + reward.getId());
                         }
                         Log.d("minal",i.toString());
                     }

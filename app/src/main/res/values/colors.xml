@@ -15,4 +15,6 @@
     <color name="red_900">#B71C1C</color>
     <color name="project_color2">@color/quantum_pink</color>
     <color name="quantum_googgreen900">#055524</color>
+    <color name="mdtp_accent_color">@color/quantum_pink</color>
+    <color name="mdtp_accent_color_dark">@color/quantum_pink</color>
 </resources>

@@ -53,14 +53,14 @@ public class ReferAdapter extends RecyclerView.Adapter<ReferAdapter.ViewHolderSu
 
         if(responseReward.getStatus()==3) {
             holder.only_images.setVisibility(View.VISIBLE);
-            Glide.with(context).load(responseReward.getImage()).into(holder.image3);
+            Glide.with(context).load(responseReward.getIm()).into(holder.image3);
         }else if(responseReward.getStatus()==2) {
             holder.only_text.setVisibility(View.VISIBLE);
             holder.text2.setText(responseReward.getText());
         }else {
             holder.only_text_image.setVisibility(View.VISIBLE);
             holder.text1.setText(responseReward.getText());
-            Glide.with(context).load(responseReward.getImage()).into(holder.image1);
+            Glide.with(context).load(responseReward.getIm()).into(holder.image1);
 
         }
 

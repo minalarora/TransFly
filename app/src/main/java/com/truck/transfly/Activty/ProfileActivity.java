@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.truck.transfly.Frament.GmailUpdateFragment;
 import com.truck.transfly.Model.ResponseAreaManager;
 import com.truck.transfly.Model.ResponseFieldStaff;
 import com.truck.transfly.Model.ResponseTransporter;
@@ -30,6 +31,22 @@ public class ProfileActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String stringText = intent.getStringExtra("stringText");
+
+        activity.editEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                GmailUpdateFragment gmailUpdateFragment=new GmailUpdateFragment();
+                gmailUpdateFragment.setCancelable(false);
+
+                Bundle bundle=new Bundle();
+                bundle.putString("email",activity.email.getText().toString());
+                gmailUpdateFragment.setArguments(bundle);
+
+                gmailUpdateFragment.show(getSupportFragmentManager(),"");
+
+            }
+        });
 
         findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,7 +94,6 @@ public class ProfileActivity extends AppCompatActivity {
 
         }
 
-
-
     }
+
 }
