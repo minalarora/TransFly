@@ -915,26 +915,91 @@ public class PlaygroundActivity extends AppCompatActivity {
       });
   }
 
-  private void updatePassword(String token, RequestPassword password)
-  {
-      api.updatePassword(token,password).enqueue(new Callback<ResponseBody>() {
-          @Override
-          public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-              if(response.code() == 200)
-              {
+//  private void updatePassword(String token, RequestPassword password)
+//  {
+//      api.updatePassword(token,password).enqueue(new Callback<ResponseBody>() {
+//          @Override
+//          public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+//              if(response.code() == 200)
+//              {
+//
+//              }
+//              else
+//              {
+//
+//              }
+//          }
+//
+//          @Override
+//          public void onFailure(Call<ResponseBody> call, Throwable t) {
+//
+//          }
+//      });
+//  }
 
-              }
-              else
-              {
+    private void changePassword(RequestCredentials credentials)
+    {
+        api.updatePassword(credentials).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response.code() == 200)
+                {
+                    //password changed
+                }
+                else
+                {
+                    //user not found
+                }
+            }
 
-              }
-          }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
 
-          @Override
-          public void onFailure(Call<ResponseBody> call, Throwable t) {
+            }
+        });
+    }
 
-          }
-      });
-  }
+
+    private void getBanners(String token)
+    {
+        api.getBanners(token).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response.code() == 200)
+                {
+
+                    ArrayList<ResponseBanner> i = new ArrayList<>();
+                    Type collectionType = new TypeToken<ArrayList<ResponseBanner>>(){}.getType();
+                    try {
+                        i.addAll(new Gson().fromJson(response.body().string().toString(),collectionType));
+                    } catch (IOException e) {
+
+                    }
+                    if(i.isEmpty())
+                    {
+
+                        Log.d("minal","no vehicle");
+                    }
+                    else
+                    {
+                        //['pan','aadhaar','bank']
+
+                        for(ResponseBanner banner : i)
+                        {
+                               banner.setImageUrl("https://transfly-ftr2t.ondigitalocean.app/bannerimage/" + banner.getId());
+                        }
+                        Log.d("minal",i.toString());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+    }
+
+
 
 }

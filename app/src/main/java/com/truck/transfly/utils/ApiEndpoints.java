@@ -158,8 +158,14 @@ public interface ApiEndpoints {
 
 
     //update password
-    @GET("/update/me")
-    Call<ResponseBody> updatePassword(@Header("Authorization")String token, @Body RequestPassword password);
+    @POST("/changepassword")
+    Call<ResponseBody> updatePassword( @Body RequestCredentials credentials);
+
+
+    //get banner
+    @GET("/allbanner")
+    Call<ResponseBody> getBanners(@Header("Authorization")String token);
+
     ///////////////////////////////////////
 
     @POST("/vehicleowner/login")
