@@ -180,6 +180,10 @@ public interface ApiEndpoints {
     Call<ResponseBody>  getAllResaleList(@Header("Authorization")String token);
 
 
+    @POST("/resale/contact")
+    Call<ResponseBody> contactResale(@Header("Authorization")String token);
+
+
 
     ///////////////////////////////////////
 
