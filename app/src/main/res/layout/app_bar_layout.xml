@@ -177,4 +177,8 @@
         android:background="@android:color/white"
         app:menu="@menu/navigation" />
 
+    <include layout="@layout/loading_view_home"/>
+
+    <include layout="@layout/no_internet_connection"/>
+
 </RelativeLayout>

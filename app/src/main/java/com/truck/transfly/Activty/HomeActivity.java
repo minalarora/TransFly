@@ -17,7 +17,9 @@ import android.util.Log;
 import android.view.Display;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -132,6 +134,8 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
     private LocationAdapter locationAdapter;
     private RequestArea requestArea;
     private String loading;
+    private FrameLayout parent_of_loading;
+    private RelativeLayout no_internet_connection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,6 +154,24 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         customerName.setText(responseFieldStaff.getName());
         number.setText(responseFieldStaff.getMobile());
 
+        parent_of_loading = findViewById(R.id.parent_of_loading);
+        parent_of_loading.setVisibility(View.GONE);
+
+        no_internet_connection = findViewById(R.id.no_internet_connection);
+        findViewById(R.id.pullToRefresh_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                loadinglist.clear();
+                mines.clear();
+                responseBannerArrayList.clear();
+                fullMetalAdapter.notifyDataSetChanged();
+                locationAdapter.notifyDataSetChanged();
+                no_internet_connection.setVisibility(View.GONE);
+                getMinesFromServer(PreferenceUtil.getData(HomeActivity.this, "token"));
+
+            }
+        });
 
         retrofit = ApiClient.getRetrofitClient();
         if (retrofit != null) {
@@ -353,8 +375,6 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         getCurrentLocation();
 
-        getBanners(PreferenceUtil.getData(HomeActivity.this,"token"));
-        
         getMinesFromServer(PreferenceUtil.getData(HomeActivity.this, "token"));
 
     }
@@ -364,6 +384,10 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         api.getBanners(token).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                parent_of_loading.setVisibility(View.GONE);
+                no_internet_connection.setVisibility(View.GONE);
+
                 if(response.code() == 200)
                 {
 
@@ -393,16 +417,27 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
 
+                parent_of_loading.setVisibility(View.GONE);
+                no_internet_connection.setVisibility(View.VISIBLE);
+
             }
         });
     }
 
     private void getMinesFromServer(String token) {
 
+        parent_of_loading.setVisibility(View.VISIBLE);
+        no_internet_connection.setVisibility(View.GONE);
+
         api.getAllMineVehicleOwner(token).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                parent_of_loading.setVisibility(View.GONE);
+
                 if (response.code() == 200) {
+
+                    getBanners(PreferenceUtil.getData(HomeActivity.this,"token"));
 
                     Type collectionType = new TypeToken<ArrayList<ResponseMine>>() {
                     }.getType();
@@ -437,11 +472,23 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                     }
 
+                } else {
+
+                    parent_of_loading.setVisibility(View.GONE);
+                    no_internet_connection.setVisibility(View.VISIBLE);
+
+                    Toast.makeText(HomeActivity.this, "Somrthing Went Wrong! Try Again", Toast.LENGTH_SHORT).show();
+
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                parent_of_loading.setVisibility(View.GONE);
+                no_internet_connection.setVisibility(View.VISIBLE);
+
+                Toast.makeText(HomeActivity.this, "Somrthing Went Wrong! Try Again", Toast.LENGTH_SHORT).show();
 
             }
         });

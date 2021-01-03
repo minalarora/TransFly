@@ -17,7 +17,7 @@ class ResponseInvoice() : Parcelable {
     @SerializedName("status")
     var status: String? = null
 
-    @SerializedName("vehicleownername")
+    @SerializedName("vehicleowner")
     var vehicleOwnerName: String? = null
 
     @SerializedName("tonnage")

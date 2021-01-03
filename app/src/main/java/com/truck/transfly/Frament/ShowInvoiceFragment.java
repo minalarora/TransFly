@@ -95,6 +95,8 @@ public class ShowInvoiceFragment extends Fragment implements com.wdullaer.materi
 
         CardView calenderSelected = inflate.findViewById(R.id.calender_selected);
 
+        Log.i("TAG", "onCreateView: "+PreferenceUtil.getData(fragmentActivity,"token"));
+
         calenderSelected.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -179,10 +181,11 @@ public class ShowInvoiceFragment extends Fragment implements com.wdullaer.materi
                     }.getType();
                     try {
                         invoices.addAll(new Gson().fromJson(response.body().string().toString(), collectionType));
+                        invoicesList.addAll(invoices);
                     } catch (IOException e) {
 
                     }
-                    if (invoices.isEmpty()) {
+                    if (invoices.size()==0) {
 
                         fieldStafAdapter.notifyDataSetChanged();
                         Log.d("minal", "no vehicle");

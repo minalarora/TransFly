@@ -10,11 +10,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.truck.transfly.Model.PositionModel;
 import com.truck.transfly.Model.RequestArea;
 import com.truck.transfly.R;
 
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.viewholder> {
 
@@ -68,7 +71,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.viewho
         holder.position_any.setVisibility(View.VISIBLE);
 
         holder.cityName.setText(requestArea.getName());
-        holder.circularImageText.setText(requestArea.getName().substring(0,2));
+        Glide.with(context).load(requestArea.getName()).into(holder.circleImageView);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,15 +92,16 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.viewho
     public class viewholder extends RecyclerView.ViewHolder {
 
         private LinearLayout position_any,position_zero;
-        private TextView circularImageText,cityName;
+        private TextView cityName;
+        private CircleImageView circleImageView;
 
         public viewholder(@NonNull View itemView) {
             super(itemView);
 
             position_zero=itemView.findViewById(R.id.position_zero);
             position_any=itemView.findViewById(R.id.postion_any);
-            circularImageText=itemView.findViewById(R.id.circularImageText);
             cityName=itemView.findViewById(R.id.cityName);
+            circleImageView=itemView.findViewById(R.id.circularImage);
 
         }
     }
