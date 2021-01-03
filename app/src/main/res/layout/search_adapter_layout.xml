@@ -32,6 +32,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="@dimen/_15ssp"
                 android:fontFamily="@font/poppins"
+                android:id="@+id/from_dest"
                 android:text="Anand(GJ) - Kamrej(GJ)"
                 android:textColor="@color/black"
                 android:textSize="15dp" />
@@ -64,6 +65,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="@dimen/_15ssp"
                 android:fontFamily="@font/poppins"
+                android:id="@+id/rate"
                 android:text="400"
                 android:textColor="@color/black"
                 android:textSize="13dp" />
@@ -97,6 +99,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="@dimen/_15ssp"
+                android:id="@+id/etl"
                 android:fontFamily="@font/poppins"
                 android:text="45 min"
                 android:textColor="@color/black"

@@ -10,6 +10,8 @@ import android.graphics.Canvas;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -45,6 +47,7 @@ public class ShowInvoiceActivity extends AppCompatActivity {
     private boolean boolean_permission;
     private LinearLayout linearLayout;
     private ActivityShowInvoiceBinding activity;
+    private boolean shareBill;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +57,7 @@ public class ShowInvoiceActivity extends AppCompatActivity {
         linearLayout = findViewById(R.id.ll_linear);
 
         Intent intent = getIntent();
+        shareBill = intent.getBooleanExtra("shareBill", false);
         ResponseInvoice responseInvoice = intent.getParcelableExtra("responseInvoice");
 
         findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
@@ -83,6 +87,16 @@ public class ShowInvoiceActivity extends AppCompatActivity {
         activity.balanceAmountCleared.setText(responseInvoice.getBalanceAmountCleared());
         activity.status.setText(responseInvoice.getStatus());
 
+        if(responseInvoice.getStatus().toLowerCase().equals("pending")){
+
+             activity.iconOfGod.setImageResource(R.drawable.pending_icon);
+
+        } else {
+
+            activity.iconOfGod.setImageResource(R.drawable.completed_icon);
+
+        }
+
         findViewById(R.id.share_screenshots).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,6 +105,19 @@ public class ShowInvoiceActivity extends AppCompatActivity {
 
             }
         });
+
+       new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+           @Override
+           public void run() {
+
+               if(shareBill){
+
+                   StartShareImage();
+
+               }
+
+           }
+       },300);
 
     }
 
@@ -168,7 +195,7 @@ public class ShowInvoiceActivity extends AppCompatActivity {
         intentShareFile.setType(URLConnection.guessContentTypeFromName(file.getName()));
         intentShareFile.putExtra(Intent.EXTRA_STREAM,
                 imageUri);
-        intentShareFile.putExtra(Intent.EXTRA_TEXT,"hmmmmmmmmmm");
+        intentShareFile.putExtra(Intent.EXTRA_TEXT,"");
 
         //if you need
         //intentShareFile.putExtra(Intent.EXTRA_SUBJECT,"Sharing File Subject);

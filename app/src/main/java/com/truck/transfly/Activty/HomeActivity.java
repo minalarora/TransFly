@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
@@ -17,7 +18,9 @@ import android.util.Log;
 import android.view.Display;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -132,6 +135,8 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
     private LocationAdapter locationAdapter;
     private RequestArea requestArea;
     private String loading;
+    private FrameLayout parent_of_loading;
+    private RelativeLayout no_internet_connection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,6 +155,24 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         customerName.setText(responseFieldStaff.getName());
         number.setText(responseFieldStaff.getMobile());
 
+        parent_of_loading = findViewById(R.id.parent_of_loading);
+        parent_of_loading.setVisibility(View.GONE);
+
+        no_internet_connection = findViewById(R.id.no_internet_connection);
+        findViewById(R.id.pullToRefresh_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                loadinglist.clear();
+                mines.clear();
+                responseBannerArrayList.clear();
+                fullMetalAdapter.notifyDataSetChanged();
+                locationAdapter.notifyDataSetChanged();
+                no_internet_connection.setVisibility(View.GONE);
+                getMinesFromServer(PreferenceUtil.getData(HomeActivity.this, "token"));
+
+            }
+        });
 
         retrofit = ApiClient.getRetrofitClient();
         if (retrofit != null) {
@@ -178,7 +201,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         navigation.enableAnimation(false);
         navigation.enableItemShiftingMode(false);
         navigation.enableShiftingMode(false);
-        navigation.setTextSize(12);
+        navigation.setTextSize(10);
         navigation.setPadding(0, 0, 0, 1);
         navigation.setIconSize(26, 26);
         navigation.setTextVisibility(true);
@@ -193,11 +216,29 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                         startActivity(new Intent(HomeActivity.this,OlxPageActivity.class));
 
-                        break;
+                        return false;
+
+                    case R.id.booking_status:
+
+                        startActivity(new Intent(HomeActivity.this,CurrentBookingActivity.class));
+
+                        return false;
+
+                    case R.id.new_booking:
+
+                        startActivity(new Intent(HomeActivity.this,SearchBarActivity.class));
+
+                        return false;
+
+                    case R.id.need_help:
+
+                        startActivity(new Intent(HomeActivity.this,TicketComplaintActivity.class));
+
+                        return false;
 
                 }
 
-                return false;
+                return true;
             }
         });
 
@@ -289,6 +330,10 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                     goToLocationWithAnimation(Double.parseDouble(requestArea.getArealatitude()), Double.parseDouble(requestArea.getArealongitude()),8);
 
+                } else {
+
+
+
                 }
 
             }
@@ -304,6 +349,12 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 Mylatitude = lastLocation.getLatitude();
                 Mylongitude = lastLocation.getLongitude();
+
+                SharedPreferences sharedPreferences=getSharedPreferences("currentLocation",MODE_PRIVATE);
+                SharedPreferences.Editor edit = sharedPreferences.edit();
+                edit.putString("lat", String.valueOf(Mylatitude));
+                edit.putString("long", String.valueOf(Mylongitude));
+                edit.apply();
 
                 LatLng latLng = new LatLng(Mylatitude, Mylongitude);
 
@@ -353,8 +404,6 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         getCurrentLocation();
 
-        getBanners(PreferenceUtil.getData(HomeActivity.this,"token"));
-        
         getMinesFromServer(PreferenceUtil.getData(HomeActivity.this, "token"));
 
     }
@@ -364,6 +413,10 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         api.getBanners(token).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                parent_of_loading.setVisibility(View.GONE);
+                no_internet_connection.setVisibility(View.GONE);
+
                 if(response.code() == 200)
                 {
 
@@ -393,16 +446,27 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
 
+                parent_of_loading.setVisibility(View.GONE);
+                no_internet_connection.setVisibility(View.VISIBLE);
+
             }
         });
     }
 
     private void getMinesFromServer(String token) {
 
+        parent_of_loading.setVisibility(View.VISIBLE);
+        no_internet_connection.setVisibility(View.GONE);
+
         api.getAllMineVehicleOwner(token).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                parent_of_loading.setVisibility(View.GONE);
+
                 if (response.code() == 200) {
+
+                    getBanners(PreferenceUtil.getData(HomeActivity.this,"token"));
 
                     Type collectionType = new TypeToken<ArrayList<ResponseMine>>() {
                     }.getType();
@@ -437,11 +501,23 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                     }
 
+                } else {
+
+                    parent_of_loading.setVisibility(View.GONE);
+                    no_internet_connection.setVisibility(View.VISIBLE);
+
+                    Toast.makeText(HomeActivity.this, "Somrthing Went Wrong! Try Again", Toast.LENGTH_SHORT).show();
+
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                parent_of_loading.setVisibility(View.GONE);
+                no_internet_connection.setVisibility(View.VISIBLE);
+
+                Toast.makeText(HomeActivity.this, "Somrthing Went Wrong! Try Again", Toast.LENGTH_SHORT).show();
 
             }
         });

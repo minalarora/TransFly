@@ -12,6 +12,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_marginTop="@dimen/_8ssp"
+        android:id="@+id/toolbar"
         android:layout_height="wrap_content">
 
             <ImageView
@@ -19,6 +20,7 @@
                 android:layout_height="@dimen/_22ssp"
                 android:layout_marginStart="@dimen/_8ssp"
                 android:layout_gravity="center"
+                android:id="@+id/back"
                 android:src="@drawable/ic_action_back"
                 />
 
@@ -73,27 +75,27 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:orientation="horizontal"
+        android:id="@+id/to_search_parent"
         android:layout_height="@dimen/_50ssp">
 
         <EditText
+            android:id="@+id/to_search"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/round_as_eddittext_search"
-            android:hint="To Destination"
-            android:id="@+id/to_search"
-            android:layout_marginEnd="12dp"
-            android:paddingStart="12dp"
-            android:textSize="14sp"
-            android:focusable="true"
-            android:drawableTint="@color/black"
-            android:layout_marginBottom="8dp"
-            android:fontFamily="@font/worksansmedium"
-            android:paddingEnd="8dp"
-            android:drawableStart="@drawable/ic_action_search"
-            android:drawablePadding="8dp"
             android:layout_marginStart="14dp"
             android:layout_marginTop="8dp"
-            />
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/round_as_eddittext_search"
+            android:drawableStart="@drawable/ic_action_search"
+            android:drawablePadding="8dp"
+            android:drawableTint="@color/black"
+            android:focusable="true"
+            android:fontFamily="@font/worksansmedium"
+            android:hint="To Destination"
+            android:paddingStart="12dp"
+            android:paddingEnd="8dp"
+            android:textSize="14sp" />
 
     </RelativeLayout>
 
@@ -104,12 +106,19 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:id="@+id/recyclerView"
+                android:visibility="gone"
                 android:layout_above="@+id/creaate_booking"
                 android:layout_height="match_parent">
 
 
 
             </androidx.recyclerview.widget.RecyclerView>
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/list_item_loading"
+                />
 
             <RelativeLayout
                 android:id="@+id/creaate_booking"
@@ -137,5 +146,9 @@
         </RelativeLayout>
 
     </LinearLayout>
+
+    <include layout="@layout/loading_view"/>
+
+    <include layout="@layout/no_internet_connection"/>
 
 </RelativeLayout>

@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -50,6 +51,29 @@ public class TransporterAdapter extends RecyclerView.Adapter<TransporterAdapter.
         holder.date_created.setText(responseInvoice.getDate());
         holder.to_from_dest.setText(responseInvoice.getLoading() +" - "+responseInvoice.getMinename());
 
+        holder.share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(context, ShowInvoiceActivity.class);
+                intent.putExtra("responseInvoice",responseInvoice);
+                intent.putExtra("shareBill",true);
+                context.startActivity(intent);
+
+            }
+        });
+
+        holder.show_invoice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(context, ShowInvoiceActivity.class);
+                intent.putExtra("responseInvoice",responseInvoice);
+                context.startActivity(intent);
+
+            }
+        });
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,6 +96,8 @@ public class TransporterAdapter extends RecyclerView.Adapter<TransporterAdapter.
 
         private TextView to_from_dest,date_created,vehile_owner,mobileNumber,vehicle_number,price_rate;
 
+        private RelativeLayout show_invoice,share;
+
         public viewholder(@NonNull View itemView) {
             super(itemView);
 
@@ -81,6 +107,8 @@ public class TransporterAdapter extends RecyclerView.Adapter<TransporterAdapter.
             mobileNumber=itemView.findViewById(R.id.mobileNumber);
             vehicle_number=itemView.findViewById(R.id.vehicle_number);
             price_rate=itemView.findViewById(R.id.price_rate);
+            show_invoice=itemView.findViewById(R.id.show_invoice);
+            share=itemView.findViewById(R.id.share);
 
         }
     }

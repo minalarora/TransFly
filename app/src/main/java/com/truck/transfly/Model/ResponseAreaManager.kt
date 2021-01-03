@@ -15,6 +15,9 @@ class ResponseAreaManager {
 
     @SerializedName("status")
     var status: Int? = null
+    //0  kyc not
+    //1  kyc pending
+    //2  comp;
 
     @SerializedName("accountno")
     var accountno: String? = null

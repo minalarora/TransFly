@@ -7,8 +7,10 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.truck.transfly.Model.RequestEmergencyContact;
+import com.truck.transfly.Model.RequestEmergencyContact2;
 import com.truck.transfly.R;
 import com.truck.transfly.databinding.ActivityEmergencyContactBinding;
 import com.truck.transfly.utils.ApiClient;
@@ -62,11 +64,13 @@ public class EmergencyContactActivity extends AppCompatActivity {
 
                 } else {
 
-//                    RequestEmergencyContact requestEmergencyContact=new RequestEmergencyContact();
-//                    requestEmergencyContact.set
-//
-//                    updateEmergencyContact(PreferenceUtil.getData(EmergencyContactActivity.this,"token"));
-//
+                    RequestEmergencyContact2 contact=new RequestEmergencyContact2();
+                    contact.setEmergencyName(activity.name.getText().toString());
+                    contact.setEmergencyMobile(activity.phoneNumber.getText().toString());
+                    contact.setEmergencyRelation(activity.relative.getText().toString());
+
+                    updateEmergencyContact(PreferenceUtil.getData(EmergencyContactActivity.this,"token"),contact);
+
                 }
 
             }
@@ -83,23 +87,40 @@ public class EmergencyContactActivity extends AppCompatActivity {
 
     }
 
-    private void updateEmergencyContact(String token, RequestEmergencyContact contact)
-    {
-        api.updateEmergencyContact(token,contact).enqueue(new Callback<ResponseBody>() {
+    private void updateEmergencyContact(String token, RequestEmergencyContact2 contact) {
+
+        parent_of_loading.setVisibility(View.VISIBLE);
+
+        api.updateEmergencyContact2(token, contact).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if(response.code() ==200)
-                {
-                    //done
+                if (response.code() == 200) {
+                    parent_of_loading.setVisibility(View.GONE);
+
+                    Toast.makeText(EmergencyContactActivity.this, "Update Conatct Successfully", Toast.LENGTH_SHORT).show();
+
+                    finish();
+
+                } else {
+
+                    parent_of_loading.setVisibility(View.GONE);
+
+                    Toast.makeText(EmergencyContactActivity.this, "Something Went Wrong! Try Again", Toast.LENGTH_SHORT).show();
+
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
 
+                Toast.makeText(EmergencyContactActivity.this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+
+                parent_of_loading.setVisibility(View.GONE);
+
             }
         });
     }
+
 
 
 }

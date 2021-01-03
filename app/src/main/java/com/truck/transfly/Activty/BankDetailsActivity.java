@@ -302,13 +302,13 @@ public class BankDetailsActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        try {
-            String listing_logo = UUID.randomUUID().toString().replaceAll("-", "");
-
-            multipartUploadRequest.addFileToUpload(storageList.get(0), "bankimage", listing_logo, "UTF-8");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            String listing_logo = UUID.randomUUID().toString().replaceAll("-", "");
+//
+//            multipartUploadRequest.addFileToUpload(storageList.get(0), "bankimage", listing_logo, "UTF-8");
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
 
         multipartUploadRequest.startUpload();
 
