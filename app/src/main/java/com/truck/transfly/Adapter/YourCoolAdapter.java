@@ -6,20 +6,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 
 
+import com.bumptech.glide.Glide;
+import com.truck.transfly.Model.ResponseBanner;
 import com.truck.transfly.Model.SliderModel;
 import com.truck.transfly.MuUtils.MetalRecyclerViewPager;
 import com.truck.transfly.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class YourCoolAdapter extends MetalRecyclerViewPager.MetalAdapter<YourCoolAdapter.YourCoolViewHolder> {
 
-    private final List<SliderModel> yourDataSource;
+    private final List<ResponseBanner> yourDataSource;
     private OnClickListener onClickListener;
     private Context context;
 
@@ -35,7 +39,7 @@ public class YourCoolAdapter extends MetalRecyclerViewPager.MetalAdapter<YourCoo
 
     }
 
-    public YourCoolAdapter(@NonNull DisplayMetrics metrics, @NonNull List<SliderModel> yourDataSource, Context context) {
+    public YourCoolAdapter(@NonNull DisplayMetrics metrics, @NonNull ArrayList<ResponseBanner> yourDataSource, Context context) {
         super(metrics);
 
         this.yourDataSource =yourDataSource;
@@ -58,18 +62,18 @@ public class YourCoolAdapter extends MetalRecyclerViewPager.MetalAdapter<YourCoo
         // don't forget to call supper.onBindViewHolder!
         super.onBindViewHolder(holder, position);
 
-//        SliderModel sliderModel = yourDataSource.get(position);
-//
-//        Glide.with(context).load(sliderModel.getSliderName()).into(holder.image);
-//
-//        holder.cardLayout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                onClickListener.onClick();
-//
-//            }
-//        });
+        ResponseBanner sliderModel = yourDataSource.get(position);
+
+        Glide.with(context).load("https://transfly-ftr2t.ondigitalocean.app/bannerimage/" + sliderModel.getId()).into(holder.image);
+
+        holder.cardLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                onClickListener.onClick();
+
+            }
+        });
 
         // ...
     }

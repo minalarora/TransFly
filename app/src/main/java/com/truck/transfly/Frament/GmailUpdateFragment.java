@@ -17,10 +17,12 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 
 import com.truck.transfly.Model.RequestEmail;
+import com.truck.transfly.Model.ResponseVehicleOwner;
 import com.truck.transfly.R;
 import com.truck.transfly.utils.ApiClient;
 import com.truck.transfly.utils.ApiEndpoints;
 import com.truck.transfly.utils.PreferenceUtil;
+import com.truck.transfly.utils.TransflyApplication;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -36,9 +38,22 @@ public class GmailUpdateFragment extends DialogFragment {
     private Retrofit retrofit = null;
     private ApiEndpoints api = null;
     private EditText mobileNumber;
+    private onClickListener onClickListener;
 
     public GmailUpdateFragment() {
         // Required empty public constructor
+    }
+
+    public interface onClickListener{
+
+        void onClick();
+
+    }
+
+    public void setonClickListener(onClickListener onClickListener){
+
+        this.onClickListener=onClickListener;
+
     }
 
     @Override
@@ -142,6 +157,16 @@ public class GmailUpdateFragment extends DialogFragment {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.code() == 200) {
+
+                    ResponseVehicleOwner responseVehicleOwner = ((TransflyApplication) fragmentActivity.getApplication()).getResponseVehicleOwner();
+
+                    responseVehicleOwner.setEmail(email.getEmail());
+
+                    ((TransflyApplication) fragmentActivity.getApplication()).setResponseVehicleOwner(responseVehicleOwner);
+
+                    Toast.makeText(fragmentActivity, "Update Email Successfully", Toast.LENGTH_SHORT).show();
+
+                    onClickListener.onClick();
 
                     dismiss();
 
