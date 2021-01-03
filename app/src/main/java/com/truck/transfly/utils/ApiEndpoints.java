@@ -3,6 +3,7 @@ package com.truck.transfly.utils;
 import com.truck.transfly.Model.RequestAadhaarDetails;
 import com.truck.transfly.Model.RequestBankDetails;
 import com.truck.transfly.Model.RequestBooking;
+import com.truck.transfly.Model.RequestCoordinates;
 import com.truck.transfly.Model.RequestCredentials;
 import com.truck.transfly.Model.RequestEmail;
 import com.truck.transfly.Model.RequestEmergencyContact;
@@ -182,6 +183,11 @@ public interface ApiEndpoints {
 
     @POST("/resale/contact")
     Call<ResponseBody> contactResale(@Header("Authorization")String token);
+
+
+
+    @POST("/nearme/mine")
+    Call<String> nearmeArea(@Header("Authorization")String token, @Body RequestCoordinates coordinates);
 
 
 

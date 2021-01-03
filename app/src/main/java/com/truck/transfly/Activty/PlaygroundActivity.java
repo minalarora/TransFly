@@ -1099,4 +1099,27 @@ public class PlaygroundActivity extends AppCompatActivity {
     }
 
 
+
+
+    private void getNearmeArea(String token, RequestCoordinates coordinates)
+    {
+        api.nearmeArea(token,coordinates).enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if(response.code()==200)
+                {
+                    String areaname  = response.body().toString();
+                    
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
+    }
+
+
 }
