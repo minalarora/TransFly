@@ -1114,13 +1114,34 @@ public class PlaygroundActivity extends AppCompatActivity {
                 if(response.code()==200)
                 {
                     String areaname  = response.body().toString();
-                    
+
 
                 }
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
+    }
+
+
+    private void getSingleMine(String token, String id)
+    {
+        api.getSingleMine(token,id).enqueue(new Callback<ResponseMine>() {
+            @Override
+            public void onResponse(Call<ResponseMine> call, Response<ResponseMine> response) {
+                if(response.code() == 200)
+                {
+                    ResponseMine mine  = response.body();
+                    //mine.getLatitude()
+                    //mine.getLongitude()
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseMine> call, Throwable t) {
 
             }
         });

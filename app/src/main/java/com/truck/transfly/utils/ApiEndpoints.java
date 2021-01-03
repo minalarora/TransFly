@@ -23,6 +23,7 @@ import com.truck.transfly.Model.RequestVehicle;
 import com.truck.transfly.Model.ResponseAreaManager;
 import com.truck.transfly.Model.ResponseBooking;
 import com.truck.transfly.Model.ResponseFieldStaff;
+import com.truck.transfly.Model.ResponseMine;
 import com.truck.transfly.Model.ResponseRefer;
 import com.truck.transfly.Model.ResponseReferral;
 import com.truck.transfly.Model.ResponseReward;
@@ -189,6 +190,9 @@ public interface ApiEndpoints {
     @POST("/nearme/mine")
     Call<String> nearmeArea(@Header("Authorization")String token, @Body RequestCoordinates coordinates);
 
+
+    @GET("/mine/{id}")
+    Call<ResponseMine> getSingleMine(@Header("Authorization")String token,@Path("id") String id);
 
 
     ///////////////////////////////////////
