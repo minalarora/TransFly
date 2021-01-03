@@ -1131,7 +1131,7 @@ public class PlaygroundActivity extends AppCompatActivity {
     }
 
 
-    private void getSingleMine(String token, String id)
+    private void getSingleMine(String token, int id)
     {
         api.getSingleMine(token,id).enqueue(new Callback<ResponseMine>() {
             @Override
