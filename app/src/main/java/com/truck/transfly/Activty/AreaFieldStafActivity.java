@@ -231,6 +231,10 @@ public class AreaFieldStafActivity extends AppCompatActivity {
                     if(pendingList.isEmpty())
                     {
 
+                        Toast.makeText(AreaFieldStafActivity.this, "No Kyc Need, Everything is clear", Toast.LENGTH_SHORT).show();
+
+                        finish();
+
                         Log.d("minal","kyc completed");
                     }
                     else

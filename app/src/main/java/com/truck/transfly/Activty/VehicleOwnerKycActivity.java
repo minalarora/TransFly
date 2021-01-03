@@ -220,6 +220,10 @@ public class VehicleOwnerKycActivity extends AppCompatActivity {
                     if(pendingList.isEmpty())
                     {
 
+                        Toast.makeText(VehicleOwnerKycActivity.this, "No Kyc Need, Everything is clear", Toast.LENGTH_SHORT).show();
+
+                        finish();
+
                         Log.d("minal","kyc completed");
                     }
                     else
