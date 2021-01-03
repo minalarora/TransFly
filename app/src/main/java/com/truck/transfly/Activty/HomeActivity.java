@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -64,6 +65,7 @@ import com.truck.transfly.Adapter.YourCoolAdapter;
 import com.truck.transfly.Frament.ShowLoadingDialogFragment;
 import com.truck.transfly.Model.PositionModel;
 import com.truck.transfly.Model.RequestArea;
+import com.truck.transfly.Model.ResponseBanner;
 import com.truck.transfly.Model.ResponseMine;
 import com.truck.transfly.Model.ResponseVehicleOwner;
 import com.truck.transfly.Model.SliderModel;
@@ -95,6 +97,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
     private double LatituteOfTajMahal = 22.106364561666886;
     private double LongitudeOfTajMahal = 85.37934426698966;
     private Retrofit retrofit = null;
+    private ArrayList<ResponseBanner> responseBannerArrayList = new ArrayList<>();
     private ArrayList<String> loadinglist = new ArrayList<>();
 
     private ApiEndpoints api = null;
@@ -331,8 +334,48 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         getCurrentLocation();
 
+        getBanners(PreferenceUtil.getData(HomeActivity.this,"token"));
+        
         getMinesFromServer(PreferenceUtil.getData(HomeActivity.this, "token"));
 
+    }
+
+    private void getBanners(String token)
+    {
+        api.getBanners(token).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response.code() == 200)
+                {
+
+                    Type collectionType = new TypeToken<ArrayList<ResponseBanner>>(){}.getType();
+                    try {
+                        responseBannerArrayList.addAll(new Gson().fromJson(response.body().string().toString(),collectionType));
+                    } catch (IOException e) {
+
+                    }
+                    if(responseBannerArrayList.isEmpty())
+                    {
+
+                        Toast.makeText(HomeActivity.this, "No Banner Found", Toast.LENGTH_SHORT).show();
+
+
+
+                    }
+                    else
+                    {
+                        fullMetalAdapter.notifyDataSetChanged();
+
+                        Log.d("minal",responseBannerArrayList.toString());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
     }
 
     private void getMinesFromServer(String token) {
@@ -398,7 +441,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
 
         DisplayMetrics metrics = getDisplayMetrics();
-        fullMetalAdapter = new YourCoolAdapter(metrics, metalList, HomeActivity.this);
+        fullMetalAdapter = new YourCoolAdapter(metrics, responseBannerArrayList, HomeActivity.this);
         viewPager = findViewById(R.id.viewPager);
         viewPager.setAdapter(fullMetalAdapter);
 

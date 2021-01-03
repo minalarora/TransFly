@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import com.truck.transfly.Model.RequestCredentials;
 import com.truck.transfly.Model.RequestPassword;
 import com.truck.transfly.R;
 import com.truck.transfly.databinding.ChangePasswordActivtyBinding;
@@ -70,10 +71,11 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
                 } else {
 
-                    RequestPassword requestPassword = new RequestPassword();
-                    requestPassword.setPassword(activity.password.getText().toString());
+                    RequestCredentials requestCredentials=new RequestCredentials();
+                    requestCredentials.setPassword(activity.password.getText().toString());
+                    requestCredentials.setMobile(mobileNo);
 
-                    updatePassword(PreferenceUtil.getData(ChangePasswordActivity.this, "token"), requestPassword);
+                    updatePassword(PreferenceUtil.getData(ChangePasswordActivity.this, "token"), requestCredentials);
 
                 }
 
@@ -82,11 +84,11 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
     }
 
-    private void updatePassword(String token, RequestPassword password) {
+    private void updatePassword(String token, RequestCredentials password) {
 
         parent_of_loading.setVisibility(View.VISIBLE);
 
-        api.updatePassword(token, password).enqueue(new Callback<ResponseBody>() {
+        api.updatePassword(password).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
@@ -99,6 +101,9 @@ public class ChangePasswordActivity extends AppCompatActivity {
                     startActivity(intent);
 
                     finish();
+
+                    Toast.makeText(ChangePasswordActivity.this, "Change Password Successfully", Toast.LENGTH_SHORT).show();
+
 
                 } else {
 

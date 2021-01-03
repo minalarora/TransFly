@@ -152,7 +152,7 @@ public interface ApiEndpoints {
 
 
     //update email
-    @GET("/update/me")
+    @POST("/me/update")
     Call<ResponseBody> updateEmail(@Header("Authorization")String token, @Body RequestEmail email);
 
 

@@ -39,6 +39,16 @@ public class ProfileActivity extends AppCompatActivity {
                 GmailUpdateFragment gmailUpdateFragment=new GmailUpdateFragment();
                 gmailUpdateFragment.setCancelable(false);
 
+                gmailUpdateFragment.setonClickListener(new GmailUpdateFragment.onClickListener() {
+                    @Override
+                    public void onClick() {
+
+                        ResponseVehicleOwner responseVehicleOwner = ((TransflyApplication) getApplication()).getResponseVehicleOwner();
+                        activity.email.setText(responseVehicleOwner.getEmail());
+
+                    }
+                });
+
                 Bundle bundle=new Bundle();
                 bundle.putString("email",activity.email.getText().toString());
                 gmailUpdateFragment.setArguments(bundle);

@@ -1,0 +1,566 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activty.ShowOlxProductActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.viewpager.widget.ViewPager
+                    android:layout_width="match_parent"
+                    android:background="@color/black"
+                    android:layout_height="@dimen/_200sdp"
+                    android:id="@+id/viewPager"
+                    />
+
+                <ru.tinkoff.scrollingpagerindicator.ScrollingPagerIndicator
+                    android:id="@+id/indicatorCondition"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:layout_marginBottom="9dp"
+                    app:spi_dotSelectedSize="8dp"
+                    app:spi_dotSize="6dp" />
+
+                <ImageView
+                    android:id="@+id/back"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="@dimen/_12ssp"
+                    android:src="@drawable/ic_action_back"
+                    app:tint="@color/white" />
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Wedding Vintage Car"
+                android:textColor="@color/black"
+                android:padding="6dp"
+                android:textSize="@dimen/_14ssp"
+                android:id="@+id/heading"
+                android:fontFamily="@font/poppinsbold"
+                android:layout_marginTop="@dimen/_8ssp"
+                android:textStyle="bold"
+                android:layout_gravity="bottom"
+                android:layout_marginEnd="@dimen/_12ssp"
+                android:layout_marginStart="@dimen/_12ssp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Microsoft. 20/12/2020"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_11ssp"
+                android:fontFamily="@font/poppinsmedium"
+                android:alpha="0.5"
+                android:id="@+id/date_name"
+                android:layout_marginTop="-4dp"
+                android:letterSpacing="0.06"
+                android:layout_marginEnd="@dimen/_12ssp"
+                android:layout_marginStart="@dimen/_20ssp"
+                />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/_12ssp"
+                android:layout_marginEnd="@dimen/_12ssp"
+                android:layout_marginTop="@dimen/_16ssp"
+                android:layout_marginBottom="@dimen/_15ssp"
+                app:cardBackgroundColor="#f2f2f2"
+                app:cardCornerRadius="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_8ssp"
+                        android:layout_marginTop="@dimen/_19ssp"
+                        android:layout_marginEnd="@dimen/_8ssp"
+                        android:background="@drawable/round_as_invoice"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/_6ssp"
+                        android:weightSum="2">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/_8ssp"
+                            android:layout_weight="1"
+                            android:alpha="0.7"
+                            android:fontFamily="@font/poppins"
+                            android:text="Ownership (Rc)"
+                            android:textColor="@color/black"
+                            android:textSize="13dp" />
+
+                        <TextView
+                            android:id="@+id/tonnege"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/_8ssp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/poppins"
+                            android:text="Available"
+                            android:textColor="@color/black"
+                            android:textSize="14dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_8ssp"
+                        android:layout_marginTop="@dimen/_7ssp"
+                        android:layout_marginEnd="@dimen/_8ssp"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/_6ssp"
+                        android:weightSum="2">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/_8ssp"
+                            android:layout_weight="1"
+                            android:alpha="0.7"
+                            android:fontFamily="@font/poppins"
+                            android:text="Insurance paper"
+                            android:textColor="@color/black"
+                            android:textSize="13dp" />
+
+                        <TextView
+                            android:id="@+id/insurance"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/_8ssp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/poppins"
+                            android:text="Available"
+                            android:textColor="@color/black"
+                            android:textSize="14dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_8ssp"
+                        android:layout_marginTop="@dimen/_7ssp"
+                        android:layout_marginEnd="@dimen/_8ssp"
+                        android:background="@drawable/round_as_invoice"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/_6ssp"
+                        android:weightSum="2">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/_8ssp"
+                            android:layout_weight="1"
+                            android:alpha="0.7"
+                            android:fontFamily="@font/poppins"
+                            android:text="Re-sold Vehicle check and clearances"
+                            android:textColor="@color/black"
+                            android:textSize="13dp" />
+
+                        <TextView
+                            android:id="@+id/resold"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/_8ssp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/poppins"
+                            android:text="Available"
+                            android:textColor="@color/black"
+                            android:textSize="14dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_8ssp"
+                        android:layout_marginTop="@dimen/_7ssp"
+                        android:layout_marginEnd="@dimen/_8ssp"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/_6ssp"
+                        android:weightSum="2">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/_8ssp"
+                            android:layout_weight="1"
+                            android:alpha="0.7"
+                            android:fontFamily="@font/poppins"
+                            android:text="Road Tax Receipt"
+                            android:textColor="@color/black"
+                            android:textSize="13dp" />
+
+                        <TextView
+                            android:id="@+id/read_tax"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/_8ssp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/poppins"
+                            android:text="Available"
+                            android:textColor="@color/black"
+                            android:textSize="14dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_8ssp"
+                        android:layout_marginTop="@dimen/_7ssp"
+                        android:layout_marginEnd="@dimen/_8ssp"
+                        android:background="@drawable/round_as_invoice"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/_6ssp"
+                        android:weightSum="2">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/_8ssp"
+                            android:layout_weight="1"
+                            android:alpha="0.7"
+                            android:fontFamily="@font/poppins"
+                            android:text="Vehicle Service Book"
+                            android:textColor="@color/black"
+                            android:textSize="13dp" />
+
+                        <TextView
+                            android:id="@+id/vehicle_service"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/_8ssp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/poppins"
+                            android:text="Available"
+                            android:textColor="@color/black"
+                            android:textSize="14dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_8ssp"
+                        android:layout_marginTop="@dimen/_7ssp"
+                        android:layout_marginEnd="@dimen/_8ssp"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/_6ssp"
+                        android:weightSum="2">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/_8ssp"
+                            android:layout_weight="1"
+                            android:alpha="0.7"
+                            android:fontFamily="@font/poppins"
+                            android:text="Loan Clearance Check"
+                            android:textColor="@color/black"
+                            android:textSize="13dp" />
+
+                        <TextView
+                            android:id="@+id/loan_clearence"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/_8ssp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/poppins"
+                            android:text="Available"
+                            android:textColor="@color/black"
+                            android:textSize="14dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_8ssp"
+                        android:layout_marginTop="@dimen/_7ssp"
+                        android:layout_marginEnd="@dimen/_8ssp"
+                        android:background="@drawable/round_as_invoice"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/_6ssp"
+                        android:weightSum="2">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/_8ssp"
+                            android:layout_weight="1"
+                            android:alpha="0.7"
+                            android:fontFamily="@font/poppins"
+                            android:text="Pollution certificate"
+                            android:textColor="@color/black"
+                            android:textSize="13dp" />
+
+                        <TextView
+                            android:id="@+id/pollution_certificate"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/_8ssp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/poppins"
+                            android:text="Available"
+                            android:textColor="@color/black"
+                            android:textSize="14dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_8ssp"
+                        android:layout_marginTop="@dimen/_7ssp"
+                        android:layout_marginEnd="@dimen/_8ssp"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/_6ssp"
+                        android:weightSum="2">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/_8ssp"
+                            android:layout_weight="1"
+                            android:alpha="0.7"
+                            android:fontFamily="@font/poppins"
+                            android:text="Engine and Chassis check"
+                            android:textColor="@color/black"
+                            android:textSize="13dp" />
+
+                        <TextView
+                            android:id="@+id/engine_chassis"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/_8ssp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/poppins"
+                            android:text="Available"
+                            android:textColor="@color/black"
+                            android:textSize="14dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_8ssp"
+                        android:layout_marginTop="@dimen/_7ssp"
+                        android:layout_marginEnd="@dimen/_8ssp"
+                        android:background="@drawable/round_as_invoice"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/_6ssp"
+                        android:weightSum="2">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/_8ssp"
+                            android:layout_weight="1"
+                            android:alpha="0.7"
+                            android:fontFamily="@font/poppins"
+                            android:text="Body (includes Front, Rear, slides and Fuel Tank Checks)"
+                            android:textColor="@color/black"
+                            android:textSize="13dp" />
+
+                        <TextView
+                            android:id="@+id/balance_amount"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/_8ssp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/poppins"
+                            android:text="Available"
+                            android:textColor="@color/black"
+                            android:textSize="14dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_8ssp"
+                        android:layout_marginTop="@dimen/_7ssp"
+                        android:layout_marginEnd="@dimen/_8ssp"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/_6ssp"
+                        android:weightSum="2">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/_8ssp"
+                            android:layout_weight="1"
+                            android:alpha="0.7"
+                            android:fontFamily="@font/poppins"
+                            android:text="Cabin"
+                            android:textColor="@color/black"
+                            android:textSize="13dp" />
+
+                        <TextView
+                            android:id="@+id/cabin"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/_8ssp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/poppins"
+                            android:text="Available"
+                            android:textColor="@color/black"
+                            android:textSize="14dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_8ssp"
+                        android:layout_marginTop="@dimen/_7ssp"
+                        android:layout_marginEnd="@dimen/_8ssp"
+                        android:background="@drawable/round_as_invoice"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/_6ssp"
+                        android:weightSum="2">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/_8ssp"
+                            android:layout_weight="1"
+                            android:alpha="0.7"
+                            android:fontFamily="@font/poppins"
+                            android:text="Tyres"
+                            android:textColor="@color/black"
+                            android:textSize="13dp" />
+
+                        <TextView
+                            android:id="@+id/tyres"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/_8ssp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/poppins"
+                            android:text="Available"
+                            android:textColor="@color/black"
+                            android:textSize="14dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_9ssp"
+                        android:layout_marginTop="@dimen/_7ssp"
+                        android:layout_marginEnd="@dimen/_8ssp"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/_6ssp"
+                        android:weightSum="2">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/_8ssp"
+                            android:layout_weight="1"
+                            android:alpha="0.7"
+                            android:fontFamily="@font/poppins"
+                            android:text="Other important declaration - check and clearances"
+                            android:textColor="@color/black"
+                            android:textSize="13dp" />
+
+                        <TextView
+                            android:id="@+id/other_declaration"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/_8ssp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/poppins"
+                            android:text="Available"
+                            android:textColor="@color/black"
+                            android:textSize="14dp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <RelativeLayout
+                android:id="@+id/login_button"
+                android:layout_width="@dimen/_240sdp"
+                android:layout_height="45dp"
+                android:layout_marginEnd="@dimen/_12ssp"
+                android:layout_marginStart="@dimen/_12ssp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="@dimen/_20sdp"
+                android:background="@drawable/design_as_edittext_gradient"
+                android:elevation="6dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/poppinsbold"
+                    android:text="Contact Owner"
+                    android:textColor="@color/white"
+                    android:textSize="14dp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>
