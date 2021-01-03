@@ -53,6 +53,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCanceledListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -181,6 +182,24 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         navigation.setPadding(0, 0, 0, 1);
         navigation.setIconSize(26, 26);
         navigation.setTextVisibility(true);
+
+        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId()){
+
+                    case R.id.vehicle_seller:
+
+                        startActivity(new Intent(HomeActivity.this,OlxPageActivity.class));
+
+                        break;
+
+                }
+
+                return false;
+            }
+        });
 
         drawerLayout = findViewById(R.id.drawer_layout);
 
@@ -519,7 +538,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                     case R.id.emergency_details:
 
-                        startActivity(new Intent(HomeActivity.this,EmergencyContactActivity.class));
+                        startActivity(new Intent(HomeActivity.this,EmergencyContactVehicleActivity.class));
 
                         break;
 

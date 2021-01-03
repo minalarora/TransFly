@@ -15,18 +15,20 @@
         <ImageView
             android:layout_width="match_parent"
             android:background="@color/black"
+            android:id="@+id/image_product"
             android:layout_height="@dimen/_130sdp"
             android:src="@drawable/card_seller_image"
             />
 
         <TextView
+            android:id="@+id/price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="10dp"
-            android:layout_toEndOf="@+id/back"
             android:layout_marginTop="@dimen/_12ssp"
+            android:layout_toEndOf="@+id/back"
             android:fontFamily="@font/opensansregular"
             android:text="50000 R.s"
             android:textColor="@android:color/black"
@@ -41,6 +43,7 @@
             android:ellipsize="end"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="10dp"
+            android:id="@+id/title"
             android:layout_marginEnd="@dimen/_6ssp"
             android:layout_toEndOf="@+id/back"
             android:fontFamily="@font/opensansregular"

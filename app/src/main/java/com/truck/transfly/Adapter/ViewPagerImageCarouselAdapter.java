@@ -26,14 +26,6 @@ public class ViewPagerImageCarouselAdapter extends PagerAdapter {
 
     public ViewPagerImageCarouselAdapter(Context context, List<String> stringList) {
 
-        stringList.clear();
-        stringList.add("https://static2.srcdn.com/wordpress/wp-content/uploads/2020/01/Girls-HBO-Lena-Dunham.jpg");
-        stringList.add("https://images.pexels.com/photos/1468379/pexels-photo-1468379.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500");
-        stringList.add("https://images.pexels.com/photos/2646841/pexels-photo-2646841.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500");
-        stringList.add("https://images.pexels.com/photos/458768/pexels-photo-458768.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500");
-        stringList.add("https://images.pexels.com/photos/1386604/pexels-photo-1386604.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500");
-        stringList.add("https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/hbz-met-gala-best-dressed-2010-gettyimages-102575534-1525207494.jpg");
-
         this.context = context;
         this.stringList = stringList;
 

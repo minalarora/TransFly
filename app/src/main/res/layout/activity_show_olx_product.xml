@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+<layout  xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools">
+
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activty.ShowOlxProductActivity">
@@ -54,7 +56,7 @@
                 android:textColor="@color/black"
                 android:padding="6dp"
                 android:textSize="@dimen/_14ssp"
-                android:id="@+id/heading"
+                android:id="@+id/vehicle_name"
                 android:fontFamily="@font/poppinsbold"
                 android:layout_marginTop="@dimen/_8ssp"
                 android:textStyle="bold"
@@ -117,7 +119,7 @@
                             android:textSize="13dp" />
 
                         <TextView
-                            android:id="@+id/tonnege"
+                            android:id="@+id/ownership"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
@@ -409,7 +411,7 @@
                             android:textSize="13dp" />
 
                         <TextView
-                            android:id="@+id/balance_amount"
+                            android:id="@+id/body"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
@@ -564,3 +566,5 @@
     </androidx.core.widget.NestedScrollView>
 
 </RelativeLayout>
+
+</layout>
