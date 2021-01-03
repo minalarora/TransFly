@@ -192,7 +192,7 @@ public interface ApiEndpoints {
 
 
     @GET("/mine/{id}")
-    Call<ResponseMine> getSingleMine(@Header("Authorization")String token,@Path("id") String id);
+    Call<ResponseMine> getSingleMine(@Header("Authorization")String token,@Path("id") int id);
 
 
     ///////////////////////////////////////
