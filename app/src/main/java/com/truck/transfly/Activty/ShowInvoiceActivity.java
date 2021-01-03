@@ -117,7 +117,7 @@ public class ShowInvoiceActivity extends AppCompatActivity {
                }
 
            }
-       },500);
+       },300);
 
     }
 
