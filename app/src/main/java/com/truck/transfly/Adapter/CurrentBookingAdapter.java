@@ -4,9 +4,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,8 +22,6 @@ import java.util.List;
 public class CurrentBookingAdapter extends RecyclerView.Adapter<CurrentBookingAdapter.viewholder> {
 
     private final Context context;
-    private final String lat;
-    private final String aLongitude;
     private final FragmentActivity fragmentActivity;
     private List<ResponseBooking> responseBookingList;
     private onClickListener onClickListener;
@@ -36,16 +32,11 @@ public class CurrentBookingAdapter extends RecyclerView.Adapter<CurrentBookingAd
         this.responseBookingList=responseBookingList;
 
         fragmentActivity= (FragmentActivity) context;
-
-        SharedPreferences sharedPreferences=context.getSharedPreferences("currentLocation",Context.MODE_PRIVATE);
-        lat = sharedPreferences.getString("lat", "");
-        aLongitude = sharedPreferences.getString("long", "");
-
     }
 
     public interface onClickListener{
 
-        void onClick(ResponseBooking responseBooking, int position);
+        void onClick(ResponseBooking responseBooking, int position, boolean b);
 
     }
 
@@ -78,14 +69,7 @@ public class CurrentBookingAdapter extends RecyclerView.Adapter<CurrentBookingAd
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-
-                String uri = "http://maps.google.com/maps?saddr=" + lat + "," + aLongitude + "&daddr=" + 0 + "," + 0;
-
-                intent.setData(Uri.parse(uri));
-                if (intent.resolveActivity(fragmentActivity.getPackageManager()) != null) {
-                    context.startActivity(intent);
-                }
+                onClickListener.onClick(responseBooking,position,true);
 
             }
         });
@@ -94,7 +78,7 @@ public class CurrentBookingAdapter extends RecyclerView.Adapter<CurrentBookingAd
             @Override
             public void onClick(View v) {
 
-                onClickListener.onClick(responseBooking,position);
+                onClickListener.onClick(responseBooking,position, false);
 
             }
         });
