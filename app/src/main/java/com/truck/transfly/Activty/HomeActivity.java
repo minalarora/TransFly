@@ -69,6 +69,7 @@ import com.truck.transfly.Adapter.YourCoolAdapter;
 import com.truck.transfly.Frament.ShowLoadingDialogFragment;
 import com.truck.transfly.Model.PositionModel;
 import com.truck.transfly.Model.RequestArea;
+import com.truck.transfly.Model.RequestCoordinates;
 import com.truck.transfly.Model.ResponseBanner;
 import com.truck.transfly.Model.ResponseMine;
 import com.truck.transfly.Model.ResponseVehicleOwner;
@@ -148,7 +149,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         View headerLayout = navigationView.getHeaderView(0);
         TextView customerName = headerLayout.findViewById(R.id.customer_name);
-        TextView number=headerLayout.findViewById(R.id.number);
+        TextView number = headerLayout.findViewById(R.id.number);
 
         ResponseVehicleOwner responseFieldStaff = ((TransflyApplication) getApplication()).getResponseVehicleOwner();
 
@@ -210,29 +211,29 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
 
                     case R.id.vehicle_seller:
 
-                        startActivity(new Intent(HomeActivity.this,OlxPageActivity.class));
+                        startActivity(new Intent(HomeActivity.this, OlxPageActivity.class));
 
                         return false;
 
                     case R.id.booking_status:
 
-                        startActivity(new Intent(HomeActivity.this,CurrentBookingActivity.class));
+                        startActivity(new Intent(HomeActivity.this, CurrentBookingActivity.class));
 
                         return false;
 
                     case R.id.new_booking:
 
-                        startActivity(new Intent(HomeActivity.this,SearchBarActivity.class));
+                        startActivity(new Intent(HomeActivity.this, SearchBarActivity.class));
 
                         return false;
 
                     case R.id.need_help:
 
-                        startActivity(new Intent(HomeActivity.this,TicketComplaintActivity.class));
+                        startActivity(new Intent(HomeActivity.this, TicketComplaintActivity.class));
 
                         return false;
 
@@ -314,7 +315,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                         @Override
                         public void onClick(String loading) {
 
-                            HomeActivity.this.loading=loading;
+                            HomeActivity.this.loading = loading;
 
                             ArrayList<ResponseMine> allMineOfSingleArea = getAllMineOfSingleArea(requestArea.getName(), loading);
 
@@ -328,11 +329,14 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                         }
                     });
 
-                    goToLocationWithAnimation(Double.parseDouble(requestArea.getArealatitude()), Double.parseDouble(requestArea.getArealongitude()),8);
+                    goToLocationWithAnimation(Double.parseDouble(requestArea.getArealatitude()), Double.parseDouble(requestArea.getArealongitude()), 8);
 
                 } else {
 
-
+                    RequestCoordinates requestCoordinates = new RequestCoordinates();
+                    requestCoordinates.setLatitude(Mylatitude);
+                    requestCoordinates.setLongitude(Mylongitude);
+                    getNearmeArea(PreferenceUtil.getData(HomeActivity.this, "token"), requestCoordinates);
 
                 }
 
@@ -350,7 +354,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                 Mylatitude = lastLocation.getLatitude();
                 Mylongitude = lastLocation.getLongitude();
 
-                SharedPreferences sharedPreferences=getSharedPreferences("currentLocation",MODE_PRIVATE);
+                SharedPreferences sharedPreferences = getSharedPreferences("currentLocation", MODE_PRIVATE);
                 SharedPreferences.Editor edit = sharedPreferences.edit();
                 edit.putString("lat", String.valueOf(Mylatitude));
                 edit.putString("long", String.valueOf(Mylongitude));
@@ -408,8 +412,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
-    private void getBanners(String token)
-    {
+    private void getBanners(String token) {
         api.getBanners(token).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -417,28 +420,24 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                 parent_of_loading.setVisibility(View.GONE);
                 no_internet_connection.setVisibility(View.GONE);
 
-                if(response.code() == 200)
-                {
+                if (response.code() == 200) {
 
-                    Type collectionType = new TypeToken<ArrayList<ResponseBanner>>(){}.getType();
+                    Type collectionType = new TypeToken<ArrayList<ResponseBanner>>() {
+                    }.getType();
                     try {
-                        responseBannerArrayList.addAll(new Gson().fromJson(response.body().string().toString(),collectionType));
+                        responseBannerArrayList.addAll(new Gson().fromJson(response.body().string().toString(), collectionType));
                     } catch (IOException e) {
 
                     }
-                    if(responseBannerArrayList.isEmpty())
-                    {
+                    if (responseBannerArrayList.isEmpty()) {
 
                         Toast.makeText(HomeActivity.this, "No Banner Found", Toast.LENGTH_SHORT).show();
 
 
-
-                    }
-                    else
-                    {
+                    } else {
                         fullMetalAdapter.notifyDataSetChanged();
 
-                        Log.d("minal",responseBannerArrayList.toString());
+                        Log.d("minal", responseBannerArrayList.toString());
                     }
                 }
             }
@@ -466,7 +465,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 if (response.code() == 200) {
 
-                    getBanners(PreferenceUtil.getData(HomeActivity.this,"token"));
+                    getBanners(PreferenceUtil.getData(HomeActivity.this, "token"));
 
                     Type collectionType = new TypeToken<ArrayList<ResponseMine>>() {
                     }.getType();
@@ -552,6 +551,64 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         return metrics;
     }
 
+    private void getNearmeArea(String token, RequestCoordinates coordinates) {
+        parent_of_loading.setVisibility(View.VISIBLE);
+
+        api.nearmeArea(token, coordinates).enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+
+                parent_of_loading.setVisibility(View.GONE);
+
+                if (response.code() == 200) {
+
+                    String areaname = response.body().toString();
+
+                    ShowLoadingDialogFragment showLoadingDialogFragment = new ShowLoadingDialogFragment();
+
+                    Bundle bundle = new Bundle();
+                    bundle.putStringArrayList("loadingList", loadinglist);
+                    showLoadingDialogFragment.setArguments(bundle);
+
+                    showLoadingDialogFragment.show(getSupportFragmentManager(), "showLoadingFragment");
+
+                    showLoadingDialogFragment.setOnClickListener(new ShowLoadingDialogFragment.onClickListener() {
+                        @Override
+                        public void onClick(String loading) {
+
+                            HomeActivity.this.loading = loading;
+
+                            ArrayList<ResponseMine> allMineOfSingleArea = getAllMineOfSingleArea(areaname, loading);
+
+                            for (ResponseMine responseMine : allMineOfSingleArea) {
+
+                                showMarkerOfArea(Double.parseDouble(responseMine.getLatitude()), Double.parseDouble(responseMine.getLongitude()), responseMine, responseMine.getName());
+
+                            }
+
+                        }
+                    });
+
+                } else {
+
+                    parent_of_loading.setVisibility(View.GONE);
+
+                    Toast.makeText(HomeActivity.this, "Something Went Wrong! Try Again", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+                parent_of_loading.setVisibility(View.GONE);
+
+                Toast.makeText(HomeActivity.this, "No Internet Connection! Try Again", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
+
     static final int SPEED_SCROLL = 3000;
     final Runnable runnable = new Runnable() {
         int count = 0;
@@ -600,7 +657,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                     case R.id.profile_drawer:
 
                         Intent intent = new Intent(HomeActivity.this, ProfileActivity.class);
-                        intent.putExtra("stringText","vehicleOwner");
+                        intent.putExtra("stringText", "vehicleOwner");
                         startActivity(intent);
 
                         break;
@@ -614,7 +671,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                     case R.id.emergency_details:
 
-                        startActivity(new Intent(HomeActivity.this,EmergencyContactVehicleActivity.class));
+                        startActivity(new Intent(HomeActivity.this, EmergencyContactVehicleActivity.class));
 
                         break;
 
@@ -656,7 +713,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                     case R.id.refer_drawer:
 
                         Intent refer_intent = new Intent(HomeActivity.this, ReferActivity.class);
-                        refer_intent.putExtra("keyword","refer");
+                        refer_intent.putExtra("keyword", "refer");
                         startActivity(refer_intent);
 
                         break;
@@ -664,7 +721,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                     case R.id.reward_program:
 
                         Intent rewardIntent = new Intent(HomeActivity.this, ReferActivity.class);
-                        rewardIntent.putExtra("keyword","reward");
+                        rewardIntent.putExtra("keyword", "reward");
                         startActivity(rewardIntent);
 
                         break;
@@ -676,7 +733,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                         startActivity(logoutIntent);
                         finish();
 
-                        PreferenceUtil.putData(HomeActivity.this,"token","");
+                        PreferenceUtil.putData(HomeActivity.this, "token", "");
 
                         break;
 
@@ -882,9 +939,9 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                     Intent intent = new Intent(HomeActivity.this, SelectYourVehicleActivity.class);
 
-                    intent.putExtra("mineid",responseMine.getId());
-                    intent.putExtra("minename",responseMine.getName());
-                    intent.putExtra("loading",loading);
+                    intent.putExtra("mineid", responseMine.getId());
+                    intent.putExtra("minename", responseMine.getName());
+                    intent.putExtra("loading", loading);
 
                     startActivity(intent);
 
