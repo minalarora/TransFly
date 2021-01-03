@@ -6,6 +6,7 @@ import com.truck.transfly.Model.RequestBooking;
 import com.truck.transfly.Model.RequestCredentials;
 import com.truck.transfly.Model.RequestEmail;
 import com.truck.transfly.Model.RequestEmergencyContact;
+import com.truck.transfly.Model.RequestEmergencyContact2;
 import com.truck.transfly.Model.RequestEmergencyDetails;
 import com.truck.transfly.Model.RequestFeedback;
 import com.truck.transfly.Model.RequestGstDetails;
@@ -160,6 +161,10 @@ public interface ApiEndpoints {
     @POST("/me/update")
     Call<ResponseBody> updateEmergencyContact(@Header("Authorization")String token, @Body RequestEmergencyContact emergencyContact);
 
+
+    //update emergencycontact
+    @POST("/me/update")
+    Call<ResponseBody> updateEmergencyContact2(@Header("Authorization")String token, @Body RequestEmergencyContact2 emergencyContact);
 
 
     //update password

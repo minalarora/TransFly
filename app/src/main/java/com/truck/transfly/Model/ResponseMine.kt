@@ -55,6 +55,9 @@ class ResponseMine {
     @SerializedName("areamanager")
     var areamanager: String? = null
 
+    @SerializedName("areaimageurl")
+    var areaimageurl: String? = null
+    
     constructor(id: Int?, name: String?, area: String?, trailer: Boolean?, tyres: Int?, bodytype: String?, loading: ArrayList<String>?, rate: Int?, etl: Int?, latitude: String?, longitude: String?, arealatitude: String?, arealongitude: String?, landmark: String?, transporter: String?, fieldstaff: String?, areamanager: String?) {
         this.id = id
         this.name = name

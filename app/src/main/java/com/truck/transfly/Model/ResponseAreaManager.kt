@@ -31,6 +31,15 @@ class ResponseAreaManager {
     @SerializedName("aadhaar")
     var aadhaar: String? = null
 
+    @SerializedName("ename")
+    var emergencyName: String? = null
+
+    @SerializedName("erelation")
+    var emergencyRelation: String? = null
+
+    @SerializedName("emobile")
+    var emergencyMobile: String? = null
+
     @SerializedName("token")
     var token: String? = null
     override fun toString(): String {

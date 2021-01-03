@@ -30,6 +30,15 @@ class ResponseTransporter {
     @SerializedName("mininglicense")
     var mininglicense: String? = null
 
+    @SerializedName("ename")
+    var emergencyName: String? = null
+
+    @SerializedName("erelation")
+    var emergencyRelation: String? = null
+
+    @SerializedName("emobile")
+    var emergencyMobile: String? = null
+
     @SerializedName("pan")
     var pan: String?  = null
     override fun toString(): String {

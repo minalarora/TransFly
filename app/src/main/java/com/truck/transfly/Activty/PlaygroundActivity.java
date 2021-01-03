@@ -1061,6 +1061,24 @@ public class PlaygroundActivity extends AppCompatActivity {
         });
     }
 
+    private void updateEmergencyContact2(String token, RequestEmergencyContact2 contact)
+    {
+        api.updateEmergencyContact2(token,contact).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response.code() ==200)
+                {
+                    //done
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+    }
+
 
 
 }
