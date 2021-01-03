@@ -1000,6 +1000,67 @@ public class PlaygroundActivity extends AppCompatActivity {
         });
     }
 
+    private void getResaleList(String token)
+    {
+        api.getAllResaleList(token).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response.code() == 200)
+                {
+                    ArrayList<ResponseResale> i = new ArrayList<>();
+                    Type collectionType = new TypeToken<ArrayList<ResponseResale>>(){}.getType();
+                    try {
+                        i.addAll(new Gson().fromJson(response.body().string().toString(),collectionType));
+                    } catch (IOException e) {
+
+                    }
+                    if(i.isEmpty())
+                    {
+
+                        Log.d("minal","no vehicle");
+                    }
+                    else
+                    {
+
+                        for(ResponseResale resale: i)
+                        {
+                            ArrayList<String> imageList = new ArrayList<>();
+                            for(int j =1;j<=resale.getTotalImage();j++)
+                            {
+                                imageList.add("https://transfly-ftr2t.ondigitalocean.app/resaleimage/" + resale.getId() + "/" + j);
+                            }
+                            resale.setImageList(imageList);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+    }
+
+
+    private void updateEmergencyContact(String token, RequestEmergencyContact contact)
+    {
+        api.updateEmergencyContact(token,contact).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response.code() ==200)
+                {
+                    //done
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+    }
+
 
 
 }
