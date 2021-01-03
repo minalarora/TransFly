@@ -4,6 +4,7 @@ package com.truck.transfly.Activty;
 
         import android.os.Bundle;
         import android.util.Log;
+        import android.widget.Toast;
 
         import com.google.gson.Gson;
         import com.google.gson.reflect.TypeToken;
@@ -274,6 +275,10 @@ public class PlaygroundActivity extends AppCompatActivity {
                     }
                     if(pendingList.isEmpty())
                     {
+
+                        Toast.makeText(PlaygroundActivity.this, "No Kyc Need, Everything is clear", Toast.LENGTH_SHORT).show();
+
+                        finish();
 
                         Log.d("minal","kyc completed");
                     }
