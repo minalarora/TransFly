@@ -5,6 +5,7 @@ import com.truck.transfly.Model.RequestBankDetails;
 import com.truck.transfly.Model.RequestBooking;
 import com.truck.transfly.Model.RequestCredentials;
 import com.truck.transfly.Model.RequestEmail;
+import com.truck.transfly.Model.RequestEmergencyContact;
 import com.truck.transfly.Model.RequestEmergencyDetails;
 import com.truck.transfly.Model.RequestFeedback;
 import com.truck.transfly.Model.RequestGstDetails;
@@ -155,6 +156,10 @@ public interface ApiEndpoints {
     @POST("/me/update")
     Call<ResponseBody> updateEmail(@Header("Authorization")String token, @Body RequestEmail email);
 
+    //update emergencycontact
+    @POST("/me/update")
+    Call<ResponseBody> updateEmergencyContact(@Header("Authorization")String token, @Body RequestEmergencyContact emergencyContact);
+
 
 
     //update password
@@ -165,6 +170,11 @@ public interface ApiEndpoints {
     //get banner
     @GET("/allbanner")
     Call<ResponseBody> getBanners(@Header("Authorization")String token);
+
+    @GET("/allresale")
+    Call<ResponseBody>  getAllResaleList(@Header("Authorization")String token);
+
+
 
     ///////////////////////////////////////
 
