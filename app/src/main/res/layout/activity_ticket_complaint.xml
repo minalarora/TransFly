@@ -93,7 +93,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:id="@+id/ticket_spinner"
-                        android:entries="@array/vehicle_owner"
+                        android:entries="@array/ticket"
                         />
 
 

@@ -64,6 +64,15 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.viewho
 
             holder.position_zero.setVisibility(View.VISIBLE);
 
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    onClickListener.onClick(null);
+
+                }
+            });
+
             return;
         }
 

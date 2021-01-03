@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
@@ -200,7 +201,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         navigation.enableAnimation(false);
         navigation.enableItemShiftingMode(false);
         navigation.enableShiftingMode(false);
-        navigation.setTextSize(12);
+        navigation.setTextSize(10);
         navigation.setPadding(0, 0, 0, 1);
         navigation.setIconSize(26, 26);
         navigation.setTextVisibility(true);
@@ -215,11 +216,29 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                         startActivity(new Intent(HomeActivity.this,OlxPageActivity.class));
 
-                        break;
+                        return false;
+
+                    case R.id.booking_status:
+
+                        startActivity(new Intent(HomeActivity.this,CurrentBookingActivity.class));
+
+                        return false;
+
+                    case R.id.new_booking:
+
+                        startActivity(new Intent(HomeActivity.this,SearchBarActivity.class));
+
+                        return false;
+
+                    case R.id.need_help:
+
+                        startActivity(new Intent(HomeActivity.this,TicketComplaintActivity.class));
+
+                        return false;
 
                 }
 
-                return false;
+                return true;
             }
         });
 
@@ -311,6 +330,10 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                     goToLocationWithAnimation(Double.parseDouble(requestArea.getArealatitude()), Double.parseDouble(requestArea.getArealongitude()),8);
 
+                } else {
+
+
+
                 }
 
             }
@@ -326,6 +349,12 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 Mylatitude = lastLocation.getLatitude();
                 Mylongitude = lastLocation.getLongitude();
+
+                SharedPreferences sharedPreferences=getSharedPreferences("currentLocation",MODE_PRIVATE);
+                SharedPreferences.Editor edit = sharedPreferences.edit();
+                edit.putString("lat", String.valueOf(Mylatitude));
+                edit.putString("long", String.valueOf(Mylongitude));
+                edit.apply();
 
                 LatLng latLng = new LatLng(Mylatitude, Mylongitude);
 

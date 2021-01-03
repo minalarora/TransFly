@@ -195,7 +195,7 @@ public class ShowInvoiceActivity extends AppCompatActivity {
         intentShareFile.setType(URLConnection.guessContentTypeFromName(file.getName()));
         intentShareFile.putExtra(Intent.EXTRA_STREAM,
                 imageUri);
-        intentShareFile.putExtra(Intent.EXTRA_TEXT,"hmmmmmmmmmm");
+        intentShareFile.putExtra(Intent.EXTRA_TEXT,"");
 
         //if you need
         //intentShareFile.putExtra(Intent.EXTRA_SUBJECT,"Sharing File Subject);

@@ -84,6 +84,7 @@
                     android:layout_height="@dimen/_150ssp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="30dp"
+                    android:visibility="gone"
                     android:id="@+id/choose_image"
                     android:background="@drawable/round_dotted_line">
 

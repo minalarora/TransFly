@@ -8,28 +8,28 @@
         android:title="Home" />
 
     <item
-        android:id="@+id/navigation_help"
-        android:icon="@drawable/need_help_checked"
-        android:visible="true"
-        android:title="Need Help" />
-
+        android:id="@+id/booking_status"
+        android:icon="@drawable/booking_status"
+        android:title="Booking Status"
+        />
 
     <item
-        android:id="@+id/navigation_contact"
-        android:icon="@drawable/contact_checked"
-        android:title="Referral"
+        android:id="@+id/new_booking"
+        android:icon="@drawable/new_booking"
+        android:title="New Booking"
         />
 
     <item
         android:id="@+id/vehicle_seller"
-        android:icon="@drawable/contact_checked"
+        android:icon="@drawable/vehicle_seller_bottom"
         android:title="Vehicle Seller"
         />
 
     <item
-        android:id="@+id/navigation_report"
-        android:icon="@drawable/report_checked"
-        android:title="Report"
-        />
+        android:id="@+id/need_help"
+        android:icon="@drawable/help_bottom"
+        android:visible="true"
+        android:title="Need Help" />
+
 
 </menu>

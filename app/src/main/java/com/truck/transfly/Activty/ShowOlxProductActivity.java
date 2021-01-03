@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,27 +18,55 @@ import com.truck.transfly.Adapter.ViewPagerImageCarouselAdapter;
 import com.truck.transfly.Model.ResponseResale;
 import com.truck.transfly.R;
 import com.truck.transfly.databinding.ActivityShowOlxProductBinding;
+import com.truck.transfly.utils.ApiClient;
+import com.truck.transfly.utils.ApiEndpoints;
+import com.truck.transfly.utils.PreferenceUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 import ru.tinkoff.scrollingpagerindicator.ScrollingPagerIndicator;
 
 public class ShowOlxProductActivity extends AppCompatActivity {
 
     private ResponseResale vehicleStore;
     private ArrayList<String> stringImage;
+    private Retrofit retrofit = null;
+    private ApiEndpoints api = null;
     private ActivityShowOlxProductBinding activity;
+    private FrameLayout parent_of_loading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity = DataBindingUtil.setContentView(this, R.layout.activity_show_olx_product);
 
+        retrofit = ApiClient.getRetrofitClient();
+        if (retrofit != null) {
+            api = retrofit.create(ApiEndpoints.class);
+        }
+
+        parent_of_loading=findViewById(R.id.parent_of_loading);
+        parent_of_loading.setVisibility(View.GONE);
+
         Intent intent = getIntent();
         vehicleStore = intent.getParcelableExtra("vehicleStore");
         stringImage =  intent.getStringArrayListExtra("stringImage");
+
+        findViewById(R.id.contact_us).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                contactForResale(PreferenceUtil.getData(ShowOlxProductActivity.this,"token"));
+
+            }
+        });
 
         activity.back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +112,38 @@ public class ShowOlxProductActivity extends AppCompatActivity {
         viewPager.setOffscreenPageLimit(6);
 
 
+    }
+
+    private void contactForResale(String token)
+    {
+        parent_of_loading.setVisibility(View.VISIBLE);
+
+        api.contactResale(token).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                parent_of_loading.setVisibility(View.GONE);
+
+                if (response.code() == 200) {
+
+                    Toast.makeText(ShowOlxProductActivity.this, "Send Email Successful, Contact You Soon", Toast.LENGTH_SHORT).show();
+
+                } else {
+
+                    Toast.makeText(ShowOlxProductActivity.this, "Something Went Wrong! Try Again", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                parent_of_loading.setVisibility(View.GONE);
+
+                Toast.makeText(ShowOlxProductActivity.this, "No Internet Connection! Try Again", Toast.LENGTH_SHORT).show();
+
+            }
+        });
     }
 
     private void setAvailable(TextView textView,boolean bool){

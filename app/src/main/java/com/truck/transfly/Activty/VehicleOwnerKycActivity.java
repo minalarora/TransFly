@@ -331,8 +331,6 @@ public class VehicleOwnerKycActivity extends AppCompatActivity {
 
         parent_of_loading.setVisibility(View.VISIBLE);
 
-        Log.i("TAG", "uploadMultipartSingle: "+storageList.get(0));
-
         MultipartUploadRequest multipartUploadRequest = null;
         try {
             multipartUploadRequest = new MultipartUploadRequest(this, EndApi.VEHICLE_OWNER_KYC)
