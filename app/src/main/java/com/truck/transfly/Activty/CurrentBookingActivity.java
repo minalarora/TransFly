@@ -1,5 +1,9 @@
 package com.truck.transfly.Activty;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,6 +22,7 @@ import com.google.gson.reflect.TypeToken;
 import com.truck.transfly.Adapter.CurrentBookingAdapter;
 import com.truck.transfly.Frament.RemoveDialogFragment;
 import com.truck.transfly.Model.ResponseBooking;
+import com.truck.transfly.Model.ResponseMine;
 import com.truck.transfly.R;
 import com.truck.transfly.databinding.ActivityCurrentBookingBinding;
 import com.truck.transfly.utils.ApiClient;
@@ -46,6 +51,8 @@ public class CurrentBookingActivity extends AppCompatActivity {
     private CurrentBookingAdapter currentBookingAdapter;
     private TextView no_booking_data;
     private RelativeLayout no_internet_connection;
+    private String lat;
+    private String aLongitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +66,10 @@ public class CurrentBookingActivity extends AppCompatActivity {
 
         parent_of_loading = findViewById(R.id.parent_of_loading);
         parent_of_loading.setVisibility(View.GONE);
+
+        SharedPreferences sharedPreferences=getSharedPreferences("currentLocation", Context.MODE_PRIVATE);
+        lat = sharedPreferences.getString("lat", "");
+        aLongitude = sharedPreferences.getString("long", "");
 
         findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,7 +103,14 @@ public class CurrentBookingActivity extends AppCompatActivity {
 
         currentBookingAdapter.setOnClickListener(new CurrentBookingAdapter.onClickListener() {
             @Override
-            public void onClick(ResponseBooking responseBooking, int position) {
+            public void onClick(ResponseBooking responseBooking, int position, boolean b) {
+
+                if(b){
+
+                    getSingleMine(PreferenceUtil.getData(CurrentBookingActivity.this,"token"), String.valueOf(responseBooking.getId()));
+
+                    return;
+                }
 
                 RemoveDialogFragment removeDialogFragment=new RemoveDialogFragment();
                 removeDialogFragment.setCancelable(false);
@@ -112,6 +130,57 @@ public class CurrentBookingActivity extends AppCompatActivity {
 
         getAllBookingVehicleOwner(PreferenceUtil.getData(CurrentBookingActivity.this,"token"));
 
+    }
+
+    private void getSingleMine(String token, String id)
+    {
+        parent_of_loading.setVisibility(View.VISIBLE);
+
+        api.getSingleMine(token,id).enqueue(new Callback<ResponseMine>() {
+            @Override
+            public void onResponse(Call<ResponseMine> call, Response<ResponseMine> response) {
+
+                parent_of_loading.setVisibility(View.GONE);
+
+                if(response.code() == 200)
+                {
+                    ResponseMine mine  = response.body();
+
+                    if(mine==null){
+
+                        parent_of_loading.setVisibility(View.GONE);
+                        Toast.makeText(CurrentBookingActivity.this, "Something Went Wrong! Try Again", Toast.LENGTH_SHORT).show();
+
+                        return;
+
+                    }
+
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+
+                    String uri = "http://maps.google.com/maps?saddr=" + lat + "," + aLongitude + "&daddr=" + mine.getLatitude() + "," + mine.getLongitude();
+
+                    intent.setData(Uri.parse(uri));
+                    if (intent.resolveActivity(getPackageManager()) != null) {
+                        startActivity(intent);
+                    }
+
+                } else {
+
+                    parent_of_loading.setVisibility(View.GONE);
+                    Toast.makeText(CurrentBookingActivity.this, "Something Went Wrong! Try Again", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseMine> call, Throwable t) {
+
+                parent_of_loading.setVisibility(View.GONE);
+                Toast.makeText(CurrentBookingActivity.this, "No Internet Connection! Try Again", Toast.LENGTH_SHORT).show();
+
+
+            }
+        });
     }
 
     private void deleteBooking(String token, int id, int position)
