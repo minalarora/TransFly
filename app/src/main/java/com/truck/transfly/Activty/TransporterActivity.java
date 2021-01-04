@@ -2,6 +2,8 @@ package com.truck.transfly.Activty;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,6 +26,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.truck.transfly.Adapter.TransporterAdapter;
+import com.truck.transfly.Frament.ShowInvoiceFragment;
 import com.truck.transfly.Model.ResponseFieldStaff;
 import com.truck.transfly.Model.ResponseInvoice;
 import com.truck.transfly.Model.ResponseTransporter;
@@ -32,11 +35,17 @@ import com.truck.transfly.utils.ApiClient;
 import com.truck.transfly.utils.ApiEndpoints;
 import com.truck.transfly.utils.PreferenceUtil;
 import com.truck.transfly.utils.TransflyApplication;
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.yalantis.phoenix.PullToRefreshView;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import okhttp3.ResponseBody;
@@ -45,7 +54,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class TransporterActivity extends AppCompatActivity {
+public class TransporterActivity extends AppCompatActivity implements com.wdullaer.materialdatetimepicker.date.DatePickerDialog.OnDateSetListener {
 
     private RecyclerView areaManagerRecycler;
     private ImageView viewById;
@@ -137,6 +146,28 @@ public class TransporterActivity extends AppCompatActivity {
         viewById = findViewById(R.id.drawer_icon);
 
         drawerLayout = findViewById(R.id.drawer_layout);
+
+        CardView calenderSelected = findViewById(R.id.calender_selected);
+
+        calenderSelected.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Calendar now = Calendar.getInstance();
+                com.wdullaer.materialdatetimepicker.date.DatePickerDialog dpd = com.wdullaer.materialdatetimepicker.date.DatePickerDialog.newInstance(
+                        TransporterActivity.this,
+                        now.get(Calendar.YEAR), // Initial year selection
+                        now.get(Calendar.MONTH), // Initial month selection
+                        now.get(Calendar.DAY_OF_MONTH) // Inital day selection
+                );
+
+                dpd.setVersion(com.wdullaer.materialdatetimepicker.date.DatePickerDialog.Version.VERSION_1);
+
+                dpd.setAccentColor(ContextCompat.getColor(TransporterActivity.this, R.color.quantum_pink));
+
+                dpd.show(getSupportFragmentManager(), "Datepickerdialog");
+            }
+        });
 
         viewById.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -308,4 +339,27 @@ public class TransporterActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+
+        String str_date = monthOfYear + "-" + dayOfMonth + "-" + year;
+        DateFormat formatter = new SimpleDateFormat("MM-dd-yyyy");
+        Date date = null;
+        try {
+            date = (Date) formatter.parse(str_date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        if (date == null)
+
+            return;
+
+        long output = date.getTime() / 1000L;
+        String str = Long.toString(output);
+        long timestamp = Long.parseLong(str) * 1000;
+
+        Log.i("TAG", "onDateSet: " + timestamp);
+
+    }
 }

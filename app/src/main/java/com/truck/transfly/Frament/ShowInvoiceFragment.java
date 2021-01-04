@@ -95,8 +95,6 @@ public class ShowInvoiceFragment extends Fragment implements com.wdullaer.materi
 
         CardView calenderSelected = inflate.findViewById(R.id.calender_selected);
 
-        Log.i("TAG", "onCreateView: "+PreferenceUtil.getData(fragmentActivity,"token"));
-
         calenderSelected.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

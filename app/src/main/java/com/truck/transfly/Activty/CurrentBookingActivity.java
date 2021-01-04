@@ -107,7 +107,7 @@ public class CurrentBookingActivity extends AppCompatActivity {
 
                 if(b){
 
-                    getSingleMine(PreferenceUtil.getData(CurrentBookingActivity.this,"token"), String.valueOf(responseBooking.getId()));
+                    getSingleMine(PreferenceUtil.getData(CurrentBookingActivity.this,"token"), responseBooking.getMineid());
 
                     return;
                 }
@@ -132,7 +132,7 @@ public class CurrentBookingActivity extends AppCompatActivity {
 
     }
 
-    private void getSingleMine(String token, String id)
+    private void getSingleMine(String token, int id)
     {
         parent_of_loading.setVisibility(View.VISIBLE);
 

@@ -1104,38 +1104,7 @@ public class PlaygroundActivity extends AppCompatActivity {
     }
 
 
-
-<<<<<<< HEAD
-    private void getSingleMine(String token, String id)
-=======
-
-    private void getNearmeArea(String token, RequestCoordinates coordinates)
-    {
-        api.nearmeArea(token,coordinates).enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if(response.code()==200)
-                {
-                    try {
-                        String areaname  = response.body().string().toString();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-
-            }
-        });
-    }
-
-
     private void getSingleMine(String token, int id)
->>>>>>> 18ba7236ce9b52f26b9597cac22d95db9f595658
     {
         api.getSingleMine(token,id).enqueue(new Callback<ResponseMine>() {
             @Override
