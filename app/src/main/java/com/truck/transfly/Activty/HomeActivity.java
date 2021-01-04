@@ -138,6 +138,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
     private String loading;
     private FrameLayout parent_of_loading;
     private RelativeLayout no_internet_connection;
+    private String areaname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -158,7 +159,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         parent_of_loading = findViewById(R.id.parent_of_loading);
         parent_of_loading.setVisibility(View.GONE);
-
+        
         no_internet_connection = findViewById(R.id.no_internet_connection);
         findViewById(R.id.pullToRefresh_button).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -554,42 +555,46 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
     private void getNearmeArea(String token, RequestCoordinates coordinates) {
         parent_of_loading.setVisibility(View.VISIBLE);
 
-        api.nearmeArea(token, coordinates).enqueue(new Callback<String>() {
+        api.nearmeArea(token,coordinates).enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
                 parent_of_loading.setVisibility(View.GONE);
 
                 if (response.code() == 200) {
 
-                    String areaname = response.body().toString();
+                    try {
+                        areaname = response.body().string().toString();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
 
-                    Toast.makeText(HomeActivity.this, ""+areaname, Toast.LENGTH_SHORT).show();
+                    mGoogleMap.clear();
 
-//                    ShowLoadingDialogFragment showLoadingDialogFragment = new ShowLoadingDialogFragment();
-//
-//                    Bundle bundle = new Bundle();
-//                    bundle.putStringArrayList("loadingList", loadinglist);
-//                    showLoadingDialogFragment.setArguments(bundle);
-//
-//                    showLoadingDialogFragment.show(getSupportFragmentManager(), "showLoadingFragment");
-//
-//                    showLoadingDialogFragment.setOnClickListener(new ShowLoadingDialogFragment.onClickListener() {
-//                        @Override
-//                        public void onClick(String loading) {
-//
-//                            HomeActivity.this.loading = loading;
-//
-//                            ArrayList<ResponseMine> allMineOfSingleArea = getAllMineOfSingleArea(areaname, loading);
-//
-//                            for (ResponseMine responseMine : allMineOfSingleArea) {
-//
-//                                showMarkerOfArea(Double.parseDouble(responseMine.getLatitude()), Double.parseDouble(responseMine.getLongitude()), responseMine, responseMine.getName());
-//
-//                            }
-//
-//                        }
-//                    });
+                    ShowLoadingDialogFragment showLoadingDialogFragment = new ShowLoadingDialogFragment();
+
+                    Bundle bundle = new Bundle();
+                    bundle.putStringArrayList("loadingList", loadinglist);
+                    showLoadingDialogFragment.setArguments(bundle);
+
+                    showLoadingDialogFragment.show(getSupportFragmentManager(), "showLoadingFragment");
+
+                    showLoadingDialogFragment.setOnClickListener(new ShowLoadingDialogFragment.onClickListener() {
+                        @Override
+                        public void onClick(String loading) {
+
+                            HomeActivity.this.loading = loading;
+
+                            ArrayList<ResponseMine> allMineOfSingleArea = getAllMineOfSingleArea(areaname, loading);
+
+                            for (ResponseMine responseMine : allMineOfSingleArea) {
+
+                                showMarkerOfArea(Double.parseDouble(responseMine.getLatitude()), Double.parseDouble(responseMine.getLongitude()), responseMine, responseMine.getName());
+
+                            }
+
+                        }
+                    });
 
                 } else {
 
@@ -601,11 +606,11 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
 
                 parent_of_loading.setVisibility(View.GONE);
 
-                Toast.makeText(HomeActivity.this, "No Internet Connection! Try Again"+t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(HomeActivity.this, ""+t.getMessage(), Toast.LENGTH_SHORT).show();
 
             }
         });

@@ -51,11 +51,10 @@
         android:layout_height="@dimen/_50ssp">
 
         <ImageView
-            android:layout_width="@dimen/_30ssp"
+            android:layout_width="32dp"
             android:layout_height="@dimen/_30ssp"
             android:layout_gravity="center"
-            android:src="@drawable/clander_planner"
-            />
+            android:src="@drawable/clander_planner" />
 
     </androidx.cardview.widget.CardView>
 
