@@ -188,7 +188,7 @@ public interface ApiEndpoints {
 
 
     @POST("/nearme/mine")
-    Call<ResponseBody> nearmeArea(@Header("Authorization")String token, @Body RequestCoordinates coordinates);
+    Call<String> nearmeArea(@Header("Authorization")String token, @Body RequestCoordinates coordinates);
 
 
     @GET("/mine/{id}")

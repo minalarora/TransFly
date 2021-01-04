@@ -1105,6 +1105,9 @@ public class PlaygroundActivity extends AppCompatActivity {
 
 
 
+<<<<<<< HEAD
+    private void getSingleMine(String token, String id)
+=======
 
     private void getNearmeArea(String token, RequestCoordinates coordinates)
     {
@@ -1132,6 +1135,7 @@ public class PlaygroundActivity extends AppCompatActivity {
 
 
     private void getSingleMine(String token, int id)
+>>>>>>> 18ba7236ce9b52f26b9597cac22d95db9f595658
     {
         api.getSingleMine(token,id).enqueue(new Callback<ResponseMine>() {
             @Override
