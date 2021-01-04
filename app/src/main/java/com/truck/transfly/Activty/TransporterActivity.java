@@ -38,6 +38,8 @@ import com.truck.transfly.utils.TransflyApplication;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.yalantis.phoenix.PullToRefreshView;
 
+import org.joda.time.DateTime;
+
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.text.DateFormat;
@@ -96,7 +98,7 @@ public class TransporterActivity extends AppCompatActivity implements com.wdulla
                 invoicesList.clear();
                 no_internet_connection.setVisibility(View.GONE);
                 fieldStafAdapter.notifyDataSetChanged();
-                getInvoiceTransporter(PreferenceUtil.getData(TransporterActivity.this,"token"));
+                getInvoiceTransporter(PreferenceUtil.getData(TransporterActivity.this,"token"),String.valueOf(new Date().getTime()));
 
             }
         });
@@ -108,7 +110,7 @@ public class TransporterActivity extends AppCompatActivity implements com.wdulla
             public void onRefresh() {
 
                 invoicesList.clear();
-                getInvoiceTransporter(PreferenceUtil.getData(TransporterActivity.this,"token"));
+                getInvoiceTransporter(PreferenceUtil.getData(TransporterActivity.this,"token"),String.valueOf(new Date().getTime()));
 
                 fieldStafAdapter.notifyDataSetChanged();
 
@@ -185,7 +187,7 @@ public class TransporterActivity extends AppCompatActivity implements com.wdulla
             }
         });
 
-        getInvoiceTransporter(PreferenceUtil.getData(TransporterActivity.this,"token"));
+        getInvoiceTransporter(PreferenceUtil.getData(TransporterActivity.this,"token"),String.valueOf(new Date().getTime()));
 
     }
 
@@ -279,13 +281,13 @@ public class TransporterActivity extends AppCompatActivity implements com.wdulla
 
     }
 
-    private void getInvoiceTransporter(String token)
+    private void getInvoiceTransporter(String token,String timestamp)
     {
         no_internet_connection.setVisibility(View.GONE);
         no_booking_data.setVisibility(View.GONE);
         parent_of_loading.setVisibility(View.VISIBLE);
 
-        api.getInvoiceTransporter(token).enqueue(new Callback<ResponseBody>() {
+        api.getInvoiceTransporter(token,timestamp).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
@@ -342,24 +344,10 @@ public class TransporterActivity extends AppCompatActivity implements com.wdulla
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
 
-        String str_date = monthOfYear + "-" + dayOfMonth + "-" + year;
-        DateFormat formatter = new SimpleDateFormat("MM-dd-yyyy");
-        Date date = null;
-        try {
-            date = (Date) formatter.parse(str_date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        DateTime dateTime=new DateTime(year,monthOfYear+1,dayOfMonth,new DateTime().getHourOfDay(),new DateTime().getMinuteOfHour());
 
-        if (date == null)
-
-            return;
-
-        long output = date.getTime() / 1000L;
-        String str = Long.toString(output);
-        long timestamp = Long.parseLong(str) * 1000;
-
-        Log.i("TAG", "onDateSet: " + timestamp);
-
+        invoicesList.clear();
+        fieldStafAdapter.notifyDataSetChanged();
+        getInvoiceTransporter(PreferenceUtil.getData(TransporterActivity.this, "token"), String.valueOf(dateTime.getMillis()));
     }
 }

@@ -257,6 +257,7 @@
                         android:fontFamily="@font/poppins"
                         android:hint="Tonnege (in Kg*)"
                         android:imeOptions="actionNext"
+                        android:maxLines="5"
                         android:id="@+id/tonnege"
                         android:inputType="number"
                         android:textSize="@dimen/_12ssp" />
@@ -279,6 +280,7 @@
                         android:fontFamily="@font/poppins"
                         android:hint="Rate*"
                         android:id="@+id/rate"
+                        android:maxLines="5"
                         android:imeOptions="actionNext"
                         android:inputType="number"
                         android:textSize="@dimen/_12ssp" />
@@ -301,6 +303,7 @@
                         android:fontFamily="@font/poppins"
                         android:hint="HSD"
                         android:id="@+id/hsd"
+                        android:maxLines="5"
                         android:imeOptions="actionNext"
                         android:inputType="number"
                         android:textSize="@dimen/_12ssp" />
@@ -345,6 +348,7 @@
                         android:background="@android:color/transparent"
                         android:fontFamily="@font/poppins"
                         android:hint="Cash"
+                        android:maxLines="5"
                         android:id="@+id/cash"
                         android:imeOptions="actionNext"
                         android:inputType="number"
