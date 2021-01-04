@@ -138,12 +138,12 @@ public interface ApiEndpoints {
     Call<ResponseBody> getInvoiceVehicleOwner(@Header("Authorization")String token);
 
     //get  invoice of areamanager
-    @GET("/allinvoice/areamanager")
-    Call<ResponseBody> getInvoiceAreaManager(@Header("Authorization")String token);
+    @GET("/allinvoice/areamanager/{timestamp}")
+    Call<ResponseBody> getInvoiceAreaManager(@Header("Authorization")String token, @Path("timestamp") int timestamp);
 
     //get  invoice of vehicleowner
-    @GET("/allinvoice/transporter")
-    Call<ResponseBody> getInvoiceTransporter(@Header("Authorization")String token);
+    @GET("/allinvoice/transporter/{timestamp}")
+    Call<ResponseBody> getInvoiceTransporter(@Header("Authorization")String token,@Path("timestamp") int timestamp);
 
 
     //get reward

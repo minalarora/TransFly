@@ -742,9 +742,9 @@ public class PlaygroundActivity extends AppCompatActivity {
     }
 
 
-    private void getInvoiceAreaManager(String token)
+    private void getInvoiceAreaManager(String token,int timestamp)
     {
-        api.getInvoiceAreaManager(token).enqueue(new Callback<ResponseBody>() {
+        api.getInvoiceAreaManager(token,timestamp).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if(response.code() == 200)
@@ -780,9 +780,9 @@ public class PlaygroundActivity extends AppCompatActivity {
     }
 
 
-    private void getInvoiceTransporter(String token)
+    private void getInvoiceTransporter(String token,int timestamp)
     {
-        api.getInvoiceTransporter(token).enqueue(new Callback<ResponseBody>() {
+        api.getInvoiceTransporter(token,timestamp).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if(response.code() == 200)
