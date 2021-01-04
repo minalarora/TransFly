@@ -742,7 +742,7 @@ public class PlaygroundActivity extends AppCompatActivity {
     }
 
 
-    private void getInvoiceAreaManager(String token,int timestamp)
+    private void getInvoiceAreaManager(String token,String timestamp)
     {
         api.getInvoiceAreaManager(token,timestamp).enqueue(new Callback<ResponseBody>() {
             @Override
@@ -780,7 +780,7 @@ public class PlaygroundActivity extends AppCompatActivity {
     }
 
 
-    private void getInvoiceTransporter(String token,int timestamp)
+    private void getInvoiceTransporter(String token,String timestamp)
     {
         api.getInvoiceTransporter(token,timestamp).enqueue(new Callback<ResponseBody>() {
             @Override
