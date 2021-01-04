@@ -51,7 +51,7 @@ public class ReferAdapter extends RecyclerView.Adapter<ReferAdapter.ViewHolderSu
         holder.only_text.setVisibility(View.GONE);
         holder.only_images.setVisibility(View.GONE);
 
-        if(responseReward.getStatus()==3) {
+        if(responseReward.getStatus()==1) {
             holder.only_images.setVisibility(View.VISIBLE);
             Glide.with(context).load(responseReward.getIm()).into(holder.image3);
         }else if(responseReward.getStatus()==2) {
@@ -61,6 +61,8 @@ public class ReferAdapter extends RecyclerView.Adapter<ReferAdapter.ViewHolderSu
             holder.only_text_image.setVisibility(View.VISIBLE);
             holder.text1.setText(responseReward.getText());
             Glide.with(context).load(responseReward.getIm()).into(holder.image1);
+
+            Log.d("TAG", "onBindViewHolder: "+responseReward.getIm());
 
         }
 

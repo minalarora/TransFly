@@ -90,6 +90,7 @@
                     android:layout_gravity="bottom|end"
                     app:cardBackgroundColor="@color/project_color"
                     app:cardCornerRadius="@dimen/_30ssp"
+                    android:visibility="gone"
                     android:layout_height="@dimen/_50ssp">
 
                     <ImageView

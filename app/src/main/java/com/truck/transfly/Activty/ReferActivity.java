@@ -63,6 +63,13 @@ public class ReferActivity extends AppCompatActivity {
         parent_of_loading = findViewById(R.id.parent_of_loading);
         parent_of_loading.setVisibility(View.GONE);
 
+        TextView toolbarHeading=findViewById(R.id.toolbarHeading);
+
+        if (keyword != null && keyword.equals("refer"))
+            toolbarHeading.setText("Referral Program");
+        else
+            toolbarHeading.setText("Reward");
+
         no_internet_connection = findViewById(R.id.no_internet_connection);
         findViewById(R.id.pullToRefresh_button).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,7 +150,7 @@ public class ReferActivity extends AppCompatActivity {
 
                                 reward.setIm("https://transfly-ftr2t.ondigitalocean.app/rewardimage/" + reward.getId());
 
-                            } else if (reward.getStatus() == 3) {
+                            } else if (reward.getStatus() == 0) {
 
                                 reward.setIm("https://transfly-ftr2t.ondigitalocean.app/rewardimage/" + reward.getId());
 
@@ -202,7 +209,7 @@ public class ReferActivity extends AppCompatActivity {
 
                             reward.setIm("https://transfly-ftr2t.ondigitalocean.app/referralimage/" + reward.getId());
 
-                        } else if (reward.getStatus() == 3) {
+                        } else if (reward.getStatus() == 0) {
 
                             reward.setIm("https://transfly-ftr2t.ondigitalocean.app/referralimage/" + reward.getId());
 

@@ -45,7 +45,7 @@ public class FieldStafAdapter extends RecyclerView.Adapter<FieldStafAdapter.view
 
         ResponseBooking responseBooking = responseBookingList.get(position);
 
-        holder.to_from_dest.setText(responseBooking.getLoading()+" - "+responseBooking.getMinename());
+        holder.to_from_dest.setText(responseBooking.getMinename()+" - "+responseBooking.getLoading());
         holder.number.setText(responseBooking.getVehicleownermobile());
         holder.name_of_owner.setText(responseBooking.getVehicleowner());
 

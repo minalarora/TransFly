@@ -163,7 +163,7 @@ public class ShowInvoiceFragment extends Fragment implements com.wdullaer.materi
 
     }
 
-    private void getInvoiceAreaManager(String token,String timestamp) {
+    private void getInvoiceAreaManager(String token, String timestamp) {
         no_internet_connection.setVisibility(View.GONE);
         no_booking_data.setVisibility(View.GONE);
         parent_of_loading.setVisibility(View.VISIBLE);

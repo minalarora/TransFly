@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -131,6 +132,13 @@ public class TransporterActivity extends AppCompatActivity implements com.wdulla
 
         NavigationView navigationView = findViewById(R.id.nav_view);
 //        navigationView.setNavigationItemSelectedListener(map);
+
+        Menu menu = navigationView.getMenu();
+        MenuItem bankDetails = menu.findItem(R.id.bank_details);
+        bankDetails.setVisible(false);
+
+        MenuItem emergency_details = menu.findItem(R.id.emergency_details);
+        emergency_details.setVisible(false);
 
         View headerLayout = navigationView.getHeaderView(0);
         TextView customerName = headerLayout.findViewById(R.id.customer_name);
@@ -343,6 +351,7 @@ public class TransporterActivity extends AppCompatActivity implements com.wdulla
 
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+
 
         DateTime dateTime=new DateTime(year,monthOfYear+1,dayOfMonth,new DateTime().getHourOfDay(),new DateTime().getMinuteOfHour());
 

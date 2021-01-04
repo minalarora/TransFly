@@ -11,10 +11,13 @@ class RequestArea {
     @SerializedName("arealongitude")
     var arealongitude: String? = null
 
-    constructor(name: String?, arealatitude: String?, arealongitude: String?) {
+    var areaimage: String? = null
+
+    constructor(name: String?, arealatitude: String?, arealongitude: String?,areaimage: String?) {
         this.name = name
         this.arealatitude = arealatitude
         this.arealongitude = arealongitude
+        this.areaimage = areaimage
     }
 
 

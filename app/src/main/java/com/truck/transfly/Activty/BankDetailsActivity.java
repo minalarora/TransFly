@@ -24,6 +24,11 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.nabinbhandari.android.permissions.PermissionHandler;
 import com.nabinbhandari.android.permissions.Permissions;
+import com.truck.transfly.Model.ResponseAreaManager;
+import com.truck.transfly.Model.ResponseFieldStaff;
+import com.truck.transfly.Model.ResponseTransporter;
+import com.truck.transfly.Model.ResponseVehicle;
+import com.truck.transfly.Model.ResponseVehicleOwner;
 import com.truck.transfly.R;
 import com.truck.transfly.databinding.ActivityBankDetailsBinding;
 import com.truck.transfly.databinding.ActivityKycEditBinding;
@@ -31,6 +36,7 @@ import com.truck.transfly.utils.ApiClient;
 import com.truck.transfly.utils.ApiEndpoints;
 import com.truck.transfly.utils.EndApi;
 import com.truck.transfly.utils.PreferenceUtil;
+import com.truck.transfly.utils.TransflyApplication;
 import com.zhihu.matisse.Matisse;
 import com.zhihu.matisse.MimeType;
 import com.zhihu.matisse.engine.impl.GlideEngine;
@@ -97,6 +103,46 @@ public class BankDetailsActivity extends AppCompatActivity {
 
             }
         });
+
+        String token = PreferenceUtil.getData(BankDetailsActivity.this, "token");
+
+        String s = token.split(":")[0];
+
+        switch (s){
+
+            case "vehicleowner":
+
+                ResponseVehicleOwner responseVehicleOwner = ((TransflyApplication) getApplication()).getResponseVehicleOwner();
+
+                activity.bankName.setText(responseVehicleOwner.getBankname());
+                activity.bankIfc.setText(responseVehicleOwner.getIfsc());
+                activity.bankNumber.setText(responseVehicleOwner.getAccountno());
+
+                break;
+
+            case "areamanager":
+
+                ResponseAreaManager responseAreaManager = ((TransflyApplication) getApplication()).getResponseAreaManager();
+
+                activity.bankName.setText(responseAreaManager.getBankname());
+                activity.bankIfc.setText(responseAreaManager.getIfsc());
+                activity.bankNumber.setText(responseAreaManager.getAccountno());
+
+                break;
+
+            case "fieldstaff":
+
+                ResponseFieldStaff responseFieldStaff = ((TransflyApplication) getApplication()).getResponseFieldStaff();
+
+                activity.bankName.setText(responseFieldStaff.getBankname());
+                activity.bankIfc.setText(responseFieldStaff.getIfsc());
+                activity.bankNumber.setText(responseFieldStaff.getAccountno());
+
+                break;
+
+
+
+        }
 
         activity.submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -275,9 +321,7 @@ public class BankDetailsActivity extends AppCompatActivity {
 
                                     parent_of_loading.setVisibility(View.GONE);
 
-//                                    Intent intent = new Intent(StepThreeActivity.this, StepFourActivity.class);
-//                                    intent.putExtra("listing_id", listing_id);
-//                                    startActivity(intent);
+                                    setDataOnModels();
 
                                     Toast.makeText(context, "Update Successfully", Toast.LENGTH_SHORT).show();
 
@@ -311,6 +355,54 @@ public class BankDetailsActivity extends AppCompatActivity {
 //        }
 
         multipartUploadRequest.startUpload();
+
+    }
+
+    private void setDataOnModels() {
+
+
+        String token = PreferenceUtil.getData(BankDetailsActivity.this, "token");
+
+        String s = token.split(":")[0];
+
+        switch (s){
+
+            case "vehicleowner":
+
+                ResponseVehicleOwner responseVehicleOwner=new ResponseVehicleOwner();
+                responseVehicleOwner.setAccountno(activity.bankNumber.getText().toString());
+                responseVehicleOwner.setBankname(activity.bankName.getText().toString());
+                responseVehicleOwner.setIfsc(activity.bankIfc.getText().toString());
+
+                ((TransflyApplication) getApplication()).setResponseVehicleOwner(responseVehicleOwner);
+
+                break;
+
+            case "areamanager":
+
+                ResponseAreaManager responseAreaManager=new ResponseAreaManager();
+                responseAreaManager.setAccountno(activity.bankNumber.getText().toString());
+                responseAreaManager.setBankname(activity.bankName.getText().toString());
+                responseAreaManager.setIfsc(activity.bankIfc.getText().toString());
+
+                ((TransflyApplication) getApplication()).setResponseAreaManager(responseAreaManager);
+
+
+                break;
+
+            case "fieldstaff":
+
+                ResponseFieldStaff responseFieldStaff=new ResponseFieldStaff();
+                responseFieldStaff.setAccountno(activity.bankNumber.getText().toString());
+                responseFieldStaff.setBankname(activity.bankName.getText().toString());
+                responseFieldStaff.setIfsc(activity.bankIfc.getText().toString());
+
+                ((TransflyApplication) getApplication()).setResponseFieldStaff(responseFieldStaff);
+
+                break;
+
+
+        }
 
     }
 

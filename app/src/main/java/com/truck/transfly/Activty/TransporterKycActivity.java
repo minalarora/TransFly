@@ -118,6 +118,14 @@ public class TransporterKycActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                if(storageList==null || storageList.size()==0){
+
+                    Toast.makeText(TransporterKycActivity.this, "Please upload a document image*", Toast.LENGTH_SHORT).show();
+
+                    return;
+
+                }
+
                 int position = activity.registerCategory.getSelectedItemPosition();
 
                 if(activity.registerCategory.getSelectedItem().toString().equals("aadhaar")){

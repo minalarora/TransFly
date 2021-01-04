@@ -302,7 +302,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                     HomeActivity.this.requestArea = requestArea;
 
-                    showMarker(Double.parseDouble(requestArea.getArealatitude()), Double.parseDouble(requestArea.getArealongitude()), 1, requestArea.getName());
+//                    showMarker(Double.parseDouble(requestArea.getArealatitude()), Double.parseDouble(requestArea.getArealongitude()), 1, requestArea.getName());
 
                     ShowLoadingDialogFragment showLoadingDialogFragment = new ShowLoadingDialogFragment();
 
@@ -485,7 +485,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                         Set<String> loadings = new HashSet<>();
                         Set<RequestArea> areass = new HashSet<>();
                         for (ResponseMine mine : mines) {
-                            areas.put(mine.getArea(), new RequestArea(mine.getArea(), mine.getArealatitude(), mine.getArealongitude()));
+                            areas.put(mine.getArea(), new RequestArea(mine.getArea(), mine.getArealatitude(), mine.getArealongitude(),mine.getAreaimageurl()));
                             for (String loading : mine.getLoading()) {
                                 loadings.add(loading);
                             }
@@ -972,7 +972,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         markerOptions.snippet("This is my spot!");
         Marker marker = mGoogleMap.addMarker(markerOptions);
 
-        marker.setIcon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon(locationAddress)));
+        marker.setIcon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon("Rate : "+responseMine.getRate() +"\n"+"Etl : "+responseMine.getEtl())));
 
         marker.setTag(responseMine);
 

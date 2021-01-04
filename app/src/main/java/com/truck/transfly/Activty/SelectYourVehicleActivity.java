@@ -18,11 +18,13 @@ import com.google.gson.reflect.TypeToken;
 import com.truck.transfly.Adapter.SmallIconsAdapter;
 import com.truck.transfly.Model.RequestBooking;
 import com.truck.transfly.Model.ResponseVehicle;
+import com.truck.transfly.Model.ResponseVehicleOwner;
 import com.truck.transfly.R;
 import com.truck.transfly.databinding.ActivitySelectYourVehicleBinding;
 import com.truck.transfly.utils.ApiClient;
 import com.truck.transfly.utils.ApiEndpoints;
 import com.truck.transfly.utils.PreferenceUtil;
+import com.truck.transfly.utils.TransflyApplication;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -170,6 +172,8 @@ public class SelectYourVehicleActivity extends AppCompatActivity {
 
     private void sendDataOnServer(Boolean active, int status) {
 
+        ResponseVehicleOwner responseVehicleOwner = ((TransflyApplication) getApplication()).getResponseVehicleOwner();
+
         if(status==0){
 
             Toast.makeText(this, "This vehicle is Not Approved", Toast.LENGTH_SHORT).show();
@@ -178,7 +182,12 @@ public class SelectYourVehicleActivity extends AppCompatActivity {
 
             Toast.makeText(this, "This vehicle is Already in booking", Toast.LENGTH_SHORT).show();
 
-        } else {
+        } else if(responseVehicleOwner.getStatus()!=2) {
+
+            Toast.makeText(this, "First! Complete Your KYC...", Toast.LENGTH_SHORT).show();
+
+        }
+        else {
 
             RequestBooking requestBooking=new RequestBooking();
             requestBooking.setLoading(loading);

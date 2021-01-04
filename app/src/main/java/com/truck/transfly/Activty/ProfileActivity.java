@@ -2,12 +2,10 @@ package com.truck.transfly.Activty;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-import androidx.databinding.ViewDataBinding;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import com.truck.transfly.Frament.GmailUpdateFragment;
 import com.truck.transfly.Model.ResponseAreaManager;
@@ -41,10 +39,9 @@ public class ProfileActivity extends AppCompatActivity {
 
                 gmailUpdateFragment.setonClickListener(new GmailUpdateFragment.onClickListener() {
                     @Override
-                    public void onClick() {
+                    public void onClick(String email) {
 
-                        ResponseVehicleOwner responseVehicleOwner = ((TransflyApplication) getApplication()).getResponseVehicleOwner();
-                        activity.email.setText(responseVehicleOwner.getEmail());
+                        activity.email.setText(email);
 
                     }
                 });

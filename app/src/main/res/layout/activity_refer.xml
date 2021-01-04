@@ -39,6 +39,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="10dp"
                 android:layout_toEndOf="@+id/back"
+                android:id="@+id/toolbarHeading"
                 android:fontFamily="@font/worksansmedium"
                 android:text="Refer"
                 android:textColor="@android:color/black"
@@ -65,7 +66,7 @@
         android:layout_centerInParent="true"
         android:layout_toEndOf="@+id/back"
         android:fontFamily="@font/poppins"
-        android:text="No Current Booking"
+        android:text="No Data Found"
         android:textColor="@android:color/black"
         android:textSize="@dimen/_16ssp" />
 

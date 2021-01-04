@@ -17,6 +17,9 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 
 import com.truck.transfly.Model.RequestEmail;
+import com.truck.transfly.Model.ResponseAreaManager;
+import com.truck.transfly.Model.ResponseFieldStaff;
+import com.truck.transfly.Model.ResponseTransporter;
 import com.truck.transfly.Model.ResponseVehicleOwner;
 import com.truck.transfly.R;
 import com.truck.transfly.utils.ApiClient;
@@ -46,7 +49,7 @@ public class GmailUpdateFragment extends DialogFragment {
 
     public interface onClickListener{
 
-        void onClick();
+        void onClick(String email);
 
     }
 
@@ -158,15 +161,11 @@ public class GmailUpdateFragment extends DialogFragment {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.code() == 200) {
 
-                    ResponseVehicleOwner responseVehicleOwner = ((TransflyApplication) fragmentActivity.getApplication()).getResponseVehicleOwner();
-
-                    responseVehicleOwner.setEmail(email.getEmail());
-
-                    ((TransflyApplication) fragmentActivity.getApplication()).setResponseVehicleOwner(responseVehicleOwner);
+                   setDataOnModels(email);
 
                     Toast.makeText(fragmentActivity, "Update Email Successfully", Toast.LENGTH_SHORT).show();
 
-                    onClickListener.onClick();
+                    onClickListener.onClick(email.getEmail());
 
                     dismiss();
 
@@ -193,5 +192,59 @@ public class GmailUpdateFragment extends DialogFragment {
 
             }
         });
+    }
+
+    private void setDataOnModels(RequestEmail email) {
+
+        String token = PreferenceUtil.getData(fragmentActivity, "token");
+
+        String s = token.split(":")[0];
+
+        switch (s){
+
+            case "vehicleowner":
+
+                ResponseVehicleOwner responseVehicleOwner = ((TransflyApplication) fragmentActivity.getApplication()).getResponseVehicleOwner();
+
+                responseVehicleOwner.setEmail(email.getEmail());
+
+                ((TransflyApplication) fragmentActivity.getApplication()).setResponseVehicleOwner(responseVehicleOwner);
+
+                break;
+
+            case "areamanager":
+
+                ResponseAreaManager responseAreaManager = ((TransflyApplication) fragmentActivity.getApplication()).getResponseAreaManager();
+
+                responseAreaManager.setEmail(email.getEmail());
+
+                ((TransflyApplication) fragmentActivity.getApplication()).setResponseAreaManager(responseAreaManager);
+
+
+                break;
+
+            case "fieldstaff":
+
+                ResponseFieldStaff responseFieldStaff = ((TransflyApplication) fragmentActivity.getApplication()).getResponseFieldStaff();
+
+                responseFieldStaff.setEmail(email.getEmail());
+
+                ((TransflyApplication) fragmentActivity.getApplication()).setResponseFieldStaff(responseFieldStaff);
+
+
+                break;
+
+            case "transporter":
+
+                ResponseTransporter responseTransporterOwner = ((TransflyApplication) fragmentActivity.getApplication()).getResponseTransporterOwner();
+
+                responseTransporterOwner.setEmail(email.getEmail());
+
+                ((TransflyApplication) fragmentActivity.getApplication()).setResponseTransporterOwner(responseTransporterOwner);
+
+                break;
+
+        }
+
     }
 }

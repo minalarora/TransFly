@@ -127,9 +127,15 @@ public class ShowBooking extends Fragment {
         fieldStafAdapter=new FieldStafAdapter(fragmentActivity,responseBookingList);
         fieldStafRecylcer.setAdapter(fieldStafAdapter);
 
+        return inflate;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
         getAllBookingFieldStaff(PreferenceUtil.getData(fragmentActivity,"token"));
 
-        return inflate;
     }
 
     private void getAllBookingFieldStaff(String token)
@@ -137,6 +143,10 @@ public class ShowBooking extends Fragment {
 
         parent_of_loading.setVisibility(View.VISIBLE);
         no_internet_connection.setVisibility(View.GONE);
+
+        responseBookingList.clear();
+        fieldStafAdapter.notifyDataSetChanged();
+
 
         api.getBookingFieldStaff(token).enqueue(new Callback<ResponseBody>() {
             @Override

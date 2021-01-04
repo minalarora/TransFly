@@ -63,12 +63,12 @@
             android:layout_gravity="center_horizontal"
             android:textColor="@color/white"
             android:textSize="12sp"
-            android:visibility="visible" />
+            android:visibility="gone" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/_12ssp"
+            android:layout_marginTop="@dimen/_22ssp"
             android:id="@+id/recyclerViewUserType"
             />
 
