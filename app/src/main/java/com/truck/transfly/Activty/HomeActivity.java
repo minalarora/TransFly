@@ -302,7 +302,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                     HomeActivity.this.requestArea = requestArea;
 
-                    showMarker(Double.parseDouble(requestArea.getArealatitude()), Double.parseDouble(requestArea.getArealongitude()), 1, requestArea.getName());
+//                    showMarker(Double.parseDouble(requestArea.getArealatitude()), Double.parseDouble(requestArea.getArealongitude()), 1, requestArea.getName());
 
                     ShowLoadingDialogFragment showLoadingDialogFragment = new ShowLoadingDialogFragment();
 
@@ -322,7 +322,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                             for (ResponseMine responseMine : allMineOfSingleArea) {
 
-                                showMarkerOfArea(Double.parseDouble(responseMine.getLatitude()), Double.parseDouble(responseMine.getLongitude()), responseMine, responseMine.getName());
+                                showMarkerOfArea(Double.parseDouble(responseMine.getLatitude()), Double.parseDouble(responseMine.getLongitude()), responseMine);
 
 
                             }
@@ -589,7 +589,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                             for (ResponseMine responseMine : allMineOfSingleArea) {
 
-                                showMarkerOfArea(Double.parseDouble(responseMine.getLatitude()), Double.parseDouble(responseMine.getLongitude()), responseMine, responseMine.getName());
+                                showMarkerOfArea(Double.parseDouble(responseMine.getLatitude()), Double.parseDouble(responseMine.getLongitude()), responseMine);
 
                             }
 
@@ -960,7 +960,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
-    private void showMarkerOfArea(double latituteOfTajMahal, double longitudeOfTajMahal, ResponseMine responseMine, String locationAddress) {
+    private void showMarkerOfArea(double latituteOfTajMahal, double longitudeOfTajMahal, ResponseMine responseMine) {
 
         LatLng latLng = new LatLng(latituteOfTajMahal, longitudeOfTajMahal);
 
@@ -968,11 +968,11 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         iconFactory.setStyle(IconGenerator.STYLE_RED);
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
-        markerOptions.title(locationAddress);
+        markerOptions.title(String.valueOf(responseMine.getName()));
         markerOptions.snippet("This is my spot!");
         Marker marker = mGoogleMap.addMarker(markerOptions);
 
-        marker.setIcon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon(locationAddress)));
+        marker.setIcon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon("Rate : "+responseMine.getRate() +"\n"+"Etl : "+responseMine.getEtl())));
 
         marker.setTag(responseMine);
 
