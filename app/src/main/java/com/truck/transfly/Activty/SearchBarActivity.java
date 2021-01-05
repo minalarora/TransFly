@@ -135,7 +135,7 @@ public class SearchBarActivity extends AppCompatActivity {
 
                 } else if(!isResponseMines(to_search.getText().toString())){
 
-                    to_search.setError(to_search.getText().toString()+" is Not Valid Loading*");
+                    to_search.setError(to_search.getText().toString()+" is Not Valid Mines*");
                     to_search.requestFocus();
 
                 } else {

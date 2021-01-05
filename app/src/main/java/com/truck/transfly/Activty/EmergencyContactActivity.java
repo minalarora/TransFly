@@ -11,11 +11,16 @@ import android.widget.Toast;
 
 import com.truck.transfly.Model.RequestEmergencyContact;
 import com.truck.transfly.Model.RequestEmergencyContact2;
+import com.truck.transfly.Model.ResponseAreaManager;
+import com.truck.transfly.Model.ResponseFieldStaff;
+import com.truck.transfly.Model.ResponseTransporter;
+import com.truck.transfly.Model.ResponseVehicleOwner;
 import com.truck.transfly.R;
 import com.truck.transfly.databinding.ActivityEmergencyContactBinding;
 import com.truck.transfly.utils.ApiClient;
 import com.truck.transfly.utils.ApiEndpoints;
 import com.truck.transfly.utils.PreferenceUtil;
+import com.truck.transfly.utils.TransflyApplication;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -42,6 +47,44 @@ public class EmergencyContactActivity extends AppCompatActivity {
 
         parent_of_loading=findViewById(R.id.parent_of_loading);
         parent_of_loading.setVisibility(View.GONE);
+
+        String token = PreferenceUtil.getData(EmergencyContactActivity.this, "token");
+
+        String s = token.split(":")[0];
+
+        switch (s){
+
+            case "areamanager":
+
+                ResponseAreaManager responseAreaManager = ((TransflyApplication) getApplication()).getResponseAreaManager();
+
+                activity.name.setText(responseAreaManager.getEmergencyName());
+                activity.phoneNumber.setText(responseAreaManager.getEmergencyMobile());
+                activity.relative.setText(responseAreaManager.getEmergencyRelation());
+
+                break;
+
+            case "fieldstaff":
+
+                ResponseFieldStaff responseFieldStaff = ((TransflyApplication) getApplication()).getResponseFieldStaff();
+
+                activity.name.setText(responseFieldStaff.getEmergencyName());
+                activity.phoneNumber.setText(responseFieldStaff.getEmergencyMobile());
+                activity.relative.setText(responseFieldStaff.getEmergencyRelation());
+
+                break;
+
+            case "transporter":
+
+                ResponseTransporter responseTransporter = ((TransflyApplication) getApplication()).getResponseTransporterOwner();
+
+                activity.name.setText(responseTransporter.getEmergencyName());
+                activity.phoneNumber.setText(responseTransporter.getEmergencyMobile());
+                activity.relative.setText(responseTransporter.getEmergencyRelation());
+
+                break;
+
+        }
 
         activity.submitDetails.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,6 +140,8 @@ public class EmergencyContactActivity extends AppCompatActivity {
                 if (response.code() == 200) {
                     parent_of_loading.setVisibility(View.GONE);
 
+                    setDataOnModels();
+
                     Toast.makeText(EmergencyContactActivity.this, "Update Conatct Successfully", Toast.LENGTH_SHORT).show();
 
                     finish();
@@ -121,6 +166,53 @@ public class EmergencyContactActivity extends AppCompatActivity {
         });
     }
 
+    private void setDataOnModels() {
+
+        String token = PreferenceUtil.getData(EmergencyContactActivity.this, "token");
+
+        String s = token.split(":")[0];
+
+        switch (s){
+
+            case "transporter":
+
+                ResponseTransporter responseTransporterOwner = ((TransflyApplication) getApplication()).getResponseTransporterOwner();
+
+                responseTransporterOwner.setEmergencyMobile(activity.phoneNumber.getText().toString());
+                responseTransporterOwner.setEmergencyName(activity.name.getText().toString());
+                responseTransporterOwner.setEmergencyRelation(activity.relative.getText().toString());
+
+                ((TransflyApplication) getApplication()).setResponseTransporterOwner(responseTransporterOwner);
+
+                break;
+
+            case "areamanager":
+
+                ResponseAreaManager responseAreaManager = ((TransflyApplication) getApplication()).getResponseAreaManager();
+
+                responseAreaManager.setEmergencyMobile(activity.phoneNumber.getText().toString());
+                responseAreaManager.setEmergencyName(activity.name.getText().toString());
+                responseAreaManager.setEmergencyRelation(activity.relative.getText().toString());
+
+                ((TransflyApplication) getApplication()).setResponseAreaManager(responseAreaManager);
+
+                break;
+
+            case "fieldstaff":
+
+                ResponseFieldStaff responseFieldStaff = ((TransflyApplication) getApplication()).getResponseFieldStaff();
+                responseFieldStaff.setEmergencyMobile(activity.phoneNumber.getText().toString());
+                responseFieldStaff.setEmergencyName(activity.name.getText().toString());
+                responseFieldStaff.setEmergencyRelation(activity.relative.getText().toString());
+
+                ((TransflyApplication) getApplication()).setResponseFieldStaff(responseFieldStaff);
+
+                break;
+
+
+        }
+
+    }
 
 
 }

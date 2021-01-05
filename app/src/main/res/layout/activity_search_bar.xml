@@ -54,7 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/round_as_eddittext_search"
-            android:hint="From Destination"
+            android:hint="To Destination"
             android:id="@+id/from_search"
             android:layout_marginEnd="12dp"
             android:paddingStart="12dp"
@@ -92,7 +92,7 @@
             android:drawableTint="@color/black"
             android:focusable="true"
             android:fontFamily="@font/worksansmedium"
-            android:hint="To Destination"
+            android:hint="From Destination"
             android:paddingStart="12dp"
             android:paddingEnd="8dp"
             android:textSize="14sp" />

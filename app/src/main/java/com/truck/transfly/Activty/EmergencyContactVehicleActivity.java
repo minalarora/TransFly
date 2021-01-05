@@ -10,11 +10,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import com.truck.transfly.Model.RequestEmergencyContact;
+import com.truck.transfly.Model.ResponseAreaManager;
+import com.truck.transfly.Model.ResponseVehicleOwner;
 import com.truck.transfly.R;
 import com.truck.transfly.databinding.ActivityEmergencyContactVehicleBinding;
 import com.truck.transfly.utils.ApiClient;
 import com.truck.transfly.utils.ApiEndpoints;
 import com.truck.transfly.utils.PreferenceUtil;
+import com.truck.transfly.utils.TransflyApplication;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -39,6 +42,9 @@ public class EmergencyContactVehicleActivity extends AppCompatActivity {
         if (retrofit != null) {
             api = retrofit.create(ApiEndpoints.class);
         }
+
+        ResponseVehicleOwner responseVehicleOwner = ((TransflyApplication) getApplication()).getResponseVehicleOwner();
+        activity.phoneNumber.setText(responseVehicleOwner.getEmergencycontact());
 
         parent_of_loading = findViewById(R.id.parent_of_loading);
         parent_of_loading.setVisibility(View.GONE);
@@ -85,6 +91,8 @@ public class EmergencyContactVehicleActivity extends AppCompatActivity {
                 if (response.code() == 200) {
                     parent_of_loading.setVisibility(View.GONE);
 
+                    setOnModels();
+
                     Toast.makeText(EmergencyContactVehicleActivity.this, "Update Conatct Successfully", Toast.LENGTH_SHORT).show();
 
                     finish();
@@ -107,6 +115,14 @@ public class EmergencyContactVehicleActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void setOnModels() {
+
+        ResponseVehicleOwner responseVehicleOwner = ((TransflyApplication) getApplication()).getResponseVehicleOwner();
+        responseVehicleOwner.setEmergencycontact(activity.phoneNumber.getText().toString());
+        ((TransflyApplication) getApplication()).setResponseVehicleOwner(responseVehicleOwner);
+
     }
 
 }

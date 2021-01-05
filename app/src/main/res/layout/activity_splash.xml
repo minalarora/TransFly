@@ -27,7 +27,7 @@
                     android:maxLines="1"
                     android:alpha="0.8"
                     android:paddingTop="8dp"
-                    android:text="Transfly"
+                    android:text="TRANSFLY"
                     android:layout_gravity="center_horizontal"
                     android:textColor="@color/white"
                     android:textSize="38sp"

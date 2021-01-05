@@ -369,7 +369,7 @@ public class BankDetailsActivity extends AppCompatActivity {
 
             case "vehicleowner":
 
-                ResponseVehicleOwner responseVehicleOwner=new ResponseVehicleOwner();
+                ResponseVehicleOwner responseVehicleOwner = ((TransflyApplication) getApplication()).getResponseVehicleOwner();
                 responseVehicleOwner.setAccountno(activity.bankNumber.getText().toString());
                 responseVehicleOwner.setBankname(activity.bankName.getText().toString());
                 responseVehicleOwner.setIfsc(activity.bankIfc.getText().toString());
@@ -380,7 +380,7 @@ public class BankDetailsActivity extends AppCompatActivity {
 
             case "areamanager":
 
-                ResponseAreaManager responseAreaManager=new ResponseAreaManager();
+                ResponseAreaManager responseAreaManager = ((TransflyApplication) getApplication()).getResponseAreaManager();
                 responseAreaManager.setAccountno(activity.bankNumber.getText().toString());
                 responseAreaManager.setBankname(activity.bankName.getText().toString());
                 responseAreaManager.setIfsc(activity.bankIfc.getText().toString());
@@ -392,7 +392,7 @@ public class BankDetailsActivity extends AppCompatActivity {
 
             case "fieldstaff":
 
-                ResponseFieldStaff responseFieldStaff=new ResponseFieldStaff();
+                ResponseFieldStaff responseFieldStaff = ((TransflyApplication) getApplication()).getResponseFieldStaff();
                 responseFieldStaff.setAccountno(activity.bankNumber.getText().toString());
                 responseFieldStaff.setBankname(activity.bankName.getText().toString());
                 responseFieldStaff.setIfsc(activity.bankIfc.getText().toString());
