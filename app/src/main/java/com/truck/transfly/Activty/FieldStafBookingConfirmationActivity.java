@@ -94,7 +94,7 @@ public class FieldStafBookingConfirmationActivity extends AppCompatActivity {
             }
         });
 
-        vehicleList.add(responseBooking.getVehiclename());
+//        vehi/leList.add(responseBooking.getVehiclename());
 
         spinnerTraspoterAdapter = new SpinnerTraspoterAdapter(this, transportersList);
 
@@ -104,6 +104,7 @@ public class FieldStafBookingConfirmationActivity extends AppCompatActivity {
                 android.R.layout.simple_list_item_1, android.R.id.text1, vehicleList);
 
         activity.registerCategory.setAdapter(adapter);
+        activity.registerCategory.setSelection(vehicleList.indexOf(responseBooking.getVehiclename()));
 
         getVehicleFieldStaff(PreferenceUtil.getData(FieldStafBookingConfirmationActivity.this, "token"), responseBooking.getVehicleownermobile());
 

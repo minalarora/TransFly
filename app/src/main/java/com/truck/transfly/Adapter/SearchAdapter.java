@@ -54,7 +54,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.viewholder
     public void onBindViewHolder(@NonNull viewholder holder, int position) {
 
         ResponseMine responseMine = responseMineList.get(position);
-        holder.from_dest.setText(responseMine.getLoading() +" - "+responseMine.getName());
+        holder.from_dest.setText(responseMine.getName());
         holder.rate.setText(String.valueOf(responseMine.getRate()));
         holder.etl.setText(String.valueOf(responseMine.getEtl()));
 

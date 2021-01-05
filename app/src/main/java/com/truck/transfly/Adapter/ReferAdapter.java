@@ -62,6 +62,8 @@ public class ReferAdapter extends RecyclerView.Adapter<ReferAdapter.ViewHolderSu
             holder.text1.setText(responseReward.getText());
             Glide.with(context).load(responseReward.getIm()).into(holder.image1);
 
+            Log.d("TAG", "onBindViewHolder: "+responseReward.getIm());
+
         }
 
     }

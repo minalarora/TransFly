@@ -34,10 +34,10 @@ public class UserChangedActivity extends AppCompatActivity {
 
         mobileNo = getIntent().getStringExtra("mobileNo");
 
-        whoModelList.add(MyUtils.returnModel(R.drawable.vehicleowner,"Vehicle Owner","Kyc Needed","Full name - Address","vehicleowner"));
-        whoModelList.add(MyUtils.returnModel(R.drawable.vehicleowner,"Transporter","Kyc Needed","Full name - Address","transporter"));
-        whoModelList.add(MyUtils.returnModel(R.drawable.vehicleowner,"Field Staf","Kyc Needed","Full name - Address","fieldstaff"));
-        whoModelList.add(MyUtils.returnModel(R.drawable.vehicleowner,"Area Manager","Kyc Needed","Full name - Address","areamanager"));
+        whoModelList.add(MyUtils.returnModel(R.drawable.vehicleowner,"Vehicle Owner","Kyc Needed","PAN - TDS","vehicleowner"));
+        whoModelList.add(MyUtils.returnModel(R.drawable.vehicleowner,"Transporter","Kyc Needed","GST - STA - PAN - AADHAAR","transporter"));
+        whoModelList.add(MyUtils.returnModel(R.drawable.vehicleowner,"Field Staff","Kyc Needed","PAN - AADHAAR","fieldstaff"));
+        whoModelList.add(MyUtils.returnModel(R.drawable.vehicleowner,"Area Manager","Kyc Needed","PAN - AADHAAR","areamanager"));
 
         RecyclerView recyclerViewUserType = activity.recyclerViewUserType;
         ChangeUserAdapter changeUserAdapter=new ChangeUserAdapter(UserChangedActivity.this,whoModelList);

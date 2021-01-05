@@ -374,7 +374,7 @@ public class SearchBarActivity extends AppCompatActivity {
                         Set<String> loadings = new HashSet<>();
                         Set<RequestArea> areass = new HashSet<>();
                         for (ResponseMine mine : mines) {
-                            areas.put(mine.getArea(), new RequestArea(mine.getArea(), mine.getArealatitude(), mine.getArealongitude()));
+                            areas.put(mine.getArea(), new RequestArea(mine.getArea(), mine.getArealatitude(), mine.getArealongitude(),mine.getAreaimageurl()));
                             for (String loading : mine.getLoading()) {
                                 loadings.add(loading);
                             }

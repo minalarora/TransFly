@@ -80,7 +80,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.viewho
         holder.position_any.setVisibility(View.VISIBLE);
 
         holder.cityName.setText(requestArea.getName());
-        Glide.with(context).load(requestArea.getName()).into(holder.circleImageView);
+        Glide.with(context).load(requestArea.getAreaimage()).into(holder.circleImageView);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

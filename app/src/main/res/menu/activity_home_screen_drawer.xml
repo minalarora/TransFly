@@ -29,12 +29,12 @@
             android:title="Give Feedback"
             android:icon="@drawable/ic_action_feedback"/>
         <item
-            android:title="Refer program App"
+            android:title="Referral Program"
             android:id="@+id/refer_drawer"
             android:icon="@drawable/ic_action_refer_program" />
 
         <item
-            android:title="Reward Program"
+            android:title="Reward"
             android:id="@+id/reward_program"
             android:icon="@drawable/ic_action_reward_program" />
 

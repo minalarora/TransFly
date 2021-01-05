@@ -9,7 +9,7 @@ class ResponseResale() : Parcelable {
     @SerializedName("1")
     var ownership: Boolean? = false;
 
-    @SerializedName("2.")
+    @SerializedName("2")
     var insurancepapers: Boolean? = false;
 
     @SerializedName("3")
