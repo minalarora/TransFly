@@ -535,7 +535,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                                                     myUtils.spotLightOnProfile(recyclerView.getChildAt(1).findViewById(R.id.postion_any), "1004", HomeActivity.this, "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", "Lorem ipum");
 
                                                 }
-                                            },1500);
+                                            },500);
 
                                         }
 
