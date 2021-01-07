@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import com.tapadoo.alerter.Alerter;
 import com.truck.transfly.Frament.ForgotPasswordDialog;
 import com.truck.transfly.Model.RequestCredentials;
 import com.truck.transfly.Model.ResponseAreaManager;
@@ -116,6 +117,9 @@ public class LoginActivity extends AppCompatActivity {
 
                 parent_of_loading.setVisibility(View.GONE);
 
+                activity.password.setError(null);
+                activity.mobileNumber.setError(null);
+
                 if(response.code() == 200)
                 {
                     ResponseToken tokenobj = response.body();
@@ -125,14 +129,32 @@ public class LoginActivity extends AppCompatActivity {
 
                     PreferenceUtil.putData(LoginActivity.this,"token",token);
 
-                } else {
+                } else if(response.code()==202) {
 
-                    activity.password.setError("Password is Wrong");
-                    activity.mobileNumber.setError("Check Your Mobile Number");
-                    activity.password.requestFocus();
+                    Alerter.create(LoginActivity.this)
+                            .setTitle("Password Miss matched")
+                            .setText("Try different Password! Password seems to wrong!")
+                            .setIcon(R.drawable.ic_action_password_lock)
+                            .setBackgroundColorRes(R.color.quantum_pink)
+                            .enableSwipeToDismiss()
+                            .setDuration(3000)
+                            .show();
 
                     parent_of_loading.setVisibility(View.GONE);
 
+
+                } else if(response.code()==205){
+
+                    Alerter.create(LoginActivity.this)
+                            .setTitle("User Not Found!")
+                            .setText("Mobile or Email And Password are miss matched!")
+                            .setIcon(R.drawable.ic_action_password_lock)
+                            .setBackgroundColorRes(R.color.quantum_pink)
+                            .enableSwipeToDismiss()
+                            .setDuration(3000)
+                            .show();
+
+                    parent_of_loading.setVisibility(View.GONE);
 
                 }
             }
@@ -141,8 +163,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onFailure(Call<ResponseToken> call, Throwable t) {
 
                 parent_of_loading.setVisibility(View.GONE);
-
-                Toast.makeText(LoginActivity.this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+                serverError();
 
             }
         });
@@ -172,8 +193,15 @@ public class LoginActivity extends AppCompatActivity {
 
 
                             } else {
-                                activity.password.setError("Password is Wrong");
-                                activity.password.requestFocus();
+
+                                Alerter.create(LoginActivity.this)
+                                        .setTitle("Password Miss matched")
+                                        .setText("Try different Password! Password seems to wrong!")
+                                        .setIcon(R.drawable.ic_action_password_lock)
+                                        .setBackgroundColorRes(R.color.quantum_pink)
+                                        .enableSwipeToDismiss()
+                                        .setDuration(3000)
+                                        .show();
 
                                 parent_of_loading.setVisibility(View.GONE);
                             }
@@ -205,8 +233,15 @@ public class LoginActivity extends AppCompatActivity {
 
 
                             } else {
-                                activity.password.setError("Password is Wrong");
-                                activity.password.requestFocus();
+
+                                Alerter.create(LoginActivity.this)
+                                        .setTitle("Password Miss matched")
+                                        .setText("Try different Password! Password seems to wrong!")
+                                        .setIcon(R.drawable.ic_action_password_lock)
+                                        .setBackgroundColorRes(R.color.quantum_pink)
+                                        .enableSwipeToDismiss()
+                                        .setDuration(3000)
+                                        .show();
 
                                 parent_of_loading.setVisibility(View.GONE);
                             }
@@ -237,8 +272,15 @@ public class LoginActivity extends AppCompatActivity {
                                         finish();
 
                             } else {
-                                activity.password.setError("Password is Wrong");
-                                activity.password.requestFocus();
+
+                                Alerter.create(LoginActivity.this)
+                                        .setTitle("Password Miss matched")
+                                        .setText("Try different Password! Password seems to wrong!")
+                                        .setIcon(R.drawable.ic_action_password_lock)
+                                        .setBackgroundColorRes(R.color.quantum_pink)
+                                        .enableSwipeToDismiss()
+                                        .setDuration(3000)
+                                        .show();
 
                                 parent_of_loading.setVisibility(View.GONE);
                             }
@@ -269,8 +311,15 @@ public class LoginActivity extends AppCompatActivity {
 
 
                             } else {
-                                activity.password.setError("Password is Wrong");
-                                activity.password.requestFocus();
+
+                                Alerter.create(LoginActivity.this)
+                                        .setTitle("Password Miss matched")
+                                        .setText("Try different Password! Password seems to wrong!")
+                                        .setIcon(R.drawable.ic_action_password_lock)
+                                        .setBackgroundColorRes(R.color.quantum_pink)
+                                        .enableSwipeToDismiss()
+                                        .setDuration(3000)
+                                        .show();
 
                                 parent_of_loading.setVisibility(View.GONE);
 
@@ -458,7 +507,13 @@ public class LoginActivity extends AppCompatActivity {
 
         parent_of_loading.setVisibility(View.GONE);
 
-        Toast.makeText(this, "No Internet connection", Toast.LENGTH_SHORT).show();
-
+        Alerter.create(LoginActivity.this)
+                .setTitle("No Internet Connection!")
+                .setText("Check your connection and try again!")
+                .setIcon(R.drawable.ic_action_no_connection)
+                .setBackgroundColorRes(R.color.quantum_pink)
+                .enableSwipeToDismiss()
+                .setDuration(3000)
+                .show();
     }
 }

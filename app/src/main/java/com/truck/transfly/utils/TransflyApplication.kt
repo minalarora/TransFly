@@ -13,7 +13,7 @@ class TransflyApplication : Application() {
 
         UploadService.NAMESPACE = BuildConfig.APPLICATION_ID
 
-        SendOTP.initializeApp(this,"authKey");
+        SendOTP.initializeApp(this,"350944Ar65hw8BuM5ff29c59P1");
 
     }
 

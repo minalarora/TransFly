@@ -8,8 +8,8 @@
     app:cardElevation="8dp"
     android:id="@+id/parent_of_card"
     android:layout_gravity="center_horizontal"
-    android:layout_marginTop="15dp"
-    android:layout_height="100dp"
+    android:layout_marginTop="28dp"
+    android:layout_height="80dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
@@ -30,11 +30,12 @@
             android:layout_width="match_parent"
             android:orientation="vertical"
             android:layout_marginStart="12dp"
+            android:gravity="center"
             android:layout_height="match_parent">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="11dp"
+                android:layout_marginStart="@dimen/_8ssp"
                 android:layout_height="wrap_content">
 
                 <TextView
@@ -69,7 +70,7 @@
                 android:textColor="@color/black"
                 android:id="@+id/belowOwner"
                 android:textSize="14dp"
-                android:visibility="visible" />
+                android:visibility="gone" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -80,7 +81,7 @@
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 android:id="@+id/belowOwner2"
-                android:visibility="visible" />
+                android:visibility="gone" />
 
         </LinearLayout>
 

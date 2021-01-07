@@ -3,6 +3,7 @@ package com.truck.transfly.Activty;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -16,6 +17,7 @@ import com.msg91.sendotpandroid.library.listners.VerificationListener;
 import com.msg91.sendotpandroid.library.roots.RetryType;
 import com.msg91.sendotpandroid.library.roots.SendOTPConfigBuilder;
 import com.msg91.sendotpandroid.library.roots.SendOTPResponseCode;
+import com.mukesh.OtpView;
 import com.truck.transfly.R;
 import com.truck.transfly.databinding.ActivityOtpValidationBinding;
 
@@ -25,6 +27,8 @@ public class OtpValidation extends AppCompatActivity implements VerificationList
     private boolean fromForgot;
     private String mobileNo;
     private boolean isTimerOn;
+    private OtpView otpView;
+    private String otp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +40,19 @@ public class OtpValidation extends AppCompatActivity implements VerificationList
         fromForgot = intent.getBooleanExtra("fromForgot", false);
         mobileNo = intent.getStringExtra("mobileNo");
 
+        String lastFourDigits = mobileNo.substring(mobileNo.length() - 4);
+
         sendOtpConfirmation(mobileNo);
 
         SendOTP.getInstance().getTrigger().initiate();
 
+        otpView = findViewById(R.id.otp_view);
+
         TextView resendOtp =findViewById(R.id.resend_otp);
+
+        TextView otp_string_text=findViewById(R.id.otp_string_text);
+
+        otp_string_text.setText("We have sent the otp in your registered mobile number xxxxxx"+lastFourDigits);
 
         resendOtp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,7 +64,7 @@ public class OtpValidation extends AppCompatActivity implements VerificationList
 
                 } else if(!isTimerOn){
 
-                    sendOtpOnMobile();
+                    SendOTP.getInstance().getTrigger().resend(RetryType.TEXT);
 
                     new CountDownTimer(30000, 1000) {
 
@@ -77,11 +89,20 @@ public class OtpValidation extends AppCompatActivity implements VerificationList
             }
         });
 
-
         activity.otpSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                confirmOtp("otpno");
+
+                if(TextUtils.isEmpty(otpView.getText().toString())){
+
+                    Toast.makeText(OtpValidation.this, "Fill Otp, which is send on your number!", Toast.LENGTH_SHORT).show();
+
+                } else {
+
+                    SendOTP.getInstance().getTrigger().verify(otpView.getText().toString());
+
+                }
+
             }
         });
 //        findViewById(R.id.otpSubmit).setOnClickListener(new View.OnClickListener() {
@@ -115,13 +136,19 @@ public class OtpValidation extends AppCompatActivity implements VerificationList
 
                 Intent intent = new Intent(OtpValidation.this, UserChangedActivity.class);
                 intent.putExtra("mobileNo", mobileNo);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
+                finish();
+
                 return;
             }
 
             Intent intent = new Intent(OtpValidation.this, ChangePasswordActivity.class);
             intent.putExtra("mobileNo", mobileNo);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
+            finish();
+
 
         } else {
             //invalid otp
@@ -149,16 +176,36 @@ public class OtpValidation extends AppCompatActivity implements VerificationList
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Log.e("TAG", "onSendOtpResponse: " + responseCode.getCode() + "=======" + message);
+
                 if (responseCode == SendOTPResponseCode.DIRECT_VERIFICATION_SUCCESSFUL_FOR_NUMBER || responseCode == SendOTPResponseCode.OTP_VERIFIED) {
                     //otp verified OR direct verified by send otp 2.O
+
+                    Toast.makeText(OtpValidation.this, "Mobile Number Verified Successfully", Toast.LENGTH_SHORT).show();
+
+                    confirmOtp("ffjfjfj");
+
                 } else if (responseCode == SendOTPResponseCode.READ_OTP_SUCCESS) {
-                    //Auto read otp from sms successfully
-                    // you can get otp form message filled
+
+                    otp=message;
+                    otpView.setText(message);
+
                 } else if (responseCode == SendOTPResponseCode.SMS_SUCCESSFUL_SEND_TO_NUMBER || responseCode == SendOTPResponseCode.DIRECT_VERIFICATION_FAILED_SMS_SUCCESSFUL_SEND_TO_NUMBER) {
-                    // Otp send to number successfully
+
+                    Toast.makeText(OtpValidation.this, "Otp Send to Mobile Number", Toast.LENGTH_SHORT).show();
+
                 } else {
-                    //exception found
+
+                    if(responseCode.getCode()==38){
+
+                        Toast.makeText(OtpValidation.this, ""+message, Toast.LENGTH_SHORT).show();
+                        confirmOtp("ojnj");
+
+                    } else {
+
+                        Toast.makeText(OtpValidation.this, "Wrong Otp! Try Again", Toast.LENGTH_SHORT).show();
+
+                    }
+
                 }
             }
         });

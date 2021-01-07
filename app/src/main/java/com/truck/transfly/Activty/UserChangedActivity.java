@@ -39,6 +39,15 @@ public class UserChangedActivity extends AppCompatActivity {
         whoModelList.add(MyUtils.returnModel(R.drawable.vehicleowner,"Field Staff","Kyc Needed","PAN - AADHAAR","fieldstaff"));
         whoModelList.add(MyUtils.returnModel(R.drawable.vehicleowner,"Area Manager","Kyc Needed","PAN - AADHAAR","areamanager"));
 
+        activity.back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                onBackPressed();
+
+            }
+        });
+
         RecyclerView recyclerViewUserType = activity.recyclerViewUserType;
         ChangeUserAdapter changeUserAdapter=new ChangeUserAdapter(UserChangedActivity.this,whoModelList);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(UserChangedActivity.this,LinearLayoutManager.VERTICAL,false);
@@ -73,4 +82,14 @@ public class UserChangedActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        Intent intent=new Intent(UserChangedActivity.this,LoginActivity.class);
+        startActivity(intent);
+
+        finish();
+
+    }
 }

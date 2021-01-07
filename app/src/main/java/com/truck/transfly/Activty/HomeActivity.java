@@ -12,10 +12,12 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.provider.Settings;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -29,6 +31,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
+import androidx.core.view.MenuItemCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -78,6 +81,7 @@ import com.truck.transfly.MuUtils.MetalRecyclerViewPager;
 import com.truck.transfly.R;
 import com.truck.transfly.utils.ApiClient;
 import com.truck.transfly.utils.ApiEndpoints;
+import com.truck.transfly.utils.MyUtils;
 import com.truck.transfly.utils.PreferenceUtil;
 import com.truck.transfly.utils.TransflyApplication;
 
@@ -135,10 +139,12 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
     private BottomNavigationViewEx navigation;
     private LocationAdapter locationAdapter;
     private RequestArea requestArea;
+    private MyUtils myUtils = new MyUtils();
     private String loading;
     private FrameLayout parent_of_loading;
     private RelativeLayout no_internet_connection;
     private String areaname;
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -159,7 +165,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         parent_of_loading = findViewById(R.id.parent_of_loading);
         parent_of_loading.setVisibility(View.GONE);
-        
+
         no_internet_connection = findViewById(R.id.no_internet_connection);
         findViewById(R.id.pullToRefresh_button).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -272,6 +278,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                 } else {
 
                     drawerLayout.openDrawer(GravityCompat.START);
+
                 }
 
             }
@@ -286,11 +293,12 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         }
 
-        RecyclerView recyclerView = findViewById(R.id.locationRecyclerView);
+        recyclerView = findViewById(R.id.locationRecyclerView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(HomeActivity.this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
         locationAdapter = new LocationAdapter(HomeActivity.this, arealist);
         recyclerView.setAdapter(locationAdapter);
+
 
         locationAdapter.setOnClickListener(new LocationAdapter.onClickListener() {
             @Override
@@ -485,7 +493,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                         Set<String> loadings = new HashSet<>();
                         Set<RequestArea> areass = new HashSet<>();
                         for (ResponseMine mine : mines) {
-                            areas.put(mine.getArea(), new RequestArea(mine.getArea(), mine.getArealatitude(), mine.getArealongitude(),mine.getAreaimageurl()));
+                            areas.put(mine.getArea(), new RequestArea(mine.getArea(), mine.getArealatitude(), mine.getArealongitude(), mine.getAreaimageurl()));
                             for (String loading : mine.getLoading()) {
                                 loadings.add(loading);
                             }
@@ -498,6 +506,45 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                         loadinglist.addAll(loadings);
                         arealist.addAll(areass);
                         locationAdapter.notifyDataSetChanged();
+
+                        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+
+                                // reseller recyclerView.getChildAt(1).findViewById(R.id.postion_any)
+                                myUtils.spotLightOnProfile(navigation.getIconAt(3), "1001", HomeActivity.this, "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", "Lorem ipum");
+
+                                myUtils.setListener(new MyUtils.listener() {
+                                    @Override
+                                    public void clickedSpotlight(String perfect) {
+
+                                        if (perfect != null && perfect.equals("1001")) {
+
+                                            myUtils.spotLightOnProfile(navigation.getIconAt(2), "1002", HomeActivity.this, "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", "Lorem ipum");
+
+                                        } else if (perfect != null && perfect.equals("1002")) {
+
+                                            myUtils.spotLightOnProfile(viewById, "1003", HomeActivity.this, "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", "Lorem ipum");
+
+                                        } else if (perfect != null && perfect.equals("1003")) {
+
+                                            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                                                @Override
+                                                public void run() {
+
+                                                    myUtils.spotLightOnProfile(recyclerView.getChildAt(1).findViewById(R.id.postion_any), "1004", HomeActivity.this, "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", "Lorem ipum");
+
+                                                }
+                                            },1500);
+
+                                        }
+
+                                    }
+                                });
+
+                            }
+                        }, 2000);
+
 
                     }
 
@@ -555,7 +602,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
     private void getNearmeArea(String token, RequestCoordinates coordinates) {
         parent_of_loading.setVisibility(View.VISIBLE);
 
-        api.nearmeArea(token,coordinates).enqueue(new Callback<ResponseBody>() {
+        api.nearmeArea(token, coordinates).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
@@ -610,7 +657,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 parent_of_loading.setVisibility(View.GONE);
 
-                Toast.makeText(HomeActivity.this, ""+t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(HomeActivity.this, "" + t.getMessage(), Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -972,7 +1019,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         markerOptions.snippet("This is my spot!");
         Marker marker = mGoogleMap.addMarker(markerOptions);
 
-        marker.setIcon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon("Rate : "+responseMine.getRate() +"\n"+"Etl : "+responseMine.getEtl())));
+        marker.setIcon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon("Rate : " + responseMine.getRate() + "\n" + "Etl : " + responseMine.getEtl())));
 
         marker.setTag(responseMine);
 

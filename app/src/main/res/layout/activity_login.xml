@@ -73,7 +73,7 @@
                 android:maxLength="10"
                 android:inputType="number"
                 android:fontFamily="@font/font_opensans"
-                android:hint="Enter Mobile Number"
+                android:hint="Please Enter Mobile or Email"
                 android:paddingStart="16dp"
                 android:paddingEnd="12dp"
                 android:textSize="14dp" />
@@ -99,18 +99,31 @@
                 android:src="@drawable/ic_action_password_lock"
                 app:tint="@color/black" />
 
-            <EditText
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="38dp"
+                app:passwordToggleEnabled="true"
+                app:boxStrokeWidth="0dp"
+                app:hintEnabled="false"
+                android:id="@+id/input_layout_password"
+                app:boxStrokeWidthFocused="0dp"
                 android:layout_toEndOf="@+id/password_lock"
-                android:background="@color/white"
-                android:inputType="textPassword"
-                android:id="@+id/password"
-                android:fontFamily="@font/font_opensans"
-                android:hint="Enter Password"
-                android:paddingStart="16dp"
-                android:paddingEnd="12dp"
-                android:textSize="14dp" />
+                app:passwordToggleTint="@color/black"
+                app:passwordToggleDrawable="@drawable/show_password_selector"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/password"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_38sdp"
+                    android:background="@color/white"
+                    android:fontFamily="@font/font_opensans"
+                    android:hint="Please Enter Password"
+                    android:inputType="textPassword"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="12dp"
+                    android:textSize="14dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
         </RelativeLayout>
 

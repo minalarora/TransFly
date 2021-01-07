@@ -5,11 +5,17 @@ import androidx.databinding.DataBindingUtil;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.truck.transfly.Model.RequestUser;
@@ -21,6 +27,7 @@ import com.truck.transfly.R;
 import com.truck.transfly.databinding.ActivitySignUpBinding;
 import com.truck.transfly.utils.ApiClient;
 import com.truck.transfly.utils.ApiEndpoints;
+import com.truck.transfly.utils.PasswordStrength;
 import com.truck.transfly.utils.PreferenceUtil;
 import com.truck.transfly.utils.TransflyApplication;
 
@@ -37,6 +44,8 @@ public class SignUpActivity extends AppCompatActivity {
     private FrameLayout parent_of_loading;
     private Retrofit retrofit = null;
     private ApiEndpoints api = null;
+    private LinearLayout progressPassword;
+    private CheckBox email_sent_av,accept_condition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +64,54 @@ public class SignUpActivity extends AppCompatActivity {
         parent_of_loading = findViewById(R.id.parent_of_loading);
         parent_of_loading.setVisibility(View.GONE);
 
+        progressPassword = findViewById(R.id.progress_password);
+
+        accept_condition = findViewById(R.id.accept_condition);
+        email_sent_av = findViewById(R.id.email_sent_av);
+
+        activity.password.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+
+                if(hasFocus){
+
+                    progressPassword.setVisibility(View.VISIBLE);
+
+                } else {
+
+                    progressPassword.setVisibility(View.GONE);
+
+                }
+
+            }
+        });
+
+        activity.password.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                updatePasswordStrengthView(s.toString());
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
         findViewById(R.id.sign_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                progressPassword.setVisibility(View.GONE);
 
                 if(TextUtils.isEmpty(activity.fullName.getText().toString())){
 
@@ -88,6 +142,14 @@ public class SignUpActivity extends AppCompatActivity {
 
                     activity.retypePassword.setError("Password No Matched*");
                     activity.retypePassword.requestFocus();
+
+                }else if (!activity.acceptCondition.isChecked()){
+
+                    Toast.makeText(SignUpActivity.this, "Checked Accept Condition", Toast.LENGTH_SHORT).show();
+
+                } else if (!activity.emailSentAv.isChecked()){
+
+                    Toast.makeText(SignUpActivity.this, "Checked Email Confirmation", Toast.LENGTH_SHORT).show();
 
                 } else {
 
@@ -237,6 +299,36 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void updatePasswordStrengthView(String password) {
+
+        ProgressBar progressBar = findViewById(R.id.progressBar);
+        TextView strengthView =  findViewById(R.id.password_strength);
+        if (TextView.VISIBLE != strengthView.getVisibility())
+            return;
+
+        if (password.isEmpty()) {
+            strengthView.setText("");
+            progressBar.setProgress(0);
+            return;
+        }
+
+        PasswordStrength str = PasswordStrength.calculateStrength(password);
+        strengthView.setText(str.getText(this));
+        strengthView.setTextColor(str.getColor());
+
+        progressBar.getProgressDrawable().setColorFilter(str.getColor(), android.graphics.PorterDuff.Mode.SRC_IN);
+        if (str.getText(this).equals("Weak")) {
+            progressBar.setProgress(25);
+        } else if (str.getText(this).equals("Medium")) {
+            progressBar.setProgress(50);
+        } else if (str.getText(this).equals("Strong")) {
+            progressBar.setProgress(75);
+        } else {
+            progressBar.setProgress(100);
+        }
+    }
+
 
     private  void createAreaManager(RequestUser user)
     {

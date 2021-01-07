@@ -89,11 +89,18 @@
         <activity
             android:name=".Activty.ProfileActivity"
             android:resizeableActivity="false"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" >
+
+
+
+        </activity>
         <activity
             android:name=".Activty.SignUpActivity"
             android:resizeableActivity="false"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" >
+
+        </activity>
+
         <activity
             android:name=".Activty.UserChangedActivity"
             android:resizeableActivity="false"
@@ -115,12 +122,15 @@
         android:resizeableActivity="false"
         android:screenOrientation="portrait"
         android:windowSoftInputMode="stateHidden">
+
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
 
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
+
     </activity>
+
     <activity
         android:name=".Activty.LoginActivity"
         android:resizeableActivity="false"
