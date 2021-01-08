@@ -69,14 +69,14 @@ public class OtpValidation extends AppCompatActivity implements VerificationList
                     new CountDownTimer(30000, 1000) {
 
                         public void onTick(long millisUntilFinished) {
-                            resendOtp.setText("remaining: " + millisUntilFinished / 1000);
+                            resendOtp.setText("Remaining: " + millisUntilFinished / 1000);
 
                             isTimerOn=true;
 
                         }
 
                         public void onFinish() {
-                            resendOtp.setText("resendOtp");
+                            resendOtp.setText("Resend OTP");
 
                             isTimerOn=false;
 

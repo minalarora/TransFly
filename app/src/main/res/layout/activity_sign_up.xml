@@ -42,14 +42,15 @@
                 </com.github.florent37.shapeofview.shapes.ArcView>
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginHorizontal="@dimen/_20sdp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="40dp"
                     android:fontFamily="@font/poppinsbold"
-                    android:text="Create Account"
+                    android:text="CREATE ACCOUNT,\nIT'S QUICK AND EASY"
                     android:textColor="@color/project_color"
-                    android:textSize="@dimen/_18ssp" />
+                    android:textSize="@dimen/_14ssp" />
 
                 <RelativeLayout
                     android:layout_width="320dp"
@@ -292,12 +293,12 @@
                     android:fontFamily="@font/poppins"
                     android:paddingStart="@dimen/_4ssp"
                     android:text="Lorem Ipsum Lorem Ipsum ipsum ipsun"
-                    android:textSize="13dp" />
+                    android:textSize="8dp" />
 
                 <CheckBox
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_25ssp"
+                    android:layout_marginStart="@dimen/_20ssp"
                     android:layout_marginEnd="@dimen/_25ssp"
                     android:layout_marginTop="@dimen/_16ssp"
                     android:id="@+id/email_sent_av"
@@ -305,9 +306,9 @@
                     android:buttonTint="@color/quantum_pink"
                     android:fontFamily="@font/poppins"
                     android:paddingStart="@dimen/_4ssp"
-                    android:gravity="center_vertical"
+                    android:gravity="center_vertical|left"
                     android:text="I want to recieve updates &amp; promotional information from Transfly"
-                    android:textSize="13dp" />
+                    android:textSize="8dp" />
 
                 <RelativeLayout
                     android:id="@+id/sign_button"
@@ -324,7 +325,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:fontFamily="@font/poppinsbold"
-                        android:text="Sign Up"
+                        android:text="SIGN UP"
                         android:textColor="@color/white"
                         android:textSize="14dp" />
 
