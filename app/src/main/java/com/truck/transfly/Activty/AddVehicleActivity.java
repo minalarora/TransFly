@@ -70,6 +70,13 @@ public class AddVehicleActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                if(storageList==null || storageList.size()==0){
+
+                    Toast.makeText(AddVehicleActivity.this, "Vehicle Rc Image Required", Toast.LENGTH_SHORT).show();
+
+                    return;
+                }
+
                 if (TextUtils.isEmpty(activity.vehicleName.getText().toString())) {
 
                     activity.vehicleName.setError("Vehicle Name is Required");

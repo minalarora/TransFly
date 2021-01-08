@@ -27,7 +27,13 @@
         <activity android:name=".Activty.BankDetailsActivity" />
         <activity android:name=".Activty.PlaygroundActivity" />
         <activity android:name=".Activty.MyVehicleActivity" />
-        <activity android:name=".Activty.AddVehicleActivity" />
+
+        <activity android:name=".Activty.AddVehicleActivity"
+            android:resizeableActivity="false"
+            android:screenOrientation="portrait"
+            />
+
+
         <activity android:name=".Activty.EmergencyContactActivity" />
         <activity android:name=".Activty.AreaFieldStafActivity" />
         <!--

@@ -68,10 +68,9 @@
                 android:textColorHint="#8c8c8c"
                 app:hintAnimationEnabled="true">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
                     android:fontFamily="@font/poppins"
                     android:hint="Full Name"
                     android:id="@+id/name"
@@ -90,10 +89,9 @@
                 android:textColorHint="#8c8c8c"
                 app:hintAnimationEnabled="true">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
                     android:fontFamily="@font/poppins"
                     android:hint="Mobile Number"
                     android:imeOptions="actionNext"
@@ -113,10 +111,9 @@
                 android:textColorHint="#8c8c8c"
                 app:hintAnimationEnabled="true">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
                     android:fontFamily="@font/poppins"
                     android:hint="Your relationship with the above contact"
                     android:imeOptions="actionNext"

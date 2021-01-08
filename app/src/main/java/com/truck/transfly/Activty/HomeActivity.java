@@ -587,7 +587,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         viewPager = findViewById(R.id.viewPager);
         viewPager.setAdapter(fullMetalAdapter);
 
-        handler.postDelayed(runnable, 2500);
+        handler.postDelayed(runnable, SPEED_SCROLL);
 
     }
 

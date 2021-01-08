@@ -232,7 +232,6 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@android:color/transparent"
                         android:fontFamily="@font/poppins"
                         android:hint="Vehicle Number"
                         android:imeOptions="actionNext"
@@ -253,7 +252,6 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@android:color/transparent"
                         android:fontFamily="@font/poppins"
                         android:hint="Tonnage"
                         android:imeOptions="actionNext"
@@ -276,7 +274,6 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@android:color/transparent"
                         android:fontFamily="@font/poppins"
                         android:hint="Rate"
                         android:id="@+id/rate"
@@ -299,7 +296,6 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@android:color/transparent"
                         android:fontFamily="@font/poppins"
                         android:hint="HSD"
                         android:id="@+id/hsd"
@@ -323,7 +319,6 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@android:color/transparent"
                         android:fontFamily="@font/poppins"
                         android:hint="Amount"
                         android:id="@+id/amount"
@@ -345,7 +340,6 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@android:color/transparent"
                         android:fontFamily="@font/poppins"
                         android:hint="Cash"
                         android:maxLines="5"

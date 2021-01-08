@@ -72,7 +72,6 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
                     android:fontFamily="@font/poppins"
                     android:hint="Full Name"
                     android:id="@+id/name"
@@ -94,7 +93,6 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
                     android:fontFamily="@font/poppins"
                     android:hint="Mobile Number"
                     android:imeOptions="actionNext"
@@ -118,7 +116,6 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
                     android:fontFamily="@font/poppins"
                     android:hint="Your relationship with the above contact"
                     android:imeOptions="actionNext"

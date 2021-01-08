@@ -117,8 +117,7 @@
 
                 <EditText
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
+                    android:layout_height="match_parent"
                     android:fontFamily="@font/poppins"
                     android:hint="Vehicle Number"
                     android:id="@+id/vehicle_number"
@@ -140,7 +139,6 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
                     android:fontFamily="@font/poppins"
                     android:hint="Vehicle Name"
                     android:id="@+id/vehicle_name"
@@ -162,7 +160,6 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
                     android:fontFamily="@font/poppins"
                     android:hint="R.c Number"
                     android:imeOptions="actionNext"

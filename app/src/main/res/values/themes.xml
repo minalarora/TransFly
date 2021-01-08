@@ -11,6 +11,9 @@
         <item name="colorOnSecondary">@color/black</item>
         <item name="otpViewStyle">@style/OtpWidget.OtpView</item>
         <item name="android:statusBarColor">@color/project_color</item>
+        <item name="colorControlNormal">@color/quantum_pink</item>
+        <item name="colorControlActivated">@color/quantum_pink</item>
+        <item name="colorControlHighlight">@color/quantum_pink</item>
 
     </style>
 
@@ -23,8 +26,9 @@
 
     <style name="AppTheme.TextFloatLabelAppearance" parent="TextAppearance.Design.Hint">
         <!-- Floating label appearance here -->
-        <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/quantum_pink</item>
+        <item name="android:textSize">14sp</item>
+        <item name="fontFamily">@font/poppinsbold</item>
     </style>
 
     <style name="AppTheme.TextErrorAppearance" parent="TextAppearance.Design.Error">
