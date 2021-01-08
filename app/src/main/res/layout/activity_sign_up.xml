@@ -272,7 +272,7 @@
                         android:layout_toEndOf="@id/password_lock"
                         android:background="@color/white"
                         android:fontFamily="@font/font_opensans"
-                        android:hint="Please Enter Password"
+                        android:hint="Please Confirm Password"
                         android:inputType="textPassword"
                         android:paddingStart="16dp"
                         android:paddingEnd="12dp"

@@ -24,6 +24,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.nabinbhandari.android.permissions.PermissionHandler;
 import com.nabinbhandari.android.permissions.Permissions;
+import com.truck.transfly.Frament.OtpDialogFragment;
 import com.truck.transfly.Model.ResponseAreaManager;
 import com.truck.transfly.Model.ResponseFieldStaff;
 import com.truck.transfly.Model.ResponseTransporter;
@@ -71,6 +72,7 @@ public class BankDetailsActivity extends AppCompatActivity {
     private ApiEndpoints api = null;
     private ArrayAdapter<String> adapter;
     ArrayList<String> pendingList  =  new ArrayList<>();
+    private String mobileNoOfOtp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,6 +116,8 @@ public class BankDetailsActivity extends AppCompatActivity {
 
                 ResponseVehicleOwner responseVehicleOwner = ((TransflyApplication) getApplication()).getResponseVehicleOwner();
 
+                mobileNoOfOtp = responseVehicleOwner.getMobile();
+
                 activity.bankName.setText(responseVehicleOwner.getBankname());
                 activity.bankIfc.setText(responseVehicleOwner.getIfsc());
                 activity.bankNumber.setText(responseVehicleOwner.getAccountno());
@@ -124,6 +128,8 @@ public class BankDetailsActivity extends AppCompatActivity {
 
                 ResponseAreaManager responseAreaManager = ((TransflyApplication) getApplication()).getResponseAreaManager();
 
+                mobileNoOfOtp = responseAreaManager.getMobile();
+
                 activity.bankName.setText(responseAreaManager.getBankname());
                 activity.bankIfc.setText(responseAreaManager.getIfsc());
                 activity.bankNumber.setText(responseAreaManager.getAccountno());
@@ -133,6 +139,8 @@ public class BankDetailsActivity extends AppCompatActivity {
             case "fieldstaff":
 
                 ResponseFieldStaff responseFieldStaff = ((TransflyApplication) getApplication()).getResponseFieldStaff();
+
+                mobileNoOfOtp = responseFieldStaff.getMobile();
 
                 activity.bankName.setText(responseFieldStaff.getBankname());
                 activity.bankIfc.setText(responseFieldStaff.getIfsc());
@@ -191,7 +199,25 @@ public class BankDetailsActivity extends AppCompatActivity {
 
                     } else {
 
-                        uploadBankMultipart();
+                        OtpDialogFragment otpDialogFragment=new OtpDialogFragment();
+                        Bundle bundle = new Bundle();
+                        bundle.putString("mobileNo", mobileNoOfOtp);
+                        otpDialogFragment.setArguments(bundle);
+                        otpDialogFragment.setCancelable(false);
+                        otpDialogFragment.show(getSupportFragmentManager(),"otpDialogFragment");
+
+                        otpDialogFragment.setOnClickListener(new OtpDialogFragment.onClickListener() {
+                            @Override
+                            public void onClick(int i) {
+
+                                if(i==1){
+
+                                    uploadBankMultipart();
+
+                                }
+
+                            }
+                        });
 
                     }
 

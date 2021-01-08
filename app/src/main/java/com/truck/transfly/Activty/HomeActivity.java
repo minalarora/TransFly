@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -145,20 +146,53 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
     private RelativeLayout no_internet_connection;
     private String areaname;
     private RecyclerView recyclerView;
+    private NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
 
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_view);
 //        navigationView.setNavigationItemSelectedListener(map);
+
+        handler = new Handler(getMainLooper());
+
+        Menu menu = navigationView.getMenu();
+        MenuItem kyc_drawer = menu.findItem(R.id.kyc_drawer);
+
+        ResponseVehicleOwner responseFieldStaff = ((TransflyApplication) getApplication()).getResponseVehicleOwner();
+
+        if(responseFieldStaff.getStatus()==0){
+
+            kyc_drawer.setTitle("KYC Details (Pending)");
+
+        } else if(responseFieldStaff.getStatus()==1){
+
+            kyc_drawer.setTitle("KYC Details (Under Process)");
+
+        } else {
+
+            kyc_drawer.setTitle("KYC Details (Completed)");
+
+        }
+
 
         View headerLayout = navigationView.getHeaderView(0);
         TextView customerName = headerLayout.findViewById(R.id.customer_name);
         TextView number = headerLayout.findViewById(R.id.number);
 
-        ResponseVehicleOwner responseFieldStaff = ((TransflyApplication) getApplication()).getResponseVehicleOwner();
+        headerLayout.findViewById(R.id.appSetting).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                Uri uri = Uri.fromParts("package", getPackageName(), null);
+                intent.setData(uri);
+                startActivity(intent);
+
+            }
+        });
 
         customerName.setText(responseFieldStaff.getName());
         number.setText(responseFieldStaff.getMobile());
@@ -188,8 +222,6 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
 
         navigationViewListener(navigationView);
-
-        navigationView.setItemIconTintList(null);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -421,6 +453,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
+
     private void getBanners(String token) {
         api.getBanners(token).enqueue(new Callback<ResponseBody>() {
             @Override
@@ -445,6 +478,8 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                     } else {
                         fullMetalAdapter.notifyDataSetChanged();
+
+                        viewPager.setVisibility(View.VISIBLE);
 
                         Log.d("minal", responseBannerArrayList.toString());
                     }
@@ -507,7 +542,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                         arealist.addAll(areass);
                         locationAdapter.notifyDataSetChanged();
 
-                        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                        handler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
 
@@ -528,7 +563,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                                         } else if (perfect != null && perfect.equals("1003")) {
 
-                                            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                                            handler.postDelayed(new Runnable() {
                                                 @Override
                                                 public void run() {
 
@@ -572,8 +607,6 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
     private void initViewImageCrousel() {
-
-        handler = new Handler(getMainLooper());
 
         for (int i = 0; i < 10; i++) {
 
@@ -779,6 +812,20 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                         startActivity(rewardIntent);
 
                         break;
+
+
+                    case R.id.contact_us:
+
+
+                        break;
+
+                    case R.id.bank_details:
+
+                        Intent bank_details=new Intent(HomeActivity.this,BankDetailsActivity.class);
+                        startActivity(bank_details);
+
+                        break;
+
 
                     case R.id.logout:
 

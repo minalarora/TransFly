@@ -9,8 +9,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -25,6 +28,7 @@ import com.google.gson.reflect.TypeToken;
 import com.truck.transfly.Adapter.FieldStafAdapter;
 import com.truck.transfly.Model.ResponseBooking;
 import com.truck.transfly.Model.ResponseFieldStaff;
+import com.truck.transfly.Model.ResponseTransporter;
 import com.truck.transfly.R;
 import com.truck.transfly.utils.ApiClient;
 import com.truck.transfly.utils.ApiEndpoints;
@@ -68,7 +72,36 @@ public class FieldStafActivity extends AppCompatActivity {
         TextView customerName = headerLayout.findViewById(R.id.customer_name);
         TextView number=headerLayout.findViewById(R.id.number);
 
+        headerLayout.findViewById(R.id.appSetting).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                Uri uri = Uri.fromParts("package", getPackageName(), null);
+                intent.setData(uri);
+                startActivity(intent);
+
+            }
+        });
+
         ResponseFieldStaff responseFieldStaff = ((TransflyApplication) getApplication()).getResponseFieldStaff();
+
+        Menu menu = navigationView.getMenu();
+        MenuItem kyc_drawer = menu.findItem(R.id.kyc_drawer);
+
+        if(responseFieldStaff.getStatus()==0){
+
+            kyc_drawer.setTitle("KYC Details (Pending)");
+
+        } else if(responseFieldStaff.getStatus()==1){
+
+            kyc_drawer.setTitle("KYC Details (Under Process)");
+
+        } else {
+
+            kyc_drawer.setTitle("KYC Details (Completed)");
+
+        }
 
         customerName.setText(responseFieldStaff.getName());
         number.setText(responseFieldStaff.getMobile());
@@ -96,8 +129,6 @@ public class FieldStafActivity extends AppCompatActivity {
         });
 
         navigationViewListener(navigationView);
-
-        navigationView.setItemIconTintList(null);
         noDataFound =findViewById(R.id.no_data_found);
         noDataFound.setVisibility(View.GONE);
 
@@ -216,6 +247,10 @@ public class FieldStafActivity extends AppCompatActivity {
 
                         break;
 
+                    case R.id.contact_us:
+
+
+                        break;
 
                     case R.id.logout:
 

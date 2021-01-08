@@ -12,17 +12,18 @@
 
         <item
             android:id="@+id/kyc_drawer"
-            android:title="Fill Kyc Details"
+            android:title="Kyc Details"
             android:icon="@drawable/ic_action_fill_kyc_details"/>
-        <item
-            android:id="@+id/ticket_drawer"
-            android:title="Complain Ticket"
-            android:icon="@drawable/ic_action_complain_text"/>
 
         <item
-            android:title="Add Vehicle"
-            android:id="@+id/add_vehicle"
-            android:icon="@drawable/ic_action_add_vehicle" />
+            android:title="Payment/Challan status"
+            android:id="@+id/current_invoices"
+            android:icon="@drawable/ic_action_update_current_invoices" />
+
+        <item
+            android:title="Bank Details"
+            android:id="@+id/bank_details"
+            android:icon="@drawable/ic_action_update_bank_details" />
 
         <item
             android:title="My Vehicle"
@@ -30,18 +31,14 @@
             android:icon="@drawable/ic_action_my_vehicle" />
 
         <item
-            android:title="My Invoices"
-            android:id="@+id/current_invoices"
-            android:icon="@drawable/ic_action_update_current_invoices" />
+            android:title="Add Vehicle"
+            android:id="@+id/add_vehicle"
+            android:icon="@drawable/ic_action_add_vehicle" />
 
         <item
-            android:id="@+id/feedback_drawer"
-            android:title="Give Feedback"
-            android:icon="@drawable/ic_action_feedback"/>
-        <item
-            android:title="Referral Program"
-            android:id="@+id/refer_drawer"
-            android:icon="@drawable/ic_action_refer_program" />
+            android:id="@+id/ticket_drawer"
+            android:title="Complain Ticket"
+            android:icon="@drawable/ic_action_complain_text"/>
 
         <item
             android:title="Reward"
@@ -49,10 +46,24 @@
             android:icon="@drawable/ic_action_reward_program" />
 
         <item
+            android:title="Referral Program"
+            android:id="@+id/refer_drawer"
+            android:icon="@drawable/ic_action_refer_program" />
+
+        <item
+            android:id="@+id/feedback_drawer"
+            android:title="Feedback"
+            android:icon="@drawable/ic_action_feedback"/>
+
+        <item
             android:title="Emergency Details"
             android:id="@+id/emergency_details"
             android:icon="@drawable/ic_action_emergency_contact" />
 
+        <item
+            android:title="Contact Us"
+            android:id="@+id/contact_us"
+            android:icon="@drawable/ic_action_contact_us" />
 
         <item
             android:id="@+id/logout"

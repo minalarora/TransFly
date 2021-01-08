@@ -11,8 +11,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,6 +33,7 @@ import com.truck.transfly.Frament.ShowInvoiceFragment;
 import com.truck.transfly.Model.ResponseFieldStaff;
 import com.truck.transfly.Model.ResponseInvoice;
 import com.truck.transfly.Model.ResponseTransporter;
+import com.truck.transfly.Model.ResponseVehicleOwner;
 import com.truck.transfly.R;
 import com.truck.transfly.utils.ApiClient;
 import com.truck.transfly.utils.ApiEndpoints;
@@ -134,6 +137,24 @@ public class TransporterActivity extends AppCompatActivity implements com.wdulla
 //        navigationView.setNavigationItemSelectedListener(map);
 
         Menu menu = navigationView.getMenu();
+        MenuItem kyc_drawer = menu.findItem(R.id.kyc_drawer);
+
+        ResponseTransporter responseFieldStaff = ((TransflyApplication) getApplication()).getResponseTransporterOwner();
+
+        if(responseFieldStaff.getStatus()==0){
+
+            kyc_drawer.setTitle("KYC Details (Pending)");
+
+        } else if(responseFieldStaff.getStatus()==1){
+
+            kyc_drawer.setTitle("KYC Details (Under Process)");
+
+        } else {
+
+            kyc_drawer.setTitle("KYC Details (Completed)");
+
+        }
+
         MenuItem bankDetails = menu.findItem(R.id.bank_details);
         bankDetails.setVisible(false);
 
@@ -144,14 +165,22 @@ public class TransporterActivity extends AppCompatActivity implements com.wdulla
         TextView customerName = headerLayout.findViewById(R.id.customer_name);
         TextView number=headerLayout.findViewById(R.id.number);
 
-        ResponseTransporter responseFieldStaff = ((TransflyApplication) getApplication()).getResponseTransporterOwner();
+        headerLayout.findViewById(R.id.appSetting).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                Uri uri = Uri.fromParts("package", getPackageName(), null);
+                intent.setData(uri);
+                startActivity(intent);
+
+            }
+        });
 
         customerName.setText(responseFieldStaff.getName());
         number.setText(responseFieldStaff.getMobile());
 
         navigationViewListener(navigationView);
-
-        navigationView.setItemIconTintList(null);
 
         viewById = findViewById(R.id.drawer_icon);
 
@@ -263,6 +292,11 @@ public class TransporterActivity extends AppCompatActivity implements com.wdulla
                     case R.id.emergency_details:
 
                         startActivity(new Intent(TransporterActivity.this,EmergencyContactActivity.class));
+
+                        break;
+
+                    case R.id.contact_us:
+
 
                         break;
 

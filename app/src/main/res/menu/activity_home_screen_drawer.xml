@@ -12,7 +12,7 @@
 
         <item
             android:id="@+id/kyc_drawer"
-            android:title="Fill Kyc Details"
+            android:title="Kyc Details"
             android:icon="@drawable/ic_action_fill_kyc_details"/>
 
         <item
@@ -42,6 +42,11 @@
             android:title="Emergency Details"
             android:id="@+id/emergency_details"
             android:icon="@drawable/ic_action_emergency_contact" />
+
+        <item
+            android:title="Contact Us"
+            android:id="@+id/contact_us"
+            android:icon="@drawable/ic_action_contact_us" />
 
         <item
             android:id="@+id/logout"

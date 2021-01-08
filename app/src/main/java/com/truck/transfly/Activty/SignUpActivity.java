@@ -20,6 +20,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.tapadoo.alerter.Alerter;
 import com.truck.transfly.Model.RequestUser;
 import com.truck.transfly.Model.ResponseAreaManager;
 import com.truck.transfly.Model.ResponseFieldStaff;
@@ -164,11 +165,23 @@ public class SignUpActivity extends AppCompatActivity {
 
                 }else if (!activity.acceptCondition.isChecked()){
 
-                    Toast.makeText(SignUpActivity.this, "Checked Accept Condition", Toast.LENGTH_SHORT).show();
+                    Alerter.create(SignUpActivity.this)
+                            .setText("Please Accept the terms and condition to continue.")
+                            .setIcon(R.drawable.ic_action_user_icon)
+                            .setBackgroundColorRes(R.color.quantum_pink)
+                            .enableSwipeToDismiss()
+                            .setDuration(3000)
+                            .show();
 
                 } else if (!activity.emailSentAv.isChecked()){
 
-                    Toast.makeText(SignUpActivity.this, "Checked Email Confirmation", Toast.LENGTH_SHORT).show();
+                    Alerter.create(SignUpActivity.this)
+                            .setText("Please Accept the Updates and promotional information for better user experience.")
+                            .setIcon(R.drawable.ic_action_password_lock)
+                            .setBackgroundColorRes(R.color.quantum_pink)
+                            .enableSwipeToDismiss()
+                            .setDuration(3000)
+                            .show();
 
                 } else {
 
@@ -391,8 +404,14 @@ public class SignUpActivity extends AppCompatActivity {
 
         if(b){
 
-            Toast.makeText(this, "Email And Mobile is already exist! try Again", Toast.LENGTH_SHORT).show();
-
+            Alerter.create(SignUpActivity.this)
+                    .setTitle("User Already Exists!")
+                    .setText("Mobile Number Already Exists! Try Another One")
+                    .setIcon(R.drawable.ic_action_password_lock)
+                    .setBackgroundColorRes(R.color.quantum_pink)
+                    .enableSwipeToDismiss()
+                    .setDuration(3000)
+                    .show();
         }
 
         parent_of_loading.setVisibility(View.GONE);

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Activty.TermsAndCondition">
 
     <androidx.core.widget.NestedScrollView
@@ -14,45 +15,81 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:src="@drawable/terms_and_condition" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/heading"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:layout_gravity="bottom"
-            android:layout_marginStart="@dimen/_12ssp"
-            android:layout_marginTop="@dimen/_12ssp"
-            android:layout_marginEnd="@dimen/_12ssp"
-            android:padding="6dp"
-            android:text="TERMS &amp; CONDITION AND PRIVACY POLICY"
-            android:textColor="@color/black"
-            android:lineSpacingExtra="@dimen/_8ssp"
-            android:textSize="@dimen/_12ssp"
-            android:textStyle="bold"
-            android:typeface="serif" />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/terms_and_condition" />
 
-        <TextView
-            android:id="@+id/desc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginStart="@dimen/_12ssp"
-            android:layout_marginEnd="@dimen/_12ssp"
-            android:lineSpacingExtra="@dimen/_6ssp"
-            android:padding="6dp"
-            android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-            android:textColor="@color/black"
-            android:textSize="@dimen/_12ssp"
-            android:typeface="serif" />
+                <ImageView
+                    android:id="@+id/back"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="@dimen/_14ssp"
+                    android:src="@drawable/ic_action_back"
+                    app:tint="@color/black" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/heading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="@dimen/_12ssp"
+                android:layout_marginTop="@dimen/_12ssp"
+                android:layout_marginEnd="@dimen/_12ssp"
+                android:gravity="center_horizontal"
+                android:lineSpacingExtra="@dimen/_8ssp"
+                android:padding="6dp"
+                android:text="TERMS &amp; CONDITION AND PRIVACY POLICY"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="bold"
+                android:typeface="serif" />
+
+            <TextView
+                android:id="@+id/desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="@dimen/_12ssp"
+                android:layout_marginEnd="@dimen/_12ssp"
+                android:lineSpacingExtra="@dimen/_6ssp"
+                android:padding="6dp"
+                android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12ssp"
+                android:typeface="serif" />
+
+            <RelativeLayout
+                android:id="@+id/agree_terms_condition"
+                android:layout_width="260dp"
+                android:layout_height="45dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/design_as_edittext_gradient"
+                android:elevation="6dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/poppinsbold"
+                    android:text="Agree Terms And Condition"
+                    android:textColor="@color/white"
+                    android:textSize="14dp" />
+
+            </RelativeLayout>
 
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
 
-    </LinearLayout>
+</LinearLayout>

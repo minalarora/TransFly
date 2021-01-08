@@ -25,6 +25,7 @@
         <ImageView
             android:id="@+id/pencil"
             android:layout_width="30dp"
+            android:visibility="gone"
             android:layout_height="30dp"
             android:layout_centerVertical="true"
             android:layout_toStartOf="@+id/profile_image"
@@ -42,7 +43,7 @@
             android:src="@drawable/default_profile" />
 
         <ImageView
-            android:id="@+id/appLogo"
+            android:id="@+id/appSetting"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_centerVertical="true"

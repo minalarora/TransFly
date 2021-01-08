@@ -119,6 +119,7 @@
         android:id="@+id/viewPager"
         android:layout_below="@+id/locationRecyclerView"
         android:layout_width="match_parent"
+        android:visibility="gone"
         android:background="@android:color/transparent"
         android:layout_height="@dimen/_72ssp"
         app:itemMargin="32dp"/>
@@ -126,6 +127,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_below="@+id/viewPager"
+        android:layout_alignWithParentIfMissing="true"
         android:layout_above="@+id/navigation"
         android:layout_height="match_parent">
 

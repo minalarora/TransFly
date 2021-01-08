@@ -8,7 +8,9 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,6 +24,7 @@ import com.truck.transfly.Frament.ShowBooking;
 import com.truck.transfly.Frament.ShowInvoiceFragment;
 import com.truck.transfly.Model.ResponseAreaManager;
 import com.truck.transfly.Model.ResponseFieldStaff;
+import com.truck.transfly.Model.ResponseTransporter;
 import com.truck.transfly.R;
 import com.truck.transfly.utils.PreferenceUtil;
 import com.truck.transfly.utils.TransflyApplication;
@@ -52,6 +55,18 @@ public class AreaManagerActivity extends AppCompatActivity {
         TextView customerName = headerLayout.findViewById(R.id.customer_name);
         TextView number=headerLayout.findViewById(R.id.number);
 
+        headerLayout.findViewById(R.id.appSetting).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                Uri uri = Uri.fromParts("package", getPackageName(), null);
+                intent.setData(uri);
+                startActivity(intent);
+
+            }
+        });
+
         ResponseAreaManager responseFieldStaff = ((TransflyApplication) getApplication()).getResponseAreaManager();
 
         customerName.setText(responseFieldStaff.getName());
@@ -59,7 +74,22 @@ public class AreaManagerActivity extends AppCompatActivity {
 
         navigationViewListener(navigationView);
 
-        navigationView.setItemIconTintList(null);
+        Menu menu = navigationView.getMenu();
+        MenuItem kyc_drawer = menu.findItem(R.id.kyc_drawer);
+
+        if(responseFieldStaff.getStatus()==0){
+
+            kyc_drawer.setTitle("KYC Details (Pending)");
+
+        } else if(responseFieldStaff.getStatus()==1){
+
+            kyc_drawer.setTitle("KYC Details (Under Process)");
+
+        } else {
+
+            kyc_drawer.setTitle("KYC Details (Completed)");
+
+        }
 
 //        Menu menu = navigationView.getMenu();
 //
@@ -151,6 +181,11 @@ public class AreaManagerActivity extends AppCompatActivity {
                     case R.id.emergency_details:
 
                         startActivity(new Intent(AreaManagerActivity.this,EmergencyContactActivity.class));
+
+                        break;
+
+                    case R.id.contact_us:
+
 
                         break;
 

@@ -71,19 +71,30 @@
 
             <FrameLayout
                 android:layout_width="wrap_content"
-                android:layout_marginTop="-66dp"
+                android:layout_marginTop="-50dp"
                 android:layout_gravity="center"
                 android:layout_height="wrap_content">
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="160dp"
-                    android:layout_height="160dp"
-                    android:padding="@dimen/_8ssp"
+                <androidx.cardview.widget.CardView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:id="@+id/circularImage"
-                    android:scaleType="centerCrop"
+                    android:backgroundTint="#f7f7f7"
+                    app:cardCornerRadius="@dimen/_100ssp"
                     android:src="@drawable/default_profile"
-                    app:civ_border_color="@color/white"
-                    app:civ_border_width="4dp" />
+                     >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/poppinsbold"
+                        android:text="SH"
+                        android:id="@+id/profile_two"
+                        android:textColor="@color/quantum_pink"
+                        android:textSize="30dp" />
+
+                </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="@dimen/_50ssp"
@@ -232,7 +243,7 @@
                     android:layout_gravity="center_vertical"
                     app:tint="@color/project_color" />
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_gravity="center_vertical"
                     android:orientation="vertical"
@@ -245,6 +256,7 @@
                         android:layout_marginStart="10dp"
                         android:fontFamily="@font/font_opensans"
                         android:text="Phone"
+                        android:id="@+id/phone_string"
                         android:alpha="0.7"
                         android:textColor="@android:color/black"
                         android:textSize="14dp" />
@@ -258,6 +270,68 @@
                         android:fontFamily="@font/font_opensans"
                         android:text="+91 1234567890"
                         android:id="@+id/phone"
+                        android:layout_below="@id/phone_string"
+                        android:textColor="@android:color/black"
+                        android:textSize="15dp" />
+
+                    <ImageView
+                        android:layout_width="@dimen/_23ssp"
+                        android:layout_height="@dimen/_23ssp"
+                        android:layout_gravity="center"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/_12ssp"
+                        android:id="@+id/edit_mobile"
+                        android:src="@drawable/ic_action_pencil"
+                        app:tint="@color/black" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <include layout="@layout/layout_single_line"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/_12ssp"
+                android:layout_marginTop="@dimen/_18ssp"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="@dimen/_28ssp"
+                    android:layout_height="@dimen/_28ssp"
+                    android:layout_marginStart="@dimen/_15ssp"
+                    android:src="@drawable/ic_action_pan_number"
+                    android:layout_gravity="center_vertical"
+                    app:tint="@color/project_color" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="@font/font_opensans"
+                        android:text="Pan Number"
+                        android:alpha="0.7"
+                        android:textColor="@android:color/black"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="@dimen/_6ssp"
+                        android:fontFamily="@font/font_opensans"
+                        android:text="+91 1234567890"
+                        android:id="@+id/pan_number"
                         android:textColor="@android:color/black"
                         android:textSize="15dp" />
 
@@ -266,6 +340,51 @@
             </LinearLayout>
 
             <include layout="@layout/layout_single_line"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:id="@+id/complete_kyc_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/font_regular"
+                    android:gravity="center_horizontal"
+                    android:lineSpacingExtra="@dimen/_5ssp"
+                    android:layout_marginStart="@dimen/_20ssp"
+                    android:layout_marginEnd="@dimen/_20ssp"
+                    android:layout_marginTop="20dp"
+                    android:alpha="0.6"
+                    android:text="Please Complete Your KYC for uninterrupted services from your app."
+                    android:layout_marginBottom="@dimen/_10ssp"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="@color/black"
+                    android:textSize="9dp" />
+
+                <RelativeLayout
+                    android:id="@+id/kyc_button"
+                    android:layout_width="170dp"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/design_as_edittext_gradient"
+                    android:elevation="6dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:fontFamily="@font/poppinsbold"
+                        android:text="Complete KYC"
+                        android:textColor="@color/white"
+                        android:textSize="14dp" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
 
         </LinearLayout>
 

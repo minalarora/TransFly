@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -23,6 +24,24 @@ public class TermsAndCondition extends AppCompatActivity {
         setContentView(R.layout.activity_terms_and_condition);
 
         TextView desc =findViewById(R.id.desc);
+
+        findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                onBackPressed();
+
+            }
+        });
+
+        findViewById(R.id.agree_terms_condition).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                onBackPressed();
+
+            }
+        });
 
         desc.setText("Thank you for using TransFly (“App”) Services. These Terms of Use, together with TransFly Privacy Policy, shall apply to the users of the app as and when they visit, browse, access data and, place orders, upload or download documents, access or otherwise use the App.\n" +
                 "By using the App, you acknowledge and signify that you have read, understood, and agree to be bound by these Terms and Conditions. You must agree to these Terms and Conditions in order to access or use the App. You may not use the services if you do not accept the terms or are unable to be bound by the terms.\n" +
