@@ -186,7 +186,7 @@
                     <EditText
                         android:id="@+id/password"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_38sdp"
+                        android:layout_height="38dp"
                         android:layout_toEndOf="@id/password_lock_1"
                         android:background="@color/white"
                         android:fontFamily="@font/font_opensans"
@@ -266,7 +266,7 @@
                     <EditText
                         android:id="@+id/retypePassword"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_38sdp"
+                        android:layout_height="38dp"
                         android:layout_toEndOf="@id/password_lock"
                         android:background="@color/white"
                         android:fontFamily="@font/font_opensans"
@@ -285,7 +285,8 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/accept_condition"
                     android:layout_marginStart="@dimen/_20ssp"
-                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_25sdp"
+                    android:lineSpacingExtra="@dimen/_4ssp"
                     android:layout_marginEnd="@dimen/_20ssp"
                     android:buttonTint="@color/quantum_pink"
                     android:fontFamily="@font/poppins"
@@ -296,13 +297,16 @@
                 <CheckBox
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_20ssp"
-                    android:layout_marginEnd="@dimen/_20ssp"
+                    android:layout_marginStart="@dimen/_25ssp"
+                    android:layout_marginEnd="@dimen/_25ssp"
+                    android:layout_marginTop="@dimen/_16ssp"
                     android:id="@+id/email_sent_av"
+                    android:lineSpacingExtra="@dimen/_4ssp"
                     android:buttonTint="@color/quantum_pink"
                     android:fontFamily="@font/poppins"
                     android:paddingStart="@dimen/_4ssp"
-                    android:text="Lorem Ipsum Lorem Ipsum ipsum ipsun"
+                    android:gravity="center_vertical"
+                    android:text="I want to recieve updates &amp; promotional information from Transfly"
                     android:textSize="13dp" />
 
                 <RelativeLayout

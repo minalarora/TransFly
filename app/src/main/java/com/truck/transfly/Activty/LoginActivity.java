@@ -129,7 +129,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     PreferenceUtil.putData(LoginActivity.this,"token",token);
 
-                } else if(response.code()==202) {
+                } else if(response.code() == 402) {
 
                     Alerter.create(LoginActivity.this)
                             .setTitle("Password Miss matched")
@@ -143,7 +143,7 @@ public class LoginActivity extends AppCompatActivity {
                     parent_of_loading.setVisibility(View.GONE);
 
 
-                } else if(response.code()==205){
+                } else if(response.code()==400){
 
                     Alerter.create(LoginActivity.this)
                             .setTitle("User Not Found!")

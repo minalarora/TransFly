@@ -70,8 +70,6 @@
                 android:layout_toEndOf="@+id/phone_icon"
                 android:background="@color/white"
                 android:id="@+id/mobileNumber"
-                android:maxLength="10"
-                android:inputType="number"
                 android:fontFamily="@font/font_opensans"
                 android:hint="Please Enter Mobile or Email"
                 android:paddingStart="16dp"
@@ -114,7 +112,7 @@
                 <EditText
                     android:id="@+id/password"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_38sdp"
+                    android:layout_height="38dp"
                     android:background="@color/white"
                     android:fontFamily="@font/font_opensans"
                     android:hint="Please Enter Password"
@@ -168,6 +166,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
+        android:id="@+id/signup_parent"
         android:layout_alignParentBottom="true"
         android:background="@drawable/design_as_gradient"
         android:layout_height="45dp">
@@ -185,6 +184,24 @@
 
 
     </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/font_regular"
+        android:text="©2021. All rights reserved to Transfly Logistics Private Limited."
+        android:layout_above="@+id/signup_parent"
+        android:gravity="center_horizontal"
+        android:lineSpacingExtra="@dimen/_5ssp"
+        android:layout_marginStart="@dimen/_20ssp"
+        android:layout_marginEnd="@dimen/_20ssp"
+        android:layout_marginTop="40dp"
+        android:alpha="0.6"
+        android:layout_marginBottom="@dimen/_10ssp"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/black"
+        android:textSize="13dp" />
 
     <include layout="@layout/loading_view_transparent"/>
 

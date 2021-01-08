@@ -6,12 +6,14 @@ import androidx.databinding.DataBindingUtil;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.Html;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -68,6 +70,23 @@ public class SignUpActivity extends AppCompatActivity {
 
         accept_condition = findViewById(R.id.accept_condition);
         email_sent_av = findViewById(R.id.email_sent_av);
+
+        activity.acceptCondition.setText(Html.fromHtml("By Clicking this Box you are agreeing to the " +
+                "<a href='google.com'>TERMS & CONDITIONS AND PRIVACY POLICY</a>"));
+
+        activity.acceptCondition.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if(isChecked){
+
+                    Intent intent=new Intent(SignUpActivity.this,TermsAndCondition.class);
+                    startActivity(intent);
+
+                }
+
+            }
+        });
 
         activity.password.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
