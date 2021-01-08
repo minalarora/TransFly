@@ -66,7 +66,7 @@ public class MyUtils {
                         .dismissOnBackPress(true)
                         .enableDismissAfterShown(true)
                         .usageId(id) //UNIQUE ID
-                        .setTypeface(ResourcesCompat.getFont(context, R.font.poppinsbold))
+                        .setTypeface(ResourcesCompat.getFont(context, R.font.font_opensans))
                         .setListener(new SpotlightListener() {
                             @Override
                             public void onUserClicked(String s) {
