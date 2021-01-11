@@ -1,11 +1,5 @@
 package com.truck.transfly.Activty;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.viewpager.widget.ViewPager;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
@@ -17,14 +11,18 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.viewpager.widget.ViewPager;
+
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.truck.transfly.Adapter.ViewPagerAdapter;
 import com.truck.transfly.Frament.ShowBooking;
 import com.truck.transfly.Frament.ShowInvoiceFragment;
 import com.truck.transfly.Model.ResponseAreaManager;
-import com.truck.transfly.Model.ResponseFieldStaff;
-import com.truck.transfly.Model.ResponseTransporter;
 import com.truck.transfly.R;
 import com.truck.transfly.utils.PreferenceUtil;
 import com.truck.transfly.utils.TransflyApplication;
@@ -39,12 +37,12 @@ public class AreaManagerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_area_manager2);
 
-        TabLayout tabLayout=findViewById(R.id.tabLayout);
+        TabLayout tabLayout = findViewById(R.id.tabLayout);
 
-        ViewPager viewPager =findViewById(R.id.viewpager);
-        ViewPagerAdapter viewPagerAdapter=new ViewPagerAdapter(getSupportFragmentManager(),0);
-        viewPagerAdapter.addFragment(new ShowBooking(),"Bookings");
-        viewPagerAdapter.addFragment(new ShowInvoiceFragment(),"Invoices");
+        ViewPager viewPager = findViewById(R.id.viewpager);
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), 0);
+        viewPagerAdapter.addFragment(new ShowBooking(), "Bookings");
+        viewPagerAdapter.addFragment(new ShowInvoiceFragment(), "Invoices");
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
 
@@ -53,7 +51,7 @@ public class AreaManagerActivity extends AppCompatActivity {
 
         View headerLayout = navigationView.getHeaderView(0);
         TextView customerName = headerLayout.findViewById(R.id.customer_name);
-        TextView number=headerLayout.findViewById(R.id.number);
+        TextView number = headerLayout.findViewById(R.id.number);
 
         headerLayout.findViewById(R.id.appSetting).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,11 +75,11 @@ public class AreaManagerActivity extends AppCompatActivity {
         Menu menu = navigationView.getMenu();
         MenuItem kyc_drawer = menu.findItem(R.id.kyc_drawer);
 
-        if(responseFieldStaff.getStatus()==0){
+        if (responseFieldStaff.getStatus() == 0) {
 
             kyc_drawer.setTitle("KYC Details (Pending)");
 
-        } else if(responseFieldStaff.getStatus()==1){
+        } else if (responseFieldStaff.getStatus() == 1) {
 
             kyc_drawer.setTitle("KYC Details (Under Process)");
 
@@ -124,40 +122,40 @@ public class AreaManagerActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
 
                     case R.id.profile_drawer:
 
                         Intent intent = new Intent(AreaManagerActivity.this, ProfileActivity.class);
-                        intent.putExtra("stringText","areaManager");
+                        intent.putExtra("stringText", "areaManager");
                         startActivity(intent);
 
                         break;
 
                     case R.id.kyc_drawer:
 
-                        Intent kyc_intent=new Intent(AreaManagerActivity.this, AreaFieldStafActivity.class);
+                        Intent kyc_intent = new Intent(AreaManagerActivity.this, AreaFieldStafActivity.class);
                         startActivity(kyc_intent);
 
                         break;
 
                     case R.id.ticket_drawer:
 
-                        Intent ticket_complain=new Intent(AreaManagerActivity.this,TicketComplaintActivity.class);
+                        Intent ticket_complain = new Intent(AreaManagerActivity.this, TicketComplaintActivity.class);
                         startActivity(ticket_complain);
 
                         break;
 
                     case R.id.bank_details:
 
-                        Intent bankDetails=new Intent(AreaManagerActivity.this,BankDetailsActivity.class);
+                        Intent bankDetails = new Intent(AreaManagerActivity.this, BankDetailsActivity.class);
                         startActivity(bankDetails);
 
                         break;
 
                     case R.id.feedback_drawer:
 
-                        Intent feedback_intent=new Intent(AreaManagerActivity.this,FeedbackActivity.class);
+                        Intent feedback_intent = new Intent(AreaManagerActivity.this, FeedbackActivity.class);
                         startActivity(feedback_intent);
 
                         break;
@@ -165,7 +163,7 @@ public class AreaManagerActivity extends AppCompatActivity {
                     case R.id.refer_drawer:
 
                         Intent refer_intent = new Intent(AreaManagerActivity.this, ReferActivity.class);
-                        refer_intent.putExtra("keyword","refer");
+                        refer_intent.putExtra("keyword", "refer");
                         startActivity(refer_intent);
 
                         break;
@@ -173,14 +171,14 @@ public class AreaManagerActivity extends AppCompatActivity {
                     case R.id.reward_program:
 
                         Intent rewardIntent = new Intent(AreaManagerActivity.this, ReferActivity.class);
-                        rewardIntent.putExtra("keyword","reward");
+                        rewardIntent.putExtra("keyword", "reward");
                         startActivity(rewardIntent);
 
                         break;
 
                     case R.id.emergency_details:
 
-                        startActivity(new Intent(AreaManagerActivity.this,EmergencyContactActivity.class));
+                        startActivity(new Intent(AreaManagerActivity.this, EmergencyContactActivity.class));
 
                         break;
 
@@ -196,7 +194,7 @@ public class AreaManagerActivity extends AppCompatActivity {
                         startActivity(logoutIntent);
                         finish();
 
-                        PreferenceUtil.putData(AreaManagerActivity.this,"token","");
+                        PreferenceUtil.putData(AreaManagerActivity.this, "token", "");
 
                         break;
 

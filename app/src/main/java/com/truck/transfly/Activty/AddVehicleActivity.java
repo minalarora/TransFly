@@ -77,11 +77,15 @@ public class AddVehicleActivity extends AppCompatActivity {
                     return;
                 }
 
-                if (TextUtils.isEmpty(activity.vehicleName.getText().toString())) {
+                if (TextUtils.isEmpty(activity.vehicleNameSpinner.getSelectedItem().toString())) {
 
-                    activity.vehicleName.setError("Vehicle Name is Required");
+                    Toast.makeText(AddVehicleActivity.this, "Not Empty Item", Toast.LENGTH_SHORT).show();
 
-                } else if (TextUtils.isEmpty(activity.vehicleNumber.getText().toString())) {
+                } else if(activity.vehicleOwnTyres.getSelectedItemPosition()==0) {
+
+                    Toast.makeText(AddVehicleActivity.this, "Select Vehicle Tyres", Toast.LENGTH_SHORT).show();
+
+                }else if (TextUtils.isEmpty(activity.vehicleNumber.getText().toString())) {
 
                     activity.vehicleNumber.setError("Vehicle Number is Required");
 
@@ -183,7 +187,7 @@ public class AddVehicleActivity extends AppCompatActivity {
                     .addHeader("Authorization", PreferenceUtil.getData(AddVehicleActivity.this,"token"))
                     .addParameter("number", activity.vehicleNumber.getText().toString())
                     .addParameter("rc", activity.rcnumber.getText().toString())
-                    .addParameter("vehiclename", activity.vehicleName.getText().toString())
+                    .addParameter("vehiclename", activity.vehicleNameSpinner.getSelectedItem().toString())
                     .setUtf8Charset()
                     .setMethod("POST")
                     .setDelegate(new UploadStatusDelegate() {

@@ -73,6 +73,7 @@
                         android:id="@+id/register_category"
                         android:layout_width="260dp"
                         android:layout_height="@dimen/field_height"
+                        android:visibility="gone"
                         android:layout_marginStart="@dimen/_12ssp"
                         android:entries="@array/bank_details"
                         android:fontFamily="@font/worksansmedium" />
@@ -130,7 +131,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_12ssp"
-                        android:layout_marginTop="@dimen/_30ssp"
+                        android:layout_marginTop="@dimen/_50ssp"
                         android:layout_marginEnd="@dimen/_12ssp"
                         android:hint="Enter Bank Name"
                         android:padding="@dimen/_4ssp"

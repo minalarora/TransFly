@@ -4,6 +4,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,7 @@ public class TransporterAdapter extends RecyclerView.Adapter<TransporterAdapter.
 
     private final Context context;
     private List<ResponseInvoice> responseInvoiceList;
+    private int decideKeywords;
 
     public TransporterAdapter(Context context, List<ResponseInvoice> responseInvoiceList){
 
@@ -43,7 +45,25 @@ public class TransporterAdapter extends RecyclerView.Adapter<TransporterAdapter.
     @Override
     public void onBindViewHolder(@NonNull viewholder holder, int position) {
 
+        holder.itemView.setVisibility(View.GONE);
         ResponseInvoice responseInvoice = responseInvoiceList.get(position);
+
+        if(decideKeywords==1 && responseInvoice.getStatus().equals("PENDING")){
+
+            holder.itemView.setVisibility(View.VISIBLE);
+
+        } else if(decideKeywords==2 && responseInvoice.getStatus().equals("COMPLETED")){
+
+            holder.itemView.setVisibility(View.VISIBLE);
+
+        } else if (decideKeywords==0 && (responseInvoice.getStatus().equals("PENDING") || responseInvoice.getStatus().equals("COMPLETED"))){
+
+            holder.itemView.setVisibility(View.VISIBLE);
+
+        }
+
+        Log.i("TAG", "onBindViewHolder: "+responseInvoice.getStatus());
+
         holder.price_rate.setText(""+responseInvoice.getRate());
         holder.vehicle_number.setText(responseInvoice.getVehiclenumber());
         holder.mobileNumber.setText(responseInvoice.getVehicleownermobile());
@@ -90,6 +110,12 @@ public class TransporterAdapter extends RecyclerView.Adapter<TransporterAdapter.
     @Override
     public int getItemCount() {
         return responseInvoiceList.size();
+    }
+
+    public void setDecideKeywords(int i) {
+
+        this.decideKeywords=i;
+
     }
 
     public class viewholder extends RecyclerView.ViewHolder {

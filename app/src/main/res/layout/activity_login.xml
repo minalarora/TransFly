@@ -172,15 +172,15 @@
         android:layout_height="45dp">
 
         <TextView
-            android:textSize="12dp"
-            android:textColor="@android:color/white"
-            android:gravity="center"
             android:id="@+id/signup"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:text="@string/do_not_have_and_account_create_account"
             android:layout_alignParentBottom="true"
-            android:fontFamily="@font/font_medium"/>
+            android:fontFamily="@font/font_medium"
+            android:gravity="center"
+            android:text="@string/do_not_have_and_account_create_account"
+            android:textColor="@android:color/white"
+            android:textSize="12dp" />
 
 
     </RelativeLayout>

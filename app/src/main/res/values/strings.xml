@@ -41,6 +41,33 @@
 
     </string-array>
 
+    <string-array name="vehicle_name">
+
+        <item> TATA </item>
+        <item> ASHOK LEYLAND </item>
+        <item> BHARAT BENZ </item>
+        <item> MAHINDRA </item>
+        <item> EICHER </item>
+        <item> OTHERS </item>
+
+    </string-array>
+
+    <string-array name="Tyres_selection">
+
+        <item> Select Vehicle Tyres </item>
+        <item> 6 </item>
+        <item> 10 </item>
+        <item> 12 </item>
+        <item> 14 - TRAILOR </item>
+        <item> 14 - WITHOUT TRAILOR </item>
+        <item> 16 - TRAILOR </item>
+        <item> 16 - WITHOUT TRAILOR </item>
+        <item> 18 </item>
+        <item> 20 </item>
+        <item> 22 </item>
+
+    </string-array>
+
     <string-array name="transporter_owner">
 
         <item> Aadhar </item>

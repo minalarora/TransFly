@@ -127,26 +127,53 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10ssp"
-                android:layout_marginTop="@dimen/_4ssp"
-                android:layout_marginEnd="@dimen/_10ssp"
-                android:textColorHint="#8c8c8c"
-                app:hintAnimationEnabled="true">
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/margin_10dp"
+                android:layout_height="wrap_content">
 
-                <EditText
+                <Spinner android:entries="@array/vehicle_name"
+                    android:id="@+id/vehicle_name_spinner"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins"
-                    android:hint="Vehicle Name"
-                    android:id="@+id/vehicle_name"
-                    android:imeOptions="actionNext"
-                    android:inputType="textCapWords"
-                    android:textSize="@dimen/_12ssp" />
+                    android:layout_marginStart="@dimen/_12ssp"
+                    android:layout_height="@dimen/field_height"
+                    android:fontFamily="@font/worksansmedium"/>
 
-            </com.google.android.material.textfield.TextInputLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/vehicle_name_spinner"
+                    android:layout_marginStart="@dimen/_12ssp"
+                    android:layout_marginEnd="@dimen/_12ssp"
+                    android:background="@color/quantum_pink"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/margin_10dp"
+                android:layout_height="wrap_content">
+
+                <Spinner android:entries="@array/Tyres_selection"
+                    android:id="@+id/vehicle_own_tyres"
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="@dimen/_12ssp"
+                    android:layout_height="@dimen/field_height"
+                    android:fontFamily="@font/worksansmedium"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/vehicle_own_tyres"
+                    android:layout_marginStart="@dimen/_12ssp"
+                    android:layout_marginEnd="@dimen/_12ssp"
+                    android:background="@color/quantum_pink"
+                    />
+
+            </RelativeLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
