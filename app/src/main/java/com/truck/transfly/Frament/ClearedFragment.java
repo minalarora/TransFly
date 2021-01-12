@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.leavjenn.smoothdaterangepicker.date.SmoothDateRangePickerFragment;
 import com.truck.transfly.Activty.CurrentInvoicesActivity;
 import com.truck.transfly.Adapter.TransporterAdapter;
 import com.truck.transfly.Model.ResponseInvoice;
@@ -30,9 +32,12 @@ import com.truck.transfly.utils.ApiEndpoints;
 import com.truck.transfly.utils.PreferenceUtil;
 import com.yalantis.phoenix.PullToRefreshView;
 
+import org.joda.time.DateTime;
+
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import okhttp3.ResponseBody;
@@ -41,7 +46,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class ClearedFragment extends Fragment {
+public class ClearedFragment extends Fragment implements SmoothDateRangePickerFragment.OnDateRangeSetListener {
 
     private List<String> stringList=new ArrayList<>();
     private Retrofit retrofit = null;
@@ -105,6 +110,38 @@ public class ClearedFragment extends Fragment {
             }
         });
 
+        CardView calenderSelected = inflate.findViewById(R.id.calender_selected);
+
+        calenderSelected.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+//                com.wdullaer.materialdatetimepicker.date.DatePickerDialog dpd = com.wdullaer.materialdatetimepicker.date.DatePickerDialog.newInstance(
+//                        TransporterActivity.this,
+//                        now.get(Calendar.YEAR), // Initial year selection
+//                        now.get(Calendar.MONTH), // Initial month selection
+//                        now.get(Calendar.DAY_OF_MONTH) // Inital day selection
+//                );
+
+                Calendar now = Calendar.getInstance();
+
+                SmoothDateRangePickerFragment smoothDateRangePickerFragment = SmoothDateRangePickerFragment.newInstance(ClearedFragment.this::onDateRangeSet, now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH));
+
+                smoothDateRangePickerFragment.setAccentColor(R.color.project_color);
+
+                smoothDateRangePickerFragment.setThemeDark(false);
+
+                smoothDateRangePickerFragment.show(fragmentActivity.getFragmentManager(), "smoothDateRangePicker");
+
+
+//                dpd.setVersion(com.wdullaer.materialdatetimepicker.date.DatePickerDialog.Version.VERSION_1);
+//
+//                dpd.setAccentColor(ContextCompat.getColor(TransporterActivity.this, R.color.quantum_pink));
+//
+//                dpd.show(getSupportFragmentManager(), "Datepickerdialog");
+            }
+        });
+
         pullToRefreshView=inflate.findViewById(R.id.pullToRefresh);
 
         pullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
@@ -139,7 +176,7 @@ public class ClearedFragment extends Fragment {
         no_booking_data.setVisibility(View.GONE);
         parent_of_loading.setVisibility(View.VISIBLE);
 
-        api.getInvoiceVehicleOwner(token).enqueue(new Callback<ResponseBody>() {
+        api.getInvoiceVehicleOwner(token,"COMPLETED").enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
@@ -187,6 +224,76 @@ public class ClearedFragment extends Fragment {
 
             }
         });
+    }
+
+    @Override
+    public void onDateRangeSet(SmoothDateRangePickerFragment view, int yearStart, int monthStart, int dayStart, int yearEnd, int monthEnd, int dayEnd) {
+
+        DateTime dateStart=new DateTime(yearStart,monthStart+1,dayStart,new DateTime().getHourOfDay(),new DateTime().getMinuteOfHour());
+
+        DateTime dateEnd=new DateTime(yearEnd,monthEnd+1,dayEnd,new DateTime().getHourOfDay(),new DateTime().getMinuteOfHour());
+
+        invoicesList.clear();
+        fieldStafAdapter.notifyDataSetChanged();
+        getInvoiceVehicleOwner2(PreferenceUtil.getData(fragmentActivity, "token"), String.valueOf(dateStart.getMillis()),String.valueOf(dateEnd.getMillis()));
+
+    }
+
+    private void getInvoiceVehicleOwner2(String token, String from, String to) {
+
+        no_internet_connection.setVisibility(View.GONE);
+        no_booking_data.setVisibility(View.GONE);
+        parent_of_loading.setVisibility(View.VISIBLE);
+
+        api.getInvoiceVehicleOwner2(token,from,to,"COMPLETED").enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                parent_of_loading.setVisibility(View.GONE);
+
+                pullToRefreshView.setRefreshing(false);
+
+                if(response.code() == 200)
+                {
+                    Type collectionType = new TypeToken<ArrayList<ResponseInvoice>>(){}.getType();
+                    try {
+                        invoicesList.addAll(new Gson().fromJson(response.body().string().toString(),collectionType));
+                    } catch (IOException e) {
+
+                    }
+                    if(invoicesList.isEmpty())
+                    {
+
+                        fieldStafAdapter.notifyDataSetChanged();
+                        Log.d("minal","no vehicle");
+
+                        no_booking_data.setVisibility(View.VISIBLE);                    }
+                    else
+                    {
+                        //['pan','aadhaar','bank']
+
+                        fieldStafAdapter.notifyDataSetChanged();
+                        Log.d("minal", String.valueOf(invoicesList.size()));
+                    }
+
+
+                }else {
+
+                    Toast.makeText(fragmentActivity, "Something Went Wrong", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                no_internet_connection.setVisibility(View.VISIBLE);
+
+                Toast.makeText(fragmentActivity, "No Internet Connection", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
     }
 
 }

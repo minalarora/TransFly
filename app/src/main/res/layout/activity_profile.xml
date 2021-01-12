@@ -3,7 +3,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-<LinearLayout
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -11,6 +11,7 @@
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:id="@+id/toolbar"
         app:contentInsetStart="0dp">
 
         <RelativeLayout
@@ -48,6 +49,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
         android:fillViewport="true">
 
         <LinearLayout
@@ -390,6 +392,8 @@
 
     </androidx.core.widget.NestedScrollView>
 
-</LinearLayout>
+    <include layout="@layout/loading_view_transparent"/>
+
+</RelativeLayout>
 
 </layout>

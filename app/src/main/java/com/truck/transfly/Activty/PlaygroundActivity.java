@@ -1,46 +1,66 @@
 package com.truck.transfly.Activty;
 
-        import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
 
-        import android.os.Bundle;
-        import android.util.Log;
-        import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
 
-        import com.google.gson.Gson;
-        import com.google.gson.reflect.TypeToken;
-        import com.truck.transfly.R;
-        import com.truck.transfly.utils.ApiClient;
-        import com.truck.transfly.utils.ApiEndpoints;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.truck.transfly.Model.RequestArea;
+import com.truck.transfly.Model.RequestBooking;
+import com.truck.transfly.Model.RequestCredentials;
+import com.truck.transfly.Model.RequestEmail;
+import com.truck.transfly.Model.RequestEmergencyContact;
+import com.truck.transfly.Model.RequestEmergencyContact2;
+import com.truck.transfly.Model.RequestInvoice;
+import com.truck.transfly.Model.RequestMobile;
+import com.truck.transfly.Model.RequestRating;
+import com.truck.transfly.Model.RequestTicket;
+import com.truck.transfly.Model.RequestUser;
+import com.truck.transfly.Model.ResponseAreaManager;
+import com.truck.transfly.Model.ResponseBanner;
+import com.truck.transfly.Model.ResponseBooking;
+import com.truck.transfly.Model.ResponseFieldStaff;
+import com.truck.transfly.Model.ResponseMine;
+import com.truck.transfly.Model.ResponseReferral;
+import com.truck.transfly.Model.ResponseResale;
+import com.truck.transfly.Model.ResponseReward;
+import com.truck.transfly.Model.ResponseToken;
+import com.truck.transfly.Model.ResponseTransporter;
+import com.truck.transfly.Model.ResponseVehicle;
+import com.truck.transfly.Model.ResponseVehicleOwner;
+import com.truck.transfly.R;
+import com.truck.transfly.utils.ApiClient;
+import com.truck.transfly.utils.ApiEndpoints;
 
-        import okhttp3.ResponseBody;
-        import retrofit2.Call;
-        import retrofit2.Callback;
-        import retrofit2.Response;
-        import retrofit2.Retrofit;
-        import com.truck.transfly.Model.*;
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
-        import java.io.IOException;
-        import java.lang.reflect.Type;
-        import java.util.ArrayList;
-        import java.util.HashMap;
-        import java.util.HashSet;
-        import java.util.Map;
-        import java.util.Set;
-
-        import com.truck.transfly.R;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class PlaygroundActivity extends AppCompatActivity {
 
-    private  Retrofit retrofit = null;
-    private  ApiEndpoints api = null;
-    private  String token = "vehicleowner:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIxMTExMTExMSIsImlhdCI6MTYwOTE3OTgyOSwiZXhwIjoxNjExNzcxODI5fQ.YUibiAIPlx8L5VtRFbpPNtjWP0oNLg-91aPE64elLq8";
+    private Retrofit retrofit = null;
+    private ApiEndpoints api = null;
+    private String token = "vehicleowner:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIxMTExMTExMSIsImlhdCI6MTYwOTE3OTgyOSwiZXhwIjoxNjExNzcxODI5fQ.YUibiAIPlx8L5VtRFbpPNtjWP0oNLg-91aPE64elLq8";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_playground);
         retrofit = ApiClient.getRetrofitClient();
-        if(retrofit!=null)
-        {
+        if (retrofit != null) {
             api = retrofit.create(ApiEndpoints.class);
         }
 //
@@ -59,26 +79,20 @@ public class PlaygroundActivity extends AppCompatActivity {
         // getPendingList(token);
 
 
-
-
     }
 
-    private  void createVehicleOwner(RequestUser user)
-    {
+    private void createVehicleOwner(RequestUser user) {
 
 
         api.createVehicleOwner(user).enqueue(new Callback<ResponseVehicleOwner>() {
             @Override
             public void onResponse(Call<ResponseVehicleOwner> call, Response<ResponseVehicleOwner> response) {
-                if(response.code() == 200)
-                {
+                if (response.code() == 200) {
                     ResponseVehicleOwner vehicleOwner = response.body();
                     //line 1
-                    Log.d("minal",vehicleOwner.toString());
+                    Log.d("minal", vehicleOwner.toString());
 
-                }
-                else
-                {
+                } else {
                     //user create failed
                 }
             }
@@ -90,21 +104,17 @@ public class PlaygroundActivity extends AppCompatActivity {
         });
     }
 
-    private  void createFieldStaff(RequestUser user)
-    {
+    private void createFieldStaff(RequestUser user) {
 
 
         api.createFieldStaff(user).enqueue(new Callback<ResponseFieldStaff>() {
             @Override
             public void onResponse(Call<ResponseFieldStaff> call, Response<ResponseFieldStaff> response) {
-                if(response.code() == 200)
-                {
+                if (response.code() == 200) {
                     ResponseFieldStaff fieldStaff = response.body();
-                    Log.d("minal",fieldStaff.toString());
+                    Log.d("minal", fieldStaff.toString());
 
-                }
-                else
-                {
+                } else {
 
                 }
             }
@@ -116,20 +126,16 @@ public class PlaygroundActivity extends AppCompatActivity {
         });
     }
 
-    private  void createTransporter(RequestUser user)
-    {
+    private void createTransporter(RequestUser user) {
 
 
         api.createTransporter(user).enqueue(new Callback<ResponseTransporter>() {
             @Override
             public void onResponse(Call<ResponseTransporter> call, Response<ResponseTransporter> response) {
-                if(response.code() == 200)
-                {
+                if (response.code() == 200) {
                     ResponseTransporter transporter = response.body();
-                    Log.d("minal",transporter.toString());
-                }
-                else
-                {
+                    Log.d("minal", transporter.toString());
+                } else {
 
                 }
             }
@@ -141,18 +147,14 @@ public class PlaygroundActivity extends AppCompatActivity {
         });
     }
 
-    private  void createAreaManager(RequestUser user)
-    {
+    private void createAreaManager(RequestUser user) {
         api.createAreaManager(user).enqueue(new Callback<ResponseAreaManager>() {
             @Override
             public void onResponse(Call<ResponseAreaManager> call, Response<ResponseAreaManager> response) {
-                if(response.code() == 200)
-                {
+                if (response.code() == 200) {
                     ResponseAreaManager areaManager = response.body();
-                    Log.d("minal",areaManager.toString());
-                }
-                else
-                {
+                    Log.d("minal", areaManager.toString());
+                } else {
 
                 }
             }
@@ -166,18 +168,14 @@ public class PlaygroundActivity extends AppCompatActivity {
 
     }
 
-    private void getVehicleOwner(String token)
-    {
+    private void getVehicleOwner(String token) {
         api.getVehicleOwner(token).enqueue(new Callback<ResponseVehicleOwner>() {
             @Override
             public void onResponse(Call<ResponseVehicleOwner> call, Response<ResponseVehicleOwner> response) {
-                if(response.code() == 200)
-                {
+                if (response.code() == 200) {
                     ResponseVehicleOwner vehicleOwner = response.body();
-                    Log.d("minal",vehicleOwner.toString());
-                }
-                else
-                {
+                    Log.d("minal", vehicleOwner.toString());
+                } else {
 
                 }
             }
@@ -189,18 +187,14 @@ public class PlaygroundActivity extends AppCompatActivity {
         });
     }
 
-    private void getFieldStaff(String token)
-    {
+    private void getFieldStaff(String token) {
         api.getFieldStaff(token).enqueue(new Callback<ResponseFieldStaff>() {
             @Override
             public void onResponse(Call<ResponseFieldStaff> call, Response<ResponseFieldStaff> response) {
-                if(response.code() == 200)
-                {
+                if (response.code() == 200) {
                     ResponseFieldStaff fieldStaff = response.body();
-                    Log.d("minal",fieldStaff.toString());
-                }
-                else
-                {
+                    Log.d("minal", fieldStaff.toString());
+                } else {
 
                 }
             }
@@ -212,18 +206,14 @@ public class PlaygroundActivity extends AppCompatActivity {
         });
     }
 
-    private void getTransporter(String token)
-    {
+    private void getTransporter(String token) {
         api.getTransporter(token).enqueue(new Callback<ResponseTransporter>() {
             @Override
             public void onResponse(Call<ResponseTransporter> call, Response<ResponseTransporter> response) {
-                if(response.code() == 200)
-                {
+                if (response.code() == 200) {
                     ResponseTransporter transporter = response.body();
-                    Log.d("minal",transporter.toString());
-                }
-                else
-                {
+                    Log.d("minal", transporter.toString());
+                } else {
 
                 }
             }
@@ -235,18 +225,14 @@ public class PlaygroundActivity extends AppCompatActivity {
         });
     }
 
-    private void getAreaManager(String token)
-    {
+    private void getAreaManager(String token) {
         api.getAreaManager(token).enqueue(new Callback<ResponseAreaManager>() {
             @Override
             public void onResponse(Call<ResponseAreaManager> call, Response<ResponseAreaManager> response) {
-                if(response.code() == 200)
-                {
+                if (response.code() == 200) {
                     ResponseAreaManager areaManager = response.body();
-                    Log.d("minal",areaManager.toString());
-                }
-                else
-                {
+                    Log.d("minal", areaManager.toString());
+                } else {
 
                 }
             }
@@ -258,35 +244,31 @@ public class PlaygroundActivity extends AppCompatActivity {
         });
     }
 
-    private void getPendingList(String token)
-    {
+    private void getPendingList(String token) {
         api.getPendingList(token).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if(response.code() == 200)
-                {
+                if (response.code() == 200) {
 
-                    ArrayList<String> pendingList  =  new ArrayList<>();
-                    Type collectionType = new TypeToken<ArrayList<String>>(){}.getType();
+                    ArrayList<String> pendingList = new ArrayList<>();
+                    Type collectionType = new TypeToken<ArrayList<String>>() {
+                    }.getType();
                     try {
-                        pendingList.addAll(new Gson().fromJson(response.body().string().toString(),collectionType));
+                        pendingList.addAll(new Gson().fromJson(response.body().string().toString(), collectionType));
                     } catch (IOException e) {
 
                     }
-                    if(pendingList.isEmpty())
-                    {
+                    if (pendingList.isEmpty()) {
 
                         Toast.makeText(PlaygroundActivity.this, "No Kyc Need, Everything is clear", Toast.LENGTH_SHORT).show();
 
                         finish();
 
-                        Log.d("minal","kyc completed");
-                    }
-                    else
-                    {
+                        Log.d("minal", "kyc completed");
+                    } else {
                         //['pan','aadhaar','bank']
 
-                        Log.d("minal",pendingList.toString());
+                        Log.d("minal", pendingList.toString());
                     }
 
 
@@ -302,44 +284,38 @@ public class PlaygroundActivity extends AppCompatActivity {
 
     //top level
 
-    private void getAllMineVehicleOwner(String token)
-    {
+    private void getAllMineVehicleOwner(String token) {
         api.getAllMineVehicleOwner(token).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if(response.code() == 200)
-                {
+                if (response.code() == 200) {
 
-                    ArrayList<ResponseMine> mines  =  new ArrayList<>();
+                    ArrayList<ResponseMine> mines = new ArrayList<>();
 
-                    Type collectionType = new TypeToken<ArrayList<ResponseMine>>(){}.getType();
+                    Type collectionType = new TypeToken<ArrayList<ResponseMine>>() {
+                    }.getType();
                     try {
-                        mines.addAll(new Gson().fromJson(response.body().string().toString(),collectionType));
+                        mines.addAll(new Gson().fromJson(response.body().string().toString(), collectionType));
                     } catch (IOException e) {
 
                     }
-                    if(mines.isEmpty())
-                    {
-                        Log.d("minal","mine not found");
-                    }
-                    else
-                    {
-                        Log.d("minal",mines.toString());
+                    if (mines.isEmpty()) {
+                        Log.d("minal", "mine not found");
+                    } else {
+                        Log.d("minal", mines.toString());
                         //for area name
-                        HashMap<String , RequestArea> areas = new HashMap<>();
+                        HashMap<String, RequestArea> areas = new HashMap<>();
                         //for destination
                         Set<String> loadings = new HashSet<>();
                         Set<RequestArea> areass = new HashSet<>();
-                        for(ResponseMine mine: mines) {
-                            areas.put(mine.getArea(), new RequestArea(mine.getArea(),mine.getArealatitude(), mine.getArealongitude(),mine.getAreaimageurl()));
-                            for(String loading: mine.getLoading())
-                            {
+                        for (ResponseMine mine : mines) {
+                            areas.put(mine.getArea(), new RequestArea(mine.getArea(), mine.getArealatitude(), mine.getArealongitude(), mine.getAreaimageurl()));
+                            for (String loading : mine.getLoading()) {
                                 loadings.add(loading);
                             }
                         }
 
-                        for(Map.Entry<String, RequestArea> a: areas.entrySet())
-                        {
+                        for (Map.Entry<String, RequestArea> a : areas.entrySet()) {
                             areass.add(a.getValue());
                         }
 
@@ -357,52 +333,44 @@ public class PlaygroundActivity extends AppCompatActivity {
             }
         });
     }
-    ArrayList<ResponseMine> mines  =  new ArrayList<>();
 
-    private ArrayList<ResponseMine> getAllMineOfSingleArea(String area,String loading)
-    {
+    ArrayList<ResponseMine> mines = new ArrayList<>();
+
+    private ArrayList<ResponseMine> getAllMineOfSingleArea(String area, String loading) {
         ArrayList<ResponseMine> selectedmines = new ArrayList<>();
-        for(ResponseMine m: mines)
-        {
-            if(m.getArea().equalsIgnoreCase(area))
-            {
-                for(String l: m.getLoading())
-                {
-                    if(l.equalsIgnoreCase(loading))
-                    {
+        for (ResponseMine m : mines) {
+            if (m.getArea().equalsIgnoreCase(area)) {
+                for (String l : m.getLoading()) {
+                    if (l.equalsIgnoreCase(loading)) {
                         selectedmines.add(m);
                     }
                 }
             }
         }
-        return  mines;
+        return mines;
     }
 
 
-    private void getAllVehicles(String token)
-    {
+    private void getAllVehicles(String token) {
         api.getAllVehicles(token).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if(response.code() == 200)
-                {
-                    ArrayList<ResponseVehicle> vehicleList  =  new ArrayList<>();
-                    Type collectionType = new TypeToken<ArrayList<ResponseVehicle>>(){}.getType();
+                if (response.code() == 200) {
+                    ArrayList<ResponseVehicle> vehicleList = new ArrayList<>();
+                    Type collectionType = new TypeToken<ArrayList<ResponseVehicle>>() {
+                    }.getType();
                     try {
-                        vehicleList.addAll(new Gson().fromJson(response.body().string().toString(),collectionType));
+                        vehicleList.addAll(new Gson().fromJson(response.body().string().toString(), collectionType));
                     } catch (IOException e) {
 
                     }
-                    if(vehicleList.isEmpty())
-                    {
+                    if (vehicleList.isEmpty()) {
 
-                        Log.d("minal","no vehicle");
-                    }
-                    else
-                    {
+                        Log.d("minal", "no vehicle");
+                    } else {
                         //['pan','aadhaar','bank']
 
-                        Log.d("minal",vehicleList.toString());
+                        Log.d("minal", vehicleList.toString());
                     }
                 }
             }
@@ -414,14 +382,12 @@ public class PlaygroundActivity extends AppCompatActivity {
         });
     }
 
-    private void createBooking(String token, RequestBooking booking)
-    {
-        api.createBooking(token,booking).enqueue(new Callback<ResponseBody>() {
+    private void createBooking(String token, RequestBooking booking) {
+        api.createBooking(token, booking).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if(response.code() == 200)
-                {
-                    Log.d("minal","booking created");
+                if (response.code() == 200) {
+                    Log.d("minal", "booking created");
                 }
             }
 
@@ -432,30 +398,26 @@ public class PlaygroundActivity extends AppCompatActivity {
         });
     }
 
-    private void getAllBookingVehicleOwner(String token)
-    {
+    private void getAllBookingVehicleOwner(String token) {
         api.getBookingVehicleOwner(token).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if(response.code() == 200)
-                {
-                    ArrayList<ResponseBooking> bookingList  =  new ArrayList<>();
-                    Type collectionType = new TypeToken<ArrayList<ResponseBooking>>(){}.getType();
+                if (response.code() == 200) {
+                    ArrayList<ResponseBooking> bookingList = new ArrayList<>();
+                    Type collectionType = new TypeToken<ArrayList<ResponseBooking>>() {
+                    }.getType();
                     try {
-                        bookingList.addAll(new Gson().fromJson(response.body().string().toString(),collectionType));
+                        bookingList.addAll(new Gson().fromJson(response.body().string().toString(), collectionType));
                     } catch (IOException e) {
 
                     }
-                    if(bookingList.isEmpty())
-                    {
+                    if (bookingList.isEmpty()) {
 
-                        Log.d("minal","no vehicle");
-                    }
-                    else
-                    {
+                        Log.d("minal", "no vehicle");
+                    } else {
                         //['pan','aadhaar','bank']
 
-                        Log.d("minal",bookingList.toString());
+                        Log.d("minal", bookingList.toString());
                     }
                 }
             }
@@ -468,13 +430,11 @@ public class PlaygroundActivity extends AppCompatActivity {
     }
 
 
-    private void deleteBooking(String token,int id)
-    {
-        api.deleteBooking(token,id).enqueue(new Callback<ResponseBooking>() {
+    private void deleteBooking(String token, int id) {
+        api.deleteBooking(token, id).enqueue(new Callback<ResponseBooking>() {
             @Override
             public void onResponse(Call<ResponseBooking> call, Response<ResponseBooking> response) {
-                if(response.code() == 200)
-                {
+                if (response.code() == 200) {
                     //booking deleted
                 }
             }
@@ -486,13 +446,11 @@ public class PlaygroundActivity extends AppCompatActivity {
         });
     }
 
-    private void createTicket(String token, RequestTicket ticket)
-    {
+    private void createTicket(String token, RequestTicket ticket) {
         api.createTicket(token, ticket).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if(response.code() == 200)
-                {
+                if (response.code() == 200) {
                     //ticket created
                 }
             }
@@ -505,13 +463,11 @@ public class PlaygroundActivity extends AppCompatActivity {
     }
 
 
-    private void createRating(String token, RequestRating rating)
-    {
+    private void createRating(String token, RequestRating rating) {
         api.createRating(token, rating).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if(response.code() == 200)
-                {
+                if (response.code() == 200) {
                     //rating done
                 }
             }
@@ -523,30 +479,26 @@ public class PlaygroundActivity extends AppCompatActivity {
         });
     }
 
-    private void getAllBookingFieldStaff(String token)
-    {
+    private void getAllBookingFieldStaff(String token) {
         api.getBookingFieldStaff(token).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if(response.code() == 200)
-                {
-                    ArrayList<ResponseBooking> bookingList  =  new ArrayList<>();
-                    Type collectionType = new TypeToken<ArrayList<ResponseBooking>>(){}.getType();
+                if (response.code() == 200) {
+                    ArrayList<ResponseBooking> bookingList = new ArrayList<>();
+                    Type collectionType = new TypeToken<ArrayList<ResponseBooking>>() {
+                    }.getType();
                     try {
-                        bookingList.addAll(new Gson().fromJson(response.body().string().toString(),collectionType));
+                        bookingList.addAll(new Gson().fromJson(response.body().string().toString(), collectionType));
                     } catch (IOException e) {
 
                     }
-                    if(bookingList.isEmpty())
-                    {
+                    if (bookingList.isEmpty()) {
 
-                        Log.d("minal","no vehicle");
-                    }
-                    else
-                    {
+                        Log.d("minal", "no vehicle");
+                    } else {
                         //['pan','aadhaar','bank']
 
-                        Log.d("minal",bookingList.toString());
+                        Log.d("minal", bookingList.toString());
                     }
                 }
             }
@@ -558,30 +510,26 @@ public class PlaygroundActivity extends AppCompatActivity {
         });
     }
 
-    private void getAllBookingAreaManager(String token)
-    {
+    private void getAllBookingAreaManager(String token) {
         api.getBookingAreaManager(token).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if(response.code() == 200)
-                {
-                    ArrayList<ResponseBooking> bookingList  =  new ArrayList<>();
-                    Type collectionType = new TypeToken<ArrayList<ResponseBooking>>(){}.getType();
+                if (response.code() == 200) {
+                    ArrayList<ResponseBooking> bookingList = new ArrayList<>();
+                    Type collectionType = new TypeToken<ArrayList<ResponseBooking>>() {
+                    }.getType();
                     try {
-                        bookingList.addAll(new Gson().fromJson(response.body().string().toString(),collectionType));
+                        bookingList.addAll(new Gson().fromJson(response.body().string().toString(), collectionType));
                     } catch (IOException e) {
 
                     }
-                    if(bookingList.isEmpty())
-                    {
+                    if (bookingList.isEmpty()) {
 
-                        Log.d("minal","no vehicle");
-                    }
-                    else
-                    {
+                        Log.d("minal", "no vehicle");
+                    } else {
                         //['pan','aadhaar','bank']
 
-                        Log.d("minal",bookingList.toString());
+                        Log.d("minal", bookingList.toString());
                     }
                 }
             }
@@ -593,13 +541,11 @@ public class PlaygroundActivity extends AppCompatActivity {
         });
     }
 
-    private void confirmBooking(String token, RequestInvoice invoice)
-    {
-        api.confirmBooking(token,invoice).enqueue(new Callback<ResponseBody>() {
+    private void confirmBooking(String token, RequestInvoice invoice) {
+        api.confirmBooking(token, invoice).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if(response.code() == 200)
-                {
+                if (response.code() == 200) {
                     //booking confirmed
                 }
             }
@@ -612,29 +558,25 @@ public class PlaygroundActivity extends AppCompatActivity {
     }
 
 
-    private void getVehicleFieldStaff(String token,String mobileofvehicleowner)
-    {
-        api.getVehicleFieldStaff(token,mobileofvehicleowner).enqueue(new Callback<ResponseBody>() {
+    private void getVehicleFieldStaff(String token, String mobileofvehicleowner) {
+        api.getVehicleFieldStaff(token, mobileofvehicleowner).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if(response.code() == 200)
-                {
-                    ArrayList<String> vehicleList  =  new ArrayList<>();
-                    Type collectionType = new TypeToken<ArrayList<String>>(){}.getType();
+                if (response.code() == 200) {
+                    ArrayList<String> vehicleList = new ArrayList<>();
+                    Type collectionType = new TypeToken<ArrayList<String>>() {
+                    }.getType();
                     try {
-                        vehicleList.addAll(new Gson().fromJson(response.body().string().toString(),collectionType));
+                        vehicleList.addAll(new Gson().fromJson(response.body().string().toString(), collectionType));
                     } catch (IOException e) {
 
                     }
-                    if(vehicleList.isEmpty())
-                    {
+                    if (vehicleList.isEmpty()) {
 
                         //no vehicle
                         //show booking vehicle
-                    }
-                    else
-                    {
-                       //list of all vehicle
+                    } else {
+                        //list of all vehicle
 
 
                     }
@@ -648,15 +590,13 @@ public class PlaygroundActivity extends AppCompatActivity {
         });
     }
 
-    private void onLogin(RequestCredentials credentials)
-    {
+    private void onLogin(RequestCredentials credentials) {
         api.login(credentials).enqueue(new Callback<ResponseToken>() {
             @Override
             public void onResponse(Call<ResponseToken> call, Response<ResponseToken> response) {
-                if(response.code() == 200)
-                {
+                if (response.code() == 200) {
                     ResponseToken tokenobj = response.body();
-                    String token  = tokenobj.getToken();
+                    String token = tokenobj.getToken();
                 }
             }
 
@@ -668,30 +608,26 @@ public class PlaygroundActivity extends AppCompatActivity {
     }
 
 
-    private void onTransporterList(String token)
-    {
+    private void onTransporterList(String token) {
         api.getTransporterList(token).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if(response.code() == 200)
-                {
-                    ArrayList<ResponseTransporter> transportersList  =  new ArrayList<>();
-                    Type collectionType = new TypeToken<ArrayList<ResponseTransporter>>(){}.getType();
+                if (response.code() == 200) {
+                    ArrayList<ResponseTransporter> transportersList = new ArrayList<>();
+                    Type collectionType = new TypeToken<ArrayList<ResponseTransporter>>() {
+                    }.getType();
                     try {
-                        transportersList.addAll(new Gson().fromJson(response.body().string().toString(),collectionType));
+                        transportersList.addAll(new Gson().fromJson(response.body().string().toString(), collectionType));
                     } catch (IOException e) {
 
                     }
-                    if(transportersList.isEmpty())
-                    {
+                    if (transportersList.isEmpty()) {
 
-                        Log.d("minal","no vehicle");
-                    }
-                    else
-                    {
+                        Log.d("minal", "no vehicle");
+                    } else {
                         //['pan','aadhaar','bank']
 
-                        Log.d("minal",transportersList.toString());
+                        Log.d("minal", transportersList.toString());
                     }
                 }
             }
@@ -704,149 +640,143 @@ public class PlaygroundActivity extends AppCompatActivity {
     }
 
 
-    private void getInvoiceVehicleowner(String token)
-    {
-        api.getInvoiceVehicleOwner(token).enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if(response.code() == 200)
-                {
-                    ArrayList<ResponseInvoice> invoices = new ArrayList<>();
-                    Type collectionType = new TypeToken<ArrayList<ResponseInvoice>>(){}.getType();
-                    try {
-                        invoices.addAll(new Gson().fromJson(response.body().string().toString(),collectionType));
-                    } catch (IOException e) {
-
-                    }
-                    if(invoices.isEmpty())
-                    {
-
-                        Log.d("minal","no vehicle");
-                    }
-                    else
-                    {
-                        //['pan','aadhaar','bank']
-
-                        Log.d("minal",invoices.toString());
-                    }
-
-
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-
-            }
-        });
-    }
-
-
-    private void getInvoiceAreaManager(String token,String timestamp)
-    {
-        api.getInvoiceAreaManager(token,timestamp).enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if(response.code() == 200)
-                {
-                    ArrayList<ResponseInvoice> invoices = new ArrayList<>();
-                    Type collectionType = new TypeToken<ArrayList<ResponseInvoice>>(){}.getType();
-                    try {
-                        invoices.addAll(new Gson().fromJson(response.body().string().toString(),collectionType));
-                    } catch (IOException e) {
-
-                    }
-                    if(invoices.isEmpty())
-                    {
-
-                        Log.d("minal","no vehicle");
-                    }
-                    else
-                    {
-                        //['pan','aadhaar','bank']
-
-                        Log.d("minal",invoices.toString());
-                    }
+//    private void getInvoiceVehicleowner(String token)
+//    {
+//        api.getInvoiceVehicleOwner(token).enqueue(new Callback<ResponseBody>() {
+//            @Override
+//            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+//                if(response.code() == 200)
+//                {
+//                    ArrayList<ResponseInvoice> invoices = new ArrayList<>();
+//                    Type collectionType = new TypeToken<ArrayList<ResponseInvoice>>(){}.getType();
+//                    try {
+//                        invoices.addAll(new Gson().fromJson(response.body().string().toString(),collectionType));
+//                    } catch (IOException e) {
+//
+//                    }
+//                    if(invoices.isEmpty())
+//                    {
+//
+//                        Log.d("minal","no vehicle");
+//                    }
+//                    else
+//                    {
+//                        //['pan','aadhaar','bank']
+//
+//                        Log.d("minal",invoices.toString());
+//                    }
+//
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ResponseBody> call, Throwable t) {
+//
+//            }
+//        });
+//    }
 
 
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-
-            }
-        });
-    }
-
-
-    private void getInvoiceTransporter(String token,String timestamp)
-    {
-        api.getInvoiceTransporter(token,timestamp).enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if(response.code() == 200)
-                {
-                    ArrayList<ResponseInvoice> invoices = new ArrayList<>();
-                    Type collectionType = new TypeToken<ArrayList<ResponseInvoice>>(){}.getType();
-                    try {
-                        invoices.addAll(new Gson().fromJson(response.body().string().toString(),collectionType));
-                    } catch (IOException e) {
-
-                    }
-                    if(invoices.isEmpty())
-                    {
-
-                        Log.d("minal","no vehicle");
-                    }
-                    else
-                    {
-                        //['pan','aadhaar','bank']
-
-                        Log.d("minal",invoices.toString());
-                    }
-
-
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-
-            }
-        });
-    }
+//    private void getInvoiceAreaManager(String token,String timestamp)
+//    {
+//        api.getInvoiceAreaManager(token,timestamp).enqueue(new Callback<ResponseBody>() {
+//            @Override
+//            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+//                if(response.code() == 200)
+//                {
+//                    ArrayList<ResponseInvoice> invoices = new ArrayList<>();
+//                    Type collectionType = new TypeToken<ArrayList<ResponseInvoice>>(){}.getType();
+//                    try {
+//                        invoices.addAll(new Gson().fromJson(response.body().string().toString(),collectionType));
+//                    } catch (IOException e) {
+//
+//                    }
+//                    if(invoices.isEmpty())
+//                    {
+//
+//                        Log.d("minal","no vehicle");
+//                    }
+//                    else
+//                    {
+//                        //['pan','aadhaar','bank']
+//
+//                        Log.d("minal",invoices.toString());
+//                    }
+//
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ResponseBody> call, Throwable t) {
+//
+//            }
+//        });
+//    }
 
 
+//    private void getInvoiceTransporter(String token,String timestamp)
+//    {
+//        api.getInvoiceTransporter(token,timestamp).enqueue(new Callback<ResponseBody>() {
+//            @Override
+//            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+//                if(response.code() == 200)
+//                {
+//                    ArrayList<ResponseInvoice> invoices = new ArrayList<>();
+//                    Type collectionType = new TypeToken<ArrayList<ResponseInvoice>>(){}.getType();
+//                    try {
+//                        invoices.addAll(new Gson().fromJson(response.body().string().toString(),collectionType));
+//                    } catch (IOException e) {
+//
+//                    }
+//                    if(invoices.isEmpty())
+//                    {
+//
+//                        Log.d("minal","no vehicle");
+//                    }
+//                    else
+//                    {
+//                        //['pan','aadhaar','bank']
+//
+//                        Log.d("minal",invoices.toString());
+//                    }
+//
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ResponseBody> call, Throwable t) {
+//
+//            }
+//        });
+//    }
 
-    private void getReward(String token)
-    {
+
+    private void getReward(String token) {
         api.getRewardList(token).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if(response.code() == 200)
-                {
+                if (response.code() == 200) {
                     ArrayList<ResponseReward> i = new ArrayList<>();
-                    Type collectionType = new TypeToken<ArrayList<ResponseReward>>(){}.getType();
+                    Type collectionType = new TypeToken<ArrayList<ResponseReward>>() {
+                    }.getType();
                     try {
-                        i.addAll(new Gson().fromJson(response.body().string().toString(),collectionType));
+                        i.addAll(new Gson().fromJson(response.body().string().toString(), collectionType));
                     } catch (IOException e) {
 
                     }
-                    if(i.isEmpty())
-                    {
+                    if (i.isEmpty()) {
 
-                        Log.d("minal","no vehicle");
-                    }
-                    else
-                    {
+                        Log.d("minal", "no vehicle");
+                    } else {
                         //['pan','aadhaar','bank']
 
-                        for(ResponseReward reward: i)
-                        {
+                        for (ResponseReward reward : i) {
                             reward.setIm("https://transfly-ftr2t.ondigitalocean.app/rewardimage/" + reward.getId());
                         }
-                        Log.d("minal",i.toString());
+                        Log.d("minal", i.toString());
                     }
                 }
             }
@@ -859,66 +789,58 @@ public class PlaygroundActivity extends AppCompatActivity {
     }
 
 
-  private void getReferral(String token)
-  {
-      api.getReferralList(token).enqueue(new Callback<ResponseBody>() {
-          @Override
-          public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+    private void getReferral(String token) {
+        api.getReferralList(token).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
-              ArrayList<ResponseReferral> i = new ArrayList<>();
-              Type collectionType = new TypeToken<ArrayList<ResponseReferral>>(){}.getType();
-              try {
-                  i.addAll(new Gson().fromJson(response.body().string().toString(),collectionType));
-              } catch (IOException e) {
+                ArrayList<ResponseReferral> i = new ArrayList<>();
+                Type collectionType = new TypeToken<ArrayList<ResponseReferral>>() {
+                }.getType();
+                try {
+                    i.addAll(new Gson().fromJson(response.body().string().toString(), collectionType));
+                } catch (IOException e) {
 
-              }
-              if(i.isEmpty())
-              {
+                }
+                if (i.isEmpty()) {
 
-                  Log.d("minal","no vehicle");
-              }
-              else
-              {
-                  //['pan','aadhaar','bank']
+                    Log.d("minal", "no vehicle");
+                } else {
+                    //['pan','aadhaar','bank']
 
-                  for(ResponseReferral reward: i)
-                  {
-                      reward.setImage("https://transfly-ftr2t.ondigitalocean.app/referralimage/" + reward.getId());
-                  }
-                  Log.d("minal",i.toString());
-              }
-          }
+                    for (ResponseReferral reward : i) {
+                        reward.setImage("https://transfly-ftr2t.ondigitalocean.app/referralimage/" + reward.getId());
+                    }
+                    Log.d("minal", i.toString());
+                }
+            }
 
-          @Override
-          public void onFailure(Call<ResponseBody> call, Throwable t) {
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
 
-          }
-      });
-  }
+            }
+        });
+    }
 
 
-  private void updateEmail(String token, RequestEmail email)
-  {
-      api.updateEmail(token,email).enqueue(new Callback<ResponseBody>() {
-          @Override
-          public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-              if(response.code() == 200)
-              {
+    private void updateEmail(String token, RequestEmail email) {
+        api.updateEmail(token, email).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.code() == 200) {
 
 
-              }
-              else
-              {
+                } else {
 
-              }
-          }
+                }
+            }
 
-          @Override
-          public void onFailure(Call<ResponseBody> call, Throwable t) {
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
 
-          }
-      });
-  }
+            }
+        });
+    }
 
 //  private void updatePassword(String token, RequestPassword password)
 //  {
@@ -942,17 +864,13 @@ public class PlaygroundActivity extends AppCompatActivity {
 //      });
 //  }
 
-    private void changePassword(RequestCredentials credentials)
-    {
+    private void changePassword(RequestCredentials credentials) {
         api.updatePassword(credentials).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if(response.code() == 200)
-                {
+                if (response.code() == 200) {
                     //password changed
-                }
-                else
-                {
+                } else {
                     //user not found
                 }
             }
@@ -965,35 +883,30 @@ public class PlaygroundActivity extends AppCompatActivity {
     }
 
 
-    private void getBanners(String token)
-    {
+    private void getBanners(String token) {
         api.getBanners(token).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if(response.code() == 200)
-                {
+                if (response.code() == 200) {
 
                     ArrayList<ResponseBanner> i = new ArrayList<>();
-                    Type collectionType = new TypeToken<ArrayList<ResponseBanner>>(){}.getType();
+                    Type collectionType = new TypeToken<ArrayList<ResponseBanner>>() {
+                    }.getType();
                     try {
-                        i.addAll(new Gson().fromJson(response.body().string().toString(),collectionType));
+                        i.addAll(new Gson().fromJson(response.body().string().toString(), collectionType));
                     } catch (IOException e) {
 
                     }
-                    if(i.isEmpty())
-                    {
+                    if (i.isEmpty()) {
 
-                        Log.d("minal","no vehicle");
-                    }
-                    else
-                    {
+                        Log.d("minal", "no vehicle");
+                    } else {
                         //['pan','aadhaar','bank']
 
-                        for(ResponseBanner banner : i)
-                        {
-                               banner.setImageUrl("https://transfly-ftr2t.ondigitalocean.app/bannerimage/" + banner.getId());
+                        for (ResponseBanner banner : i) {
+                            banner.setImageUrl("https://transfly-ftr2t.ondigitalocean.app/bannerimage/" + banner.getId());
                         }
-                        Log.d("minal",i.toString());
+                        Log.d("minal", i.toString());
                     }
                 }
             }
@@ -1005,33 +918,27 @@ public class PlaygroundActivity extends AppCompatActivity {
         });
     }
 
-    private void getResaleList(String token)
-    {
+    private void getResaleList(String token) {
         api.getAllResaleList(token).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if(response.code() == 200)
-                {
+                if (response.code() == 200) {
                     ArrayList<ResponseResale> i = new ArrayList<>();
-                    Type collectionType = new TypeToken<ArrayList<ResponseResale>>(){}.getType();
+                    Type collectionType = new TypeToken<ArrayList<ResponseResale>>() {
+                    }.getType();
                     try {
-                        i.addAll(new Gson().fromJson(response.body().string().toString(),collectionType));
+                        i.addAll(new Gson().fromJson(response.body().string().toString(), collectionType));
                     } catch (IOException e) {
 
                     }
-                    if(i.isEmpty())
-                    {
+                    if (i.isEmpty()) {
 
-                        Log.d("minal","no vehicle");
-                    }
-                    else
-                    {
+                        Log.d("minal", "no vehicle");
+                    } else {
 
-                        for(ResponseResale resale: i)
-                        {
+                        for (ResponseResale resale : i) {
                             ArrayList<String> imageList = new ArrayList<>();
-                            for(int j =1;j<=resale.getTotalImage();j++)
-                            {
+                            for (int j = 1; j <= resale.getTotalImage(); j++) {
                                 imageList.add("https://transfly-ftr2t.ondigitalocean.app/resaleimage/" + resale.getId() + "/" + j);
                             }
                             resale.setImageList(imageList);
@@ -1048,13 +955,11 @@ public class PlaygroundActivity extends AppCompatActivity {
     }
 
 
-    private void updateEmergencyContact(String token, RequestEmergencyContact contact)
-    {
-        api.updateEmergencyContact(token,contact).enqueue(new Callback<ResponseBody>() {
+    private void updateEmergencyContact(String token, RequestEmergencyContact contact) {
+        api.updateEmergencyContact(token, contact).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if(response.code() ==200)
-                {
+                if (response.code() == 200) {
                     //done
                 }
             }
@@ -1066,13 +971,11 @@ public class PlaygroundActivity extends AppCompatActivity {
         });
     }
 
-    private void updateEmergencyContact2(String token, RequestEmergencyContact2 contact)
-    {
-        api.updateEmergencyContact2(token,contact).enqueue(new Callback<ResponseBody>() {
+    private void updateEmergencyContact2(String token, RequestEmergencyContact2 contact) {
+        api.updateEmergencyContact2(token, contact).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if(response.code() ==200)
-                {
+                if (response.code() == 200) {
                     //done
                 }
             }
@@ -1085,8 +988,7 @@ public class PlaygroundActivity extends AppCompatActivity {
     }
 
 
-    private void contactForResale(String token)
-    {
+    private void contactForResale(String token) {
         api.contactResale(token).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1104,14 +1006,12 @@ public class PlaygroundActivity extends AppCompatActivity {
     }
 
 
-    private void getSingleMine(String token, int id)
-    {
-        api.getSingleMine(token,id).enqueue(new Callback<ResponseMine>() {
+    private void getSingleMine(String token, int id) {
+        api.getSingleMine(token, id).enqueue(new Callback<ResponseMine>() {
             @Override
             public void onResponse(Call<ResponseMine> call, Response<ResponseMine> response) {
-                if(response.code() == 200)
-                {
-                    ResponseMine mine  = response.body();
+                if (response.code() == 200) {
+                    ResponseMine mine = response.body();
                     //mine.getLatitude()
                     //mine.getLongitude()
                 }
@@ -1125,9 +1025,8 @@ public class PlaygroundActivity extends AppCompatActivity {
     }
 
 
-    private void updateMobile(String token, RequestMobile mobile)
-    {
-        api.updateMobile(token,mobile).enqueue(new Callback<ResponseBody>() {
+    private void updateMobile(String token, RequestMobile mobile) {
+        api.updateMobile(token, mobile).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
@@ -1141,26 +1040,21 @@ public class PlaygroundActivity extends AppCompatActivity {
     }
 
 
-
     private ArrayList<ResponseMine> list = new ArrayList<>();
 
-    private ArrayList<ResponseMine> getMine(String minename)
-    {
+    private ArrayList<ResponseMine> getMine(String minename) {
         ArrayList<ResponseMine> selectedlist = new ArrayList<>();
-        for(ResponseMine mine: list)
-        {
-            if (mine.getName().contains(minename.toUpperCase()))
-            {
+        for (ResponseMine mine : list) {
+            if (mine.getName().contains(minename.toUpperCase())) {
                 selectedlist.add(mine);
             }
         }
         return selectedlist;
     }
 
-    private ArrayList<String> getLoading(ResponseMine mine)
-    {
+    private ArrayList<String> getLoading(ResponseMine mine) {
         return mine.getLoading();
     }
-    
+
 
 }

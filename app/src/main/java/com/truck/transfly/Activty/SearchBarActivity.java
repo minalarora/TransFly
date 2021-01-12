@@ -123,34 +123,36 @@ public class SearchBarActivity extends AppCompatActivity {
                     fromSearch.setError("From Destination is Empty*");
                     fromSearch.requestFocus();
 
-                } else if(!isLoadingAvailable(fromSearch.getText().toString())){
+                }else if(!isResponseMines(fromSearch.getText().toString())){
 
-                    fromSearch.setError(fromSearch.getText().toString()+" is Not Valid Loading*");
+                    fromSearch.setError(fromSearch.getText().toString()+" is Not Valid Mines*");
                     fromSearch.requestFocus();
 
-                } else if(TextUtils.isEmpty(to_search.getText().toString())){
+                }  else if(TextUtils.isEmpty(to_search.getText().toString())){
 
                     to_search.setError("to Destination is Empty*");
                     to_search.requestFocus();
 
-                } else if(!isResponseMines(to_search.getText().toString())){
+                } else if(!isLoadingAvailable(to_search.getText().toString())){
 
-                    to_search.setError(to_search.getText().toString()+" is Not Valid Mines*");
+                    to_search.setError(to_search.getText().toString()+" is Not Valid Loading*");
                     to_search.requestFocus();
 
-                } else {
+                }  else {
 
                     if(responseMineGlobal==null){
 
                         Toast.makeText(SearchBarActivity.this, "Select a Mines", Toast.LENGTH_SHORT).show();
+
+                        fromSearch.requestFocus();
 
                     } else {
 
                         Intent intent = new Intent(SearchBarActivity.this, SelectYourVehicleActivity.class);
 
                         intent.putExtra("mineid",responseMineGlobal.getId());
-                        intent.putExtra("minename",to_search.getText().toString());
-                        intent.putExtra("loading",fromSearch.getText().toString());
+                        intent.putExtra("minename",fromSearch.getText().toString());
+                        intent.putExtra("loading",to_search.getText().toString());
 
                         startActivity(intent);
 
@@ -176,13 +178,12 @@ public class SearchBarActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 selectedSweet = listViewLoading.getItemAtPosition(position).toString();
-                fromSearch.setText(selectedSweet);
-                fromSearch.setSelection(selectedSweet.length());
-                listViewLoading.setVisibility(View.GONE);
-                recyclerView.setVisibility(View.VISIBLE);
+                to_search.setText(selectedSweet);
+                to_search.setSelection(selectedSweet.length());
                 to_search_parent.setVisibility(View.VISIBLE);
+                recyclerView.setVisibility(View.GONE);
                 to_search.requestFocus();
-                fromSearch.setError(null);
+                to_search.setError(null);
 
             }
         });
@@ -193,10 +194,10 @@ public class SearchBarActivity extends AppCompatActivity {
 
                 if (hasFocus) {
 
-                    listViewLoading.setVisibility(View.VISIBLE);
-                    recyclerView.setVisibility(View.GONE);
+                    listViewLoading.setVisibility(View.GONE);
+                    recyclerView.setVisibility(View.VISIBLE);
                     to_search_parent.setVisibility(View.GONE);
-                    adapter.notifyDataSetChanged();
+                    searchAdapter.notifyDataSetChanged();
 
                 }
 
@@ -210,6 +211,25 @@ public class SearchBarActivity extends AppCompatActivity {
             }
         });
 
+//        fromSearch.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//                adapter.getFilter().filter(s);
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//
+//            }
+//        });
+
         fromSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -219,26 +239,7 @@ public class SearchBarActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                adapter.getFilter().filter(s);
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        to_search.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                ArrayList<ResponseMine> minesByMines = getMinesByMines(s.toString(), selectedSweet);
+                ArrayList<ResponseMine> minesByMines = getMine(s.toString());
                 responseMineArrayList.clear();
                 responseMineArrayList.addAll(minesByMines);
                 searchAdapter.notifyDataSetChanged();
@@ -251,12 +252,15 @@ public class SearchBarActivity extends AppCompatActivity {
                 if(s.length()==0){
 
                     responseMineArrayList.clear();
+                    responseMineArrayList.addAll(mines);
                     searchAdapter.notifyDataSetChanged();
 
                 }
 
             }
         });
+
+        responseMineArrayList.addAll(mines);
 
         recyclerView = findViewById(R.id.recyclerView);
         searchAdapter = new SearchAdapter(SearchBarActivity.this, responseMineArrayList);
@@ -269,18 +273,48 @@ public class SearchBarActivity extends AppCompatActivity {
             @Override
             public void onClick(ResponseMine responseMine) {
 
-                to_search.setText(responseMine.getName());
-                to_search.requestFocus();
-                to_search.setSelection(to_search.length());
+                fromSearch.setText(responseMine.getName());
+                fromSearch.setSelection(fromSearch.length());
                 responseMineGlobal=responseMine;
+                to_search_parent.setVisibility(View.VISIBLE);
                 to_search.setError(null);
                 fromSearch.setError(null);
+
+                recyclerView.setVisibility(View.GONE);
+                listViewLoading.setVisibility(View.VISIBLE);
+
+                ArrayList<String> loading = getLoading(responseMine);
+
+                to_search.requestFocus();
+
+                loadinglist.clear();
+                loadinglist.addAll(loading);
+                adapter.notifyDataSetChanged();
+
 
             }
         });
 
         getMinesFromServer(PreferenceUtil.getData(SearchBarActivity.this, "token"));
 
+    }
+
+    private ArrayList<String> getLoading(ResponseMine mine)
+    {
+        return mine.getLoading();
+    }
+
+    private ArrayList<ResponseMine> getMine(String minename)
+    {
+        ArrayList<ResponseMine> selectedlist = new ArrayList<>();
+        for(ResponseMine mine: mines)
+        {
+            if (mine.getName().contains(minename.toUpperCase()))
+            {
+                selectedlist.add(mine);
+            }
+        }
+        return selectedlist;
     }
 
     private boolean isResponseMines(String s) {
@@ -298,7 +332,9 @@ public class SearchBarActivity extends AppCompatActivity {
 
     private boolean isLoadingAvailable(String selectedSweet) {
 
-        for (String s : loadinglist) {
+        ArrayList<String> loading = getLoading(responseMineGlobal);
+
+        for (String s : loading) {
 
             if(s.equals(selectedSweet))
                 return true;
@@ -362,6 +398,8 @@ public class SearchBarActivity extends AppCompatActivity {
                     }.getType();
                     try {
                         mines.addAll(new Gson().fromJson(response.body().string().toString(), collectionType));
+                        responseMineArrayList.addAll(mines);
+                        searchAdapter.notifyDataSetChanged();
                     } catch (IOException e) {
                     }
                     if (mines.isEmpty()) {
@@ -405,29 +443,6 @@ public class SearchBarActivity extends AppCompatActivity {
 
             }
         });
-    }
-
-    private ArrayList<String> getLoading() {
-        HashSet<String> set = new HashSet<>();
-        for (ResponseMine m : mines) {
-            for (String loading : m.getLoading()) {
-                set.add(loading);
-            }
-        }
-
-        return new ArrayList<>(set);
-//        ArrayList<ResponseMine> selectedmines = new ArrayList<>();
-//        for(ResponseMine m: mines)
-//        {
-//            for(String l: m.getLoading())
-//            {
-//                if(l.equalsIgnoreCase(loading))
-//                {
-//                    selectedmines.add(m);
-//                }
-//            }
-//        }
-//        return selectedmines;
     }
 
     private ArrayList<ResponseMine> getMinesByMines(String mine, String loading) {

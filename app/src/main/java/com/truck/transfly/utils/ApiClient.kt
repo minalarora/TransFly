@@ -6,17 +6,14 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 class ApiClient {
-    companion object
-    {
+    companion object {
 
         @JvmStatic
-       private var retrofitUser: Retrofit?=null
+        private var retrofitUser: Retrofit? = null
 
         @JvmStatic
-        fun getRetrofitClient() : Retrofit?
-        {
-            if(retrofitUser !=null)
-            {
+        fun getRetrofitClient(): Retrofit? {
+            if (retrofitUser != null) {
                 return retrofitUser
             }
 

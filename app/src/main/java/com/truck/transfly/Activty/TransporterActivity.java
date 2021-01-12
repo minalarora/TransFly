@@ -94,7 +94,7 @@ public class TransporterActivity extends AppCompatActivity implements SmoothDate
                 invoicesList.clear();
                 no_internet_connection.setVisibility(View.GONE);
                 fieldStafAdapter.notifyDataSetChanged();
-                getInvoiceTransporter(PreferenceUtil.getData(TransporterActivity.this,"token"),String.valueOf(new Date().getTime()));
+                getInvoiceTransporter(PreferenceUtil.getData(TransporterActivity.this,"token"));
 
             }
         });
@@ -106,7 +106,7 @@ public class TransporterActivity extends AppCompatActivity implements SmoothDate
             public void onRefresh() {
 
                 invoicesList.clear();
-                getInvoiceTransporter(PreferenceUtil.getData(TransporterActivity.this,"token"),String.valueOf(new Date().getTime()));
+                getInvoiceTransporter(PreferenceUtil.getData(TransporterActivity.this,"token"));
 
                 fieldStafAdapter.notifyDataSetChanged();
 
@@ -226,7 +226,7 @@ public class TransporterActivity extends AppCompatActivity implements SmoothDate
             }
         });
 
-        getInvoiceTransporter(PreferenceUtil.getData(TransporterActivity.this,"token"),String.valueOf(new Date().getTime()));
+        getInvoiceTransporter(PreferenceUtil.getData(TransporterActivity.this,"token"));
 
     }
 
@@ -325,13 +325,13 @@ public class TransporterActivity extends AppCompatActivity implements SmoothDate
 
     }
 
-    private void getInvoiceTransporter(String token,String timestamp)
+    private void getInvoiceTransporter(String token)
     {
         no_internet_connection.setVisibility(View.GONE);
         no_booking_data.setVisibility(View.GONE);
         parent_of_loading.setVisibility(View.VISIBLE);
 
-        api.getInvoiceTransporter(token,timestamp).enqueue(new Callback<ResponseBody>() {
+        api.getInvoiceTransporter(token).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
@@ -394,7 +394,69 @@ public class TransporterActivity extends AppCompatActivity implements SmoothDate
 
         invoicesList.clear();
         fieldStafAdapter.notifyDataSetChanged();
-        getInvoiceTransporter(PreferenceUtil.getData(TransporterActivity.this, "token"), String.valueOf(dateStart.getMillis()));
+        getInvoiceTransporter2(PreferenceUtil.getData(TransporterActivity.this, "token"), String.valueOf(dateStart.getMillis()),String.valueOf(dateEnd.getMillis()));
+
+    }
+
+    private void getInvoiceTransporter2(String token, String from,String to) {
+
+
+        no_internet_connection.setVisibility(View.GONE);
+        no_booking_data.setVisibility(View.GONE);
+        parent_of_loading.setVisibility(View.VISIBLE);
+
+        api.getInvoiceTransporter2(token,from,to).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                parent_of_loading.setVisibility(View.GONE);
+
+                pullToRefreshView.setRefreshing(false);
+
+                if(response.code() == 200)
+                {
+                    Type collectionType = new TypeToken<ArrayList<ResponseInvoice>>(){}.getType();
+                    try {
+                        invoicesList.addAll(new Gson().fromJson(response.body().string().toString(),collectionType));
+                    } catch (IOException e) {
+
+                    }
+                    if(invoicesList.isEmpty())
+                    {
+
+                        fieldStafAdapter.notifyDataSetChanged();
+                        Log.d("minal","no vehicle");
+
+                        no_booking_data.setVisibility(View.VISIBLE);
+
+                    }
+                    else
+                    {
+                        //['pan','aadhaar','bank']
+
+                        fieldStafAdapter.notifyDataSetChanged();
+                        Log.d("minal", invoicesList.toString());
+
+                    }
+
+
+
+                } else {
+
+                    Toast.makeText(TransporterActivity.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                no_internet_connection.setVisibility(View.VISIBLE);
+
+                Toast.makeText(TransporterActivity.this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+
+            }
+        });
 
     }
 }

@@ -10,19 +10,19 @@
     <item
         android:id="@+id/booking_status"
         android:icon="@drawable/booking_status"
-        android:title="Booking Status"
+        android:title="Loading Status"
         />
 
     <item
         android:id="@+id/new_booking"
         android:icon="@drawable/new_booking"
-        android:title="New Booking"
+        android:title="New Loading"
         />
 
     <item
         android:id="@+id/vehicle_seller"
         android:icon="@drawable/vehicle_seller_bottom"
-        android:title="Vehicle Seller"
+        android:title="Resale/lease"
         />
 
     <item
