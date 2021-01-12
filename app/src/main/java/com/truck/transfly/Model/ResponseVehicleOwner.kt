@@ -3,6 +3,9 @@ package com.truck.transfly.Model
 import com.google.gson.annotations.SerializedName
 
 class ResponseVehicleOwner {
+    @SerializedName("id")
+    var id: String? = null
+
     @SerializedName("name")
     var  name: String? = null;
 
@@ -38,6 +41,9 @@ class ResponseVehicleOwner {
 
     @SerializedName("token")
     var token: String? = null
+
+    @SerializedName("firebase")
+    var firebase : String? = null
 
     override fun toString(): String {
         return "ResponseVehicleOwner(name=$name, mobile=$mobile, email=$email, status=$status, accountno=$accountno, ifsc=$ifsc, bankname=$bankname, pan=$pan, tds=$tds, emergencycontact=$emergencycontact, token=$token)"

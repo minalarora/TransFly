@@ -16,10 +16,14 @@ class RequestUser {
     @SerializedName("password")
     var password: String?  =null
 
-    constructor(name: String?, email: String?, mobile: String?, password: String?) {
+    @SerializedName("firebase")
+    var firebase : String? = null
+
+    constructor(name: String?, email: String?, mobile: String?, password: String?,firebase : String?) {
         this.name = name
         this.email = email
         this.mobile = mobile
         this.password = password
+        this.firebase = firebase
     }
 }

@@ -3,6 +3,9 @@ package com.truck.transfly.Model
 import com.google.gson.annotations.SerializedName
 
 class ResponseAreaManager {
+    @SerializedName("id")
+    var id: String? = null
+
     @SerializedName("name")
     var  name: String? = null;
 
@@ -11,6 +14,9 @@ class ResponseAreaManager {
 
     @SerializedName("email")
     var email: String? = null
+
+    @SerializedName("firebase")
+    var firebase : String? = null
 
 
     @SerializedName("status")

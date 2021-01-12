@@ -4,6 +4,8 @@ import com.google.gson.annotations.SerializedName
 
 class ResponseFieldStaff {
 
+    @SerializedName("id")
+    var id: String? = null
     @SerializedName("name")
     var  name: String? = null;
 
@@ -14,6 +16,8 @@ class ResponseFieldStaff {
     var email: String? = null
 
 
+    @SerializedName("firebase")
+    var firebase : String? = null
 
     @SerializedName("status")
     var status: Int? = null
