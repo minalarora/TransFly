@@ -58,10 +58,16 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCanceledListener;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.installations.FirebaseInstallations;
+import com.google.firebase.installations.InstallationTokenResult;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.google.maps.android.ui.IconGenerator;
@@ -177,7 +183,6 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         }
 
-
         View headerLayout = navigationView.getHeaderView(0);
         TextView customerName = headerLayout.findViewById(R.id.customer_name);
         TextView number = headerLayout.findViewById(R.id.number);
@@ -241,7 +246,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         navigation.enableAnimation(false);
         navigation.enableItemShiftingMode(false);
         navigation.enableShiftingMode(false);
-        navigation.setTextSize(10);
+        navigation.setTextSize(9);
         navigation.setPadding(0, 0, 0, 1);
         navigation.setIconSize(26, 26);
         navigation.setTextVisibility(true);

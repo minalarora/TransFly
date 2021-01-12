@@ -22,6 +22,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.leavjenn.smoothdaterangepicker.date.SmoothDateRangePickerFragment;
+import com.truck.transfly.Activty.TransporterActivity;
 import com.truck.transfly.Adapter.TransporterAdapter;
 import com.truck.transfly.Model.ResponseInvoice;
 import com.truck.transfly.R;
@@ -49,7 +51,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class ShowInvoiceFragment extends Fragment implements com.wdullaer.materialdatetimepicker.date.DatePickerDialog.OnDateSetListener {
+public class ShowInvoiceFragment extends Fragment implements SmoothDateRangePickerFragment.OnDateRangeSetListener {
 
     private List<String> stringList = new ArrayList<>();
     private Retrofit retrofit = null;
@@ -103,18 +105,15 @@ public class ShowInvoiceFragment extends Fragment implements com.wdullaer.materi
             public void onClick(View v) {
 
                 Calendar now = Calendar.getInstance();
-                com.wdullaer.materialdatetimepicker.date.DatePickerDialog dpd = com.wdullaer.materialdatetimepicker.date.DatePickerDialog.newInstance(
-                        ShowInvoiceFragment.this,
-                        now.get(Calendar.YEAR), // Initial year selection
-                        now.get(Calendar.MONTH), // Initial month selection
-                        now.get(Calendar.DAY_OF_MONTH) // Inital day selection
-                );
 
-                dpd.setVersion(com.wdullaer.materialdatetimepicker.date.DatePickerDialog.Version.VERSION_1);
+                SmoothDateRangePickerFragment smoothDateRangePickerFragment = SmoothDateRangePickerFragment.newInstance(ShowInvoiceFragment.this::onDateRangeSet, now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH));
 
-                dpd.setAccentColor(ContextCompat.getColor(fragmentActivity, R.color.quantum_pink));
+                smoothDateRangePickerFragment.setAccentColor(R.color.project_color);
 
-                dpd.show(fragmentActivity.getSupportFragmentManager(), "Datepickerdialog");
+                smoothDateRangePickerFragment.setThemeDark(false);
+
+                smoothDateRangePickerFragment.show(fragmentActivity.getFragmentManager(), "smoothDateRangePicker");
+
             }
         });
 
@@ -126,7 +125,7 @@ public class ShowInvoiceFragment extends Fragment implements com.wdullaer.materi
                 invoicesList.clear();
                 no_internet_connection.setVisibility(View.GONE);
                 fieldStafAdapter.notifyDataSetChanged();
-                getInvoiceAreaManager(PreferenceUtil.getData(fragmentActivity, "token"), String.valueOf(new Date().getTime()));
+                getInvoiceAreaManager(PreferenceUtil.getData(fragmentActivity, "token"));
 
             }
         });
@@ -138,7 +137,7 @@ public class ShowInvoiceFragment extends Fragment implements com.wdullaer.materi
             public void onRefresh() {
 
                 invoicesList.clear();
-                getInvoiceAreaManager(PreferenceUtil.getData(fragmentActivity, "token"), String.valueOf(new Date().getTime()));
+                getInvoiceAreaManager(PreferenceUtil.getData(fragmentActivity, "token"));
 
                 fieldStafAdapter.notifyDataSetChanged();
 
@@ -157,18 +156,18 @@ public class ShowInvoiceFragment extends Fragment implements com.wdullaer.materi
         no_booking_data = inflate.findViewById(R.id.no_booking_data);
         no_booking_data.setVisibility(View.GONE);
 
-        getInvoiceAreaManager(PreferenceUtil.getData(fragmentActivity, "token"), String.valueOf(new Date().getTime()));
+        getInvoiceAreaManager(PreferenceUtil.getData(fragmentActivity, "token"));
 
         return inflate;
 
     }
 
-    private void getInvoiceAreaManager(String token, String timestamp) {
+    private void getInvoiceAreaManager(String token) {
         no_internet_connection.setVisibility(View.GONE);
         no_booking_data.setVisibility(View.GONE);
         parent_of_loading.setVisibility(View.VISIBLE);
 
-        api.getInvoiceAreaManager(token,timestamp).enqueue(new Callback<ResponseBody>() {
+        api.getInvoiceAreaManager(token).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
@@ -218,14 +217,75 @@ public class ShowInvoiceFragment extends Fragment implements com.wdullaer.materi
         });
     }
 
-    @Override
-    public void onDateSet(com.wdullaer.materialdatetimepicker.date.DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
 
-        DateTime dateTime=new DateTime(year,monthOfYear+1,dayOfMonth,new DateTime().getHourOfDay(),new DateTime().getMinuteOfHour());
+    @Override
+    public void onDateRangeSet(SmoothDateRangePickerFragment view, int yearStart, int monthStart, int dayStart, int yearEnd, int monthEnd, int dayEnd) {
+
+        DateTime dateStart=new DateTime(yearStart,monthStart+1,dayStart,new DateTime().getHourOfDay(),new DateTime().getMinuteOfHour());
+
+        DateTime dateEnd=new DateTime(yearEnd,monthEnd+1,dayEnd,new DateTime().getHourOfDay(),new DateTime().getMinuteOfHour());
 
         invoicesList.clear();
         fieldStafAdapter.notifyDataSetChanged();
-        getInvoiceAreaManager(PreferenceUtil.getData(fragmentActivity, "token"), String.valueOf(dateTime.getMillis()));
+        getInvoiceAreaManager2(PreferenceUtil.getData(fragmentActivity, "token"), String.valueOf(dateStart.getMillis()),String.valueOf(dateEnd.getMillis()));
+
+
+    }
+
+    private void getInvoiceAreaManager2(String token, String from, String to) {
+
+        no_internet_connection.setVisibility(View.GONE);
+        no_booking_data.setVisibility(View.GONE);
+        parent_of_loading.setVisibility(View.VISIBLE);
+
+        api.getInvoiceAreaManager2(token,from,to).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                parent_of_loading.setVisibility(View.GONE);
+
+                pullToRefreshView.setRefreshing(false);
+
+                if (response.code() == 200) {
+                    ArrayList<ResponseInvoice> invoices = new ArrayList<>();
+                    Type collectionType = new TypeToken<ArrayList<ResponseInvoice>>() {
+                    }.getType();
+                    try {
+                        invoices.addAll(new Gson().fromJson(response.body().string().toString(), collectionType));
+                        invoicesList.addAll(invoices);
+                    } catch (IOException e) {
+
+                    }
+                    if (invoices.size()==0) {
+
+                        fieldStafAdapter.notifyDataSetChanged();
+                        Log.d("minal", "no vehicle");
+
+                        no_booking_data.setVisibility(View.VISIBLE);
+                    } else {
+                        //['pan','aadhaar','bank']
+
+                        fieldStafAdapter.notifyDataSetChanged();
+                        Log.d("minal", invoicesList.toString());
+                    }
+
+
+                } else {
+
+                    Toast.makeText(fragmentActivity, "Something Went Wrong", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                no_internet_connection.setVisibility(View.VISIBLE);
+
+                Toast.makeText(fragmentActivity, "No Internet Connection", Toast.LENGTH_SHORT).show();
+
+            }
+        });
 
     }
 }

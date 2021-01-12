@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.truck.transfly.Model.ResponseAreaManager;
 import com.truck.transfly.Model.ResponseFieldStaff;
 import com.truck.transfly.Model.ResponseTransporter;
@@ -56,6 +57,8 @@ public class SplashActivity extends AppCompatActivity {
         if (retrofit != null) {
             api = retrofit.create(ApiEndpoints.class);
         }
+
+        getFireBaseToken();
 
         progressBar =findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
@@ -153,6 +156,12 @@ public class SplashActivity extends AppCompatActivity {
             NetworkInfo nwInfo = connectivityManager.getActiveNetworkInfo();
             return nwInfo != null && nwInfo.isConnected();
         }
+    }
+
+    private void getFireBaseToken() {
+
+        FirebaseMessaging.getInstance().setAutoInitEnabled(true);
+
     }
 
     private void validateToken() {

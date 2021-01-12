@@ -136,6 +136,7 @@ public interface ApiEndpoints {
 
 
     //get  invoice of vehicleowner
+    //
     @GET("/allinvoice/vehicleowner/{status}")
     Call<ResponseBody> getInvoiceVehicleOwner(@Header("Authorization")String token,@Path("status") String status);
 
@@ -144,20 +145,20 @@ public interface ApiEndpoints {
     Call<ResponseBody> getInvoiceVehicleOwner2(@Header("Authorization")String token, @Path("status") String status, @Query("from") String from,@Query("to") String to);
 
     //get  invoice of areamanager
-    @GET("/allinvoice/areamanager/{status}")
-    Call<ResponseBody> getInvoiceAreaManager(@Header("Authorization")String token, @Path("status") String status);
+    @GET("/allinvoice/areamanager/")
+    Call<ResponseBody> getInvoiceAreaManager(@Header("Authorization")String token);
 
     //get  invoice of areamanager
-    @GET("/allinvoice/areamanager/{status}")
-    Call<ResponseBody> getInvoiceAreaManager2(@Header("Authorization")String token, @Path("status") String status, @Query("from") String from,@Query("to") String to);
+    @GET("/allinvoice/areamanager/")
+    Call<ResponseBody> getInvoiceAreaManager2(@Header("Authorization")String token,  @Query("from") String from,@Query("to") String to);
 
     //get  invoice of vehicleowner
-    @GET("/allinvoice/transporter/{status}")
-    Call<ResponseBody> getInvoiceTransporter(@Header("Authorization")String token,@Path("status") String status);
+    @GET("/allinvoice/transporter/")
+    Call<ResponseBody> getInvoiceTransporter(@Header("Authorization")String token);
 
     //get  invoice of vehicleowner
-    @GET("/allinvoice/transporter/{status}")
-    Call<ResponseBody> getInvoiceTransporter2(@Header("Authorization")String token,@Path("status") String status, @Query("from") String from,@Query("to") String to);
+    @GET("/allinvoice/transporter/")
+    Call<ResponseBody> getInvoiceTransporter2(@Header("Authorization")String token, @Query("from") String from,@Query("to") String to);
 
     //get reward
     @GET("/allreward")
@@ -202,6 +203,9 @@ public interface ApiEndpoints {
 
     @GET("/allresale")
     Call<ResponseBody>  getAllResaleList(@Header("Authorization")String token);
+
+    @GET("/alllease")
+    Call<ResponseBody>  getAllLeaseList(@Header("Authorization")String token);
 
 
     @POST("/resale/contact")

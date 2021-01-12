@@ -66,15 +66,6 @@ public class YourCoolAdapter extends MetalRecyclerViewPager.MetalAdapter<YourCoo
 
         Glide.with(context).load("https://transfly-ftr2t.ondigitalocean.app/bannerimage/" + sliderModel.getId()).into(holder.image);
 
-        holder.cardLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                onClickListener.onClick();
-
-            }
-        });
-
         // ...
     }
 

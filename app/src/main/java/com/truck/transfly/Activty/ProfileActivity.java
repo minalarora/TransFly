@@ -3,6 +3,8 @@ package com.truck.transfly.Activty;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -10,23 +12,43 @@ import androidx.databinding.DataBindingUtil;
 import com.truck.transfly.Frament.GmailUpdateFragment;
 import com.truck.transfly.Frament.MobileUpdateDailogFragment;
 import com.truck.transfly.Frament.OtpDialogFragment;
+import com.truck.transfly.Model.RequestMobile;
 import com.truck.transfly.Model.ResponseAreaManager;
 import com.truck.transfly.Model.ResponseFieldStaff;
 import com.truck.transfly.Model.ResponseTransporter;
 import com.truck.transfly.Model.ResponseVehicleOwner;
 import com.truck.transfly.R;
 import com.truck.transfly.databinding.ActivityProfileBinding;
+import com.truck.transfly.utils.ApiClient;
+import com.truck.transfly.utils.ApiEndpoints;
 import com.truck.transfly.utils.PreferenceUtil;
 import com.truck.transfly.utils.TransflyApplication;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class ProfileActivity extends AppCompatActivity {
 
     private ActivityProfileBinding activity;
+    private FrameLayout parent_of_loading;
+    private Retrofit retrofit = null;
+    private ApiEndpoints api = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        retrofit = ApiClient.getRetrofitClient();
+        if (retrofit != null) {
+            api = retrofit.create(ApiEndpoints.class);
+        }
+
+        parent_of_loading=findViewById(R.id.parent_of_loading);
+        parent_of_loading.setVisibility(View.GONE);
 
         activity = DataBindingUtil.setContentView(this, R.layout.activity_profile);
 
@@ -209,7 +231,10 @@ public class ProfileActivity extends AppCompatActivity {
 
                             activity.phone.setText(s);
 
-                            setDataOnModels(s);
+                            RequestMobile requestMobile=new RequestMobile();
+                            requestMobile.setMobile(s);
+
+                            updateMobile(PreferenceUtil.getData(ProfileActivity.this,"token"),requestMobile);
 
                         }
 
@@ -220,6 +245,36 @@ public class ProfileActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    private void updateMobile(String token, RequestMobile mobile)
+    {
+
+        parent_of_loading.setVisibility(View.VISIBLE);
+
+        api.updateMobile(token,mobile).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                setDataOnModels(mobile.getMobile());
+
+                parent_of_loading.setVisibility(View.GONE);
+
+                Toast.makeText(ProfileActivity.this, "Update SuccessFul", Toast.LENGTH_SHORT).show();
+
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                parent_of_loading.setVisibility(View.GONE);
+
+                Toast.makeText(ProfileActivity.this, "Something Went Wrong Try Again", Toast.LENGTH_SHORT).show();
+
+
+            }
+        });
     }
 
     private void setDataOnModels(String mobile) {

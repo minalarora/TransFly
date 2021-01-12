@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "368090939042",
+    "project_id": "transfly",
+    "storage_bucket": "transfly.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:368090939042:android:f6eca21042f1112c90e1fb",
+        "android_client_info": {
+          "package_name": "com.truck.transfly"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "368090939042-gq0l165qoq30m3d7p1ri574m88eao4nv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.truck.transfly",
+            "certificate_hash": "bc0c47db2b73a30488205fd8d621830136c861f6"
+          }
+        },
+        {
+          "client_id": "368090939042-1bnhtnstp7oo3276pge7f0jhgvgi216b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWWLJp_XuMRKbUpcclIEmnlpu4Onkf32A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "368090939042-1bnhtnstp7oo3276pge7f0jhgvgi216b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

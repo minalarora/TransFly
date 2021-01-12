@@ -1,5 +1,6 @@
 package com.truck.transfly.Activty;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
@@ -20,6 +21,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.installations.FirebaseInstallations;
+import com.google.firebase.installations.InstallationTokenResult;
 import com.tapadoo.alerter.Alerter;
 import com.truck.transfly.Model.RequestUser;
 import com.truck.transfly.Model.ResponseAreaManager;
@@ -49,6 +54,7 @@ public class SignUpActivity extends AppCompatActivity {
     private ApiEndpoints api = null;
     private LinearLayout progressPassword;
     private CheckBox email_sent_av,accept_condition;
+    private InstallationTokenResult result;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +69,17 @@ public class SignUpActivity extends AppCompatActivity {
 
         mobileNo = getIntent().getStringExtra("mobileNo");
         userType = getIntent().getStringExtra("type");
+
+        FirebaseInstallations.getInstance().getToken(true).addOnCompleteListener(new OnCompleteListener<InstallationTokenResult>() {
+            @Override
+            public void onComplete(@NonNull Task<InstallationTokenResult> task) {
+
+                if(task.isSuccessful()) {
+                    result = task.getResult();
+                }
+
+            }
+        });
 
         parent_of_loading = findViewById(R.id.parent_of_loading);
         parent_of_loading.setVisibility(View.GONE);
@@ -202,19 +219,19 @@ public class SignUpActivity extends AppCompatActivity {
 
         switch (userType) {
             case "vehicleowner": {
-                createVehicleOwner(new RequestUser(activity.fullName.getText().toString(),activity.email.getText().toString(),mobileNo,activity.password.getText().toString()));
+                createVehicleOwner(new RequestUser(activity.fullName.getText().toString(),activity.email.getText().toString(),mobileNo,activity.password.getText().toString(),result.getToken()));
                 break;
             }
             case "areamanager": {
-                createAreaManager(new RequestUser(activity.fullName.getText().toString(),activity.email.getText().toString(),mobileNo,activity.password.getText().toString()));
+                createAreaManager(new RequestUser(activity.fullName.getText().toString(),activity.email.getText().toString(),mobileNo,activity.password.getText().toString(),result.getToken()));
                 break;
             }
             case "transporter": {
-                createTransporter(new RequestUser(activity.fullName.getText().toString(),activity.email.getText().toString(),mobileNo,activity.password.getText().toString()));
+                createTransporter(new RequestUser(activity.fullName.getText().toString(),activity.email.getText().toString(),mobileNo,activity.password.getText().toString(),result.getToken()));
                 break;
             }
             case "fieldstaff": {
-                createFieldStaff(new RequestUser(activity.fullName.getText().toString(),activity.email.getText().toString(),mobileNo,activity.password.getText().toString()));
+                createFieldStaff(new RequestUser(activity.fullName.getText().toString(),activity.email.getText().toString(),mobileNo,activity.password.getText().toString(),result.getToken()));
                 break;
             }
 

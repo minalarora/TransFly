@@ -54,7 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/round_as_eddittext_search"
-            android:hint="To Destination"
+            android:hint="From Destination"
             android:id="@+id/from_search"
             android:layout_marginEnd="12dp"
             android:paddingStart="12dp"
@@ -76,6 +76,7 @@
         android:layout_width="match_parent"
         android:orientation="horizontal"
         android:id="@+id/to_search_parent"
+        android:visibility="gone"
         android:layout_height="@dimen/_50ssp">
 
         <EditText
@@ -92,7 +93,7 @@
             android:drawableTint="@color/black"
             android:focusable="true"
             android:fontFamily="@font/worksansmedium"
-            android:hint="From Destination"
+            android:hint="To Destination"
             android:paddingStart="12dp"
             android:paddingEnd="8dp"
             android:textSize="14sp" />
@@ -106,7 +107,6 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:id="@+id/recyclerView"
-                android:visibility="gone"
                 android:layout_above="@+id/creaate_booking"
                 android:layout_height="match_parent">
 
@@ -117,6 +117,7 @@
             <ListView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:visibility="gone"
                 android:id="@+id/list_item_loading"
                 />
 

@@ -80,7 +80,7 @@ public class FieldStafBookingConfirmationActivity extends AppCompatActivity {
                  vehicleList.clear();
                  transportersList.clear();
 
-                getVehicleFieldStaff(PreferenceUtil.getData(FieldStafBookingConfirmationActivity.this, "token"), responseBooking.getVehicleownermobile());
+                getVehicleFieldStaff(PreferenceUtil.getData(FieldStafBookingConfirmationActivity.this, "token"), responseBooking.getOwner());
 
             }
         });
@@ -106,7 +106,7 @@ public class FieldStafBookingConfirmationActivity extends AppCompatActivity {
         activity.registerCategory.setAdapter(adapter);
         activity.registerCategory.setSelection(vehicleList.indexOf(responseBooking.getVehiclename()));
 
-        getVehicleFieldStaff(PreferenceUtil.getData(FieldStafBookingConfirmationActivity.this, "token"), responseBooking.getVehicleownermobile());
+        getVehicleFieldStaff(PreferenceUtil.getData(FieldStafBookingConfirmationActivity.this, "token"), responseBooking.getOwner());
 
         activity.creaateBooking.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,10 +146,11 @@ public class FieldStafBookingConfirmationActivity extends AppCompatActivity {
                     requestInvoice.setVehicleownermobile(responseBooking.getVehicleownermobile());
                     requestInvoice.setTonnage(Integer.valueOf(activity.tonnege.getText().toString()));
                     requestInvoice.setCash(Integer.valueOf(activity.cash.getText().toString()));
+                    requestInvoice.setOwner(responseBooking.getOwner());
 
                     ResponseTransporter selectedItem = (ResponseTransporter) activity.transporterName.getSelectedItem();
 
-                    requestInvoice.setTransporterMobile(selectedItem.getMobile());
+                    requestInvoice.setTransporterMobile(selectedItem.getId());
 
                     confirmBooking(PreferenceUtil.getData(FieldStafBookingConfirmationActivity.this, "token"), requestInvoice);
 
