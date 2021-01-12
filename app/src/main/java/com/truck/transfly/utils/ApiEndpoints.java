@@ -12,6 +12,7 @@ import com.truck.transfly.Model.RequestEmergencyDetails;
 import com.truck.transfly.Model.RequestFeedback;
 import com.truck.transfly.Model.RequestGstDetails;
 import com.truck.transfly.Model.RequestInvoice;
+import com.truck.transfly.Model.RequestMobile;
 import com.truck.transfly.Model.RequestPanDetails;
 import com.truck.transfly.Model.RequestPassword;
 import com.truck.transfly.Model.RequestRating;
@@ -42,6 +43,7 @@ import retrofit2.http.Header;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ApiEndpoints {
     //api
@@ -123,10 +125,9 @@ public interface ApiEndpoints {
     @POST("/invoice")
     Call<ResponseBody> confirmBooking(@Header("Authorization")String token, @Body RequestInvoice invoice);
 
-
     //get list of all vehicle in single booking
-    @GET("/booking/vehicle/{mobile}")
-    Call<ResponseBody> getVehicleFieldStaff(@Header("Authorization")String token, @Path("mobile") String mobile);
+    @GET("/booking/vehicle/{id}")
+    Call<ResponseBody> getVehicleFieldStaff(@Header("Authorization")String token, @Path("id") String id);
 
     //get list of all transporters in single booking
     @GET("/alltransporter")
@@ -134,17 +135,28 @@ public interface ApiEndpoints {
 
 
     //get  invoice of vehicleowner
-    @GET("/allinvoice/vehicleowner")
-    Call<ResponseBody> getInvoiceVehicleOwner(@Header("Authorization")String token);
-
-    //get  invoice of areamanager
-    @GET("/allinvoice/areamanager/{timestamp}")
-    Call<ResponseBody> getInvoiceAreaManager(@Header("Authorization")String token, @Path("timestamp") String timestamp);
+    @GET("/allinvoice/vehicleowner/{status}")
+    Call<ResponseBody> getInvoiceVehicleOwner(@Header("Authorization")String token,@Path("status") String status);
 
     //get  invoice of vehicleowner
-    @GET("/allinvoice/transporter/{timestamp}")
-    Call<ResponseBody> getInvoiceTransporter(@Header("Authorization")String token,@Path("timestamp") String timestamp);
+    @GET("/allinvoice/vehicleowner/{status}")
+    Call<ResponseBody> getInvoiceVehicleOwner2(@Header("Authorization")String token, @Path("status") String status, @Query("from") String from,@Query("to") String to);
 
+    //get  invoice of areamanager
+    @GET("/allinvoice/areamanager/{status}")
+    Call<ResponseBody> getInvoiceAreaManager(@Header("Authorization")String token, @Path("status") String status);
+
+    //get  invoice of areamanager
+    @GET("/allinvoice/areamanager/{status}")
+    Call<ResponseBody> getInvoiceAreaManager2(@Header("Authorization")String token, @Path("status") String status, @Query("from") String from,@Query("to") String to);
+
+    //get  invoice of vehicleowner
+    @GET("/allinvoice/transporter/{status}")
+    Call<ResponseBody> getInvoiceTransporter(@Header("Authorization")String token,@Path("status") String status);
+
+    //get  invoice of vehicleowner
+    @GET("/allinvoice/transporter/{status}")
+    Call<ResponseBody> getInvoiceTransporter2(@Header("Authorization")String token,@Path("status") String status, @Query("from") String from,@Query("to") String to);
 
     //get reward
     @GET("/allreward")
@@ -167,6 +179,11 @@ public interface ApiEndpoints {
     //update emergencycontact
     @POST("/me/update")
     Call<ResponseBody> updateEmergencyContact2(@Header("Authorization")String token, @Body RequestEmergencyContact2 emergencyContact);
+
+
+    //update mobile
+    @POST("/me/update")
+    Call<ResponseBody> updateMobile(@Header("Authorization")String token, @Body RequestMobile mobile);
 
 
     //update password

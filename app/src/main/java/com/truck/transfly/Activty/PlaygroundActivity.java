@@ -43,9 +43,9 @@ public class PlaygroundActivity extends AppCompatActivity {
         {
             api = retrofit.create(ApiEndpoints.class);
         }
-
-        createVehicleOwner(new RequestUser("Minal Arora","minalvehicleowner@gmail.com","11111111","password"));
-        //createFieldStaff(new RequestUser("Minal Arora","minalfieldstaff@gmail.com","2222222","password"));
+//
+//        createVehicleOwner(new RequestUser("Minal Arora","minalvehicleowner@gmail.com","11111111","password"));
+//        //createFieldStaff(new RequestUser("Minal Arora","minalfieldstaff@gmail.com","2222222","password"));
         // createTransporter(new RequestUser("Minal Arora","minaltransporter@gmail.com","333333333","password"));
         //createAreaManager(new RequestUser("Minal Arora","minalareamanager@gmail.com","44444444","password"));
 
@@ -1124,5 +1124,43 @@ public class PlaygroundActivity extends AppCompatActivity {
         });
     }
 
+
+    private void updateMobile(String token, RequestMobile mobile)
+    {
+        api.updateMobile(token,mobile).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+    }
+
+
+
+    private ArrayList<ResponseMine> list = new ArrayList<>();
+
+    private ArrayList<ResponseMine> getMine(String minename)
+    {
+        ArrayList<ResponseMine> selectedlist = new ArrayList<>();
+        for(ResponseMine mine: list)
+        {
+            if (mine.getName().contains(minename.toUpperCase()))
+            {
+                selectedlist.add(mine);
+            }
+        }
+        return selectedlist;
+    }
+
+    private ArrayList<String> getLoading(ResponseMine mine)
+    {
+        return mine.getLoading();
+    }
+    
 
 }

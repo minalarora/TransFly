@@ -9,6 +9,9 @@ class RequestInvoice {
     @SerializedName("mineid")
     var mineid: Int? = null
 
+    @SerializedName("owner")
+    var owner: String? = null
+
     @SerializedName("minename")
     var minename: String? = null
 

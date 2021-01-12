@@ -21,5 +21,8 @@ class ResponseVehicle {
     @SerializedName("active")
     var active: Boolean? = false
 
+    @SerializedName("date")
+    var date: String? = null
+
 
 }

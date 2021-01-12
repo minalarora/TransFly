@@ -32,6 +32,9 @@ class ResponseBooking() : Parcelable {
     @SerializedName("vehicleownermobile")
     var vehicleownermobile: String? = null
 
+    @SerializedName("owner")
+    var owner: String? = null
+
     constructor(parcel: Parcel) : this() {
         id = parcel.readValue(Int::class.java.classLoader) as? Int
         loading = parcel.readString()
