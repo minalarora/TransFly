@@ -10,6 +10,7 @@ import com.truck.transfly.Model.RequestEmergencyContact;
 import com.truck.transfly.Model.RequestEmergencyContact2;
 import com.truck.transfly.Model.RequestEmergencyDetails;
 import com.truck.transfly.Model.RequestFeedback;
+import com.truck.transfly.Model.RequestFirebase;
 import com.truck.transfly.Model.RequestGstDetails;
 import com.truck.transfly.Model.RequestInvoice;
 import com.truck.transfly.Model.RequestMobile;
@@ -184,6 +185,10 @@ public interface ApiEndpoints {
     //update mobile
     @POST("/me/update")
     Call<ResponseBody> updateMobile(@Header("Authorization")String token, @Body RequestMobile mobile);
+
+    //update mobile
+    @POST("/me/update")
+    Call<ResponseBody> updateFirebase(@Header("Authorization")String token, @Body RequestFirebase firebase);
 
 
     //update password

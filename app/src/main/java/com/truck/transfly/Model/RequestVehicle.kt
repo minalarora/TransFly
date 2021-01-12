@@ -17,4 +17,7 @@ class RequestVehicle {
     @SerializedName("vehiclename")
     var vehiclename: String? = null
 
+    @SerializedName("tyres")
+    var tyres: String? = null
+
 }
