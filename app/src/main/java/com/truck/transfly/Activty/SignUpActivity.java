@@ -25,6 +25,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.installations.FirebaseInstallations;
 import com.google.firebase.installations.InstallationTokenResult;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.tapadoo.alerter.Alerter;
 import com.truck.transfly.Model.RequestUser;
 import com.truck.transfly.Model.ResponseAreaManager;
@@ -55,6 +56,7 @@ public class SignUpActivity extends AppCompatActivity {
     private LinearLayout progressPassword;
     private CheckBox email_sent_av,accept_condition;
     private InstallationTokenResult result;
+    private String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,16 +72,21 @@ public class SignUpActivity extends AppCompatActivity {
         mobileNo = getIntent().getStringExtra("mobileNo");
         userType = getIntent().getStringExtra("type");
 
-        FirebaseInstallations.getInstance().getToken(true).addOnCompleteListener(new OnCompleteListener<InstallationTokenResult>() {
-            @Override
-            public void onComplete(@NonNull Task<InstallationTokenResult> task) {
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w("TAG", "Fetching FCM registration token failed", task.getException());
+                            return;
+                        }
 
-                if(task.isSuccessful()) {
-                    result = task.getResult();
-                }
+                        // Get new FCM registration token
+                        token = task.getResult();
 
-            }
-        });
+
+                    }
+                });
 
         parent_of_loading = findViewById(R.id.parent_of_loading);
         parent_of_loading.setVisibility(View.GONE);
@@ -219,19 +226,19 @@ public class SignUpActivity extends AppCompatActivity {
 
         switch (userType) {
             case "vehicleowner": {
-                createVehicleOwner(new RequestUser(activity.fullName.getText().toString(),activity.email.getText().toString(),mobileNo,activity.password.getText().toString(),result.getToken()));
+                createVehicleOwner(new RequestUser(activity.fullName.getText().toString(),activity.email.getText().toString(),mobileNo,activity.password.getText().toString(),token));
                 break;
             }
             case "areamanager": {
-                createAreaManager(new RequestUser(activity.fullName.getText().toString(),activity.email.getText().toString(),mobileNo,activity.password.getText().toString(),result.getToken()));
+                createAreaManager(new RequestUser(activity.fullName.getText().toString(),activity.email.getText().toString(),mobileNo,activity.password.getText().toString(),token));
                 break;
             }
             case "transporter": {
-                createTransporter(new RequestUser(activity.fullName.getText().toString(),activity.email.getText().toString(),mobileNo,activity.password.getText().toString(),result.getToken()));
+                createTransporter(new RequestUser(activity.fullName.getText().toString(),activity.email.getText().toString(),mobileNo,activity.password.getText().toString(),token));
                 break;
             }
             case "fieldstaff": {
-                createFieldStaff(new RequestUser(activity.fullName.getText().toString(),activity.email.getText().toString(),mobileNo,activity.password.getText().toString(),result.getToken()));
+                createFieldStaff(new RequestUser(activity.fullName.getText().toString(),activity.email.getText().toString(),mobileNo,activity.password.getText().toString(),token));
                 break;
             }
 
