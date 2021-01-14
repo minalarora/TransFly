@@ -22,8 +22,8 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="@dimen/_50ssp"
-                android:layout_height="@dimen/_50ssp"
+                android:layout_width="@dimen/_35ssp"
+                android:layout_height="@dimen/_35ssp"
                 android:src="@drawable/box_animation" />
 
             <TextView
@@ -35,7 +35,7 @@
                 android:id="@+id/from_dest"
                 android:text="Anand(GJ) - Kamrej(GJ)"
                 android:textColor="@color/black"
-                android:textSize="15dp" />
+                android:textSize="13dp" />
 
         </LinearLayout>
 
@@ -49,6 +49,11 @@
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12ssp"
             android:layout_marginStart="@dimen/_13ssp"
@@ -70,20 +75,10 @@
                 android:textColor="@color/black"
                 android:textSize="13dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="@dimen/_4ssp"
-                android:fontFamily="@font/poppins"
-                android:text="(Estimate Rate)"
-                android:textColor="#8c8c8c"
-                android:textSize="12dp" />
-
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12ssp"
             android:layout_marginStart="@dimen/_13ssp"
@@ -105,15 +100,8 @@
                 android:textColor="@color/black"
                 android:textSize="13dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="@dimen/_4ssp"
-                android:fontFamily="@font/poppins"
-                android:text="(Loading Time)"
-                android:textColor="#8c8c8c"
-                android:textSize="12dp" />
+
+        </LinearLayout>
 
         </LinearLayout>
 

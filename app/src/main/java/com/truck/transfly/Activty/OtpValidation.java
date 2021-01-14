@@ -52,7 +52,7 @@ public class OtpValidation extends AppCompatActivity implements VerificationList
 
         TextView otp_string_text=findViewById(R.id.otp_string_text);
 
-        otp_string_text.setText("We have sent the otp in your registered mobile number xxxxxx"+lastFourDigits);
+        otp_string_text.setText("We have Sent the OTP in your registered mobile number xxxxxx"+lastFourDigits);
 
         resendOtp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,11 +60,13 @@ public class OtpValidation extends AppCompatActivity implements VerificationList
 
                 if(isTimerOn){
 
-                    Toast.makeText(OtpValidation.this, "Wait For Otp!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(OtpValidation.this, "Wait For OTP!", Toast.LENGTH_SHORT).show();
 
                 } else if(!isTimerOn){
 
                     SendOTP.getInstance().getTrigger().resend(RetryType.TEXT);
+
+                    Toast.makeText(OtpValidation.this, "OTP Sent to registered Mobile Number "+lastFourDigits, Toast.LENGTH_SHORT).show();
 
                     new CountDownTimer(30000, 1000) {
 
@@ -164,7 +166,7 @@ public class OtpValidation extends AppCompatActivity implements VerificationList
                 .setVerifyWithoutOtp(true)//direct verification while connect with mobile network
                 .setAutoVerification(OtpValidation.this)//Auto read otp from Sms And Verify
                 .setSenderId("ABCDEF")
-                .setMessage("##OTP## is Your verification digits.")
+                .setMessage("##OTP## is your confirmation on OTP, Please do not share your Otp and confidential info with anynoe.TransFly")
                 .setOtpLength(4)
                 .setOtpExpireInMinute(10)
                 .setVerificationCallBack(this).build();
@@ -191,7 +193,7 @@ public class OtpValidation extends AppCompatActivity implements VerificationList
 
                 } else if (responseCode == SendOTPResponseCode.SMS_SUCCESSFUL_SEND_TO_NUMBER || responseCode == SendOTPResponseCode.DIRECT_VERIFICATION_FAILED_SMS_SUCCESSFUL_SEND_TO_NUMBER) {
 
-                    Toast.makeText(OtpValidation.this, "Otp Send to Mobile Number", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(OtpValidation.this, "OTP Sent to Registered Mobile Number", Toast.LENGTH_SHORT).show();
 
                 } else {
 
@@ -202,7 +204,7 @@ public class OtpValidation extends AppCompatActivity implements VerificationList
 
                     } else {
 
-                        Toast.makeText(OtpValidation.this, "Wrong Otp! Try Again", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(OtpValidation.this, "Wrong OTP! Try Again", Toast.LENGTH_SHORT).show();
 
                     }
 

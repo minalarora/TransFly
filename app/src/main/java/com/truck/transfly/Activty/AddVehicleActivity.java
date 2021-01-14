@@ -188,6 +188,7 @@ public class AddVehicleActivity extends AppCompatActivity {
                     .addParameter("number", activity.vehicleNumber.getText().toString())
                     .addParameter("rc", activity.rcnumber.getText().toString())
                     .addParameter("vehiclename", activity.vehicleNameSpinner.getSelectedItem().toString())
+                    .addParameter("tyres",activity.vehicleOwnTyres.getSelectedItem().toString())
                     .setUtf8Charset()
                     .setMethod("POST")
                     .setDelegate(new UploadStatusDelegate() {

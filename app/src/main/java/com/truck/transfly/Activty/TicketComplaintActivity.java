@@ -32,6 +32,8 @@ public class TicketComplaintActivity extends AppCompatActivity {
     private FrameLayout parent_of_loading;
     private String StringRadio;
 
+    private EditText driver_name,driver_phone,location_name,vehicle_number;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +49,10 @@ public class TicketComplaintActivity extends AppCompatActivity {
 
         ticket_spinner = findViewById(R.id.select_complaint);
         ticket_complaint = findViewById(R.id.ticket_complaint);
+        driver_name = findViewById(R.id.driver_name);
+        location_name = findViewById(R.id.location_name);
+        driver_phone = findViewById(R.id.driver_phone);
+        vehicle_number = findViewById(R.id.vehicle_number);
         RelativeLayout submit = findViewById(R.id.submit);
 
         StringRadio = "Vehicle Break Down";
@@ -94,7 +100,7 @@ public class TicketComplaintActivity extends AppCompatActivity {
 
                     RequestTicket requestTicket = new RequestTicket();
                     requestTicket.setCategory(StringRadio);
-                    requestTicket.setMessage(ticket_complaint.getText().toString());
+                    requestTicket.setMessage("Driver name : "+driver_name.getText().toString()+"\n"+"Driver phone Number : "+driver_phone.getText().toString()+"\n"+" vehicle Number : "+vehicle_number.getText().toString()+"\nLocation : "+location_name.getText().toString()+"\nTicket : "+ticket_complaint.getText().toString());
 
                     createBooking(PreferenceUtil.getData(TicketComplaintActivity.this, "token"), requestTicket);
 
@@ -112,7 +118,7 @@ public class TicketComplaintActivity extends AppCompatActivity {
     private void createBooking(String token, RequestTicket ticket) {
         parent_of_loading.setVisibility(View.VISIBLE);
 
-        api.createTicket(token, ticket).enqueue(new Callback<ResponseBody>() {
+        api.createTicket(token, ticket).enqueue(new Callback<ResponseBody>(){
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 

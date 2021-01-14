@@ -53,7 +53,7 @@ public class CurrentInvoicesActivity extends AppCompatActivity {
         ViewPager viewPager =findViewById(R.id.viewpager);
         ViewPagerAdapter viewPagerAdapter=new ViewPagerAdapter(getSupportFragmentManager(),0);
         viewPagerAdapter.addFragment(new PendingFragment(),"Pending");
-        viewPagerAdapter.addFragment(new ClearedFragment(),"Cleared");
+        viewPagerAdapter.addFragment(new ClearedFragment(),"Completed");
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
     }

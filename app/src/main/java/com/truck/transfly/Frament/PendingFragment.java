@@ -229,7 +229,7 @@ public class PendingFragment extends Fragment implements SmoothDateRangePickerFr
     @Override
     public void onDateRangeSet(SmoothDateRangePickerFragment view, int yearStart, int monthStart, int dayStart, int yearEnd, int monthEnd, int dayEnd) {
 
-        DateTime dateStart=new DateTime(yearStart,monthStart+1,dayStart,new DateTime().getHourOfDay(),new DateTime().getMinuteOfHour());
+        DateTime dateStart=new DateTime(yearStart,monthStart+1,dayStart,new DateTime().getHourOfDay(),new DateTime().getMinuteOfHour()).minusDays(1);
 
         DateTime dateEnd=new DateTime(yearEnd,monthEnd+1,dayEnd,new DateTime().getHourOfDay(),new DateTime().getMinuteOfHour());
 
@@ -247,7 +247,7 @@ public class PendingFragment extends Fragment implements SmoothDateRangePickerFr
         no_booking_data.setVisibility(View.GONE);
         parent_of_loading.setVisibility(View.VISIBLE);
 
-        api.getInvoiceVehicleOwner2(token,from,to,"PENDING").enqueue(new Callback<ResponseBody>() {
+        api.getInvoiceVehicleOwner2(token,"PENDING",from,to).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
@@ -277,7 +277,7 @@ public class PendingFragment extends Fragment implements SmoothDateRangePickerFr
                         fieldStafAdapter.notifyDataSetChanged();
                         Log.d("minal", String.valueOf(invoicesList.size()));
                     }
-
+//localhost:8080/allinvoice/vehicleowner/PENDING?from=1609524000000&to=1612116000000
 
                 }else {
 

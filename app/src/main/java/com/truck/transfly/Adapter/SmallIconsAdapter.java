@@ -26,6 +26,7 @@ public class SmallIconsAdapter extends RecyclerView.Adapter<SmallIconsAdapter.vi
     public SmallIconsAdapter(Context context, ArrayList<ResponseVehicle> vehicleList){
 
         this.context=context;
+
         this.vehicleList=vehicleList;
 
     }
