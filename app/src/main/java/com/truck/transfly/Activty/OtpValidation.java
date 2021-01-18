@@ -66,6 +66,8 @@ public class OtpValidation extends AppCompatActivity implements VerificationList
 
                     SendOTP.getInstance().getTrigger().resend(RetryType.TEXT);
 
+                    otp_string_text.setText("OTP Sent to registered Mobile Number "+lastFourDigits);
+
                     Toast.makeText(OtpValidation.this, "OTP Sent to registered Mobile Number "+lastFourDigits, Toast.LENGTH_SHORT).show();
 
                     new CountDownTimer(30000, 1000) {

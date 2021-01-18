@@ -18,6 +18,8 @@ class ResponseAreaManager {
     @SerializedName("firebase")
     var firebase : String? = null
 
+    @SerializedName("bankpersonname")
+    var bankpersonname: String? = null
 
     @SerializedName("status")
     var status: Int? = null

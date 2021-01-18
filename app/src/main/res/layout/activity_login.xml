@@ -194,7 +194,7 @@
                 android:layout_alignParentBottom="true"
                 android:fontFamily="@font/poppinsbold"
                 android:gravity="center"
-                android:text="Create Here"
+                android:text=" Create Here"
                 android:textColor="@color/blue"
                 android:textSize="12dp" />
 
@@ -207,7 +207,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/font_regular"
-        android:text="©2021. All rights reserved to Transfly Logistics Private Limited."
+        android:text="©2021. All rights reserved to Transfly infotech Logistics Private Limited."
         android:layout_above="@+id/signup_parent"
         android:gravity="center_horizontal"
         android:lineSpacingExtra="@dimen/_5ssp"

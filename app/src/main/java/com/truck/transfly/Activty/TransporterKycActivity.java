@@ -231,7 +231,7 @@ public class TransporterKycActivity extends AppCompatActivity {
                     if(pendingList.isEmpty())
                     {
 
-                        Toast.makeText(TransporterKycActivity.this, "No Kyc Need, Everything is clear", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(TransporterKycActivity.this, "Your KYC has already been completed, thank you", Toast.LENGTH_SHORT).show();
 
                         finish();
 
@@ -298,9 +298,13 @@ public class TransporterKycActivity extends AppCompatActivity {
 
                                     parent_of_loading.setVisibility(View.GONE);
 
-                                    Toast.makeText(context, "Update Successfully", Toast.LENGTH_SHORT).show();
-
                                     finish();
+
+                                    Intent intent = new Intent(TransporterKycActivity.this, TransporterKycActivity.class);
+                                    startActivity(intent);
+
+                                    Toast.makeText(context, "Updated Successfully", Toast.LENGTH_SHORT).show();
+                                    
 
                                 }
                             }, 2000);

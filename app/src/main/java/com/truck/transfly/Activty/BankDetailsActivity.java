@@ -121,6 +121,8 @@ public class BankDetailsActivity extends AppCompatActivity {
                 activity.bankName.setText(responseVehicleOwner.getBankname());
                 activity.bankIfc.setText(responseVehicleOwner.getIfsc());
                 activity.bankNumber.setText(responseVehicleOwner.getAccountno());
+                activity.personName.setText(responseVehicleOwner.getBankpersonname());
+                activity.confirmAccountName.setText(responseVehicleOwner.getAccountno());
 
                 break;
 
@@ -133,6 +135,8 @@ public class BankDetailsActivity extends AppCompatActivity {
                 activity.bankName.setText(responseAreaManager.getBankname());
                 activity.bankIfc.setText(responseAreaManager.getIfsc());
                 activity.bankNumber.setText(responseAreaManager.getAccountno());
+                activity.personName.setText(responseAreaManager.getBankpersonname());
+                activity.confirmAccountName.setText(responseAreaManager.getAccountno());
 
                 break;
 
@@ -145,6 +149,8 @@ public class BankDetailsActivity extends AppCompatActivity {
                 activity.bankName.setText(responseFieldStaff.getBankname());
                 activity.bankIfc.setText(responseFieldStaff.getIfsc());
                 activity.bankNumber.setText(responseFieldStaff.getAccountno());
+                activity.personName.setText(responseFieldStaff.getBankpersonname());
+                activity.confirmAccountName.setText(responseFieldStaff.getAccountno());
 
                 break;
 
@@ -197,7 +203,15 @@ public class BankDetailsActivity extends AppCompatActivity {
 
                         Toast.makeText(BankDetailsActivity.this, "Enter Bank IFSC", Toast.LENGTH_SHORT).show();
 
-                    } else {
+                    } else if(TextUtils.isEmpty(activity.personName.getText().toString())){
+
+                        Toast.makeText(BankDetailsActivity.this, "Enter Person Name", Toast.LENGTH_SHORT).show();
+
+                    } else if(!activity.confirmAccountName.getText().toString().equals(activity.bankNumber.getText().toString())){
+
+                        Toast.makeText(BankDetailsActivity.this, "Account Number MisMatched", Toast.LENGTH_SHORT).show();
+
+                    } else{
 
                         OtpDialogFragment otpDialogFragment=new OtpDialogFragment();
                         Bundle bundle = new Bundle();
@@ -315,6 +329,7 @@ public class BankDetailsActivity extends AppCompatActivity {
                     .addHeader("Authorization", PreferenceUtil.getData(BankDetailsActivity.this,"token"))
                     .addParameter("bankname",activity.bankName.getText().toString())
                     .addParameter("accountno",activity.bankNumber.getText().toString())
+                    .addParameter("bankpersonname",activity.personName.getText().toString())
                     .addParameter("ifsc",activity.bankIfc.getText().toString())
                     .setUtf8Charset()
                     .setMethod("POST")
@@ -399,6 +414,7 @@ public class BankDetailsActivity extends AppCompatActivity {
                 responseVehicleOwner.setAccountno(activity.bankNumber.getText().toString());
                 responseVehicleOwner.setBankname(activity.bankName.getText().toString());
                 responseVehicleOwner.setIfsc(activity.bankIfc.getText().toString());
+                responseVehicleOwner.setBankpersonname(activity.personName.getText().toString());
 
                 ((TransflyApplication) getApplication()).setResponseVehicleOwner(responseVehicleOwner);
 
@@ -410,6 +426,7 @@ public class BankDetailsActivity extends AppCompatActivity {
                 responseAreaManager.setAccountno(activity.bankNumber.getText().toString());
                 responseAreaManager.setBankname(activity.bankName.getText().toString());
                 responseAreaManager.setIfsc(activity.bankIfc.getText().toString());
+                responseAreaManager.setBankpersonname(activity.personName.getText().toString());
 
                 ((TransflyApplication) getApplication()).setResponseAreaManager(responseAreaManager);
 
@@ -422,6 +439,7 @@ public class BankDetailsActivity extends AppCompatActivity {
                 responseFieldStaff.setAccountno(activity.bankNumber.getText().toString());
                 responseFieldStaff.setBankname(activity.bankName.getText().toString());
                 responseFieldStaff.setIfsc(activity.bankIfc.getText().toString());
+                responseFieldStaff.setBankpersonname(activity.personName.getText().toString());
 
                 ((TransflyApplication) getApplication()).setResponseFieldStaff(responseFieldStaff);
 

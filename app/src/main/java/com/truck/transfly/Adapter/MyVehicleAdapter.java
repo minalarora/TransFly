@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -44,6 +45,8 @@ public class MyVehicleAdapter extends RecyclerView.Adapter<MyVehicleAdapter.view
         holder.vehicle_number.setText(responseVehicle.getNumber());
         holder.vehicle_name.setText(responseVehicle.getVehiclename());
 
+        holder.date_created.setText(responseVehicle.getDate().substring(0,15));
+
         if(responseVehicle.getStatus()!=null && responseVehicle.getStatus()==0){
 
             holder.status.setText("Pending");
@@ -63,7 +66,7 @@ public class MyVehicleAdapter extends RecyclerView.Adapter<MyVehicleAdapter.view
 
     public class viewholder extends RecyclerView.ViewHolder {
 
-        private TextView vehicle_name,vehicle_number,status;
+        private TextView vehicle_name,vehicle_number,status,date_created;
 
         public viewholder(@NonNull View itemView) {
             super(itemView);
@@ -71,6 +74,7 @@ public class MyVehicleAdapter extends RecyclerView.Adapter<MyVehicleAdapter.view
             vehicle_name=itemView.findViewById(R.id.vehicle_name);
             vehicle_number=itemView.findViewById(R.id.vehicle_number);
             status=itemView.findViewById(R.id.status);
+            date_created=itemView.findViewById(R.id.date_created);
 
         }
     }

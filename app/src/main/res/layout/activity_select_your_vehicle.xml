@@ -105,7 +105,9 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins"
                         android:id="@+id/from_dest"
-                        android:hint="Enter From Destination"
+                        android:hint="From Mines"
+                        android:enabled="false"
+                        android:textColor="@color/black"
                         android:imeOptions="actionNext"
                         android:inputType="textCapWords"
                         android:textSize="@dimen/_12ssp" />
@@ -125,9 +127,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins"
-                        android:hint="Enter To Destination"
+                        android:hint="To Destination"
                         android:imeOptions="actionNext"
                         android:id="@+id/to_dest"
+                        android:textColor="@color/black"
+                        android:enabled="false"
                         android:inputType="textCapWords"
                         android:textSize="@dimen/_12ssp" />
 

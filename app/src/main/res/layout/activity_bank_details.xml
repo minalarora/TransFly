@@ -133,6 +133,25 @@
                         android:layout_marginStart="@dimen/_12ssp"
                         android:layout_marginTop="@dimen/_50ssp"
                         android:layout_marginEnd="@dimen/_12ssp"
+                        android:hint="Enter Person Name"
+                        android:padding="@dimen/_4ssp"
+                        app:boxBackgroundColor="@color/white">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/person_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/opensansregular"
+                            android:textSize="@dimen/_15ssp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_12ssp"
+                        android:layout_marginTop="@dimen/_10ssp"
+                        android:layout_marginEnd="@dimen/_12ssp"
                         android:hint="Enter Bank Name"
                         android:padding="@dimen/_4ssp"
                         app:boxBackgroundColor="@color/white">
@@ -151,7 +170,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_12ssp"
-                        android:layout_marginTop="@dimen/_30ssp"
+                        android:layout_marginTop="@dimen/_10ssp"
                         android:layout_marginEnd="@dimen/_12ssp"
                         android:hint="Enter Account Number"
                         android:padding="@dimen/_4ssp"
@@ -166,12 +185,31 @@
 
                     </com.google.android.material.textfield.TextInputLayout>
 
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_12ssp"
+                        android:layout_marginTop="@dimen/_10ssp"
+                        android:layout_marginEnd="@dimen/_12ssp"
+                        android:hint="Confirm Account Number"
+                        android:padding="@dimen/_4ssp"
+                        app:boxBackgroundColor="@color/white">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/confirm_account_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/opensansregular"
+                            android:textSize="@dimen/_15ssp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_12ssp"
-                        android:layout_marginTop="@dimen/_30ssp"
+                        android:layout_marginTop="@dimen/_10ssp"
                         android:layout_marginEnd="@dimen/_12ssp"
                         android:hint="Enter Bank IFC"
                         android:padding="@dimen/_4ssp"

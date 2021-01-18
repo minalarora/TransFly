@@ -106,6 +106,7 @@ public class SignUpActivity extends AppCompatActivity {
                 if(isChecked){
 
                     Intent intent=new Intent(SignUpActivity.this,TermsAndCondition.class);
+                    intent.putExtra("userType",userType);
                     startActivity(intent);
 
                 }

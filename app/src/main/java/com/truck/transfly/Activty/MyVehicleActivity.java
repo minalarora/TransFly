@@ -44,6 +44,15 @@ public class MyVehicleActivity extends AppCompatActivity {
         parent_of_loading = findViewById(R.id.parent_of_loading);
         parent_of_loading.setVisibility(View.GONE);
 
+        findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                onBackPressed();
+
+            }
+        });
+
         RecyclerView recyclerView =findViewById(R.id.recyclerView);
         myVehicleAdapter=new MyVehicleAdapter(MyVehicleActivity.this,responseVehicleList);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(MyVehicleActivity.this,LinearLayoutManager.VERTICAL,false);
@@ -78,6 +87,7 @@ public class MyVehicleActivity extends AppCompatActivity {
                             responseVehicle.setVehiclename(jsonObject.getString("vehiclename"));
                             responseVehicle.setStatus(jsonObject.getInt("status"));
                             responseVehicle.setActive(jsonObject.getBoolean("active"));
+                            responseVehicle.setDate(jsonObject.getString("date"));
 
                             responseVehicleList.add(responseVehicle);
                         }

@@ -228,7 +228,7 @@ public class VehicleOwnerKycActivity extends AppCompatActivity {
                     if(pendingList.isEmpty())
                     {
 
-                        Toast.makeText(VehicleOwnerKycActivity.this, "No Kyc Need, Everything is clear", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(VehicleOwnerKycActivity.this, "Your KYC has already been completed, thank you", Toast.LENGTH_SHORT).show();
 
                         finish();
 
@@ -301,13 +301,13 @@ public class VehicleOwnerKycActivity extends AppCompatActivity {
 
                                     parent_of_loading.setVisibility(View.GONE);
 
-//                                    Intent intent = new Intent(StepThreeActivity.this, StepFourActivity.class);
-//                                    intent.putExtra("listing_id", listing_id);
-//                                    startActivity(intent);
-
-                                    Toast.makeText(context, "Update Successfully", Toast.LENGTH_SHORT).show();
-
                                     finish();
+
+                                    Intent intent = new Intent(VehicleOwnerKycActivity.this, VehicleOwnerKycActivity.class);
+                                    startActivity(intent);
+
+                                    Toast.makeText(context, "Updated Successfully", Toast.LENGTH_SHORT).show();
+
                                 }
                             }, 2000);
 
@@ -385,9 +385,13 @@ public class VehicleOwnerKycActivity extends AppCompatActivity {
                                     activity.bankName.setText("");
                                     activity.bankIfc.setText("");
 
-                                    Toast.makeText(context, "Update Successfully", Toast.LENGTH_SHORT).show();
-
                                     finish();
+
+                                    Intent intent = new Intent(VehicleOwnerKycActivity.this, VehicleOwnerKycActivity.class);
+                                    startActivity(intent);
+
+                                    Toast.makeText(context, "Updated Successfully", Toast.LENGTH_SHORT).show();
+
 
 
                                 }

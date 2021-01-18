@@ -14,6 +14,7 @@ import com.truck.transfly.Model.RequestEmergencyContact2;
 import com.truck.transfly.Model.ResponseAreaManager;
 import com.truck.transfly.Model.ResponseFieldStaff;
 import com.truck.transfly.Model.ResponseTransporter;
+import com.truck.transfly.Model.ResponseVehicle;
 import com.truck.transfly.Model.ResponseVehicleOwner;
 import com.truck.transfly.R;
 import com.truck.transfly.databinding.ActivityEmergencyContactBinding;
@@ -81,6 +82,16 @@ public class EmergencyContactActivity extends AppCompatActivity {
                 activity.name.setText(responseTransporter.getEmergencyName());
                 activity.phoneNumber.setText(responseTransporter.getEmergencyMobile());
                 activity.relative.setText(responseTransporter.getEmergencyRelation());
+
+                break;
+
+            case "vehicleowner":
+
+                ResponseVehicleOwner responseVehicleOwner = ((TransflyApplication) getApplication()).getResponseVehicleOwner();
+
+                activity.name.setText(responseVehicleOwner.getEmergencyName());
+                activity.phoneNumber.setText(responseVehicleOwner.getEmergencyMobile());
+                activity.relative.setText(responseVehicleOwner.getEmergencyRelation());
 
                 break;
 
@@ -206,6 +217,17 @@ public class EmergencyContactActivity extends AppCompatActivity {
                 responseFieldStaff.setEmergencyRelation(activity.relative.getText().toString());
 
                 ((TransflyApplication) getApplication()).setResponseFieldStaff(responseFieldStaff);
+
+                break;
+
+            case "vehicleowner":
+
+                ResponseVehicleOwner responseVehicleOwner = ((TransflyApplication) getApplication()).getResponseVehicleOwner();
+                responseVehicleOwner.setEmergencyMobile(activity.phoneNumber.getText().toString());
+                responseVehicleOwner.setEmergencyName(activity.name.getText().toString());
+                responseVehicleOwner.setEmergencyRelation(activity.relative.getText().toString());
+
+                ((TransflyApplication) getApplication()).setResponseVehicleOwner(responseVehicleOwner);
 
                 break;
 

@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.ColorStateList;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
@@ -31,8 +32,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.core.view.MenuItemCompat;
+import androidx.core.widget.ImageViewCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -77,6 +80,7 @@ import com.nabinbhandari.android.permissions.PermissionHandler;
 import com.nabinbhandari.android.permissions.Permissions;
 import com.truck.transfly.Adapter.LocationAdapter;
 import com.truck.transfly.Adapter.YourCoolAdapter;
+import com.truck.transfly.Frament.MineChooseFragment;
 import com.truck.transfly.Frament.ShowLoadingDialogFragment;
 import com.truck.transfly.Model.PositionModel;
 import com.truck.transfly.Model.RequestArea;
@@ -170,20 +174,6 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         ResponseVehicleOwner responseFieldStaff = ((TransflyApplication) getApplication()).getResponseVehicleOwner();
 
-        if(responseFieldStaff.getStatus()==0){
-
-            kyc_drawer.setTitle("KYC Details (Pending)");
-
-        } else if(responseFieldStaff.getStatus()==1){
-
-            kyc_drawer.setTitle("KYC Details (Under Process)");
-
-        } else {
-
-            kyc_drawer.setTitle("KYC Details (Completed)");
-
-        }
-
         View headerLayout = navigationView.getHeaderView(0);
         TextView customerName = headerLayout.findViewById(R.id.customer_name);
         TextView number = headerLayout.findViewById(R.id.number);
@@ -192,10 +182,10 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                Uri uri = Uri.fromParts("package", getPackageName(), null);
-                intent.setData(uri);
-                startActivity(intent);
+//                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+//                Uri uri = Uri.fromParts("package", getPackageName(), null);
+//                intent.setData(uri);
+//                startActivity(intent);
 
             }
         });
@@ -251,6 +241,9 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         navigation.setPadding(0, 0, 0, 1);
         navigation.setIconSize(26, 26);
         navigation.setTextVisibility(true);
+
+        ImageView iconAt = navigation.getIconAt(2);
+        ImageViewCompat.setImageTintList(iconAt, ColorStateList.valueOf(ContextCompat.getColor(HomeActivity.this, R.color.quantum_grey2)));
 
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -376,7 +369,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                         }
                     });
 
-                    goToLocationWithAnimation(Double.parseDouble(requestArea.getArealatitude()), Double.parseDouble(requestArea.getArealongitude()), 8);
+                    goToLocationWithAnimation(Double.parseDouble(requestArea.getArealatitude()), Double.parseDouble(requestArea.getArealongitude()), 12);
 
                 } else {
 
@@ -484,6 +477,8 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                     } else {
                         fullMetalAdapter.notifyDataSetChanged();
+
+                        handler.postDelayed(runnable,SPEED_SCROLL);
 
                         viewPager.setVisibility(View.VISIBLE);
 
@@ -613,13 +608,6 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
     private void initViewImageCrousel() {
-
-        for (int i = 0; i < 10; i++) {
-
-            SliderModel sliderModel = new SliderModel();
-            metalList.add(sliderModel);
-
-        }
 
         DisplayMetrics metrics = getDisplayMetrics();
         fullMetalAdapter = new YourCoolAdapter(metrics, responseBannerArrayList, HomeActivity.this);
@@ -764,7 +752,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                     case R.id.emergency_details:
 
-                        startActivity(new Intent(HomeActivity.this, EmergencyContactVehicleActivity.class));
+                        startActivity(new Intent(HomeActivity.this, EmergencyContactActivity.class));
 
                         break;
 
@@ -1044,13 +1032,32 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 if (responseMine != null) {
 
-                    Intent intent = new Intent(HomeActivity.this, SelectYourVehicleActivity.class);
+                    MineChooseFragment mineChooseFragment=new MineChooseFragment();
 
-                    intent.putExtra("mineid", responseMine.getId());
-                    intent.putExtra("minename", responseMine.getName());
-                    intent.putExtra("loading", loading);
+                    Bundle bundle=new Bundle();
+                    bundle.putString("minename",responseMine.getName());
+                    bundle.putString("loading",loading);
 
-                    startActivity(intent);
+                    mineChooseFragment.setArguments(bundle);
+
+                    mineChooseFragment.setCancelable(false);
+
+                    mineChooseFragment.show(getSupportFragmentManager(),"mineChooseFragment");
+
+                    mineChooseFragment.setOnClickListener(new MineChooseFragment.onClickListener() {
+                        @Override
+                        public void onClick() {
+
+                            Intent intent = new Intent(HomeActivity.this, SelectYourVehicleActivity.class);
+
+                            intent.putExtra("mineid", responseMine.getId());
+                            intent.putExtra("minename", responseMine.getName());
+                            intent.putExtra("loading", loading);
+
+                            startActivity(intent);
+
+                        }
+                    });
 
                 }
 

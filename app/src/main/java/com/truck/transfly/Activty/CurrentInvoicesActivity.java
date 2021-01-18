@@ -50,6 +50,15 @@ public class CurrentInvoicesActivity extends AppCompatActivity {
 
         TabLayout tabLayout=findViewById(R.id.tabLayout);
 
+        findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                onBackPressed();
+
+            }
+        });
+
         ViewPager viewPager =findViewById(R.id.viewpager);
         ViewPagerAdapter viewPagerAdapter=new ViewPagerAdapter(getSupportFragmentManager(),0);
         viewPagerAdapter.addFragment(new PendingFragment(),"Pending");

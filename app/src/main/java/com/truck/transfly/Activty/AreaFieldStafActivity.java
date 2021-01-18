@@ -239,7 +239,7 @@ public class AreaFieldStafActivity extends AppCompatActivity {
                     if(pendingList.isEmpty())
                     {
 
-                        Toast.makeText(AreaFieldStafActivity.this, "No Kyc Need, Everything is clear", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AreaFieldStafActivity.this, "Your KYC has already been completed, thank you", Toast.LENGTH_SHORT).show();
 
                         finish();
 
@@ -360,12 +360,12 @@ public class AreaFieldStafActivity extends AppCompatActivity {
 
                                     parent_of_loading.setVisibility(View.GONE);
 
-//                                    Intent intent = new Intent(StepThreeActivity.this, StepFourActivity.class);
-//                                    intent.putExtra("listing_id", listing_id);
-//                                    startActivity(intent);
-
-                                    Toast.makeText(context, "Update Successfully", Toast.LENGTH_SHORT).show();
                                     finish();
+
+                                    Intent intent = new Intent(AreaFieldStafActivity.this, AreaFieldStafActivity.class);
+                                    startActivity(intent);
+
+                                    Toast.makeText(context, "Updated Successfully", Toast.LENGTH_SHORT).show();
 
                                 }
                             }, 2000);
@@ -439,13 +439,13 @@ public class AreaFieldStafActivity extends AppCompatActivity {
 
                                     parent_of_loading.setVisibility(View.GONE);
 
-//                                    Intent intent = new Intent(StepThreeActivity.this, StepFourActivity.class);
-//                                    intent.putExtra("listing_id", listing_id);
-//                                    startActivity(intent);
-
-                                    Toast.makeText(context, "Update Successfully", Toast.LENGTH_SHORT).show();
-
                                     finish();
+
+                                    Intent intent = new Intent(AreaFieldStafActivity.this, AreaFieldStafActivity.class);
+                                    startActivity(intent);
+
+                                    Toast.makeText(context, "Updated Successfully", Toast.LENGTH_SHORT).show();
+
 
                                 }
                             }, 2000);

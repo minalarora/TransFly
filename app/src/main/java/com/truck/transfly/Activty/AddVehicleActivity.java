@@ -57,6 +57,15 @@ public class AddVehicleActivity extends AppCompatActivity {
         parent_of_loading = findViewById(R.id.parent_of_loading);
         parent_of_loading.setVisibility(View.GONE);
 
+        findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                onBackPressed();
+
+            }
+        });
+
         activity.addRcImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,10 +97,17 @@ public class AddVehicleActivity extends AppCompatActivity {
                 }else if (TextUtils.isEmpty(activity.vehicleNumber.getText().toString())) {
 
                     activity.vehicleNumber.setError("Vehicle Number is Required");
+                    activity.vehicleNumber.requestFocus();
 
                 } else if (TextUtils.isEmpty(activity.rcnumber.getText().toString())) {
 
                     activity.rcnumber.setError("R.c Number is Required");
+                    activity.rcnumber.requestFocus();
+
+                } else if(TextUtils.isEmpty(activity.contactNumber.getText().toString())){
+
+                    activity.contactNumber.setError("Contact Number is Required");
+                    activity.contactNumber.requestFocus();
 
                 } else if (TextUtils.isEmpty(storageList.get(0))) {
 
@@ -187,6 +203,7 @@ public class AddVehicleActivity extends AppCompatActivity {
                     .addHeader("Authorization", PreferenceUtil.getData(AddVehicleActivity.this,"token"))
                     .addParameter("number", activity.vehicleNumber.getText().toString())
                     .addParameter("rc", activity.rcnumber.getText().toString())
+                    .addParameter("contact",activity.contactNumber.getText().toString())
                     .addParameter("vehiclename", activity.vehicleNameSpinner.getSelectedItem().toString())
                     .addParameter("tyres",activity.vehicleOwnTyres.getSelectedItem().toString())
                     .setUtf8Charset()

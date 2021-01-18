@@ -35,7 +35,6 @@ public class EmergencyContactVehicleActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_emergency_contact_vehicle);
         activity = DataBindingUtil.setContentView(this, R.layout.activity_emergency_contact_vehicle);
 
         retrofit = ApiClient.getRetrofitClient();
@@ -44,7 +43,7 @@ public class EmergencyContactVehicleActivity extends AppCompatActivity {
         }
 
         ResponseVehicleOwner responseVehicleOwner = ((TransflyApplication) getApplication()).getResponseVehicleOwner();
-        activity.phoneNumber.setText(responseVehicleOwner.getEmergencycontact());
+//        activity.phoneNumber.setText(responseVehicleOwner.getEmergencycontact());
 
         parent_of_loading = findViewById(R.id.parent_of_loading);
         parent_of_loading.setVisibility(View.GONE);
@@ -120,7 +119,7 @@ public class EmergencyContactVehicleActivity extends AppCompatActivity {
     private void setOnModels() {
 
         ResponseVehicleOwner responseVehicleOwner = ((TransflyApplication) getApplication()).getResponseVehicleOwner();
-        responseVehicleOwner.setEmergencycontact(activity.phoneNumber.getText().toString());
+//        responseVehicleOwner.setEmergencycontact(activity.phoneNumber.getText().toString());
         ((TransflyApplication) getApplication()).setResponseVehicleOwner(responseVehicleOwner);
 
     }

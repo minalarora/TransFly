@@ -2,10 +2,12 @@ package com.truck.transfly.Activty;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
@@ -36,21 +38,22 @@ public class ProfileActivity extends AppCompatActivity {
     private FrameLayout parent_of_loading;
     private Retrofit retrofit = null;
     private ApiEndpoints api = null;
+    private String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
+        activity = DataBindingUtil.setContentView(this, R.layout.activity_profile);
 
         retrofit = ApiClient.getRetrofitClient();
         if (retrofit != null) {
             api = retrofit.create(ApiEndpoints.class);
         }
 
-        parent_of_loading=findViewById(R.id.parent_of_loading);
-        parent_of_loading.setVisibility(View.GONE);
+        parent_of_loading = findViewById(R.id.parent_of_loading);
+        parent_of_loading.setVisibility(View.VISIBLE);
 
-        activity = DataBindingUtil.setContentView(this, R.layout.activity_profile);
+        validateToken();
 
         Intent intent = getIntent();
         String stringText = intent.getStringExtra("stringText");
@@ -102,24 +105,24 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(stringText.equals("vehicleOwner")){
+                if (stringText.equals("vehicleOwner")) {
 
-                    Intent vehicleKyc=new Intent(ProfileActivity.this,VehicleOwnerKycActivity.class);
+                    Intent vehicleKyc = new Intent(ProfileActivity.this, VehicleOwnerKycActivity.class);
                     startActivity(vehicleKyc);
 
-                } else if(stringText.equals("fieldStaff")){
+                } else if (stringText.equals("fieldStaff")) {
 
-                    Intent fieldStaffKyc=new Intent(ProfileActivity.this,AreaFieldStafActivity.class);
+                    Intent fieldStaffKyc = new Intent(ProfileActivity.this, AreaFieldStafActivity.class);
                     startActivity(fieldStaffKyc);
 
-                } else if(stringText.equals("areaManager")){
+                } else if (stringText.equals("areaManager")) {
 
-                    Intent areamanager=new Intent(ProfileActivity.this,AreaFieldStafActivity.class);
+                    Intent areamanager = new Intent(ProfileActivity.this, AreaFieldStafActivity.class);
                     startActivity(areamanager);
 
-                } else if(stringText.equals("transporter")) {
+                } else if (stringText.equals("transporter")) {
 
-                    Intent transporter=new Intent(ProfileActivity.this,TransporterKycActivity.class);
+                    Intent transporter = new Intent(ProfileActivity.this, TransporterKycActivity.class);
                     startActivity(transporter);
 
                 }
@@ -127,7 +130,11 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        if (stringText.equals("vehicleOwner")) {
+    }
+
+    private void CheckKycParent(String stringText) {
+
+        if (stringText.equals("vehicleowner")) {
 
             ResponseVehicleOwner responseVehicleOwner = ((TransflyApplication) getApplication()).getResponseVehicleOwner();
 
@@ -147,7 +154,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
 
 
-        } else if (stringText.equals("fieldStaff")) {
+        } else if (stringText.equals("fieldstaff")) {
 
             ResponseFieldStaff responseVehicleOwner = ((TransflyApplication) getApplication()).getResponseFieldStaff();
 
@@ -164,7 +171,7 @@ public class ProfileActivity extends AppCompatActivity {
 
             }
 
-        } else if (stringText.equals("areaManager")) {
+        } else if (stringText.equals("areamanager")) {
 
             ResponseAreaManager responseVehicleOwner = ((TransflyApplication) getApplication()).getResponseAreaManager();
 
@@ -201,6 +208,7 @@ public class ProfileActivity extends AppCompatActivity {
         }
 
     }
+
 
     private void updateMobileNumber() {
 
@@ -328,6 +336,170 @@ public class ProfileActivity extends AppCompatActivity {
                 break;
 
         }
+
+    }
+
+    private void validateToken() {
+        try {
+
+            parent_of_loading.setVisibility(View.VISIBLE);
+
+            token = PreferenceUtil.getData(ProfileActivity.this, "token");
+
+            String type = this.token.split(":")[0];
+            switch (type) {
+                case "vehicleowner": {
+
+                    api.getVehicleOwner(this.token).enqueue(new Callback<ResponseVehicleOwner>() {
+                        @Override
+                        public void onResponse(Call<ResponseVehicleOwner> call, Response<ResponseVehicleOwner> response) {
+
+                            parent_of_loading.setVisibility(View.GONE);
+
+                            if (response.code() == 200) {
+///
+                                ResponseVehicleOwner responseVehicleOwner = response.body();
+                                ((TransflyApplication) getApplication()).setResponseVehicleOwner(responseVehicleOwner);
+
+                                CheckKycParent(type);
+
+                                setStatusOnProfile(String.valueOf(responseVehicleOwner.getStatus()));
+
+
+                            } else {
+                                serverError();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseVehicleOwner> call, Throwable t) {
+                            serverError();
+                        }
+                    });
+
+                    break;
+                }
+                case "transporter": {
+                    api.getTransporter(this.token).enqueue(new Callback<ResponseTransporter>() {
+                        @Override
+                        public void onResponse(Call<ResponseTransporter> call, Response<ResponseTransporter> response) {
+
+                            parent_of_loading.setVisibility(View.GONE);
+
+                            if (response.code() == 200) {
+
+                                ResponseTransporter responseTransporter = response.body();
+                                ((TransflyApplication) getApplication()).setResponseTransporterOwner(responseTransporter);
+
+                                CheckKycParent(type);
+
+                                setStatusOnProfile(String.valueOf(responseTransporter.getStatus()));
+
+                            } else {
+
+                                serverError();
+                            }
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseTransporter> call, Throwable t) {
+                            serverError();
+                        }
+                    });
+                    break;
+                }
+                case "areamanager": {
+                    api.getAreaManager(this.token).enqueue(new Callback<ResponseAreaManager>() {
+                        @Override
+                        public void onResponse(Call<ResponseAreaManager> call, Response<ResponseAreaManager> response) {
+
+                            parent_of_loading.setVisibility(View.GONE);
+
+                            if (response.code() == 200) {
+
+                                ResponseAreaManager responseAreaManager = response.body();
+                                ((TransflyApplication) getApplication()).setResponseAreaManager(responseAreaManager);
+
+                                CheckKycParent(type);
+
+                                setStatusOnProfile(String.valueOf(responseAreaManager.getStatus()));
+
+                            } else {
+                                serverError();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseAreaManager> call, Throwable t) {
+                            serverError();
+                        }
+                    });
+                    break;
+                }
+                case "fieldstaff": {
+                    api.getFieldStaff(this.token).enqueue(new Callback<ResponseFieldStaff>() {
+                        @Override
+                        public void onResponse(Call<ResponseFieldStaff> call, Response<ResponseFieldStaff> response) {
+
+                            parent_of_loading.setVisibility(View.GONE);
+
+                            if (response.code() == 200) {
+
+                                ResponseFieldStaff responseFieldStaff = response.body();
+                                ((TransflyApplication) getApplication()).setResponseFieldStaff(responseFieldStaff);
+
+                                CheckKycParent(type);
+
+                                setStatusOnProfile(String.valueOf(responseFieldStaff.getStatus()));
+
+                            } else {
+                                serverError();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseFieldStaff> call, Throwable t) {
+                            serverError();
+                        }
+                    });
+                    break;
+                }
+                default: {
+                    serverError();
+                }
+            }
+        } catch (Exception e) {
+
+
+
+        }
+    }
+
+    private void setStatusOnProfile(@NonNull String responseFieldStaff) {
+
+        if(responseFieldStaff.equals("0")){
+
+            activity.kycStatus.setText("PENDING");
+
+        } else if(responseFieldStaff.equals("1")){
+
+            activity.kycStatus.setText("UNDER PROCESS");
+
+        } else {
+
+            activity.kycStatus.setText("COMPLETED");
+
+        }
+
+
+    }
+
+    private void serverError() {
+
+        Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+
+        parent_of_loading.setVisibility(View.GONE);
 
     }
 
