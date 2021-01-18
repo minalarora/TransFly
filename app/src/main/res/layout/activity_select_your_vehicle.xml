@@ -38,6 +38,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="10dp"
                     android:layout_toEndOf="@+id/back"
+                    android:id="@+id/toolbarText"
                     android:fontFamily="@font/poppins"
                     android:text="Create Booking"
                     android:textColor="@android:color/black"
@@ -81,6 +82,7 @@
                         android:layout_centerVertical="true"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="10dp"
+                        android:layout_marginTop="@dimen/_12ssp"
                         android:id="@+id/no_vehicle_found"
                         android:layout_centerInParent="true"
                         android:fontFamily="@font/poppins"
@@ -151,13 +153,13 @@
                         android:src="@drawable/estimate_rate" />
 
                     <TextView
+                        android:id="@+id/rate"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="15dp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="@dimen/_15ssp"
                         android:fontFamily="@font/poppins"
                         android:text="5000"
-                        android:id="@+id/rate"
                         android:textColor="@color/black"
                         android:textSize="13dp" />
 

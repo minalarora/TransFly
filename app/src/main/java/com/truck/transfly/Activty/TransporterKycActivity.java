@@ -128,23 +128,23 @@ public class TransporterKycActivity extends AppCompatActivity {
 
                 int position = activity.registerCategory.getSelectedItemPosition();
 
-                if(activity.registerCategory.getSelectedItem().toString().equals("aadhaar")){
+                if(activity.registerCategory.getSelectedItem().toString().toLowerCase().equals("aadhaar")){
 
                     callValidationAndMultipart(activity.enterTdsNumber.getText().toString(),"aadhaar","aadhaarimage","Enter Aadhar Number");
 
-                } else if(activity.registerCategory.getSelectedItem().toString().equals("pan")){
+                } else if(activity.registerCategory.getSelectedItem().toString().toLowerCase().equals("pan")){
 
                     callValidationAndMultipart(activity.enterTdsNumber.getText().toString(),"pan","panimage","Enter Pan Number");
 
-                } else if(activity.registerCategory.getSelectedItem().toString().equals("gst")) {
+                } else if(activity.registerCategory.getSelectedItem().toString().toLowerCase().equals("gst")) {
 
                     callValidationAndMultipart(activity.enterTdsNumber.getText().toString(),"gst","gstimage","Enter Gst Number");
 
-                }else if(activity.registerCategory.getSelectedItem().toString().equals("sta")) {
+                }else if(activity.registerCategory.getSelectedItem().toString().toLowerCase().equals("sta")) {
 
-                    callValidationAndMultipart(activity.enterTdsNumber.getText().toString(),"sta","staimage","Enter Sta Number");
+                    callValidationAndMultipart(activity.enterTdsNumber.getText().toString().toString(),"sta","staimage","Enter Sta Number");
 
-                }else if(activity.registerCategory.getSelectedItem().toString().equals("mininglicense")) {
+                }else if(activity.registerCategory.getSelectedItem().toString().toLowerCase().equals("mininglicense")) {
 
                     callValidationAndMultipart(activity.enterTdsNumber.getText().toString(),"mininglicense","mininglicenseimage","Enter Mining License Number");
 
@@ -164,23 +164,23 @@ public class TransporterKycActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                if(activity.registerCategory.getSelectedItem().toString().equals("aadhaar")){
+                if(activity.registerCategory.getSelectedItem().toString().toLowerCase().equals("aadhaar")){
 
                     activity.tdsEditLayout.setHint("Enter Aadhar Number");
 
-                } else if(activity.registerCategory.getSelectedItem().toString().equals("pan")){
+                } else if(activity.registerCategory.getSelectedItem().toString().toLowerCase().equals("pan")){
 
                     activity.tdsEditLayout.setHint("Enter Pan Number");
 
-                } else if(activity.registerCategory.getSelectedItem().toString().equals("gst")) {
+                } else if(activity.registerCategory.getSelectedItem().toString().toLowerCase().equals("gst")) {
 
                     activity.tdsEditLayout.setHint("Enter Gst Number");
 
-                }else if(activity.registerCategory.getSelectedItem().toString().equals("sta")) {
+                }else if(activity.registerCategory.getSelectedItem().toString().toLowerCase().equals("sta")) {
 
                     activity.tdsEditLayout.setHint("Enter STA Number");
 
-                }else if(activity.registerCategory.getSelectedItem().toString().equals("mininglicense")) {
+                }else if(activity.registerCategory.getSelectedItem().toString().toLowerCase().equals("mininglicense")) {
 
                     activity.tdsEditLayout.setHint("Enter Mining License Number");
                 }
@@ -224,7 +224,7 @@ public class TransporterKycActivity extends AppCompatActivity {
 
                     Type collectionType = new TypeToken<ArrayList<String>>(){}.getType();
                     try {
-                        pendingList.addAll(new Gson().fromJson(response.body().string().toString(),collectionType));
+                        pendingList.addAll(new Gson().fromJson(response.body().string().toString().toUpperCase(),collectionType));
                     } catch (IOException e) {
 
                     }

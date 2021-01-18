@@ -45,6 +45,7 @@ class ResponseBooking() : Parcelable {
         vehiclename = parcel.readString()
         vehicleowner = parcel.readString()
         vehicleownermobile = parcel.readString()
+        owner = parcel.readString()
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -57,6 +58,7 @@ class ResponseBooking() : Parcelable {
         parcel.writeString(vehiclename)
         parcel.writeString(vehicleowner)
         parcel.writeString(vehicleownermobile)
+        parcel.writeString(owner)
     }
 
     override fun describeContents(): Int {
@@ -72,4 +74,5 @@ class ResponseBooking() : Parcelable {
             return arrayOfNulls(size)
         }
     }
+
 }

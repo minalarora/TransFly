@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,20 +18,34 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.truck.transfly.Adapter.ViewPagerAdapter;
 import com.truck.transfly.Frament.ShowBooking;
 import com.truck.transfly.Frament.ShowInvoiceFragment;
 import com.truck.transfly.Model.ResponseAreaManager;
+import com.truck.transfly.Model.ResponseFirebase;
 import com.truck.transfly.R;
+import com.truck.transfly.utils.ApiClient;
+import com.truck.transfly.utils.ApiEndpoints;
 import com.truck.transfly.utils.PreferenceUtil;
 import com.truck.transfly.utils.TransflyApplication;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class AreaManagerActivity extends AppCompatActivity {
 
     private ImageView viewById;
     private DrawerLayout drawerLayout;
+    private Retrofit retrofit;
+    private ApiEndpoints api;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +53,13 @@ public class AreaManagerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_area_manager2);
 
         TabLayout tabLayout = findViewById(R.id.tabLayout);
+
+        retrofit = ApiClient.getRetrofitClient();
+        if(retrofit!=null)
+        {
+            api = retrofit.create(ApiEndpoints.class);
+        }
+
 
         ViewPager viewPager = findViewById(R.id.viewpager);
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), 0);
@@ -48,6 +70,26 @@ public class AreaManagerActivity extends AppCompatActivity {
 
         NavigationView navigationView = findViewById(R.id.nav_view);
 //        navigationView.setNavigationItemSelectedListener(map);
+
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w("TAG", "Fetching FCM registration token failed", task.getException());
+                            return;
+                        }
+
+                        // Get new FCM registration token
+                        String token = task.getResult();
+
+                        ResponseFirebase responseFirebase=new ResponseFirebase();
+                        responseFirebase.setFirebase(token);
+
+                        updateFirebase(PreferenceUtil.getData(AreaManagerActivity.this,"token"),responseFirebase);
+
+                    }
+                });
 
         View headerLayout = navigationView.getHeaderView(0);
         TextView customerName = headerLayout.findViewById(R.id.customer_name);
@@ -113,6 +155,21 @@ public class AreaManagerActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void updateFirebase(String token, ResponseFirebase firebase)
+    {
+        api.updateFirebase(token,firebase).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
     }
 
     private void navigationViewListener(NavigationView navigationView) {
@@ -182,8 +239,17 @@ public class AreaManagerActivity extends AppCompatActivity {
 
                         break;
 
+                    case R.id.rate_etl:
+
+                        startActivity(new Intent(AreaManagerActivity.this,SearchBarActivity.class));
+
+                        break;
+
                     case R.id.contact_us:
 
+                        String phone = "7847072064";
+                        Intent phoneCall = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null));
+                        startActivity(phoneCall);
 
                         break;
 

@@ -100,10 +100,23 @@
 
                         </LinearLayout>
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:id="@+id/date_created"
+                            android:layout_marginStart="@dimen/_15ssp"
+                            android:fontFamily="@font/poppins"
+                            android:text="Posted at 21 Dec, 10:12 AM | Expires in 45 hours"
+                            android:textColor="#8c8c8c"
+                            android:textSize="13dp" />
+
+
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
                             android:layout_marginStart="@dimen/_15ssp"
+                            android:layout_marginTop="@dimen/_7ssp"
                             android:layout_marginEnd="@dimen/_15ssp"
                             android:background="#dcdcdc" />
 

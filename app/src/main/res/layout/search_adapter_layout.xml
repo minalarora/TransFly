@@ -39,71 +39,71 @@
 
         </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="@dimen/_5ssp"
-            android:layout_marginStart="@dimen/_15ssp"
-            android:layout_marginEnd="@dimen/_15ssp"
-            android:background="#dcdcdc" />
+<!--        <View-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:layout_marginTop="@dimen/_5ssp"-->
+<!--            android:layout_marginStart="@dimen/_15ssp"-->
+<!--            android:layout_marginEnd="@dimen/_15ssp"-->
+<!--            android:background="#dcdcdc" />-->
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_height="wrap_content">
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:layout_height="wrap_content">-->
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_12ssp"
-            android:layout_marginStart="@dimen/_13ssp"
-            android:orientation="horizontal">
+<!--        <LinearLayout-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="@dimen/_12ssp"-->
+<!--            android:layout_marginStart="@dimen/_13ssp"-->
+<!--            android:orientation="horizontal">-->
 
-            <ImageView
-                android:layout_width="@dimen/_20ssp"
-                android:layout_height="@dimen/_20ssp"
-                android:src="@drawable/estimate_rate" />
+<!--            <ImageView-->
+<!--                android:layout_width="@dimen/_20ssp"-->
+<!--                android:layout_height="@dimen/_20ssp"-->
+<!--                android:src="@drawable/estimate_rate" />-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="@dimen/_15ssp"
-                android:fontFamily="@font/poppins"
-                android:id="@+id/rate"
-                android:text="400"
-                android:textColor="@color/black"
-                android:textSize="13dp" />
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center_vertical"-->
+<!--                android:layout_marginStart="@dimen/_15ssp"-->
+<!--                android:fontFamily="@font/poppins"-->
+<!--                android:id="@+id/rate"-->
+<!--                android:text="400"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="13dp" />-->
 
-        </LinearLayout>
+<!--        </LinearLayout>-->
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_12ssp"
-            android:layout_marginStart="@dimen/_13ssp"
-            android:orientation="horizontal">
+<!--        <LinearLayout-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="@dimen/_12ssp"-->
+<!--            android:layout_marginStart="@dimen/_13ssp"-->
+<!--            android:orientation="horizontal">-->
 
-            <ImageView
-                android:layout_width="@dimen/_20ssp"
-                android:layout_height="@dimen/_20ssp"
-                android:src="@drawable/loading_time" />
+<!--            <ImageView-->
+<!--                android:layout_width="@dimen/_20ssp"-->
+<!--                android:layout_height="@dimen/_20ssp"-->
+<!--                android:src="@drawable/loading_time" />-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="@dimen/_15ssp"
-                android:id="@+id/etl"
-                android:fontFamily="@font/poppins"
-                android:text="45 min"
-                android:textColor="@color/black"
-                android:textSize="13dp" />
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center_vertical"-->
+<!--                android:layout_marginStart="@dimen/_15ssp"-->
+<!--                android:id="@+id/etl"-->
+<!--                android:fontFamily="@font/poppins"-->
+<!--                android:text="45 min"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="13dp" />-->
 
 
-        </LinearLayout>
+<!--        </LinearLayout>-->
 
-        </LinearLayout>
+<!--        </LinearLayout>-->
 
     </LinearLayout>
 

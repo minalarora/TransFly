@@ -151,6 +151,10 @@ public class ProfileActivity extends AppCompatActivity {
 
                 activity.completeKycParent.setVisibility(View.VISIBLE);
 
+            } else if(responseVehicleOwner.getStatus()==1){
+
+                activity.pendingKycParent.setVisibility(View.VISIBLE);
+
             }
 
 
@@ -165,9 +169,15 @@ public class ProfileActivity extends AppCompatActivity {
             String substring = responseVehicleOwner.getName().substring(0, 2);
             activity.profileTwo.setText(substring);
 
+            activity.panNumber.setText(responseVehicleOwner.getPan());
+
             if(responseVehicleOwner.getStatus()==0){
 
                 activity.completeKycParent.setVisibility(View.VISIBLE);
+
+            } else if(responseVehicleOwner.getStatus()==1){
+
+                activity.pendingKycParent.setVisibility(View.VISIBLE);
 
             }
 
@@ -182,9 +192,15 @@ public class ProfileActivity extends AppCompatActivity {
             String substring = responseVehicleOwner.getName().substring(0, 2);
             activity.profileTwo.setText(substring);
 
+            activity.panNumber.setText(responseVehicleOwner.getPan());
+
             if(responseVehicleOwner.getStatus()==0){
 
                 activity.completeKycParent.setVisibility(View.VISIBLE);
+
+            } else if(responseVehicleOwner.getStatus()==1){
+
+                activity.pendingKycParent.setVisibility(View.VISIBLE);
 
             }
 
@@ -199,9 +215,15 @@ public class ProfileActivity extends AppCompatActivity {
             String substring = responseVehicleOwner.getName().substring(0, 2);
             activity.profileTwo.setText(substring);
 
+            activity.panNumber.setText(responseVehicleOwner.getPan());
+
             if(responseVehicleOwner.getStatus()==0){
 
                 activity.completeKycParent.setVisibility(View.VISIBLE);
+
+            } else if(responseVehicleOwner.getStatus()==1){
+
+                activity.pendingKycParent.setVisibility(View.VISIBLE);
 
             }
 

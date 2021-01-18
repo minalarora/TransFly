@@ -86,6 +86,8 @@ import com.truck.transfly.Model.PositionModel;
 import com.truck.transfly.Model.RequestArea;
 import com.truck.transfly.Model.RequestCoordinates;
 import com.truck.transfly.Model.ResponseBanner;
+import com.truck.transfly.Model.ResponseFirebase;
+import com.truck.transfly.Model.ResponseLoading;
 import com.truck.transfly.Model.ResponseMine;
 import com.truck.transfly.Model.ResponseVehicleOwner;
 import com.truck.transfly.Model.SliderModel;
@@ -212,6 +214,28 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
+
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w("TAG", "Fetching FCM registration token failed", task.getException());
+                            return;
+                        }
+
+                        // Get new FCM registration token
+                        String token = task.getResult();
+
+                        ResponseFirebase responseFirebase=new ResponseFirebase();
+                        responseFirebase.setFirebase(token);
+
+                        updateFirebase(PreferenceUtil.getData(HomeActivity.this,"token"),responseFirebase);
+
+                    }
+                });
+
+
         retrofit = ApiClient.getRetrofitClient();
         if (retrofit != null) {
             api = retrofit.create(ApiEndpoints.class);
@@ -265,7 +289,11 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                     case R.id.new_booking:
 
-                        startActivity(new Intent(HomeActivity.this, SearchBarActivity.class));
+                        Intent searchBarAcivity = new Intent(HomeActivity.this, SearchBarActivity.class);
+
+                        searchBarAcivity.putExtra("vehicle",true);
+
+                        startActivity(searchBarAcivity);
 
                         return false;
 
@@ -291,9 +319,11 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(HomeActivity.this, SearchBarActivity.class);
+                Intent searchBarAcivity = new Intent(HomeActivity.this, SearchBarActivity.class);
 
-                startActivity(intent);
+                searchBarAcivity.putExtra("vehicle",true);
+
+                startActivity(searchBarAcivity);
 
             }
         });
@@ -361,7 +391,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                             for (ResponseMine responseMine : allMineOfSingleArea) {
 
-                                showMarkerOfArea(Double.parseDouble(responseMine.getLatitude()), Double.parseDouble(responseMine.getLongitude()), responseMine);
+                                showMarkerOfArea(Double.parseDouble(responseMine.getLatitude()), Double.parseDouble(responseMine.getLongitude()), responseMine,loading);
 
 
                             }
@@ -530,8 +560,8 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                         Set<RequestArea> areass = new HashSet<>();
                         for (ResponseMine mine : mines) {
                             areas.put(mine.getArea(), new RequestArea(mine.getArea(), mine.getArealatitude(), mine.getArealongitude(), mine.getAreaimageurl()));
-                            for (String loading : mine.getLoading()) {
-                                loadings.add(loading);
+                            for (ResponseLoading loading : mine.getLoading()) {
+                                loadings.add(loading.getLoadingName());
                             }
                         }
 
@@ -614,8 +644,6 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         viewPager = findViewById(R.id.viewPager);
         viewPager.setAdapter(fullMetalAdapter);
 
-        handler.postDelayed(runnable, SPEED_SCROLL);
-
     }
 
     private DisplayMetrics getDisplayMetrics() {
@@ -624,6 +652,21 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         display.getMetrics(metrics);
 
         return metrics;
+    }
+
+    private void updateFirebase(String token, ResponseFirebase firebase)
+    {
+        api.updateFirebase(token,firebase).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
     }
 
     private void getNearmeArea(String token, RequestCoordinates coordinates) {
@@ -663,7 +706,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                             for (ResponseMine responseMine : allMineOfSingleArea) {
 
-                                showMarkerOfArea(Double.parseDouble(responseMine.getLatitude()), Double.parseDouble(responseMine.getLongitude()), responseMine);
+                                showMarkerOfArea(Double.parseDouble(responseMine.getLatitude()), Double.parseDouble(responseMine.getLongitude()), responseMine,loading);
 
                             }
 
@@ -716,8 +759,8 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         ArrayList<ResponseMine> selectedmines = new ArrayList<>();
         for (ResponseMine m : mines) {
             if (m.getArea().equalsIgnoreCase(area)) {
-                for (String l : m.getLoading()) {
-                    if (l.equalsIgnoreCase(loading)) {
+                for (ResponseLoading l : m.getLoading()) {
+                    if (l.getLoadingName().equalsIgnoreCase(loading)) {
                         selectedmines.add(m);
                     }
                 }
@@ -810,6 +853,9 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                     case R.id.contact_us:
 
+                        String phone = "7847072064";
+                        Intent phoneCall = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null));
+                        startActivity(phoneCall);
 
                         break;
 
@@ -1049,10 +1095,24 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                         public void onClick() {
 
                             Intent intent = new Intent(HomeActivity.this, SelectYourVehicleActivity.class);
+                            ArrayList<ResponseLoading> arrayList = responseMine.getLoading();
+                            int rate = 5;
+                            int etl = 0;
+                            for(ResponseLoading l: arrayList)
+                            {
+                                if(l.getLoadingName().equalsIgnoreCase(loading))
+                                {
+                                    rate = l.getRate();
+                                    etl = l.getEtl();
+
+                                }
+                            }
 
                             intent.putExtra("mineid", responseMine.getId());
                             intent.putExtra("minename", responseMine.getName());
                             intent.putExtra("loading", loading);
+                            intent.putExtra("rate", rate);
+                            intent.putExtra("etl", etl);
 
                             startActivity(intent);
 
@@ -1067,7 +1127,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
-    private void showMarkerOfArea(double latituteOfTajMahal, double longitudeOfTajMahal, ResponseMine responseMine) {
+    private void showMarkerOfArea(double latituteOfTajMahal, double longitudeOfTajMahal, ResponseMine responseMine,String loadingname) {
 
         LatLng latLng = new LatLng(latituteOfTajMahal, longitudeOfTajMahal);
 
@@ -1079,7 +1139,19 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         markerOptions.snippet("This is my spot!");
         Marker marker = mGoogleMap.addMarker(markerOptions);
 
-        marker.setIcon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon("Rate : " + responseMine.getRate() + "\n" + "Etl : " + responseMine.getEtl())));
+        ArrayList<ResponseLoading> arrayList = responseMine.getLoading();
+        int rate = 5;
+        int etl = 0;
+        for(ResponseLoading l: arrayList)
+        {
+            if(l.getLoadingName().equalsIgnoreCase(loadingname))
+            {
+                rate = l.getRate();
+                etl = l.getEtl();
+
+            }
+        }
+        marker.setIcon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon("Rate : " + rate + "\n" + "Etl : " + etl)));
 
         marker.setTag(responseMine);
 

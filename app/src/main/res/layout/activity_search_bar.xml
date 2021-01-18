@@ -139,6 +139,7 @@
                     android:layout_centerInParent="true"
                     android:fontFamily="@font/poppinsbold"
                     android:text="Create Booking"
+                    android:id="@+id/bookingButton"
                     android:textColor="@color/white"
                     android:textSize="14dp" />
 

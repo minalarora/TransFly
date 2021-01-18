@@ -21,6 +21,11 @@
             android:icon="@drawable/ic_action_update_bank_details"/>
 
         <item
+            android:id="@+id/rate_etl"
+            android:title="Rate And ETL"
+            android:icon="@drawable/estimate_rate"/>
+
+        <item
             android:id="@+id/ticket_drawer"
             android:title="On-Road Assistance?"
             android:icon="@drawable/ic_action_complain_text"/>

@@ -23,6 +23,7 @@ import com.truck.transfly.Model.ResponseAreaManager;
 import com.truck.transfly.Model.ResponseBanner;
 import com.truck.transfly.Model.ResponseBooking;
 import com.truck.transfly.Model.ResponseFieldStaff;
+import com.truck.transfly.Model.ResponseFirebase;
 import com.truck.transfly.Model.ResponseMine;
 import com.truck.transfly.Model.ResponseReferral;
 import com.truck.transfly.Model.ResponseResale;
@@ -81,6 +82,20 @@ public class PlaygroundActivity extends AppCompatActivity {
 
     }
 
+    private void updateFirebase(String token,ResponseFirebase firebase)
+    {
+        api.updateFirebase(token,firebase).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+    }
     private void createVehicleOwner(RequestUser user) {
 
 
@@ -284,71 +299,71 @@ public class PlaygroundActivity extends AppCompatActivity {
 
     //top level
 
-    private void getAllMineVehicleOwner(String token) {
-        api.getAllMineVehicleOwner(token).enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.code() == 200) {
-
-                    ArrayList<ResponseMine> mines = new ArrayList<>();
-
-                    Type collectionType = new TypeToken<ArrayList<ResponseMine>>() {
-                    }.getType();
-                    try {
-                        mines.addAll(new Gson().fromJson(response.body().string().toString(), collectionType));
-                    } catch (IOException e) {
-
-                    }
-                    if (mines.isEmpty()) {
-                        Log.d("minal", "mine not found");
-                    } else {
-                        Log.d("minal", mines.toString());
-                        //for area name
-                        HashMap<String, RequestArea> areas = new HashMap<>();
-                        //for destination
-                        Set<String> loadings = new HashSet<>();
-                        Set<RequestArea> areass = new HashSet<>();
-                        for (ResponseMine mine : mines) {
-                            areas.put(mine.getArea(), new RequestArea(mine.getArea(), mine.getArealatitude(), mine.getArealongitude(), mine.getAreaimageurl()));
-                            for (String loading : mine.getLoading()) {
-                                loadings.add(loading);
-                            }
-                        }
-
-                        for (Map.Entry<String, RequestArea> a : areas.entrySet()) {
-                            areass.add(a.getValue());
-                        }
-
-                        ArrayList<String> loadinglist = new ArrayList<>(loadings);
-                        ArrayList<RequestArea> arealist = new ArrayList<>(areass);
-
-                    }
-
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-
-            }
-        });
-    }
+//    private void getAllMineVehicleOwner(String token) {
+//        api.getAllMineVehicleOwner(token).enqueue(new Callback<ResponseBody>() {
+//            @Override
+//            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+//                if (response.code() == 200) {
+//
+//                    ArrayList<ResponseMine> mines = new ArrayList<>();
+//
+//                    Type collectionType = new TypeToken<ArrayList<ResponseMine>>() {
+//                    }.getType();
+//                    try {
+//                        mines.addAll(new Gson().fromJson(response.body().string().toString(), collectionType));
+//                    } catch (IOException e) {
+//
+//                    }
+//                    if (mines.isEmpty()) {
+//                        Log.d("minal", "mine not found");
+//                    } else {
+//                        Log.d("minal", mines.toString());
+//                        //for area name
+//                        HashMap<String, RequestArea> areas = new HashMap<>();
+//                        //for destination
+//                        Set<String> loadings = new HashSet<>();
+//                        Set<RequestArea> areass = new HashSet<>();
+//                        for (ResponseMine mine : mines) {
+//                            areas.put(mine.getArea(), new RequestArea(mine.getArea(), mine.getArealatitude(), mine.getArealongitude(), mine.getAreaimageurl()));
+//                            for (String loading : mine.getLoading()) {
+//                                loadings.add(loading);
+//                            }
+//                        }
+//
+//                        for (Map.Entry<String, RequestArea> a : areas.entrySet()) {
+//                            areass.add(a.getValue());
+//                        }
+//
+//                        ArrayList<String> loadinglist = new ArrayList<>(loadings);
+//                        ArrayList<RequestArea> arealist = new ArrayList<>(areass);
+//
+//                    }
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ResponseBody> call, Throwable t) {
+//
+//            }
+//        });
+//    }
 
     ArrayList<ResponseMine> mines = new ArrayList<>();
 
-    private ArrayList<ResponseMine> getAllMineOfSingleArea(String area, String loading) {
-        ArrayList<ResponseMine> selectedmines = new ArrayList<>();
-        for (ResponseMine m : mines) {
-            if (m.getArea().equalsIgnoreCase(area)) {
-                for (String l : m.getLoading()) {
-                    if (l.equalsIgnoreCase(loading)) {
-                        selectedmines.add(m);
-                    }
-                }
-            }
-        }
-        return mines;
-    }
+//    private ArrayList<ResponseMine> getAllMineOfSingleArea(String area, String loading) {
+//        ArrayList<ResponseMine> selectedmines = new ArrayList<>();
+//        for (ResponseMine m : mines) {
+//            if (m.getArea().equalsIgnoreCase(area)) {
+//                for (String l : m.getLoading()) {
+//                    if (l.equalsIgnoreCase(loading)) {
+//                        selectedmines.add(m);
+//                    }
+//                }
+//            }
+//        }
+//        return mines;
+//    }
 
 
     private void getAllVehicles(String token) {
@@ -1052,9 +1067,9 @@ public class PlaygroundActivity extends AppCompatActivity {
         return selectedlist;
     }
 
-    private ArrayList<String> getLoading(ResponseMine mine) {
-        return mine.getLoading();
-    }
+//    private ArrayList<String> getLoading(ResponseMine mine) {
+//        return mine.getLoading();
+//    }
 
 
 }

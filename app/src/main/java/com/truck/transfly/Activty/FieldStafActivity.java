@@ -22,12 +22,16 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.truck.transfly.Adapter.FieldStafAdapter;
 import com.truck.transfly.Model.ResponseBooking;
 import com.truck.transfly.Model.ResponseFieldStaff;
+import com.truck.transfly.Model.ResponseFirebase;
 import com.truck.transfly.Model.ResponseTransporter;
 import com.truck.transfly.R;
 import com.truck.transfly.utils.ApiClient;
@@ -65,6 +69,13 @@ public class FieldStafActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        retrofit = ApiClient.getRetrofitClient();
+        if(retrofit!=null)
+        {
+            api = retrofit.create(ApiEndpoints.class);
+        }
+
+
         NavigationView navigationView = findViewById(R.id.nav_view);
 //        navigationView.setNavigationItemSelectedListener(map);
 
@@ -84,33 +95,33 @@ public class FieldStafActivity extends AppCompatActivity {
             }
         });
 
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w("TAG", "Fetching FCM registration token failed", task.getException());
+                            return;
+                        }
+
+                        // Get new FCM registration token
+                        String token = task.getResult();
+
+                        ResponseFirebase responseFirebase=new ResponseFirebase();
+                        responseFirebase.setFirebase(token);
+
+                        updateFirebase(PreferenceUtil.getData(FieldStafActivity.this,"token"),responseFirebase);
+
+                    }
+                });
+
         ResponseFieldStaff responseFieldStaff = ((TransflyApplication) getApplication()).getResponseFieldStaff();
 
         Menu menu = navigationView.getMenu();
         MenuItem kyc_drawer = menu.findItem(R.id.kyc_drawer);
 
-        if(responseFieldStaff.getStatus()==0){
-
-            kyc_drawer.setTitle("KYC Details (Pending)");
-
-        } else if(responseFieldStaff.getStatus()==1){
-
-            kyc_drawer.setTitle("KYC Details (Under Process)");
-
-        } else {
-
-            kyc_drawer.setTitle("KYC Details (Completed)");
-
-        }
-
         customerName.setText(responseFieldStaff.getName());
         number.setText(responseFieldStaff.getMobile());
-
-        retrofit = ApiClient.getRetrofitClient();
-        if(retrofit!=null)
-        {
-            api = retrofit.create(ApiEndpoints.class);
-        }
 
         parent_of_loading = findViewById(R.id.parent_of_loading);
         parent_of_loading.setVisibility(View.GONE);
@@ -170,6 +181,21 @@ public class FieldStafActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    private void updateFirebase(String token, ResponseFirebase firebase)
+    {
+        api.updateFirebase(token,firebase).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
     }
 
     @Override
@@ -247,8 +273,17 @@ public class FieldStafActivity extends AppCompatActivity {
 
                         break;
 
+                    case R.id.rate_etl:
+
+                        startActivity(new Intent(FieldStafActivity.this,SearchBarActivity.class));
+
+                        break;
+
                     case R.id.contact_us:
 
+                        String phone = "7847072064";
+                        Intent phoneCall = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null));
+                        startActivity(phoneCall);
 
                         break;
 

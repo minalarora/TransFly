@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +25,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.truck.transfly.Adapter.SearchAdapter;
 import com.truck.transfly.Model.RequestArea;
+import com.truck.transfly.Model.ResponseLoading;
 import com.truck.transfly.Model.ResponseMine;
 import com.truck.transfly.R;
 import com.truck.transfly.utils.ApiClient;
@@ -68,6 +70,7 @@ public class SearchBarActivity extends AppCompatActivity {
     private String selectedSweet;
     private SearchAdapter searchAdapter;
     private ResponseMine responseMineGlobal;
+    private boolean vehicleOwner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +80,20 @@ public class SearchBarActivity extends AppCompatActivity {
         retrofit = ApiClient.getRetrofitClient();
         if (retrofit != null) {
             api = retrofit.create(ApiEndpoints.class);
+        }
+
+        TextView bookingButton =findViewById(R.id.bookingButton);
+
+        Intent intent = getIntent();
+
+        if(intent!=null){
+
+            vehicleOwner = intent.getBooleanExtra("vehicle",false);
+
+            if(!vehicleOwner)
+                bookingButton.setText("Check Rate And ETL");
+
+
         }
 
         findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
@@ -148,15 +165,29 @@ public class SearchBarActivity extends AppCompatActivity {
 
                     } else {
 
-                        Intent intent = new Intent(SearchBarActivity.this, SelectYourVehicleActivity.class);
 
-                        intent.putExtra("mineid",responseMineGlobal.getId());
-                        intent.putExtra("minename",fromSearch.getText().toString());
-                        intent.putExtra("loading",to_search.getText().toString());
+                        Intent intent = new Intent(SearchBarActivity.this, SelectYourVehicleActivity.class);
+                        intent.putExtra("vehicle",vehicleOwner);
+                        ArrayList<ResponseLoading> arrayList = responseMineGlobal.getLoading();
+                        int rate = 5;
+                        int etl = 0;
+                        for(ResponseLoading l: arrayList)
+                        {
+                            if(l.getLoadingName().equalsIgnoreCase(to_search.getText().toString()))
+                            {
+                                rate = l.getRate();
+                                etl = l.getEtl();
+
+                            }
+                        }
+
+                        intent.putExtra("mineid", responseMineGlobal.getId());
+                        intent.putExtra("minename", fromSearch.getText().toString());
+                        intent.putExtra("loading", to_search.getText().toString());
+                        intent.putExtra("rate", rate);
+                        intent.putExtra("etl", etl);
 
                         startActivity(intent);
-
-                        finish();
 
                     }
 
@@ -301,7 +332,13 @@ public class SearchBarActivity extends AppCompatActivity {
 
     private ArrayList<String> getLoading(ResponseMine mine)
     {
-        return mine.getLoading();
+        ArrayList<String> loadingName = new ArrayList<>();
+        for (ResponseLoading responseLoading : mine.getLoading()) {
+
+            loadingName.add(responseLoading.getLoadingName());
+
+        }
+        return loadingName;
     }
 
     private ArrayList<ResponseMine> getMine(String minename)
@@ -413,8 +450,8 @@ public class SearchBarActivity extends AppCompatActivity {
                         Set<RequestArea> areass = new HashSet<>();
                         for (ResponseMine mine : mines) {
                             areas.put(mine.getArea(), new RequestArea(mine.getArea(), mine.getArealatitude(), mine.getArealongitude(),mine.getAreaimageurl()));
-                            for (String loading : mine.getLoading()) {
-                                loadings.add(loading);
+                            for (ResponseLoading loading : mine.getLoading()) {
+                                loadings.add(loading.getLoadingName());
                             }
                         }
 

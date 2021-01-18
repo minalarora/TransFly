@@ -127,7 +127,7 @@ public class AreaFieldStafActivity extends AppCompatActivity {
 
                 int position=activity.registerCategory.getSelectedItemPosition();
 
-                if (activity.registerCategory.getSelectedItem().toString().equals("pan")) {
+                if (activity.registerCategory.getSelectedItem().toString().toLowerCase().equals("pan")) {
 
                     if(!TextUtils.isEmpty(activity.enterTdsNumber.getText().toString())){
 
@@ -140,7 +140,7 @@ public class AreaFieldStafActivity extends AppCompatActivity {
                     }
 
 
-                } else if (activity.registerCategory.getSelectedItem().toString().equals("aadhaar")) {
+                } else if (activity.registerCategory.getSelectedItem().toString().toLowerCase().equals("aadhaar")) {
 
                     if(!TextUtils.isEmpty(activity.enterTdsNumber.getText().toString())){
 
@@ -152,7 +152,7 @@ public class AreaFieldStafActivity extends AppCompatActivity {
 
                     }
 
-                } else if (activity.registerCategory.getSelectedItem().toString().equals("bank")) {
+                } else if (activity.registerCategory.getSelectedItem().toString().toLowerCase().equals("bank")) {
 
                     if(TextUtils.isEmpty(activity.bankName.getText().toString())){
 
@@ -191,17 +191,17 @@ public class AreaFieldStafActivity extends AppCompatActivity {
                 activity.tdsEditLayout.setVisibility(View.GONE);
                 activity.bankParent.setVisibility(View.GONE);
 
-                if(activity.registerCategory.getSelectedItem().toString().equals("pan")){
+                if(activity.registerCategory.getSelectedItem().toString().toLowerCase().equals("pan")){
 
                     activity.tdsEditLayout.setHint("Enter Pan Number");
                     activity.tdsEditLayout.setVisibility(View.VISIBLE);
 
-                } else if(activity.registerCategory.getSelectedItem().toString().equals("aadhaar")){
+                } else if(activity.registerCategory.getSelectedItem().toString().toLowerCase().equals("aadhaar")){
 
                     activity.tdsEditLayout.setHint("Enter Aadhar Number");
                     activity.tdsEditLayout.setVisibility(View.VISIBLE);
 
-                } else if(activity.registerCategory.getSelectedItem().toString().equals("bank")) {
+                } else if(activity.registerCategory.getSelectedItem().toString().toLowerCase().equals("bank")) {
 
                     activity.bankParent.setVisibility(View.VISIBLE);
 
@@ -232,7 +232,7 @@ public class AreaFieldStafActivity extends AppCompatActivity {
 
                     Type collectionType = new TypeToken<ArrayList<String>>(){}.getType();
                     try {
-                        pendingList.addAll(new Gson().fromJson(response.body().string().toString(),collectionType));
+                        pendingList.addAll(new Gson().fromJson(response.body().string().toString().toUpperCase(),collectionType));
                     } catch (IOException e) {
 
                     }

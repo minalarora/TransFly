@@ -103,6 +103,15 @@ public class VehicleOwnerKycActivity extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                onBackPressed();
+
+            }
+        });
+
         activity.submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,7 +126,7 @@ public class VehicleOwnerKycActivity extends AppCompatActivity {
 
                 int position=activity.registerCategory.getSelectedItemPosition();
 
-                if (activity.registerCategory.getSelectedItem().toString().equals("tds")) {
+                if (activity.registerCategory.getSelectedItem().toString().toLowerCase().equals("tds")) {
 
                     if(!TextUtils.isEmpty(activity.enterTdsNumber.getText().toString())){
 
@@ -130,7 +139,7 @@ public class VehicleOwnerKycActivity extends AppCompatActivity {
                     }
 
 
-                } else if (activity.registerCategory.getSelectedItem().toString().equals("pan")) {
+                } else if (activity.registerCategory.getSelectedItem().toString().toLowerCase().equals("pan")) {
 
                     if(!TextUtils.isEmpty(activity.panEdittext.getText().toString())){
 
@@ -142,7 +151,7 @@ public class VehicleOwnerKycActivity extends AppCompatActivity {
 
                     }
 
-                } else if (activity.registerCategory.getSelectedItem().toString().equals("bank")) {
+                } else if (activity.registerCategory.getSelectedItem().toString().toLowerCase().equals("bank")) {
 
                     if(TextUtils.isEmpty(activity.bankName.getText().toString())){
 
@@ -182,15 +191,15 @@ public class VehicleOwnerKycActivity extends AppCompatActivity {
                 activity.bankParent.setVisibility(View.GONE);
                 activity.tdsEditLayout.setVisibility(View.GONE);
 
-                if (activity.registerCategory.getSelectedItem().toString().equals("tds")) {
+                if (activity.registerCategory.getSelectedItem().toString().toLowerCase().equals("tds")) {
 
                     activity.tdsEditLayout.setVisibility(View.VISIBLE);
 
-                } else if (activity.registerCategory.getSelectedItem().toString().equals("pan")) {
+                } else if (activity.registerCategory.getSelectedItem().toString().toLowerCase().equals("pan")) {
 
                     activity.panEditLayout.setVisibility(View.VISIBLE);
 
-                } else if (activity.registerCategory.getSelectedItem().toString().equals("bank")) {
+                } else if (activity.registerCategory.getSelectedItem().toString().toLowerCase().equals("bank")) {
 
                     activity.bankParent.setVisibility(View.VISIBLE);
 
@@ -221,7 +230,7 @@ public class VehicleOwnerKycActivity extends AppCompatActivity {
 
                     Type collectionType = new TypeToken<ArrayList<String>>(){}.getType();
                     try {
-                        pendingList.addAll(new Gson().fromJson(response.body().string().toString(),collectionType));
+                        pendingList.addAll(new Gson().fromJson(response.body().string().toString().toUpperCase(),collectionType));
                     } catch (IOException e) {
 
                     }

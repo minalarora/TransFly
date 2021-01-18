@@ -24,11 +24,15 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.leavjenn.smoothdaterangepicker.date.SmoothDateRangePickerFragment;
 import com.truck.transfly.Adapter.TransporterAdapter;
+import com.truck.transfly.Model.ResponseFirebase;
 import com.truck.transfly.Model.ResponseInvoice;
 import com.truck.transfly.Model.ResponseTransporter;
 import com.truck.transfly.R;
@@ -76,6 +80,25 @@ public class TransporterActivity extends AppCompatActivity implements SmoothDate
             api = retrofit.create(ApiEndpoints.class);
         }
 
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w("TAG", "Fetching FCM registration token failed", task.getException());
+                            return;
+                        }
+
+                        // Get new FCM registration token
+                        String token = task.getResult();
+
+                        ResponseFirebase responseFirebase=new ResponseFirebase();
+                        responseFirebase.setFirebase(token);
+
+                        updateFirebase(PreferenceUtil.getData(TransporterActivity.this,"token"),responseFirebase);
+
+                    }
+                });
 
         areaManagerRecycler =findViewById(R.id.areaManagerRecycler);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(TransporterActivity.this,LinearLayoutManager.VERTICAL,false);
@@ -132,20 +155,6 @@ public class TransporterActivity extends AppCompatActivity implements SmoothDate
         MenuItem kyc_drawer = menu.findItem(R.id.kyc_drawer);
 
         ResponseTransporter responseFieldStaff = ((TransflyApplication) getApplication()).getResponseTransporterOwner();
-
-        if(responseFieldStaff.getStatus()==0){
-
-            kyc_drawer.setTitle("KYC Details (Pending)");
-
-        } else if(responseFieldStaff.getStatus()==1){
-
-            kyc_drawer.setTitle("KYC Details (Under Process)");
-
-        } else {
-
-            kyc_drawer.setTitle("KYC Details (Completed)");
-
-        }
 
         MenuItem bankDetails = menu.findItem(R.id.bank_details);
         bankDetails.setVisible(false);
@@ -230,6 +239,21 @@ public class TransporterActivity extends AppCompatActivity implements SmoothDate
 
     }
 
+    private void updateFirebase(String token, ResponseFirebase firebase)
+    {
+        api.updateFirebase(token,firebase).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+    }
+
     private void navigationViewListener(NavigationView navigationView) {
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -297,8 +321,17 @@ public class TransporterActivity extends AppCompatActivity implements SmoothDate
 
                         break;
 
+                    case R.id.rate_etl:
+
+                        startActivity(new Intent(TransporterActivity.this,SearchBarActivity.class));
+
+                        break;
+
                     case R.id.contact_us:
 
+                        String phone = "7847072064";
+                        Intent phoneCall = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null));
+                        startActivity(phoneCall);
 
                         break;
 

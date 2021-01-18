@@ -16,6 +16,7 @@ import androidx.databinding.DataBindingUtil;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.truck.transfly.Adapter.SpinnerTraspoterAdapter;
+import com.truck.transfly.Frament.ConfirmationBookingDialog;
 import com.truck.transfly.Model.RequestInvoice;
 import com.truck.transfly.Model.ResponseBooking;
 import com.truck.transfly.Model.ResponseTransporter;
@@ -24,6 +25,8 @@ import com.truck.transfly.databinding.ActivityFieldStafBookingConfirmationBindin
 import com.truck.transfly.utils.ApiClient;
 import com.truck.transfly.utils.ApiEndpoints;
 import com.truck.transfly.utils.PreferenceUtil;
+
+import org.joda.time.DateTime;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -67,6 +70,9 @@ public class FieldStafBookingConfirmationActivity extends AppCompatActivity {
 
         parent_of_loading = findViewById(R.id.parent_of_loading);
         parent_of_loading.setVisibility(View.GONE);
+
+        DateTime dateTime=new DateTime();
+        activity.dateCreated.setText(dateTime.getDayOfMonth()+"/"+dateTime.getMonthOfYear()+"/"+dateTime.getYear()+" "+dateTime.getHourOfDay()+":"+dateTime.getMinuteOfHour());
 
         no_internet_connection = findViewById(R.id.no_internet_connection);
         findViewById(R.id.pullToRefresh_button).setOnClickListener(new View.OnClickListener() {
@@ -134,25 +140,46 @@ public class FieldStafBookingConfirmationActivity extends AppCompatActivity {
 
                 } else {
 
-                    RequestInvoice requestInvoice = new RequestInvoice();
-                    requestInvoice.setId(responseBooking.getId());
-                    requestInvoice.setMineid(responseBooking.getMineid());
-                    requestInvoice.setMinename(responseBooking.getMinename());
-                    requestInvoice.setLoading(responseBooking.getLoading());
-                    requestInvoice.setHsd(Integer.valueOf(activity.hsd.getText().toString()));
-                    requestInvoice.setRate(Integer.valueOf(activity.rate.getText().toString()));
-                    requestInvoice.setVehiclenumber(activity.registerCategory.getSelectedItem().toString());
-                    requestInvoice.setVehicleowner(responseBooking.getVehicleowner());
-                    requestInvoice.setVehicleownermobile(responseBooking.getVehicleownermobile());
-                    requestInvoice.setTonnage(Integer.valueOf(activity.tonnege.getText().toString()));
-                    requestInvoice.setCash(Integer.valueOf(activity.cash.getText().toString()));
-                    requestInvoice.setOwner(responseBooking.getOwner());
+                    ConfirmationBookingDialog confirmationBookingDialog=new ConfirmationBookingDialog();
+                    Bundle bundle=new Bundle();
+                    bundle.putParcelable("responseBooking",responseBooking);
+                    bundle.putString("hsd",activity.hsd.getText().toString());
+                    bundle.putString("rate",activity.rate.getText().toString());
+                    bundle.putString("cash",activity.cash.getText().toString());
+                    confirmationBookingDialog.setArguments(bundle);
+                    confirmationBookingDialog.show(getSupportFragmentManager(),"");
 
-                    ResponseTransporter selectedItem = (ResponseTransporter) activity.transporterName.getSelectedItem();
+                    confirmationBookingDialog.setOnClickListener(new ConfirmationBookingDialog.onClickListener() {
+                        @Override
+                        public void onClick() {
 
-                    requestInvoice.setTransporterMobile(selectedItem.getId());
+                            RequestInvoice requestInvoice = new RequestInvoice();
+                            requestInvoice.setId(responseBooking.getId());
+                            requestInvoice.setMineid(responseBooking.getMineid());
+                            requestInvoice.setMinename(responseBooking.getMinename());
+                            requestInvoice.setLoading(responseBooking.getLoading());
+                            requestInvoice.setHsd(Integer.valueOf(activity.hsd.getText().toString()));
+                            requestInvoice.setRate(Integer.valueOf(activity.rate.getText().toString()));
+                            requestInvoice.setVehiclenumber(activity.registerCategory.getSelectedItem().toString());
+                            requestInvoice.setVehicleowner(responseBooking.getVehicleowner());
+                            requestInvoice.setVehicleownermobile(responseBooking.getVehicleownermobile());
+                            requestInvoice.setTonnage(Integer.valueOf(activity.tonnege.getText().toString()));
+                            requestInvoice.setCash(Integer.valueOf(activity.cash.getText().toString()));
+                            requestInvoice.setOwner(responseBooking.getOwner());
 
-                    confirmBooking(PreferenceUtil.getData(FieldStafBookingConfirmationActivity.this, "token"), requestInvoice);
+                            if(transportersList.size()>0) {
+
+                                ResponseTransporter selectedItem = (ResponseTransporter) activity.transporterName.getSelectedItem();
+
+                                requestInvoice.setTransporterMobile(selectedItem.getId());
+
+                            }
+
+                            confirmBooking(PreferenceUtil.getData(FieldStafBookingConfirmationActivity.this, "token"), requestInvoice);
+
+
+                        }
+                    });
 
                 }
 
@@ -193,6 +220,8 @@ public class FieldStafBookingConfirmationActivity extends AppCompatActivity {
             public void onFailure(Call<ResponseBody> call, Throwable t) {
 
                 no_internet_connection.setVisibility(View.VISIBLE);
+
+                Toast.makeText(FieldStafBookingConfirmationActivity.this, "jmmm", Toast.LENGTH_SHORT).show();
                 parent_of_loading.setVisibility(View.GONE);
 
             }
@@ -274,6 +303,8 @@ public class FieldStafBookingConfirmationActivity extends AppCompatActivity {
                 no_internet_connection.setVisibility(View.VISIBLE);
 
                 parent_of_loading.setVisibility(View.GONE);
+
+                Toast.makeText(FieldStafBookingConfirmationActivity.this, "jppppmmm", Toast.LENGTH_SHORT).show();
 
             }
         });

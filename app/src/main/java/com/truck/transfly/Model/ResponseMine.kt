@@ -16,8 +16,8 @@ class ResponseMine {
     @SerializedName("trailer")
     var trailer: Boolean? = null
 
-//    @SerializedName("active")
-//    var active: Boolean? = null
+    @SerializedName("active")
+    var active: Boolean? = null
 
     @SerializedName("tyres")
     var tyres: Int? = 0
@@ -26,13 +26,14 @@ class ResponseMine {
     var bodytype: String? = null
 
     @SerializedName("loading")
-    var loading: ArrayList<String>? = null
+    var loading: ArrayList<ResponseLoading>? = ArrayList<ResponseLoading>();
 
-    @SerializedName("rate")
-    var rate: Int? = null
+//    @SerializedName("rate")
+//    var rate: Int? = null
+//
+//    @SerializedName("etl")
+//    var etl: Int? = null
 
-    @SerializedName("etl")
-    var etl: Int? = null
 
     @SerializedName("latitude")
     var latitude: String? = null
@@ -58,7 +59,7 @@ class ResponseMine {
     @SerializedName("areaimageurl")
     var areaimageurl: String? = null
     
-    constructor(id: Int?, name: String?, area: String?, trailer: Boolean?, tyres: Int?, bodytype: String?, loading: ArrayList<String>?, rate: Int?, etl: Int?, latitude: String?, longitude: String?, arealatitude: String?, arealongitude: String?, landmark: String?, fieldstaff: String?, areamanager: String?) {
+    constructor(id: Int?, name: String?, area: String?, trailer: Boolean?, tyres: Int?, bodytype: String?, loading: ArrayList<ResponseLoading>?, latitude: String?, longitude: String?, arealatitude: String?, arealongitude: String?, landmark: String?, fieldstaff: String?, areamanager: String?) {
         this.id = id
         this.name = name
         this.area = area
@@ -66,8 +67,6 @@ class ResponseMine {
         this.tyres = tyres
         this.bodytype = bodytype
         this.loading = loading
-        this.rate = rate
-        this.etl = etl
         this.latitude = latitude
         this.longitude = longitude
         this.arealatitude = arealatitude
@@ -78,7 +77,7 @@ class ResponseMine {
     }
 
     override fun toString(): String {
-        return "ResponseMine(id=$id, name=$name, area=$area, trailer=$trailer, tyres=$tyres, bodytype=$bodytype, loading=$loading, rate=$rate, etl=$etl, latitude=$latitude, longitude=$longitude, arealatitude=$arealatitude, arealongitude=$arealongitude, landmark=$landmark, fieldstaff=$fieldstaff, areamanager=$areamanager)"
+        return "ResponseMine(id=$id, name=$name, area=$area, trailer=$trailer, tyres=$tyres, bodytype=$bodytype, loading=$loading,  latitude=$latitude, longitude=$longitude, arealatitude=$arealatitude, arealongitude=$arealongitude, landmark=$landmark, fieldstaff=$fieldstaff, areamanager=$areamanager)"
     }
 
 
