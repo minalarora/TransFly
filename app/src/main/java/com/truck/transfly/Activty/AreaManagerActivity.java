@@ -9,8 +9,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -46,6 +48,8 @@ public class AreaManagerActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private Retrofit retrofit;
     private ApiEndpoints api;
+    private String token;
+    private FrameLayout parent_of_loading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,9 +58,11 @@ public class AreaManagerActivity extends AppCompatActivity {
 
         TabLayout tabLayout = findViewById(R.id.tabLayout);
 
+        parent_of_loading = findViewById(R.id.parent_of_loading);
+        parent_of_loading.setVisibility(View.GONE);
+
         retrofit = ApiClient.getRetrofitClient();
-        if(retrofit!=null)
-        {
+        if (retrofit != null) {
             api = retrofit.create(ApiEndpoints.class);
         }
 
@@ -81,12 +87,12 @@ public class AreaManagerActivity extends AppCompatActivity {
                         }
 
                         // Get new FCM registration token
-                        String token = task.getResult();
+                        token = task.getResult();
 
-                        ResponseFirebase responseFirebase=new ResponseFirebase();
+                        ResponseFirebase responseFirebase = new ResponseFirebase();
                         responseFirebase.setFirebase(token);
 
-                        updateFirebase(PreferenceUtil.getData(AreaManagerActivity.this,"token"),responseFirebase);
+                        updateFirebase(PreferenceUtil.getData(AreaManagerActivity.this, "token"), responseFirebase);
 
                     }
                 });
@@ -157,9 +163,36 @@ public class AreaManagerActivity extends AppCompatActivity {
 
     }
 
-    private void updateFirebase(String token, ResponseFirebase firebase)
-    {
-        api.updateFirebase(token,firebase).enqueue(new Callback<ResponseBody>() {
+    private void deleteFirebase(String token, ResponseFirebase firebase) {
+
+        parent_of_loading.setVisibility(View.VISIBLE);
+
+        api.deleteFirebase(token, firebase).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                parent_of_loading.setVisibility(View.GONE);
+
+                Intent logoutIntent = new Intent(AreaManagerActivity.this, LoginActivity.class);
+                logoutIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(logoutIntent);
+                finish();
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                parent_of_loading.setVisibility(View.GONE);
+
+                Toast.makeText(AreaManagerActivity.this, "No Internet Connection! Try again", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
+
+    private void updateFirebase(String token, ResponseFirebase firebase) {
+        api.updateFirebase(token, firebase).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
@@ -241,7 +274,7 @@ public class AreaManagerActivity extends AppCompatActivity {
 
                     case R.id.rate_etl:
 
-                        startActivity(new Intent(AreaManagerActivity.this,SearchBarActivity.class));
+                        startActivity(new Intent(AreaManagerActivity.this, SearchBarActivity.class));
 
                         break;
 
@@ -255,10 +288,10 @@ public class AreaManagerActivity extends AppCompatActivity {
 
                     case R.id.logout:
 
-                        Intent logoutIntent = new Intent(AreaManagerActivity.this, LoginActivity.class);
-                        logoutIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(logoutIntent);
-                        finish();
+                        ResponseFirebase responseFirebase = new ResponseFirebase();
+                        responseFirebase.setFirebase(token);
+
+                        deleteFirebase(PreferenceUtil.getData(AreaManagerActivity.this, "token"), responseFirebase);
 
                         PreferenceUtil.putData(AreaManagerActivity.this, "token", "");
 

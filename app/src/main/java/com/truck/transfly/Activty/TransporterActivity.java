@@ -69,6 +69,7 @@ public class TransporterActivity extends AppCompatActivity implements SmoothDate
     private RelativeLayout no_internet_connection;
     private TextView no_booking_data;
     private PullToRefreshView pullToRefreshView;
+    private String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +91,7 @@ public class TransporterActivity extends AppCompatActivity implements SmoothDate
                         }
 
                         // Get new FCM registration token
-                        String token = task.getResult();
+                        token = task.getResult();
 
                         ResponseFirebase responseFirebase=new ResponseFirebase();
                         responseFirebase.setFirebase(token);
@@ -337,10 +338,10 @@ public class TransporterActivity extends AppCompatActivity implements SmoothDate
 
                     case R.id.logout:
 
-                        Intent logoutIntent = new Intent(TransporterActivity.this, LoginActivity.class);
-                        logoutIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(logoutIntent);
-                        finish();
+                        ResponseFirebase responseFirebase=new ResponseFirebase();
+                        responseFirebase.setFirebase(token);
+
+                        deleteFirebase(PreferenceUtil.getData(TransporterActivity.this, "token"),responseFirebase);
 
                         PreferenceUtil.putData(TransporterActivity.this,"token","");
 
@@ -356,6 +357,34 @@ public class TransporterActivity extends AppCompatActivity implements SmoothDate
         });
 
 
+    }
+
+    private void deleteFirebase(String token, ResponseFirebase firebase)
+    {
+        parent_of_loading.setVisibility(View.VISIBLE);
+
+        api.deleteFirebase(token,firebase).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+
+                parent_of_loading.setVisibility(View.GONE);
+                Intent logoutIntent = new Intent(TransporterActivity.this, LoginActivity.class);
+                logoutIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(logoutIntent);
+                finish();
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                parent_of_loading.setVisibility(View.GONE);
+
+                Toast.makeText(TransporterActivity.this, "No Internet Connection! Try again", Toast.LENGTH_SHORT).show();
+
+            }
+        });
     }
 
     private void getInvoiceTransporter(String token)

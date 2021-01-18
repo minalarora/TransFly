@@ -160,6 +160,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
     private String areaname;
     private RecyclerView recyclerView;
     private NavigationView navigationView;
+    private String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -225,7 +226,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                         }
 
                         // Get new FCM registration token
-                        String token = task.getResult();
+                        token = task.getResult();
 
                         ResponseFirebase responseFirebase=new ResponseFirebase();
                         responseFirebase.setFirebase(token);
@@ -669,6 +670,34 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         });
     }
 
+    private void deleteFirebase(String token, ResponseFirebase firebase)
+    {
+        parent_of_loading.setVisibility(View.VISIBLE);
+
+        api.deleteFirebase(token,firebase).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                parent_of_loading.setVisibility(View.GONE);
+
+                Intent logoutIntent = new Intent(HomeActivity.this, LoginActivity.class);
+                logoutIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(logoutIntent);
+                finish();
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                parent_of_loading.setVisibility(View.GONE);
+
+                Toast.makeText(HomeActivity.this, "No Internet Connection! Try again", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
+
     private void getNearmeArea(String token, RequestCoordinates coordinates) {
         parent_of_loading.setVisibility(View.VISIBLE);
 
@@ -869,12 +898,12 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                     case R.id.logout:
 
-                        Intent logoutIntent = new Intent(HomeActivity.this, LoginActivity.class);
-                        logoutIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(logoutIntent);
-                        finish();
-
                         PreferenceUtil.putData(HomeActivity.this, "token", "");
+
+                        ResponseFirebase responseFirebase=new ResponseFirebase();
+                        responseFirebase.setFirebase(token);
+
+                        deleteFirebase(PreferenceUtil.getData(HomeActivity.this, "token"),responseFirebase);
 
                         break;
 

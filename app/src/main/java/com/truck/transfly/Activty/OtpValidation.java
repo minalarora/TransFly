@@ -202,7 +202,6 @@ public class OtpValidation extends AppCompatActivity implements VerificationList
                     if(responseCode.getCode()==38){
 
                         Toast.makeText(OtpValidation.this, ""+message, Toast.LENGTH_SHORT).show();
-                        confirmOtp("ojnj");
 
                     } else {
 

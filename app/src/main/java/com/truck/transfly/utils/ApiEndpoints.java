@@ -196,6 +196,9 @@ public interface ApiEndpoints {
     @POST("/me/update")
     Call<ResponseBody> updateFirebase(@Header("Authorization")String token, @Body RequestFirebase firebase);
 
+    //update mobile
+    @POST("/me/delete")
+    Call<ResponseBody> deleteFirebase(@Header("Authorization")String token, @Body ResponseFirebase firebase);
 
     //update password
     @POST("/changepassword")

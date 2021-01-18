@@ -1,12 +1,5 @@
 package com.truck.transfly.Activty;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
@@ -22,6 +15,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
@@ -32,7 +32,6 @@ import com.truck.transfly.Adapter.FieldStafAdapter;
 import com.truck.transfly.Model.ResponseBooking;
 import com.truck.transfly.Model.ResponseFieldStaff;
 import com.truck.transfly.Model.ResponseFirebase;
-import com.truck.transfly.Model.ResponseTransporter;
 import com.truck.transfly.R;
 import com.truck.transfly.utils.ApiClient;
 import com.truck.transfly.utils.ApiEndpoints;
@@ -53,16 +52,17 @@ import retrofit2.Retrofit;
 public class FieldStafActivity extends AppCompatActivity {
 
     private RecyclerView fieldStafRecylcer;
-    private List<String> stringList=new ArrayList<>();
+    private List<String> stringList = new ArrayList<>();
     private ImageView viewById;
     private DrawerLayout drawerLayout;
     private Retrofit retrofit = null;
     private ApiEndpoints api = null;
-    private ArrayList<ResponseBooking> responseBookingList=new ArrayList<>();
+    private ArrayList<ResponseBooking> responseBookingList = new ArrayList<>();
     private FrameLayout parent_of_loading;
     private FieldStafAdapter fieldStafAdapter;
     private TextView noDataFound;
     private RelativeLayout no_internet_connection;
+    private String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,8 +70,7 @@ public class FieldStafActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         retrofit = ApiClient.getRetrofitClient();
-        if(retrofit!=null)
-        {
+        if (retrofit != null) {
             api = retrofit.create(ApiEndpoints.class);
         }
 
@@ -81,7 +80,7 @@ public class FieldStafActivity extends AppCompatActivity {
 
         View headerLayout = navigationView.getHeaderView(0);
         TextView customerName = headerLayout.findViewById(R.id.customer_name);
-        TextView number=headerLayout.findViewById(R.id.number);
+        TextView number = headerLayout.findViewById(R.id.number);
 
         headerLayout.findViewById(R.id.appSetting).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,12 +104,12 @@ public class FieldStafActivity extends AppCompatActivity {
                         }
 
                         // Get new FCM registration token
-                        String token = task.getResult();
+                        token = task.getResult();
 
-                        ResponseFirebase responseFirebase=new ResponseFirebase();
+                        ResponseFirebase responseFirebase = new ResponseFirebase();
                         responseFirebase.setFirebase(token);
 
-                        updateFirebase(PreferenceUtil.getData(FieldStafActivity.this,"token"),responseFirebase);
+                        updateFirebase(PreferenceUtil.getData(FieldStafActivity.this, "token"), responseFirebase);
 
                     }
                 });
@@ -134,19 +133,19 @@ public class FieldStafActivity extends AppCompatActivity {
                 responseBookingList.clear();
                 no_internet_connection.setVisibility(View.GONE);
                 fieldStafAdapter.notifyDataSetChanged();
-                getAllBookingFieldStaff(PreferenceUtil.getData(FieldStafActivity.this,"token"));
+                getAllBookingFieldStaff(PreferenceUtil.getData(FieldStafActivity.this, "token"));
 
             }
         });
 
         navigationViewListener(navigationView);
-        noDataFound =findViewById(R.id.no_data_found);
+        noDataFound = findViewById(R.id.no_data_found);
         noDataFound.setVisibility(View.GONE);
 
-        fieldStafRecylcer =findViewById(R.id.fieldStafRecylcer);
-        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(FieldStafActivity.this,LinearLayoutManager.VERTICAL,false);
+        fieldStafRecylcer = findViewById(R.id.fieldStafRecylcer);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(FieldStafActivity.this, LinearLayoutManager.VERTICAL, false);
         fieldStafRecylcer.setLayoutManager(linearLayoutManager);
-        fieldStafAdapter=new FieldStafAdapter(this,responseBookingList);
+        fieldStafAdapter = new FieldStafAdapter(this, responseBookingList);
         fieldStafRecylcer.setAdapter(fieldStafAdapter);
 
         this.viewById = findViewById(R.id.drawer_icon);
@@ -174,7 +173,7 @@ public class FieldStafActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 responseBookingList.clear();
-                getAllBookingFieldStaff(PreferenceUtil.getData(FieldStafActivity.this,"token"));
+                getAllBookingFieldStaff(PreferenceUtil.getData(FieldStafActivity.this, "token"));
                 noDataFound.setVisibility(View.GONE);
 
             }
@@ -183,9 +182,8 @@ public class FieldStafActivity extends AppCompatActivity {
 
     }
 
-    private void updateFirebase(String token, ResponseFirebase firebase)
-    {
-        api.updateFirebase(token,firebase).enqueue(new Callback<ResponseBody>() {
+    private void updateFirebase(String token, ResponseFirebase firebase) {
+        api.updateFirebase(token, firebase).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
@@ -202,7 +200,7 @@ public class FieldStafActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        getAllBookingFieldStaff(PreferenceUtil.getData(FieldStafActivity.this,"token"));
+        getAllBookingFieldStaff(PreferenceUtil.getData(FieldStafActivity.this, "token"));
 
     }
 
@@ -213,46 +211,46 @@ public class FieldStafActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
 
                     case R.id.profile_drawer:
 
                         Intent intent = new Intent(FieldStafActivity.this, ProfileActivity.class);
-                        intent.putExtra("stringText","fieldStaff");
+                        intent.putExtra("stringText", "fieldStaff");
                         startActivity(intent);
 
                         break;
 
                     case R.id.emergency_details:
 
-                        startActivity(new Intent(FieldStafActivity.this,EmergencyContactActivity.class));
+                        startActivity(new Intent(FieldStafActivity.this, EmergencyContactActivity.class));
 
                         break;
 
                     case R.id.kyc_drawer:
 
-                        Intent kyc_intent=new Intent(FieldStafActivity.this, AreaFieldStafActivity.class);
+                        Intent kyc_intent = new Intent(FieldStafActivity.this, AreaFieldStafActivity.class);
                         startActivity(kyc_intent);
 
                         break;
 
                     case R.id.bank_details:
 
-                        Intent bankDetails=new Intent(FieldStafActivity.this,BankDetailsActivity.class);
+                        Intent bankDetails = new Intent(FieldStafActivity.this, BankDetailsActivity.class);
                         startActivity(bankDetails);
 
                         break;
 
                     case R.id.ticket_drawer:
 
-                        Intent ticket_complain=new Intent(FieldStafActivity.this,TicketComplaintActivity.class);
+                        Intent ticket_complain = new Intent(FieldStafActivity.this, TicketComplaintActivity.class);
                         startActivity(ticket_complain);
 
                         break;
 
                     case R.id.feedback_drawer:
 
-                        Intent feedback_intent=new Intent(FieldStafActivity.this,FeedbackActivity.class);
+                        Intent feedback_intent = new Intent(FieldStafActivity.this, FeedbackActivity.class);
                         startActivity(feedback_intent);
 
                         break;
@@ -260,7 +258,7 @@ public class FieldStafActivity extends AppCompatActivity {
                     case R.id.refer_drawer:
 
                         Intent refer_intent = new Intent(FieldStafActivity.this, ReferActivity.class);
-                        refer_intent.putExtra("keyword","refer");
+                        refer_intent.putExtra("keyword", "refer");
                         startActivity(refer_intent);
 
                         break;
@@ -268,14 +266,14 @@ public class FieldStafActivity extends AppCompatActivity {
                     case R.id.reward_program:
 
                         Intent rewardIntent = new Intent(FieldStafActivity.this, ReferActivity.class);
-                        rewardIntent.putExtra("keyword","reward");
+                        rewardIntent.putExtra("keyword", "reward");
                         startActivity(rewardIntent);
 
                         break;
 
                     case R.id.rate_etl:
 
-                        startActivity(new Intent(FieldStafActivity.this,SearchBarActivity.class));
+                        startActivity(new Intent(FieldStafActivity.this, SearchBarActivity.class));
 
                         break;
 
@@ -289,12 +287,12 @@ public class FieldStafActivity extends AppCompatActivity {
 
                     case R.id.logout:
 
-                        Intent logoutIntent = new Intent(FieldStafActivity.this, LoginActivity.class);
-                        logoutIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(logoutIntent);
-                        finish();
+                        ResponseFirebase responseFirebase = new ResponseFirebase();
+                        responseFirebase.setFirebase(token);
 
-                        PreferenceUtil.putData(FieldStafActivity.this,"token","");
+                        deleteFirebase(PreferenceUtil.getData(FieldStafActivity.this, "token"),responseFirebase);
+
+                        PreferenceUtil.putData(FieldStafActivity.this, "token", "");
 
                         break;
 
@@ -310,8 +308,33 @@ public class FieldStafActivity extends AppCompatActivity {
 
     }
 
-    private void getAllBookingFieldStaff(String token)
-    {
+    private void deleteFirebase(String token, ResponseFirebase firebase) {
+
+        parent_of_loading.setVisibility(View.VISIBLE);
+
+        api.deleteFirebase(token, firebase).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                Intent logoutIntent = new Intent(FieldStafActivity.this, LoginActivity.class);
+                logoutIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(logoutIntent);
+                finish();
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                parent_of_loading.setVisibility(View.GONE);
+
+                Toast.makeText(FieldStafActivity.this, "No Internet Connection! Try again", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
+
+    private void getAllBookingFieldStaff(String token) {
 
         parent_of_loading.setVisibility(View.VISIBLE);
 
@@ -326,22 +349,19 @@ public class FieldStafActivity extends AppCompatActivity {
 
                 parent_of_loading.setVisibility(View.GONE);
 
-                if(response.code() == 200)
-                {
-                    Type collectionType = new TypeToken<ArrayList<ResponseBooking>>(){}.getType();
+                if (response.code() == 200) {
+                    Type collectionType = new TypeToken<ArrayList<ResponseBooking>>() {
+                    }.getType();
                     try {
-                        responseBookingList.addAll(new Gson().fromJson(response.body().string().toString(),collectionType));
+                        responseBookingList.addAll(new Gson().fromJson(response.body().string().toString(), collectionType));
                     } catch (IOException e) {
 
                     }
-                    if(responseBookingList.isEmpty())
-                    {
+                    if (responseBookingList.isEmpty()) {
 
                         noDataFound.setVisibility(View.VISIBLE);
-                        Log.d("minal","no vehicle");
-                    }
-                    else
-                    {
+                        Log.d("minal", "no vehicle");
+                    } else {
                         //['pan','aadhaar','bank']
 
                         noDataFound.setVisibility(View.GONE);
