@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.truck.transfly.Model.RequestArea;
 import com.truck.transfly.Model.RequestBooking;
 import com.truck.transfly.Model.RequestCredentials;
 import com.truck.transfly.Model.RequestEmail;
@@ -23,6 +22,7 @@ import com.truck.transfly.Model.ResponseAreaManager;
 import com.truck.transfly.Model.ResponseBanner;
 import com.truck.transfly.Model.ResponseBooking;
 import com.truck.transfly.Model.ResponseFieldStaff;
+import com.truck.transfly.Model.ResponseFieldStaffForMine;
 import com.truck.transfly.Model.ResponseFirebase;
 import com.truck.transfly.Model.ResponseMine;
 import com.truck.transfly.Model.ResponseReferral;
@@ -39,10 +39,6 @@ import com.truck.transfly.utils.ApiEndpoints;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -82,9 +78,8 @@ public class PlaygroundActivity extends AppCompatActivity {
 
     }
 
-    private void updateFirebase(String token,ResponseFirebase firebase)
-    {
-        api.updateFirebase(token,firebase).enqueue(new Callback<ResponseBody>() {
+    private void updateFirebase(String token, ResponseFirebase firebase) {
+        api.updateFirebase(token, firebase).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
@@ -96,6 +91,7 @@ public class PlaygroundActivity extends AppCompatActivity {
             }
         });
     }
+
     private void createVehicleOwner(RequestUser user) {
 
 
@@ -1065,6 +1061,95 @@ public class PlaygroundActivity extends AppCompatActivity {
             }
         }
         return selectedlist;
+    }
+
+
+    private void getAreaManagerByMines(String token) {
+        api.getAreaManagerMines(token).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.code() == 200) {
+                    ArrayList<ResponseMine> i = new ArrayList<>();
+                    Type collectionType = new TypeToken<ArrayList<ResponseMine>>() {
+                    }.getType();
+                    try {
+                        i.addAll(new Gson().fromJson(response.body().string().toString(), collectionType));
+                    } catch (IOException e) {
+
+                    }
+                    if (i.isEmpty()) {
+
+                    } else {
+                            //arraylist
+                    }
+                }
+                else {
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void getAreaManagerFieldStaff(String token)
+    {
+        api.getAreaManagerFieldStaff(token).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response.code() == 200)
+                {
+                    ArrayList<ResponseFieldStaff> i = new ArrayList<>();
+                    Type collectionType = new TypeToken<ArrayList<ResponseFieldStaff>>() {
+                    }.getType();
+                    try {
+                        i.addAll(new Gson().fromJson(response.body().string().toString(), collectionType));
+                    } catch (IOException e) {
+
+                    }
+                    if (i.isEmpty()) {
+
+                    } else {
+                        //arraylist
+                    }
+                }
+                else
+                {
+
+                }
+            }
+
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void giveAccess(String token, ResponseFieldStaffForMine mine)
+    {
+        api.getAreaManagerAccess(token,mine).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response.code() == 200)
+                {
+                    //done
+                }
+                else
+                {
+                    //go wrong
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
     }
 
 //    private ArrayList<String> getLoading(ResponseMine mine) {

@@ -1124,6 +1124,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                         public void onClick() {
 
                             Intent intent = new Intent(HomeActivity.this, SelectYourVehicleActivity.class);
+                            intent.putExtra("vehicle",true);
                             ArrayList<ResponseLoading> arrayList = responseMine.getLoading();
                             int rate = 5;
                             int etl = 0;

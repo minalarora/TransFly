@@ -25,6 +25,7 @@ import com.truck.transfly.Model.RequestVehicle;
 import com.truck.transfly.Model.ResponseAreaManager;
 import com.truck.transfly.Model.ResponseBooking;
 import com.truck.transfly.Model.ResponseFieldStaff;
+import com.truck.transfly.Model.ResponseFieldStaffForMine;
 import com.truck.transfly.Model.ResponseFirebase;
 import com.truck.transfly.Model.ResponseMine;
 import com.truck.transfly.Model.ResponseRefer;
@@ -227,6 +228,16 @@ public interface ApiEndpoints {
 
     @GET("/mine/{id}")
     Call<ResponseMine> getSingleMine(@Header("Authorization")String token,@Path("id") int id);
+
+
+    @GET("/areamanager/mines")
+    Call<ResponseBody> getAreaManagerMines(@Header("Authorization")String token);
+
+    @GET("/areamanager/allfieldstaff")
+    Call<ResponseBody> getAreaManagerFieldStaff(@Header("Authorization")String token);
+
+    @POST("/areamanager/confirm")
+    Call<ResponseBody> getAreaManagerAccess(@Header("Authorization")String token,@Body ResponseFieldStaffForMine responseFieldStaffForMine);
 
 
     ///////////////////////////////////////

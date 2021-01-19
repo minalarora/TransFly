@@ -19,7 +19,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TransFly">
-        <activity android:name=".Activty.ComplainProfileActivity"></activity>
+        <activity android:name=".Activty.SearchFieldStaffActivityy"></activity>
+        <activity android:name=".Activty.FindFieldStafActivity" />
+        <activity android:name=".Activty.ComplainProfileActivity" />
         <activity android:name=".Activty.TermsAndCondition" />
         <activity android:name=".Activty.EmergencyContactVehicleActivity" />
         <activity android:name=".Activty.ShowOlxProductActivity" />
@@ -98,7 +100,7 @@
         <activity
             android:name=".Activty.SignUpActivity"
             android:resizeableActivity="false"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activty.UserChangedActivity"
             android:resizeableActivity="false"

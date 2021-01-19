@@ -66,6 +66,14 @@ public class AreaManagerActivity extends AppCompatActivity {
             api = retrofit.create(ApiEndpoints.class);
         }
 
+        findViewById(R.id.field_staff_choose).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(new Intent(AreaManagerActivity.this,FindFieldStafActivity.class));
+
+            }
+        });
 
         ViewPager viewPager = findViewById(R.id.viewpager);
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), 0);

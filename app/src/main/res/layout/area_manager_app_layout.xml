@@ -27,6 +27,18 @@
                 android:src="@drawable/ic_action_menu"
                 app:tint="@color/black" />
 
+            <ImageView
+                android:id="@+id/field_staff_choose"
+                android:layout_width="24dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginEnd="@dimen/_12ssp"
+                android:layout_marginStart="15dp"
+                android:src="@drawable/ic_action_choose_field_staff"
+                app:tint="@color/black" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -54,6 +66,7 @@
         android:layout_width="match_parent"
         android:layout_marginTop="@dimen/_12ssp"
         android:layout_below="@+id/toolbar"
+        android:id="@+id/toolbar_parent"
         android:layout_height="wrap_content">
 
         <com.google.android.material.tabs.TabLayout
@@ -94,6 +107,7 @@
     <androidx.viewpager.widget.ViewPager
         android:layout_width="match_parent"
         android:id="@+id/viewpager"
+        android:layout_below="@+id/toolbar_parent"
         android:layout_height="match_parent">
 
 
