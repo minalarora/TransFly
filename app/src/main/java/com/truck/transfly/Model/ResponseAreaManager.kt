@@ -9,6 +9,9 @@ class ResponseAreaManager {
     @SerializedName("name")
     var  name: String? = null;
 
+    @SerializedName("profile")
+    var profile: String? = null
+
     @SerializedName("mobile")
     var mobile: String? = null;
 

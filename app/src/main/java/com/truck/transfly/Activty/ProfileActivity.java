@@ -1,22 +1,32 @@
 package com.truck.transfly.Activty;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.truck.transfly.Frament.GmailUpdateFragment;
 import com.truck.transfly.Frament.MobileUpdateDailogFragment;
 import com.truck.transfly.Frament.OtpDialogFragment;
 import com.truck.transfly.Model.RequestMobile;
 import com.truck.transfly.Model.ResponseAreaManager;
 import com.truck.transfly.Model.ResponseFieldStaff;
+import com.truck.transfly.Model.ResponseProfile;
 import com.truck.transfly.Model.ResponseTransporter;
 import com.truck.transfly.Model.ResponseVehicleOwner;
 import com.truck.transfly.R;
@@ -25,6 +35,10 @@ import com.truck.transfly.utils.ApiClient;
 import com.truck.transfly.utils.ApiEndpoints;
 import com.truck.transfly.utils.PreferenceUtil;
 import com.truck.transfly.utils.TransflyApplication;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -39,6 +53,9 @@ public class ProfileActivity extends AppCompatActivity {
     private Retrofit retrofit = null;
     private ApiEndpoints api = null;
     private String token;
+    private String image = null;
+    public Uri fileUri = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,8 +159,53 @@ public class ProfileActivity extends AppCompatActivity {
             activity.email.setText(responseVehicleOwner.getEmail());
             activity.phone.setText(responseVehicleOwner.getMobile());
 
+
+            /**
+             *  if (!user.profile.isNullOrBlank()) {
+             *             if (imageString.isNullOrBlank()) {
+             *                 var bytes = Base64.decode(user.profile, Base64.DEFAULT)
+             *                 activity.pic.setImageBitmap(BitmapFactory.decodeByteArray(bytes, 0, bytes.size))
+             *                 Log.d("which", "if")
+             *             } else if (imageString != user.profile) {
+             *                 var bytes = Base64.decode(imageString, Base64.DEFAULT)
+             *                 activity.pic.setImageBitmap(BitmapFactory.decodeByteArray(bytes, 0, bytes.size))
+             *                 Log.d("which", "else")
+             *             } else {
+             *                 var bytes = Base64.decode(user.profile, Base64.DEFAULT)
+             *                 activity.pic.setImageBitmap(BitmapFactory.decodeByteArray(bytes, 0, bytes.size))
+             *                 Log.d("which", "if2")
+             *
+             *             }
+             *         }
+             */
+
+            if(responseVehicleOwner.getProfile()!=null)
+            {
+                if(image == null)
+                {
+                    byte[] bytes =Base64.decode(responseVehicleOwner.getProfile(),Base64.NO_WRAP);
+                    activity.pic.setImageBitmap(BitmapFactory.decodeByteArray(bytes,0,bytes.length));
+                    activity.pic.setVisibility(View.VISIBLE);
+                    Log.d("minal","1");
+
+                }
+                else if(!image.equals(responseVehicleOwner.getProfile()))
+                {
+                    byte[] bytes =Base64.decode(image,Base64.NO_WRAP);
+
+                    activity.pic.setImageBitmap(BitmapFactory.decodeByteArray(bytes,0,bytes.length));
+                    Log.d("minal","2");
+                }
+                else
+                {
+                    byte[] bytes =Base64.decode(responseVehicleOwner.getProfile(),Base64.NO_WRAP);
+                    activity.pic.setImageBitmap(BitmapFactory.decodeByteArray(bytes,0,bytes.length));
+                    Log.d("minal","3");
+                }
+            }
+
             String substring = responseVehicleOwner.getName().substring(0, 2);
-            activity.profileTwo.setText(substring);
+
 
             activity.panNumber.setText(responseVehicleOwner.getPan());
 
@@ -166,8 +228,29 @@ public class ProfileActivity extends AppCompatActivity {
             activity.email.setText(responseVehicleOwner.getEmail());
             activity.phone.setText(responseVehicleOwner.getMobile());
 
+            if(responseVehicleOwner.getProfile()!=null)
+            {
+                if(image == null)
+                {
+                    byte[] bytes =Base64.decode(responseVehicleOwner.getProfile(),Base64.DEFAULT);
+                    activity.pic.setImageBitmap(BitmapFactory.decodeByteArray(bytes,0,bytes.length));
+
+                }
+                else if(image != responseVehicleOwner.getProfile() )
+                {
+                    byte[] bytes =Base64.decode(image,Base64.DEFAULT);
+
+                    activity.pic.setImageBitmap(BitmapFactory.decodeByteArray(bytes,0,bytes.length));
+                }
+                else
+                {
+                    byte[] bytes =Base64.decode(responseVehicleOwner.getProfile(),Base64.DEFAULT);
+                    activity.pic.setImageBitmap(BitmapFactory.decodeByteArray(bytes,0,bytes.length));
+                }
+            }
+
             String substring = responseVehicleOwner.getName().substring(0, 2);
-            activity.profileTwo.setText(substring);
+
 
             activity.panNumber.setText(responseVehicleOwner.getPan());
 
@@ -189,8 +272,29 @@ public class ProfileActivity extends AppCompatActivity {
             activity.email.setText(responseVehicleOwner.getEmail());
             activity.phone.setText(responseVehicleOwner.getMobile());
 
+            if(responseVehicleOwner.getProfile()!=null)
+            {
+                if(image == null)
+                {
+                    byte[] bytes =Base64.decode(responseVehicleOwner.getProfile(),Base64.DEFAULT);
+                    activity.pic.setImageBitmap(BitmapFactory.decodeByteArray(bytes,0,bytes.length));
+
+                }
+                else if(image != responseVehicleOwner.getProfile() )
+                {
+                    byte[] bytes =Base64.decode(image,Base64.DEFAULT);
+
+                    activity.pic.setImageBitmap(BitmapFactory.decodeByteArray(bytes,0,bytes.length));
+                }
+                else
+                {
+                    byte[] bytes =Base64.decode(responseVehicleOwner.getProfile(),Base64.DEFAULT);
+                    activity.pic.setImageBitmap(BitmapFactory.decodeByteArray(bytes,0,bytes.length));
+                }
+            }
+
             String substring = responseVehicleOwner.getName().substring(0, 2);
-            activity.profileTwo.setText(substring);
+
 
             activity.panNumber.setText(responseVehicleOwner.getPan());
 
@@ -212,8 +316,28 @@ public class ProfileActivity extends AppCompatActivity {
             activity.email.setText(responseVehicleOwner.getEmail());
             activity.phone.setText(responseVehicleOwner.getMobile());
 
+            if(responseVehicleOwner.getProfile()!=null)
+            {
+                if(image == null)
+                {
+                    byte[] bytes =Base64.decode(responseVehicleOwner.getProfile(),Base64.DEFAULT);
+                    activity.pic.setImageBitmap(BitmapFactory.decodeByteArray(bytes,0,bytes.length));
+
+                }
+                else if(image != responseVehicleOwner.getProfile() )
+                {
+                    byte[] bytes =Base64.decode(image,Base64.DEFAULT);
+
+                    activity.pic.setImageBitmap(BitmapFactory.decodeByteArray(bytes,0,bytes.length));
+                }
+                else
+                {
+                    byte[] bytes =Base64.decode(responseVehicleOwner.getProfile(),Base64.DEFAULT);
+                    activity.pic.setImageBitmap(BitmapFactory.decodeByteArray(bytes,0,bytes.length));
+                }
+            }
+
             String substring = responseVehicleOwner.getName().substring(0, 2);
-            activity.profileTwo.setText(substring);
 
             activity.panNumber.setText(responseVehicleOwner.getPan());
 
@@ -526,4 +650,59 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
 
+    public void changePic(View view) {
+        ImagePicker.Companion.with(ProfileActivity.this)//Crop image(Optional), Check Customization for more option
+                .compress(128)			//Final image size will be less than 1 MB(Optional)
+                .maxResultSize(1080, 1080)	//Final image resolution will be less than 1080 x 1080(Optional)
+                .start(1);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+
+        if(resultCode == Activity.RESULT_OK && requestCode == 1)
+        {
+
+
+
+//            activity.doc1.setImageURI(fileUri)
+
+
+
+
+            try {
+                fileUri = data.getData();
+                activity.pic.setImageURI(fileUri);
+                File file = ImagePicker.Companion.getFile(data);
+                image  = Base64.encodeToString( Files.readAllBytes(file.toPath()), Base64.NO_WRAP);
+                ((TransflyApplication) getApplication()).getResponseVehicleOwner().setProfile(image);
+                updateImage(token,image);
+
+            } catch (IOException e) {
+
+            }
+
+
+        }
+    }
+
+    private void updateImage(String token,String image)
+    {
+        ResponseProfile profile = new ResponseProfile();
+        profile.setProfile(image);
+        api.updateProfile(token,profile).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Log.d("minal","" + response.code()+ response.message());
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+    }
 }

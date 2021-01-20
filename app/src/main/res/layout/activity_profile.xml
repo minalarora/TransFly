@@ -77,43 +77,29 @@
                 android:layout_gravity="center"
                 android:layout_height="wrap_content">
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:id="@+id/circularImage"
-                    android:backgroundTint="#f7f7f7"
-                    app:cardCornerRadius="@dimen/_100ssp"
-                    android:src="@drawable/default_profile"
-                     >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:fontFamily="@font/poppinsbold"
-                        android:text="SH"
-                        android:id="@+id/profile_two"
-                        android:textColor="@color/quantum_pink"
-                        android:textSize="30dp" />
-
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="@dimen/_50ssp"
-                    android:layout_gravity="bottom|end"
-                    app:cardBackgroundColor="@color/project_color"
-                    app:cardCornerRadius="@dimen/_30ssp"
-                    android:visibility="gone"
-                    android:layout_height="@dimen/_50ssp">
-
+                <RelativeLayout
+                    android:layout_width="@dimen/_70sdp"
+                    android:layout_height="@dimen/_70sdp"
+                    android:elevation="2dp"
+                    android:id="@+id/profile_pic"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    >
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/pic"
+                        android:src="@drawable/dummy_user"
+                        />
                     <ImageView
-                        android:layout_width="@dimen/_30ssp"
-                        android:layout_height="@dimen/_30ssp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/ic_action_camera"
-                        app:tint="@color/white" />
-
-                </androidx.cardview.widget.CardView>
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:src="@drawable/ic_camera"
+                        android:onClick="changePic"
+                        android:layout_alignParentRight="true"
+                        />
+                </RelativeLayout>
 
             </FrameLayout>
 

@@ -4,6 +4,9 @@ import com.google.gson.annotations.SerializedName
 
 class ResponseTransporter {
 
+    @SerializedName("profile")
+    var profile: String? = null
+
     @SerializedName("id")
     var id: String? = null
 

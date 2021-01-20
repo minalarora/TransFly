@@ -28,6 +28,7 @@ import com.truck.transfly.Model.ResponseFieldStaff;
 import com.truck.transfly.Model.ResponseFieldStaffForMine;
 import com.truck.transfly.Model.ResponseFirebase;
 import com.truck.transfly.Model.ResponseMine;
+import com.truck.transfly.Model.ResponseProfile;
 import com.truck.transfly.Model.ResponseRefer;
 import com.truck.transfly.Model.ResponseReferral;
 import com.truck.transfly.Model.ResponseReward;
@@ -188,6 +189,10 @@ public interface ApiEndpoints {
     //update mobile
     @POST("/me/update")
     Call<ResponseBody> updateMobile(@Header("Authorization")String token, @Body RequestMobile mobile);
+
+    //update mobile
+    @POST("/me/update")
+    Call<ResponseBody> updateProfile(@Header("Authorization")String token, @Body ResponseProfile mobile);
 
     //update mobile
     @POST("/me/update")
