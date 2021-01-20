@@ -165,7 +165,6 @@
                             android:background="@android:color/transparent"
                             android:fontFamily="@font/font_regular"
                             android:hint="FieldStaff"
-                            android:maxLength="10"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_13ssp" />
 
@@ -208,6 +207,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/white"
+            android:visibility="gone"
             android:id="@+id/no_data_found"
             android:clickable="true"
             android:focusable="true"
@@ -219,7 +219,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center"
-                android:fontFamily="@font/poppinsmedium"
+                android:fontFamily="@font/poppins"
                 android:text="No Mines Allot"
                 android:textColor="@android:color/black"
                 android:textSize="20dp" />

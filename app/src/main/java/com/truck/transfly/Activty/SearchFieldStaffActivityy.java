@@ -83,6 +83,8 @@ public class SearchFieldStaffActivityy extends AppCompatActivity {
 
                 onClickListener1.onClick(responseFieldStaff);
 
+                finish();
+
             }
         });
 
@@ -130,6 +132,9 @@ public class SearchFieldStaffActivityy extends AppCompatActivity {
         api.getAreaManagerFieldStaff(token).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                parent_of_loading.setVisibility(View.GONE);
+
                 if(response.code() == 200)
                 {
                     Type collectionType = new TypeToken<ArrayList<ResponseFieldStaff>>() {

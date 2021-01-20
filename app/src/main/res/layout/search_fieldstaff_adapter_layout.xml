@@ -17,10 +17,10 @@
         android:layout_marginTop="@dimen/_17ssp"
         android:layout_marginBottom="@dimen/_17ssp"
         android:layout_toEndOf="@+id/drawer_bar"
-        android:fontFamily="@font/poppinsmedium"
+        android:fontFamily="@font/poppins"
         android:text="@string/title_home"
         android:textColor="@android:color/black"
-        android:textSize="@dimen/_14ssp" />
+        android:textSize="@dimen/_13ssp" />
 
     <include layout="@layout/layout_single_line" />
 

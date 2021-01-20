@@ -160,7 +160,7 @@ public class SplashActivity extends AppCompatActivity {
 
     private void getFireBaseToken() {
 
-        FirebaseMessaging.getInstance().setAutoInitEnabled(true);
+        FirebaseMessaging.getInstance().setAutoInitEnabled(false);
 
     }
 

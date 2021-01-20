@@ -101,6 +101,16 @@ public class TransporterActivity extends AppCompatActivity implements SmoothDate
                     }
                 });
 
+
+        findViewById(R.id.search_bar).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(new Intent(TransporterActivity.this,SearchBarActivity.class));
+
+            }
+        });
+
         areaManagerRecycler =findViewById(R.id.areaManagerRecycler);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(TransporterActivity.this,LinearLayoutManager.VERTICAL,false);
         areaManagerRecycler.setLayoutManager(linearLayoutManager);

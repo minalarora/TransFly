@@ -74,7 +74,7 @@ public class SearchFieldStafAdapter extends RecyclerView.Adapter<SearchFieldStaf
             }
         });
 
-        holder.city_name.setText(cityModel.getName());
+        holder.city_name.setText(cityModel.getName()+" ("+cityModel.getMobile()+")");
 
     }
 

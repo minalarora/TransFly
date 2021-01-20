@@ -131,20 +131,6 @@ public class AreaManagerActivity extends AppCompatActivity {
         Menu menu = navigationView.getMenu();
         MenuItem kyc_drawer = menu.findItem(R.id.kyc_drawer);
 
-        if (responseFieldStaff.getStatus() == 0) {
-
-            kyc_drawer.setTitle("KYC Details (Pending)");
-
-        } else if (responseFieldStaff.getStatus() == 1) {
-
-            kyc_drawer.setTitle("KYC Details (Under Process)");
-
-        } else {
-
-            kyc_drawer.setTitle("KYC Details (Completed)");
-
-        }
-
 //        Menu menu = navigationView.getMenu();
 //
 //        menu.findItem()

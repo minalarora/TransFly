@@ -205,7 +205,6 @@ public interface ApiEndpoints {
     @POST("/changepassword")
     Call<ResponseBody> updatePassword( @Body RequestCredentials credentials);
 
-
     //get banner
     @GET("/allbanner")
     Call<ResponseBody> getBanners(@Header("Authorization")String token);

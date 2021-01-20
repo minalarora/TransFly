@@ -2,7 +2,6 @@ package com.truck.transfly.Activty;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -163,7 +162,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onFailure(Call<ResponseToken> call, Throwable t) {
 
                 parent_of_loading.setVisibility(View.GONE);
-                serverError();
+                serverError(t);
 
             }
         });
@@ -209,7 +208,8 @@ public class LoginActivity extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Call<ResponseVehicleOwner> call, Throwable t) {
-                            serverError();
+
+                            serverError(t);
                         }
                     });
 
@@ -250,7 +250,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Call<ResponseTransporter> call, Throwable t) {
-                            serverError();
+                            serverError(t);
                         }
                     });
                     break;
@@ -288,7 +288,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Call<ResponseAreaManager> call, Throwable t) {
-                            serverError();
+                            serverError(t);
                         }
                     });
                     break;
@@ -328,13 +328,13 @@ public class LoginActivity extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Call<ResponseFieldStaff> call, Throwable t) {
-                            serverError();
+                            serverError(t);
                         }
                     });
                     break;
                 }
                 default: {
-                    serverError();
+//                    serverError();
                 }
             }
         } catch (Exception e) {
@@ -373,7 +373,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<ResponseVehicleOwner> call, Throwable t) {
-                    serverError();
+                    serverError(t);
                 }
             });
         } catch (Exception e) {
@@ -412,7 +412,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<ResponseTransporter> call, Throwable t) {
-                    serverError();
+                    serverError(t);
                 }
             });
         } catch (Exception e) {
@@ -451,7 +451,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<ResponseAreaManager> call, Throwable t) {
-                    serverError();
+                    serverError(t);
                 }
             });
         } catch (Exception e) {
@@ -490,7 +490,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<ResponseFieldStaff> call, Throwable t) {
-                    serverError();
+                    serverError(t);
                 }
             });
         } catch (Exception e) {
@@ -503,7 +503,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    private void serverError() {
+    private void serverError(Throwable t) {
 
         parent_of_loading.setVisibility(View.GONE);
 

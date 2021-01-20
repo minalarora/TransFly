@@ -14,10 +14,7 @@ class ResponseFieldStaff {
 
     @SerializedName("email")
     var email: String? = null
-
-    @SerializedName("firebase")
-    var firebase : String? = null
-
+    
     @SerializedName("bankpersonname")
     var bankpersonname: String? = null
 

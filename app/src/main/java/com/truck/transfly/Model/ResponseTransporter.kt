@@ -43,9 +43,6 @@ class ResponseTransporter {
     @SerializedName("emobile")
     var emergencyMobile: String? = null
 
-    @SerializedName("firebase")
-    var firebase : String? = null
-
     @SerializedName("pan")
     var pan: String?  = null
     override fun toString(): String {
