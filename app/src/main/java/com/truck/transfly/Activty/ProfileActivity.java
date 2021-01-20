@@ -6,7 +6,6 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -19,6 +18,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import com.bumptech.glide.Glide;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.truck.transfly.Frament.GmailUpdateFragment;
 import com.truck.transfly.Frament.MobileUpdateDailogFragment;
@@ -179,29 +179,10 @@ public class ProfileActivity extends AppCompatActivity {
              *         }
              */
 
-            if(responseVehicleOwner.getProfile()!=null)
-            {
-                if(image == null)
-                {
-                    byte[] bytes =Base64.decode(responseVehicleOwner.getProfile(),Base64.NO_WRAP);
-                    activity.pic.setImageBitmap(BitmapFactory.decodeByteArray(bytes,0,bytes.length));
-                    activity.pic.setVisibility(View.VISIBLE);
-                    Log.d("minal","1");
+            if (responseVehicleOwner.getProfile() != null) {
 
-                }
-                else if(!image.equals(responseVehicleOwner.getProfile()))
-                {
-                    byte[] bytes =Base64.decode(image,Base64.NO_WRAP);
+                Glide.with(ProfileActivity.this).load(responseVehicleOwner.getProfile()).placeholder(R.drawable.dummy_user).into(activity.pic);
 
-                    activity.pic.setImageBitmap(BitmapFactory.decodeByteArray(bytes,0,bytes.length));
-                    Log.d("minal","2");
-                }
-                else
-                {
-                    byte[] bytes =Base64.decode(responseVehicleOwner.getProfile(),Base64.NO_WRAP);
-                    activity.pic.setImageBitmap(BitmapFactory.decodeByteArray(bytes,0,bytes.length));
-                    Log.d("minal","3");
-                }
             }
 
             String substring = responseVehicleOwner.getName().substring(0, 2);
@@ -209,11 +190,11 @@ public class ProfileActivity extends AppCompatActivity {
 
             activity.panNumber.setText(responseVehicleOwner.getPan());
 
-            if(responseVehicleOwner.getStatus()==0){
+            if (responseVehicleOwner.getStatus() == 0) {
 
                 activity.completeKycParent.setVisibility(View.VISIBLE);
 
-            } else if(responseVehicleOwner.getStatus()==1){
+            } else if (responseVehicleOwner.getStatus() == 1) {
 
                 activity.pendingKycParent.setVisibility(View.VISIBLE);
 
@@ -228,25 +209,10 @@ public class ProfileActivity extends AppCompatActivity {
             activity.email.setText(responseVehicleOwner.getEmail());
             activity.phone.setText(responseVehicleOwner.getMobile());
 
-            if(responseVehicleOwner.getProfile()!=null)
-            {
-                if(image == null)
-                {
-                    byte[] bytes =Base64.decode(responseVehicleOwner.getProfile(),Base64.DEFAULT);
-                    activity.pic.setImageBitmap(BitmapFactory.decodeByteArray(bytes,0,bytes.length));
+            if (responseVehicleOwner.getProfile() != null) {
 
-                }
-                else if(image != responseVehicleOwner.getProfile() )
-                {
-                    byte[] bytes =Base64.decode(image,Base64.DEFAULT);
+                Glide.with(ProfileActivity.this).load(responseVehicleOwner.getProfile()).placeholder(R.drawable.dummy_user).into(activity.pic);
 
-                    activity.pic.setImageBitmap(BitmapFactory.decodeByteArray(bytes,0,bytes.length));
-                }
-                else
-                {
-                    byte[] bytes =Base64.decode(responseVehicleOwner.getProfile(),Base64.DEFAULT);
-                    activity.pic.setImageBitmap(BitmapFactory.decodeByteArray(bytes,0,bytes.length));
-                }
             }
 
             String substring = responseVehicleOwner.getName().substring(0, 2);
@@ -254,11 +220,11 @@ public class ProfileActivity extends AppCompatActivity {
 
             activity.panNumber.setText(responseVehicleOwner.getPan());
 
-            if(responseVehicleOwner.getStatus()==0){
+            if (responseVehicleOwner.getStatus() == 0) {
 
                 activity.completeKycParent.setVisibility(View.VISIBLE);
 
-            } else if(responseVehicleOwner.getStatus()==1){
+            } else if (responseVehicleOwner.getStatus() == 1) {
 
                 activity.pendingKycParent.setVisibility(View.VISIBLE);
 
@@ -272,25 +238,12 @@ public class ProfileActivity extends AppCompatActivity {
             activity.email.setText(responseVehicleOwner.getEmail());
             activity.phone.setText(responseVehicleOwner.getMobile());
 
-            if(responseVehicleOwner.getProfile()!=null)
-            {
-                if(image == null)
-                {
-                    byte[] bytes =Base64.decode(responseVehicleOwner.getProfile(),Base64.DEFAULT);
-                    activity.pic.setImageBitmap(BitmapFactory.decodeByteArray(bytes,0,bytes.length));
+            Log.i("TAG", "profileImage: "+responseVehicleOwner.getProfile());
 
-                }
-                else if(image != responseVehicleOwner.getProfile() )
-                {
-                    byte[] bytes =Base64.decode(image,Base64.DEFAULT);
+            if (responseVehicleOwner.getProfile() != null) {
 
-                    activity.pic.setImageBitmap(BitmapFactory.decodeByteArray(bytes,0,bytes.length));
-                }
-                else
-                {
-                    byte[] bytes =Base64.decode(responseVehicleOwner.getProfile(),Base64.DEFAULT);
-                    activity.pic.setImageBitmap(BitmapFactory.decodeByteArray(bytes,0,bytes.length));
-                }
+                Glide.with(ProfileActivity.this).load(responseVehicleOwner.getProfile()).placeholder(R.drawable.dummy_user).into(activity.pic);
+
             }
 
             String substring = responseVehicleOwner.getName().substring(0, 2);
@@ -298,11 +251,11 @@ public class ProfileActivity extends AppCompatActivity {
 
             activity.panNumber.setText(responseVehicleOwner.getPan());
 
-            if(responseVehicleOwner.getStatus()==0){
+            if (responseVehicleOwner.getStatus() == 0) {
 
                 activity.completeKycParent.setVisibility(View.VISIBLE);
 
-            } else if(responseVehicleOwner.getStatus()==1){
+            } else if (responseVehicleOwner.getStatus() == 1) {
 
                 activity.pendingKycParent.setVisibility(View.VISIBLE);
 
@@ -316,36 +269,21 @@ public class ProfileActivity extends AppCompatActivity {
             activity.email.setText(responseVehicleOwner.getEmail());
             activity.phone.setText(responseVehicleOwner.getMobile());
 
-            if(responseVehicleOwner.getProfile()!=null)
-            {
-                if(image == null)
-                {
-                    byte[] bytes =Base64.decode(responseVehicleOwner.getProfile(),Base64.DEFAULT);
-                    activity.pic.setImageBitmap(BitmapFactory.decodeByteArray(bytes,0,bytes.length));
+            if (responseVehicleOwner.getProfile() != null) {
 
-                }
-                else if(image != responseVehicleOwner.getProfile() )
-                {
-                    byte[] bytes =Base64.decode(image,Base64.DEFAULT);
+                Glide.with(ProfileActivity.this).load(responseVehicleOwner.getProfile()).placeholder(R.drawable.dummy_user).into(activity.pic);
 
-                    activity.pic.setImageBitmap(BitmapFactory.decodeByteArray(bytes,0,bytes.length));
-                }
-                else
-                {
-                    byte[] bytes =Base64.decode(responseVehicleOwner.getProfile(),Base64.DEFAULT);
-                    activity.pic.setImageBitmap(BitmapFactory.decodeByteArray(bytes,0,bytes.length));
-                }
             }
 
             String substring = responseVehicleOwner.getName().substring(0, 2);
 
             activity.panNumber.setText(responseVehicleOwner.getPan());
 
-            if(responseVehicleOwner.getStatus()==0){
+            if (responseVehicleOwner.getStatus() == 0) {
 
                 activity.completeKycParent.setVisibility(View.VISIBLE);
 
-            } else if(responseVehicleOwner.getStatus()==1){
+            } else if (responseVehicleOwner.getStatus() == 1) {
 
                 activity.pendingKycParent.setVisibility(View.VISIBLE);
 
@@ -377,7 +315,7 @@ public class ProfileActivity extends AppCompatActivity {
                     @Override
                     public void onClick(int i) {
 
-                        if(i==0){
+                        if (i == 0) {
 
                             // update soon
 
@@ -385,10 +323,10 @@ public class ProfileActivity extends AppCompatActivity {
 
                             activity.phone.setText(s);
 
-                            RequestMobile requestMobile=new RequestMobile();
+                            RequestMobile requestMobile = new RequestMobile();
                             requestMobile.setMobile(s);
 
-                            updateMobile(PreferenceUtil.getData(ProfileActivity.this,"token"),requestMobile);
+                            updateMobile(PreferenceUtil.getData(ProfileActivity.this, "token"), requestMobile);
 
                         }
 
@@ -401,12 +339,11 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
 
-    private void updateMobile(String token, RequestMobile mobile)
-    {
+    private void updateMobile(String token, RequestMobile mobile) {
 
         parent_of_loading.setVisibility(View.VISIBLE);
 
-        api.updateMobile(token,mobile).enqueue(new Callback<ResponseBody>() {
+        api.updateMobile(token, mobile).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
@@ -437,7 +374,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         String s = token.split(":")[0];
 
-        switch (s){
+        switch (s) {
 
             case "vehicleowner":
 
@@ -618,17 +555,16 @@ public class ProfileActivity extends AppCompatActivity {
         } catch (Exception e) {
 
 
-
         }
     }
 
     private void setStatusOnProfile(@NonNull String responseFieldStaff) {
 
-        if(responseFieldStaff.equals("0")){
+        if (responseFieldStaff.equals("0")) {
 
             activity.kycStatus.setText("PENDING");
 
-        } else if(responseFieldStaff.equals("1")){
+        } else if (responseFieldStaff.equals("1")) {
 
             activity.kycStatus.setText("UNDER PROCESS");
 
@@ -652,8 +588,8 @@ public class ProfileActivity extends AppCompatActivity {
 
     public void changePic(View view) {
         ImagePicker.Companion.with(ProfileActivity.this)//Crop image(Optional), Check Customization for more option
-                .compress(128)			//Final image size will be less than 1 MB(Optional)
-                .maxResultSize(1080, 1080)	//Final image resolution will be less than 1080 x 1080(Optional)
+                .compress(256)            //Final image size will be less than 1 MB(Optional)
+                .maxResultSize(1080, 1080)    //Final image resolution will be less than 1080 x 1080(Optional)
                 .start(1);
     }
 
@@ -663,23 +599,19 @@ public class ProfileActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
 
-        if(resultCode == Activity.RESULT_OK && requestCode == 1)
-        {
-
+        if (resultCode == Activity.RESULT_OK && requestCode == 1) {
 
 
 //            activity.doc1.setImageURI(fileUri)
-
-
 
 
             try {
                 fileUri = data.getData();
                 activity.pic.setImageURI(fileUri);
                 File file = ImagePicker.Companion.getFile(data);
-                image  = Base64.encodeToString( Files.readAllBytes(file.toPath()), Base64.NO_WRAP);
+                image = Base64.encodeToString(Files.readAllBytes(file.toPath()), Base64.NO_WRAP);
                 ((TransflyApplication) getApplication()).getResponseVehicleOwner().setProfile(image);
-                updateImage(token,image);
+                updateImage(token, image);
 
             } catch (IOException e) {
 
@@ -689,14 +621,13 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
 
-    private void updateImage(String token,String image)
-    {
+    private void updateImage(String token, String image) {
         ResponseProfile profile = new ResponseProfile();
         profile.setProfile(image);
-        api.updateProfile(token,profile).enqueue(new Callback<ResponseBody>() {
+        api.updateProfile(token, profile).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                Log.d("minal","" + response.code()+ response.message());
+                Log.d("minal", "" + response.code() + response.message());
             }
 
             @Override
