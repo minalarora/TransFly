@@ -11,8 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.truck.transfly.Model.PositionModel;
 import com.truck.transfly.Model.RequestArea;
+import com.truck.transfly.Model.ResponseLoading;
 import com.truck.transfly.R;
 
 import java.util.List;
@@ -22,25 +22,36 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.viewholder> {
 
     private final Context context;
+    private final List<ResponseLoading> responseLoadingList;
     private List<RequestArea> positionModelList;
     private onClickListener onClickListener;
+    private boolean loading;
 
-    public LocationAdapter(Context context,List<RequestArea> positionModels){
+    public LocationAdapter(Context context, List<RequestArea> positionModels, List<ResponseLoading> responseLoadingList) {
 
-        this.context=context;
-        this.positionModelList=positionModels;
+        this.context = context;
+        this.positionModelList = positionModels;
+        this.responseLoadingList = responseLoadingList;
 
     }
 
-    public interface onClickListener{
+    public void setLoading(boolean b) {
+
+        this.loading = b;
+
+    }
+
+    public interface onClickListener {
 
         void onClick(RequestArea requestArea);
 
+        void onClickLoading(ResponseLoading requestArea);
+
     }
 
-    public void setOnClickListener(onClickListener onClickListener){
+    public void setOnClickListener(onClickListener onClickListener) {
 
-        this.onClickListener=onClickListener;
+        this.onClickListener = onClickListener;
 
     }
 
@@ -48,7 +59,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.viewho
     @Override
     public viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        LayoutInflater layoutInflater=LayoutInflater.from(context);
+        LayoutInflater layoutInflater = LayoutInflater.from(context);
         View inflate = layoutInflater.inflate(R.layout.location_adapter_layout, parent, false);
 
         return new viewholder(inflate);
@@ -60,7 +71,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.viewho
         holder.position_any.setVisibility(View.GONE);
         holder.position_zero.setVisibility(View.GONE);
 
-        if(position==0) {
+        if (position == 0) {
 
             holder.position_zero.setVisibility(View.VISIBLE);
 
@@ -75,42 +86,60 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.viewho
 
             return;
         }
+        else if( position > 0 && position < (positionModelList.size()+1)) {
+            RequestArea requestArea = positionModelList.get(position - 1);
+            holder.position_any.setVisibility(View.VISIBLE);
 
-        RequestArea requestArea = positionModelList.get(position-1);
-        holder.position_any.setVisibility(View.VISIBLE);
+            holder.cityName.setText(requestArea.getName());
+            Glide.with(context).load(requestArea.getAreaimage()).into(holder.circleImageView);
 
-        holder.cityName.setText(requestArea.getName());
-        Glide.with(context).load(requestArea.getAreaimage()).into(holder.circleImageView);
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                    onClickListener.onClick(requestArea);
 
-                onClickListener.onClick(requestArea);
+                }
+            });
+        }
+        else {
 
-            }
-        });
+            ResponseLoading loading = responseLoadingList.get(position-(positionModelList.size()+1));
+            holder.position_any.setVisibility(View.VISIBLE);
+
+            holder.cityName.setText(loading.getLoadingName());
+            Glide.with(context).load("https://transfly-ftr2t.ondigitalocean.app/loading/"+loading.getLoadingName()).into(holder.circleImageView);
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    onClickListener.onClickLoading(loading);
+
+                }
+            });
+        }
 
     }
 
     @Override
     public int getItemCount() {
-        return positionModelList.size()+1;
+        return positionModelList.size() + responseLoadingList.size()+1;
     }
 
     public class viewholder extends RecyclerView.ViewHolder {
 
-        private LinearLayout position_any,position_zero;
+        private LinearLayout position_any, position_zero;
         private TextView cityName;
         private CircleImageView circleImageView;
 
         public viewholder(@NonNull View itemView) {
             super(itemView);
 
-            position_zero=itemView.findViewById(R.id.position_zero);
-            position_any=itemView.findViewById(R.id.postion_any);
-            cityName=itemView.findViewById(R.id.cityName);
-            circleImageView=itemView.findViewById(R.id.circularImage);
+            position_zero = itemView.findViewById(R.id.position_zero);
+            position_any = itemView.findViewById(R.id.postion_any);
+            cityName = itemView.findViewById(R.id.cityName);
+            circleImageView = itemView.findViewById(R.id.circularImage);
 
         }
     }

@@ -103,7 +103,7 @@
             android:paddingTop="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:text="Please Type Your Mobile Number, we will send you a verification code."
+            android:text="Please type your mobile number, we will send you a verification code."
             android:layout_gravity="center_horizontal"
             android:textColor="@color/white"
             android:textSize="14dp"

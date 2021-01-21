@@ -31,13 +31,13 @@
             android:icon="@drawable/ic_action_my_vehicle" />
 
         <item
-            android:title="Add Vehicle"
+            android:title="Add Vehicles"
             android:id="@+id/add_vehicle"
             android:icon="@drawable/ic_action_add_vehicle" />
 
         <item
             android:id="@+id/ticket_drawer"
-            android:title="On-Road Assistance?"
+            android:title="On-Road Assistance"
             android:icon="@drawable/ic_action_complain_text"/>
 
         <item

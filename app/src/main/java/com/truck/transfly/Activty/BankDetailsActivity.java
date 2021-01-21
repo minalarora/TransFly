@@ -364,7 +364,7 @@ public class BankDetailsActivity extends AppCompatActivity {
 
                                     setDataOnModels();
 
-                                    Toast.makeText(context, "Update Successfully", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(context, "Update Successful", Toast.LENGTH_SHORT).show();
 
                                     finish();
 

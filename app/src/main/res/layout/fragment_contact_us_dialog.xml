@@ -10,71 +10,34 @@
     >
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="30dp"
-        android:fontFamily="@font/poppinsmedium"
-        android:gravity="center"
-        android:id="@+id/otp_string_text"
-        android:lineSpacingExtra="6dp"
-        android:paddingTop="8dp"
-        android:textColor="@color/black"
-        android:textSize="14sp"
-        android:visibility="visible" />
-
-    <com.mukesh.OtpView
-        android:id="@+id/otp_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="15dp"
-        android:inputType="number"
-        android:textColor="@color/quantum_pink"
-        app:OtpItemCount="4"
-        app:OtpViewType="line" />
+        android:text="Contact Us"
+        android:id="@+id/text"
+        android:layout_marginTop="@dimen/_15ssp"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        android:layout_marginStart="@dimen/_15ssp"
+        android:fontFamily="@font/open_sans_semibold"
+        />
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/worksansregular"
-            android:gravity="center"
-            android:padding="6dp"
-            android:text="Did not Recieve?"
-            android:textColor="@color/black"
-            android:textSize="14dp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/resend_otp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/worksansregular"
-            android:gravity="center"
-            android:padding="6dp"
-            android:text="Resend OTP"
-            android:textColor="@color/quantum_yellow"
-            android:textSize="14dp"
-            android:textStyle="bold" />
-
-
-    </LinearLayout>
+        android:text="Connect us via "
+        android:layout_marginTop="@dimen/_6ssp"
+        android:textSize="14sp"
+        android:layout_marginBottom="@dimen/_12ssp"
+        android:textColor="@android:color/black"
+        android:layout_marginStart="@dimen/_15ssp"
+        android:fontFamily="@font/opensansregular"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_alignParentBottom="true"
         android:background="@color/white"
-        android:layout_marginTop="@dimen/_12ssp"
-        android:layout_height="42dp">
+        android:layout_height="46dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -82,22 +45,37 @@
             android:foreground="?attr/selectableItemBackground"
             android:clickable="true"
             android:focusable="true"
-            android:id="@+id/cancel"
+            android:id="@+id/phone"
             android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:orientation="horizontal"
+                android:layout_centerInParent="true"
+                android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="@dimen/_19ssp"
+                android:layout_height="@dimen/_19ssp"
+                android:src="@drawable/ic_phone_call"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:fontFamily="@font/open_sans_semibold"
-                android:text="Cancel"
+                android:text="Phone"
+                android:layout_marginStart="@dimen/_12ssp"
                 android:layout_centerInParent="true"
                 android:drawablePadding="@dimen/_7ssp"
                 android:gravity="center_horizontal|center_vertical"
                 android:layout_gravity="center_vertical"
-                android:textAllCaps="true"
+                android:textAllCaps="false"
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:textSize="12dp" />
+
+            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
@@ -119,26 +97,41 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_weight="1"
-            android:id="@+id/otpSubmit"
+            android:id="@+id/telegram"
             android:foreground="?attr/selectableItemBackground"
             android:clickable="true"
             android:focusable="true"
             android:layout_height="match_parent">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:orientation="horizontal"
                 android:layout_centerInParent="true"
-                android:layout_gravity="center_vertical"
-                android:drawablePadding="@dimen/_8ssp"
-                android:fontFamily="@font/open_sans_semibold"
-                android:gravity="center_horizontal|center_vertical"
-                android:text="Confirm OTP"
-                android:textAllCaps="true"
-                android:textColor="@color/quantum_pink"
-                android:textSize="12dp"
-                android:textStyle="bold"
-                />
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="@dimen/_19ssp"
+                    android:layout_height="@dimen/_19ssp"
+                    android:src="@drawable/ic_telegram"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="@dimen/_12ssp"
+                    android:layout_gravity="center_vertical"
+                    android:drawablePadding="@dimen/_8ssp"
+                    android:fontFamily="@font/open_sans_semibold"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="Telegram"
+                    android:textAllCaps="false"
+                    android:textColor="#013220"
+                    android:textSize="12dp"
+                    android:textStyle="bold"
+                    />
+
+            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"

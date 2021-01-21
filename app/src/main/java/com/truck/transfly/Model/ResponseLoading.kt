@@ -11,4 +11,7 @@ class ResponseLoading {
 
     @SerializedName("etl")
     var etl:Int? = 0
+
+
+    var loadingimage: String? = "https://transfly-ftr2t.ondigitalocean.app/loading/" + loadingName
 }

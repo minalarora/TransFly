@@ -126,7 +126,7 @@ public class SearchBarActivity extends AppCompatActivity {
         });
 
         to_search_parent = findViewById(R.id.to_search_parent);
-        to_search_parent.setVisibility(View.GONE);
+//        to_search_parent.setVisibility(View.GONE);
 
         findViewById(R.id.creaate_booking).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,7 +137,7 @@ public class SearchBarActivity extends AppCompatActivity {
 
                 if(TextUtils.isEmpty(fromSearch.getText().toString())){
 
-                    fromSearch.setError("From Destination is Empty*");
+                    fromSearch.setError("From Mines is Empty*");
                     fromSearch.requestFocus();
 
                 }else if(!isResponseMines(fromSearch.getText().toString())){
@@ -147,7 +147,7 @@ public class SearchBarActivity extends AppCompatActivity {
 
                 }  else if(TextUtils.isEmpty(to_search.getText().toString())){
 
-                    to_search.setError("to Destination is Empty*");
+                    to_search.setError("to Loading is Empty*");
                     to_search.requestFocus();
 
                 } else if(!isLoadingAvailable(to_search.getText().toString())){
@@ -227,7 +227,7 @@ public class SearchBarActivity extends AppCompatActivity {
 
                     listViewLoading.setVisibility(View.GONE);
                     recyclerView.setVisibility(View.VISIBLE);
-                    to_search_parent.setVisibility(View.GONE);
+//                    to_search_parent.setVisibility(View.GONE);
                     searchAdapter.notifyDataSetChanged();
 
                 }

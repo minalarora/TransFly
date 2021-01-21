@@ -52,7 +52,7 @@ public class OtpValidation extends AppCompatActivity implements VerificationList
 
         TextView otp_string_text=findViewById(R.id.otp_string_text);
 
-        otp_string_text.setText("We have Sent the OTP in your registered mobile number xxxxxx"+lastFourDigits);
+        otp_string_text.setText("We have sent the OTP to your mobile number xxxxxx"+lastFourDigits);
 
         resendOtp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,7 +99,7 @@ public class OtpValidation extends AppCompatActivity implements VerificationList
 
                 if(TextUtils.isEmpty(otpView.getText().toString())){
 
-                    Toast.makeText(OtpValidation.this, "Fill Otp, which is send on your number!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(OtpValidation.this, "Fill OTP, which is send on your number!", Toast.LENGTH_SHORT).show();
 
                 } else {
 
@@ -168,7 +168,7 @@ public class OtpValidation extends AppCompatActivity implements VerificationList
                 .setVerifyWithoutOtp(true)//direct verification while connect with mobile network
                 .setAutoVerification(OtpValidation.this)//Auto read otp from Sms And Verify
                 .setSenderId("ABCDEF")
-                .setMessage("##OTP## is your confirmation on OTP, Please do not share your Otp and confidential info with anynoe.TransFly")
+                .setMessage("##OTP## is your confirmation on OTP, Please do not share your OTP and confidential info with anyone.TransFly")
                 .setOtpLength(4)
                 .setOtpExpireInMinute(10)
                 .setVerificationCallBack(this).build();
@@ -195,7 +195,7 @@ public class OtpValidation extends AppCompatActivity implements VerificationList
 
                 } else if (responseCode == SendOTPResponseCode.SMS_SUCCESSFUL_SEND_TO_NUMBER || responseCode == SendOTPResponseCode.DIRECT_VERIFICATION_FAILED_SMS_SUCCESSFUL_SEND_TO_NUMBER) {
 
-                    Toast.makeText(OtpValidation.this, "OTP Sent to Registered Mobile Number", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(OtpValidation.this, "OTP sent to your mobile number", Toast.LENGTH_SHORT).show();
 
                 } else {
 

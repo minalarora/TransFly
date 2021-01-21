@@ -42,6 +42,8 @@ public class MyVehicleAdapter extends RecyclerView.Adapter<MyVehicleAdapter.view
 
         ResponseVehicle responseVehicle = responseVehicleList.get(position);
 
+        holder.vehicle_number_series.setText("Vehicle "+String.valueOf(position+1));
+
         holder.vehicle_number.setText(responseVehicle.getNumber());
         holder.vehicle_name.setText(responseVehicle.getVehiclename());
 
@@ -66,7 +68,7 @@ public class MyVehicleAdapter extends RecyclerView.Adapter<MyVehicleAdapter.view
 
     public class viewholder extends RecyclerView.ViewHolder {
 
-        private TextView vehicle_name,vehicle_number,status,date_created;
+        private TextView vehicle_name,vehicle_number,status,date_created,vehicle_number_series;
 
         public viewholder(@NonNull View itemView) {
             super(itemView);
@@ -75,6 +77,7 @@ public class MyVehicleAdapter extends RecyclerView.Adapter<MyVehicleAdapter.view
             vehicle_number=itemView.findViewById(R.id.vehicle_number);
             status=itemView.findViewById(R.id.status);
             date_created=itemView.findViewById(R.id.date_created);
+            vehicle_number_series=itemView.findViewById(R.id.vehicle_number_series);
 
         }
     }

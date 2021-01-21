@@ -1,11 +1,15 @@
 package com.truck.transfly.Activty;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -19,7 +23,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.target.CustomTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.github.dhaval2404.imagepicker.ImagePicker;
+import com.squareup.picasso.Picasso;
 import com.truck.transfly.Frament.GmailUpdateFragment;
 import com.truck.transfly.Frament.MobileUpdateDailogFragment;
 import com.truck.transfly.Frament.OtpDialogFragment;
@@ -33,12 +41,22 @@ import com.truck.transfly.R;
 import com.truck.transfly.databinding.ActivityProfileBinding;
 import com.truck.transfly.utils.ApiClient;
 import com.truck.transfly.utils.ApiEndpoints;
+import com.truck.transfly.utils.EndApi;
 import com.truck.transfly.utils.PreferenceUtil;
 import com.truck.transfly.utils.TransflyApplication;
 
+import net.gotev.uploadservice.MultipartUploadRequest;
+import net.gotev.uploadservice.ServerResponse;
+import net.gotev.uploadservice.UploadInfo;
+import net.gotev.uploadservice.UploadNotificationConfig;
+import net.gotev.uploadservice.UploadStatusDelegate;
+
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.nio.file.Files;
+import java.util.UUID;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -181,7 +199,7 @@ public class ProfileActivity extends AppCompatActivity {
 
             if (responseVehicleOwner.getProfile() != null) {
 
-                Glide.with(ProfileActivity.this).load(responseVehicleOwner.getProfile()).placeholder(R.drawable.dummy_user).into(activity.pic);
+                Glide.with(ProfileActivity.this).load(responseVehicleOwner.getProfile()).placeholder(R.drawable.dummy_user).skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.NONE).into(activity.pic);
 
             }
 
@@ -211,7 +229,7 @@ public class ProfileActivity extends AppCompatActivity {
 
             if (responseVehicleOwner.getProfile() != null) {
 
-                Glide.with(ProfileActivity.this).load(responseVehicleOwner.getProfile()).placeholder(R.drawable.dummy_user).into(activity.pic);
+                Glide.with(ProfileActivity.this).load(responseVehicleOwner.getProfile()).placeholder(R.drawable.dummy_user).skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.NONE).into(activity.pic);
 
             }
 
@@ -242,7 +260,7 @@ public class ProfileActivity extends AppCompatActivity {
 
             if (responseVehicleOwner.getProfile() != null) {
 
-                Glide.with(ProfileActivity.this).load(responseVehicleOwner.getProfile()).placeholder(R.drawable.dummy_user).into(activity.pic);
+                Glide.with(ProfileActivity.this).load(responseVehicleOwner.getProfile()).placeholder(R.drawable.dummy_user).skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.NONE).into(activity.pic);
 
             }
 
@@ -271,7 +289,9 @@ public class ProfileActivity extends AppCompatActivity {
 
             if (responseVehicleOwner.getProfile() != null) {
 
-                Glide.with(ProfileActivity.this).load(responseVehicleOwner.getProfile()).placeholder(R.drawable.dummy_user).into(activity.pic);
+//                Picasso.get().load(responseVehicleOwner.getProfile()).placeholder(R.drawable.dummy_user).into(activity.pic);
+
+                Glide.with(ProfileActivity.this).load(responseVehicleOwner.getProfile()).placeholder(R.drawable.dummy_user).skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.NONE).into(activity.pic);
 
             }
 
@@ -607,11 +627,16 @@ public class ProfileActivity extends AppCompatActivity {
 
             try {
                 fileUri = data.getData();
-                activity.pic.setImageURI(fileUri);
+
+                Glide.with(ProfileActivity.this).load(fileUri).placeholder(R.drawable.dummy_user).into(activity.pic);
+
                 File file = ImagePicker.Companion.getFile(data);
                 image = Base64.encodeToString(Files.readAllBytes(file.toPath()), Base64.NO_WRAP);
                 ((TransflyApplication) getApplication()).getResponseVehicleOwner().setProfile(image);
-                updateImage(token, image);
+
+                uploadMultipartSingle(fileUri);
+
+//                updateImage(token, image);
 
             } catch (IOException e) {
 
@@ -620,6 +645,78 @@ public class ProfileActivity extends AppCompatActivity {
 
         }
     }
+
+    private void uploadMultipartSingle(Uri image) {
+
+        parent_of_loading.setVisibility(View.VISIBLE);
+
+        MultipartUploadRequest multipartUploadRequest = null;
+        try {
+            multipartUploadRequest = new MultipartUploadRequest(this, EndApi.VEHICLE_OWNER_KYC)
+                    .setNotificationConfig(new UploadNotificationConfig())
+                    .setMaxRetries(5)
+                    .addHeader("Authorization", PreferenceUtil.getData(ProfileActivity.this,"token"))
+                    .setUtf8Charset()
+                    .setMethod("POST")
+                    .setDelegate(new UploadStatusDelegate() {
+                        @Override
+                        public void onProgress(Context context, UploadInfo uploadInfo) {
+
+
+                        }
+
+                        @Override
+                        public void onError(Context context, UploadInfo uploadInfo, ServerResponse serverResponse, Exception exception) {
+
+                            parent_of_loading.setVisibility(View.GONE);
+
+                            Log.i("TAG", "onError: " + serverResponse.getBodyAsString());
+
+                            Toast.makeText(context, "Error" + serverResponse.getBodyAsString(), Toast.LENGTH_SHORT).show();
+
+                        }
+
+                        @Override
+                        public void onCompleted(final Context context, UploadInfo uploadInfo, ServerResponse serverResponse) {
+
+                            new Handler(getMainLooper()).postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+
+                                    parent_of_loading.setVisibility(View.GONE);
+
+                                }
+                            }, 2000);
+
+                        }
+
+                        @Override
+                        public void onCancelled(Context context, UploadInfo uploadInfo) {
+
+                            parent_of_loading.setVisibility(View.GONE);
+
+
+                        }
+
+
+                    });
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+
+            String listing_logo = UUID.randomUUID().toString().replaceAll("-", "");
+
+
+            multipartUploadRequest.addFileToUpload(image.getPath(), "profile", listing_logo, "UTF-8");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        multipartUploadRequest.startUpload();
+
+    }
+
 
     private void updateImage(String token, String image) {
         ResponseProfile profile = new ResponseProfile();

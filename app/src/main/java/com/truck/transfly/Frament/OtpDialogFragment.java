@@ -127,7 +127,7 @@ public class OtpDialogFragment extends DialogFragment implements VerificationLis
 
                 if(isTimerOn){
 
-                    Toast.makeText(fragmentActivity, "Wait For Otp!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(fragmentActivity, "Wait For OTP!", Toast.LENGTH_SHORT).show();
 
                 } else if(!isTimerOn){
 
@@ -200,7 +200,7 @@ public class OtpDialogFragment extends DialogFragment implements VerificationLis
 
                 } else if (responseCode == SendOTPResponseCode.SMS_SUCCESSFUL_SEND_TO_NUMBER || responseCode == SendOTPResponseCode.DIRECT_VERIFICATION_FAILED_SMS_SUCCESSFUL_SEND_TO_NUMBER) {
 
-                    Toast.makeText(fragmentActivity, "Otp Send to Mobile Number", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(fragmentActivity, "OTP sent to your mobile number", Toast.LENGTH_SHORT).show();
 
                 } else {
 
@@ -214,7 +214,7 @@ public class OtpDialogFragment extends DialogFragment implements VerificationLis
 
                     } else {
 
-                        Toast.makeText(fragmentActivity, "Wrong Otp! Try Again", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(fragmentActivity, "Wrong OTP! Try Again", Toast.LENGTH_SHORT).show();
 
                     }
 
