@@ -337,7 +337,7 @@
                                 android:layout_weight="1"
                                 android:alpha="0.7"
                                 android:fontFamily="@font/poppins"
-                                android:text="Tonnege"
+                                android:text="Tonnage"
                                 android:textColor="@color/black"
                                 android:textSize="13dp" />
 
@@ -446,7 +446,7 @@
                                 android:layout_weight="1"
                                 android:alpha="0.7"
                                 android:fontFamily="@font/poppins"
-                                android:text="hsd"
+                                android:text="HSD"
                                 android:textColor="@color/black"
                                 android:textSize="13dp" />
 
@@ -483,7 +483,7 @@
                                 android:layout_weight="1"
                                 android:alpha="0.7"
                                 android:fontFamily="@font/poppins"
-                                android:text="cash"
+                                android:text="Cash"
                                 android:textColor="@color/black"
                                 android:textSize="13dp" />
 
@@ -519,7 +519,7 @@
                                 android:layout_weight="1"
                                 android:alpha="0.7"
                                 android:fontFamily="@font/poppins"
-                                android:text="Tds"
+                                android:text="TDS"
                                 android:textColor="@color/black"
                                 android:textSize="13dp" />
 
@@ -556,7 +556,7 @@
                                 android:layout_weight="1"
                                 android:alpha="0.7"
                                 android:fontFamily="@font/poppins"
-                                android:text="office charge"
+                                android:text="Office Charge"
                                 android:textColor="@color/black"
                                 android:textSize="13dp" />
 
@@ -652,6 +652,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_8ssp"
                             android:layout_marginTop="@dimen/_7ssp"
+                            android:id="@+id/challan_transporter_parent"
                             android:layout_marginEnd="@dimen/_8ssp"
                             android:orientation="horizontal"
                             android:padding="@dimen/_6ssp"
@@ -665,7 +666,7 @@
                                 android:layout_weight="1"
                                 android:alpha="0.7"
                                 android:fontFamily="@font/poppins"
-                                android:text="Challan Transporter"
+                                android:text="Challan To Transporter"
                                 android:textColor="@color/black"
                                 android:textSize="13dp" />
 

@@ -308,7 +308,7 @@
                     android:fontFamily="@font/poppins"
                     android:paddingStart="@dimen/_4ssp"
                     android:gravity="center_vertical|left"
-                    android:text="I want to recieve updates &amp; promotional information from Transfly"
+                    android:text="I want to receive updates &amp; promotional information from Transfly"
                     android:textSize="8dp" />
 
                 <RelativeLayout

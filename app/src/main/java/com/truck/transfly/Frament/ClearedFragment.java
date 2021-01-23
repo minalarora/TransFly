@@ -88,6 +88,7 @@ public class ClearedFragment extends Fragment implements SmoothDateRangePickerFr
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(fragmentActivity,LinearLayoutManager.VERTICAL,false);
         areaManagerRecycler.setLayoutManager(linearLayoutManager);
         fieldStafAdapter=new TransporterAdapter(fragmentActivity,invoicesList);
+        fieldStafAdapter.setVehicleOwnwer(true);
         fieldStafAdapter.setDecideKeywords(2);
         areaManagerRecycler.setAdapter(fieldStafAdapter);
 

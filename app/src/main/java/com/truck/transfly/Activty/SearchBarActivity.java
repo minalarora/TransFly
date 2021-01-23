@@ -239,6 +239,10 @@ public class SearchBarActivity extends AppCompatActivity {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
 
+                listViewLoading.setVisibility(View.VISIBLE);
+                recyclerView.setVisibility(View.GONE);
+                adapter.notifyDataSetChanged();
+
             }
         });
 

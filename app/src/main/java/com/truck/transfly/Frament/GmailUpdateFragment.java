@@ -163,7 +163,7 @@ public class GmailUpdateFragment extends DialogFragment {
 
                    setDataOnModels(email);
 
-                    Toast.makeText(fragmentActivity, "Update Email Successfully", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(fragmentActivity, "Email Change Successful", Toast.LENGTH_SHORT).show();
 
                     onClickListener.onClick(email.getEmail());
 

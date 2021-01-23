@@ -66,7 +66,7 @@ public class FieldStafBookingConfirmationActivity extends AppCompatActivity {
 
         activity.mobileNumber.setText(responseBooking.getVehicleownermobile());
         activity.ownerName.setText(responseBooking.getVehicleowner());
-        activity.toFromDest.setText(responseBooking.getLoading() + " - " + responseBooking.getMinename());
+        activity.toFromDest.setText(responseBooking.getMinename() + " - " + responseBooking.getLoading());
 
         parent_of_loading = findViewById(R.id.parent_of_loading);
         parent_of_loading.setVisibility(View.GONE);

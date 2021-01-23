@@ -32,7 +32,7 @@ public class UserChangedActivity extends AppCompatActivity {
 
         mobileNo = getIntent().getStringExtra("mobileNo");
 
-        whoModelList.add(MyUtils.returnModel(R.drawable.vehicleowner, "Vehicle Owner", "Kyc Needed", "PAN - TDS", "vehicleowner"));
+        whoModelList.add(MyUtils.returnModel(R.drawable.ic_driver, "Vehicle Owner", "Kyc Needed", "PAN - TDS", "vehicleowner"));
         whoModelList.add(MyUtils.returnModel(R.drawable.vehicleowner, "Office Staff", "Kyc Needed", "GST - STA - PAN - AADHAAR", "office_staff"));
 
         activity.back.setOnClickListener(new View.OnClickListener() {

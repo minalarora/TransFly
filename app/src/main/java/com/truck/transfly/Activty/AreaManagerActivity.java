@@ -20,21 +20,29 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.leavjenn.smoothdaterangepicker.date.SmoothDateRangePickerFragment;
 import com.truck.transfly.Adapter.ViewPagerAdapter;
 import com.truck.transfly.Frament.ShowBooking;
 import com.truck.transfly.Frament.ShowInvoiceFragment;
 import com.truck.transfly.Model.ResponseAreaManager;
 import com.truck.transfly.Model.ResponseFirebase;
+import com.truck.transfly.Model.ResponseVehicleOwner;
 import com.truck.transfly.R;
 import com.truck.transfly.utils.ApiClient;
 import com.truck.transfly.utils.ApiEndpoints;
 import com.truck.transfly.utils.PreferenceUtil;
 import com.truck.transfly.utils.TransflyApplication;
+
+import org.joda.time.DateTime;
+
+import java.util.Calendar;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -42,7 +50,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class AreaManagerActivity extends AppCompatActivity {
+public class AreaManagerActivity extends AppCompatActivity implements SmoothDateRangePickerFragment.OnDateRangeSetListener  {
 
     private ImageView viewById;
     private DrawerLayout drawerLayout;
@@ -50,6 +58,7 @@ public class AreaManagerActivity extends AppCompatActivity {
     private ApiEndpoints api;
     private String token;
     private FrameLayout parent_of_loading;
+    private ImageView image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +80,24 @@ public class AreaManagerActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 startActivity(new Intent(AreaManagerActivity.this,FindFieldStafActivity.class));
+
+            }
+        });
+
+        findViewById(R.id.export_report).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                Calendar now = Calendar.getInstance();
+
+                SmoothDateRangePickerFragment smoothDateRangePickerFragment = SmoothDateRangePickerFragment.newInstance(AreaManagerActivity.this::onDateRangeSet, now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH));
+
+                smoothDateRangePickerFragment.setAccentColor(R.color.project_color);
+
+                smoothDateRangePickerFragment.setThemeDark(false);
+
+                smoothDateRangePickerFragment.show(getFragmentManager(), "smoothDateRangePicker");
 
             }
         });
@@ -109,14 +136,28 @@ public class AreaManagerActivity extends AppCompatActivity {
         TextView customerName = headerLayout.findViewById(R.id.customer_name);
         TextView number = headerLayout.findViewById(R.id.number);
 
+        image = headerLayout.findViewById(R.id.profile_image);
+
+        image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(new Intent(AreaManagerActivity.this, ProfileActivity.class));
+
+                Toast.makeText(AreaManagerActivity.this, "You can change your profile in My Profile section", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+
         headerLayout.findViewById(R.id.appSetting).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                Uri uri = Uri.fromParts("package", getPackageName(), null);
-                intent.setData(uri);
-                startActivity(intent);
+//                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+//                Uri uri = Uri.fromParts("package", getPackageName(), null);
+//                intent.setData(uri);
+//                startActivity(intent);
 
             }
         });
@@ -131,15 +172,18 @@ public class AreaManagerActivity extends AppCompatActivity {
         Menu menu = navigationView.getMenu();
         MenuItem kyc_drawer = menu.findItem(R.id.kyc_drawer);
 
+        MenuItem allotMines=menu.findItem(R.id.allot_mines);
+        allotMines.setVisible(true);
+
 //        Menu menu = navigationView.getMenu();
 //
 //        menu.findItem()
 
-        viewById = findViewById(R.id.drawer_icon);
+        this.viewById = findViewById(R.id.drawer_icon);
 
         drawerLayout = findViewById(R.id.drawer_layout);
 
-        viewById.setOnClickListener(new View.OnClickListener() {
+        this.viewById.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -154,6 +198,15 @@ public class AreaManagerActivity extends AppCompatActivity {
 
             }
         });
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        ResponseAreaManager responseFieldStaff = ((TransflyApplication) getApplication()).getResponseAreaManager();
+        Glide.with(AreaManagerActivity.this).load(responseFieldStaff.getProfile()).placeholder(R.drawable.dummy_user).skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.NONE).into(image);
 
     }
 
@@ -266,6 +319,13 @@ public class AreaManagerActivity extends AppCompatActivity {
 
                         break;
 
+
+                    case R.id.allot_mines:
+
+                        startActivity(new Intent(AreaManagerActivity.this,FindFieldStafActivity.class));
+
+                        break;
+
                     case R.id.rate_etl:
 
                         startActivity(new Intent(AreaManagerActivity.this, SearchBarActivity.class));
@@ -300,6 +360,24 @@ public class AreaManagerActivity extends AppCompatActivity {
             }
         });
 
+
+    }
+
+    @Override
+    public void onDateRangeSet(SmoothDateRangePickerFragment view, int yearStart, int monthStart, int dayStart, int yearEnd, int monthEnd, int dayEnd) {
+
+        ResponseAreaManager responseVehicleOwner = ((TransflyApplication) getApplication()).getResponseAreaManager();
+
+        DateTime dateStart=new DateTime(yearStart,monthStart+1,dayStart,new DateTime().getHourOfDay(),new DateTime().getMinuteOfHour());
+
+        DateTime dateEnd=new DateTime(yearEnd,monthEnd+1,dayEnd,new DateTime().getHourOfDay(),new DateTime().getMinuteOfHour()).plusDays(1);
+
+        Intent intent=new Intent(AreaManagerActivity.this,WebViewActivity.class);
+        intent.putExtra("from_time",dateStart.getMillis());
+        intent.putExtra("to_time",dateEnd.getMillis());
+        intent.putExtra("mobile",responseVehicleOwner.getMobile());
+        intent.putExtra("keywords","mobinvoiceareamanager");
+        startActivity(intent);
 
     }
 }

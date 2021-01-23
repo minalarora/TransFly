@@ -102,7 +102,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
                     finish();
 
-                    Toast.makeText(ChangePasswordActivity.this, "Change Password Successfully", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ChangePasswordActivity.this, "Password Change Successful", Toast.LENGTH_SHORT).show();
 
 
                 } else {

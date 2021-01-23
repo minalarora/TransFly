@@ -396,7 +396,7 @@
                     android:layout_marginEnd="@dimen/_20ssp"
                     android:layout_marginTop="20dp"
                     android:alpha="0.6"
-                    android:text="Please Complete Your KYC for uninterrupted services from your app."
+                    android:text="Please complete your KYC for an uninterrupted user experience and service from the app"
                     android:layout_marginBottom="@dimen/_10ssp"
                     android:layout_gravity="center_horizontal"
                     android:textColor="@color/black"

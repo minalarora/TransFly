@@ -47,12 +47,13 @@
                     android:layout_centerInParent="true"
                     android:layout_toEndOf="@+id/back"
                     android:fontFamily="@font/poppinsbold"
-                    android:text="On-Road Assistance?"
+                    android:text="On-Road Assistance"
                     android:textColor="@color/white"
                     android:textSize="15dp" />
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:layout_width="@dimen/_36ssp"
+                    android:visibility="gone"
                     android:layout_height="@dimen/_36ssp"
                     android:src="@drawable/default_profile"
                     android:layout_marginEnd="@dimen/_12ssp"
@@ -84,7 +85,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="10dp"
                         android:fontFamily="@font/poppinsbold"
-                        android:text="Select Complaint"
+                        android:text="Select Complain"
                         android:textColor="@color/project_color"
                         android:textSize="13dp" />
 
@@ -221,14 +222,14 @@
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="@dimen/_18ssp"
                         android:fontFamily="@font/poppinsbold"
-                        android:text="Add Complaint"
+                        android:text="Add Message"
                         android:textColor="@color/project_color"
                         android:textSize="13dp" />
 
                     <EditText
                         android:layout_width="match_parent"
                         android:lines="5"
-                        android:hint="Add Complaint"
+                        android:hint="Type Your Message"
                         android:fontFamily="@font/font_opensans"
                         android:gravity="top"
                         android:paddingStart="@dimen/_9ssp"

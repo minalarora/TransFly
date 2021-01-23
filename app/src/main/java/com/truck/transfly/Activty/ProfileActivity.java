@@ -625,22 +625,17 @@ public class ProfileActivity extends AppCompatActivity {
 //            activity.doc1.setImageURI(fileUri)
 
 
-            try {
                 fileUri = data.getData();
 
                 Glide.with(ProfileActivity.this).load(fileUri).placeholder(R.drawable.dummy_user).into(activity.pic);
 
-                File file = ImagePicker.Companion.getFile(data);
-                image = Base64.encodeToString(Files.readAllBytes(file.toPath()), Base64.NO_WRAP);
-                ((TransflyApplication) getApplication()).getResponseVehicleOwner().setProfile(image);
+//                File file = ImagePicker.Companion.getFile(data);
+//                image = Base64.encodeToString(Files.readAllBytes(file.toPath()), Base64.NO_WRAP);
+//                ((TransflyApplication) getApplication()).getResponseVehicleOwner().setProfile(image);
 
                 uploadMultipartSingle(fileUri);
 
 //                updateImage(token, image);
-
-            } catch (IOException e) {
-
-            }
 
 
         }

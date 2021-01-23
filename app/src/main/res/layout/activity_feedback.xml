@@ -57,6 +57,7 @@
             android:layout_width="@dimen/_36ssp"
             android:layout_height="@dimen/_36ssp"
             android:src="@drawable/default_profile"
+            android:visibility="gone"
             android:layout_marginEnd="@dimen/_12ssp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"

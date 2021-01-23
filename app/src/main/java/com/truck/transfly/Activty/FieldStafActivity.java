@@ -22,6 +22,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
@@ -32,6 +34,7 @@ import com.truck.transfly.Adapter.FieldStafAdapter;
 import com.truck.transfly.Model.ResponseBooking;
 import com.truck.transfly.Model.ResponseFieldStaff;
 import com.truck.transfly.Model.ResponseFirebase;
+import com.truck.transfly.Model.ResponseVehicleOwner;
 import com.truck.transfly.R;
 import com.truck.transfly.utils.ApiClient;
 import com.truck.transfly.utils.ApiEndpoints;
@@ -63,6 +66,7 @@ public class FieldStafActivity extends AppCompatActivity {
     private TextView noDataFound;
     private RelativeLayout no_internet_connection;
     private String token;
+    private ImageView image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,14 +86,27 @@ public class FieldStafActivity extends AppCompatActivity {
         TextView customerName = headerLayout.findViewById(R.id.customer_name);
         TextView number = headerLayout.findViewById(R.id.number);
 
+
+        image= headerLayout.findViewById(R.id.profile_image);
+        image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(new Intent(FieldStafActivity.this, ProfileActivity.class));
+
+                Toast.makeText(FieldStafActivity.this, "You can change your profile in My Profile section", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
         headerLayout.findViewById(R.id.appSetting).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                Uri uri = Uri.fromParts("package", getPackageName(), null);
-                intent.setData(uri);
-                startActivity(intent);
+//                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+//                Uri uri = Uri.fromParts("package", getPackageName(), null);
+//                intent.setData(uri);
+//                startActivity(intent);
 
             }
         });
@@ -118,6 +135,9 @@ public class FieldStafActivity extends AppCompatActivity {
 
         Menu menu = navigationView.getMenu();
         MenuItem kyc_drawer = menu.findItem(R.id.kyc_drawer);
+        MenuItem bookingHistory = menu.findItem(R.id.booking_history);
+
+        bookingHistory.setVisible(true);
 
         customerName.setText(responseFieldStaff.getName());
         number.setText(responseFieldStaff.getMobile());
@@ -181,7 +201,7 @@ public class FieldStafActivity extends AppCompatActivity {
 
 
     }
-
+    
     private void updateFirebase(String token, ResponseFirebase firebase) {
         api.updateFirebase(token, firebase).enqueue(new Callback<ResponseBody>() {
             @Override
@@ -199,6 +219,9 @@ public class FieldStafActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
+        ResponseFieldStaff responseFieldStaff = ((TransflyApplication) getApplication()).getResponseFieldStaff();
+        Glide.with(FieldStafActivity.this).load(responseFieldStaff.getProfile()).placeholder(R.drawable.dummy_user).skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.NONE).into(image);
 
         getAllBookingFieldStaff(PreferenceUtil.getData(FieldStafActivity.this, "token"));
 
@@ -252,6 +275,13 @@ public class FieldStafActivity extends AppCompatActivity {
 
                         Intent feedback_intent = new Intent(FieldStafActivity.this, FeedbackActivity.class);
                         startActivity(feedback_intent);
+
+                        break;
+
+                    case R.id.booking_history:
+
+                        Intent current_invoices = new Intent(FieldStafActivity.this, FieldStaffInvoicesActivity.class);
+                        startActivity(current_invoices);
 
                         break;
 

@@ -11,7 +11,7 @@ import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.location.Location;
 import android.location.LocationManager;
-import android.net.Uri;
+import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
@@ -38,6 +38,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -157,6 +159,8 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
     private NavigationView navigationView;
     private String token;
     private Marker marker;
+    private ImageView currentBooking;
+    private ImageView image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -177,7 +181,9 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         TextView customerName = headerLayout.findViewById(R.id.customer_name);
         TextView number = headerLayout.findViewById(R.id.number);
 
-        headerLayout.findViewById(R.id.profile_image).setOnClickListener(new View.OnClickListener() {
+        image=headerLayout.findViewById(R.id.profile_image);
+
+        image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -256,7 +262,9 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         mapFragment.getMapAsync(this::onMapReady);
 
-        findViewById(R.id.current_booking).setOnClickListener(new View.OnClickListener() {
+        currentBooking =findViewById(R.id.current_booking);
+
+        currentBooking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -432,7 +440,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                 RequestCoordinates requestCoordinates = new RequestCoordinates();
                 requestCoordinates.setLatitude(Mylatitude);
                 requestCoordinates.setLongitude(Mylongitude);
-                getNearmeArea2(PreferenceUtil.getData(HomeActivity.this, "token"), requestCoordinates,requestArea.getLoadingName());
+                getNearmeArea2(PreferenceUtil.getData(HomeActivity.this, "token"), requestCoordinates, requestArea.getLoadingName());
 
             }
         });
@@ -551,6 +559,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         });
     }
 
+
     private void getMinesFromServer(String token) {
 
         parent_of_loading.setVisibility(View.VISIBLE);
@@ -604,7 +613,8 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                             public void run() {
 
                                 // reseller recyclerView.getChildAt(1).findViewById(R.id.postion_any)
-                                myUtils.spotLightOnProfile(navigation.getIconAt(3), "1001", HomeActivity.this, "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", "Lorem ipum");
+
+                                myUtils.spotLightOnProfile(recyclerView.getChildAt(0).findViewById(R.id.position_zero), "1001", HomeActivity.this, "This is your nearest Loading options, click on the location and get your Loading", "NEAREST LOCATION");
 
                                 myUtils.setListener(new MyUtils.listener() {
                                     @Override
@@ -612,11 +622,11 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                                         if (perfect != null && perfect.equals("1001")) {
 
-                                            myUtils.spotLightOnProfile(navigation.getIconAt(2), "1002", HomeActivity.this, "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", "Lorem ipum");
+                                            myUtils.spotLightOnProfile(recyclerView.getChildAt(1).findViewById(R.id.postion_any), "1002", HomeActivity.this, "Click here for Quick Loading options (Areas like Barbil, Vizag Loading)", "QUICK LOADING");
 
                                         } else if (perfect != null && perfect.equals("1002")) {
 
-                                            myUtils.spotLightOnProfile(viewById, "1003", HomeActivity.this, "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", "Lorem ipum");
+                                            myUtils.spotLightOnProfile(currentBooking, "1003", HomeActivity.this, "Click here to check your current bookings.", "BOOKING HISTORY");
 
                                         } else if (perfect != null && perfect.equals("1003")) {
 
@@ -624,10 +634,25 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                                                 @Override
                                                 public void run() {
 
-                                                    myUtils.spotLightOnProfile(recyclerView.getChildAt(1).findViewById(R.id.postion_any), "1004", HomeActivity.this, "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", "Lorem ipum");
+                                                    myUtils.spotLightOnProfile(navigation.getIconAt(3), "1004", HomeActivity.this, "Click here to check Vehicles for resale and lease.", "VEHICLE RESALE AND LEASE");
 
                                                 }
                                             }, 500);
+
+                                        } else if (perfect != null && perfect.equals("1004")) {
+
+                                            handler.postDelayed(new Runnable() {
+                                                @Override
+                                                public void run() {
+
+                                                    myUtils.spotLightOnProfile(viewById, "1005", HomeActivity.this, "Click here to check profile, KYC status and Challan status", "PROFILE");
+                                                }
+                                            }, 500);
+
+                                        } else if (perfect != null && perfect.equals("1005")) {
+
+                                            myUtils.spotLightOnProfile(navigation.getIconAt(2), "1006", HomeActivity.this, "Click here to create booking", "BOOKING");
+
 
                                         }
 
@@ -762,7 +787,14 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                             }
 
+                            if(allMineOfSingleArea.size()>0){
+
+                                goToLocationWithAnimation(Double.parseDouble(allMineOfSingleArea.get(0).getArealatitude()), Double.parseDouble(allMineOfSingleArea.get(0).getArealongitude()), 12);
+
+                            }
+
                         }
+
                     });
 
                 } else {
@@ -785,7 +817,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         });
     }
 
-    private void getNearmeArea2(String token, RequestCoordinates coordinates,String loding) {
+    private void getNearmeArea2(String token, RequestCoordinates coordinates, String loding) {
         parent_of_loading.setVisibility(View.VISIBLE);
 
         api.nearmeArea(token, coordinates).enqueue(new Callback<ResponseBody>() {
@@ -814,8 +846,11 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                     }
 
-                    goToLocationWithAnimation(Double.parseDouble(allMineOfSingleArea.get(0).getArealatitude()), Double.parseDouble(allMineOfSingleArea.get(0).getArealatitude()), 12);
+                    if(allMineOfSingleArea.size()>0){
 
+                        goToLocationWithAnimation(Double.parseDouble(allMineOfSingleArea.get(0).getArealatitude()), Double.parseDouble(allMineOfSingleArea.get(0).getArealongitude()), 12);
+
+                    }
                 } else {
 
                     parent_of_loading.setVisibility(View.GONE);
@@ -957,9 +992,9 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                     case R.id.contact_us:
 
-                        ContactUsDialogFragment contactUsDialogFragment=new ContactUsDialogFragment();
+                        ContactUsDialogFragment contactUsDialogFragment = new ContactUsDialogFragment();
                         contactUsDialogFragment.setCancelable(true);
-                        contactUsDialogFragment.show(getSupportFragmentManager(),"contact_us");
+                        contactUsDialogFragment.show(getSupportFragmentManager(), "contact_us");
 
                         break;
 
@@ -1252,7 +1287,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
             }
         }
-        marker.setIcon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon("Rate : " + rate + "\n" + "Etl : " + etl)));
+        marker.setIcon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon("Rate : " + rate + "\n" + "ETL : " + etl)));
 
         marker.setTag(responseMine);
 
@@ -1278,8 +1313,13 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
     protected void onResume() {
         super.onResume();
 
+        ResponseVehicleOwner responseFieldStaff = ((TransflyApplication) getApplication()).getResponseVehicleOwner();
+        Glide.with(HomeActivity.this).load(responseFieldStaff.getProfile()).skipMemoryCache(true).placeholder(R.drawable.dummy_user).diskCacheStrategy(DiskCacheStrategy.NONE).into(image);
+
         if (Mylatitude != 0 && Mylongitude != 0)
             goToLocationWithAnimation(Mylatitude, Mylongitude, 9);
+
+
 
     }
 

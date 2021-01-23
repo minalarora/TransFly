@@ -153,7 +153,7 @@ public class EmergencyContactActivity extends AppCompatActivity {
 
                     setDataOnModels();
 
-                    Toast.makeText(EmergencyContactActivity.this, "Update Conatct Successfully", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EmergencyContactActivity.this, "Emergency Contact Change Successful", Toast.LENGTH_SHORT).show();
 
                     finish();
 

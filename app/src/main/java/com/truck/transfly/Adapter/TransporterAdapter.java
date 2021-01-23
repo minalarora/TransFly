@@ -24,6 +24,7 @@ public class TransporterAdapter extends RecyclerView.Adapter<TransporterAdapter.
     private final Context context;
     private List<ResponseInvoice> responseInvoiceList;
     private int decideKeywords;
+    private boolean b;
 
     public TransporterAdapter(Context context, List<ResponseInvoice> responseInvoiceList){
 
@@ -52,7 +53,7 @@ public class TransporterAdapter extends RecyclerView.Adapter<TransporterAdapter.
         holder.mobileNumber.setText(responseInvoice.getVehicleownermobile());
         holder.vehile_owner.setText(responseInvoice.getVehicleOwnerName());
         holder.date_created.setText(responseInvoice.getDate());
-        holder.to_from_dest.setText(responseInvoice.getLoading() +" - "+responseInvoice.getMinename());
+        holder.to_from_dest.setText(responseInvoice.getMinename() +" - "+responseInvoice.getLoading());
 
         holder.share.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,6 +72,7 @@ public class TransporterAdapter extends RecyclerView.Adapter<TransporterAdapter.
             public void onClick(View v) {
 
                 Intent intent = new Intent(context, ShowInvoiceActivity.class);
+                intent.putExtra("vehicle_owner",b);
                 intent.putExtra("responseInvoice",responseInvoice);
                 context.startActivity(intent);
 
@@ -98,6 +100,12 @@ public class TransporterAdapter extends RecyclerView.Adapter<TransporterAdapter.
     public void setDecideKeywords(int i) {
 
         this.decideKeywords=i;
+
+    }
+
+    public void setVehicleOwnwer(boolean vehicleOwner) {
+
+        this.b=vehicleOwner;
 
     }
 

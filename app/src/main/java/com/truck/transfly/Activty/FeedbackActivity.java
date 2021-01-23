@@ -147,7 +147,7 @@ public class FeedbackActivity extends AppCompatActivity {
 
                 if(response.code() == 200)
                 {
-                    Toast.makeText(FeedbackActivity.this, "Feedback Update Successful", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FeedbackActivity.this, "Feedback Send", Toast.LENGTH_SHORT).show();
 
                     finish();
                 }

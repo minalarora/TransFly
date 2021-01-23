@@ -237,7 +237,7 @@ public class VehicleOwnerKycActivity extends AppCompatActivity {
                     if(pendingList.isEmpty())
                     {
 
-                        Toast.makeText(VehicleOwnerKycActivity.this, "Your KYC has already been completed, thank you", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(VehicleOwnerKycActivity.this, "Thank you, your KYC is complete. You are now ready to have a great experience on our app.", Toast.LENGTH_SHORT).show();
 
                         finish();
 

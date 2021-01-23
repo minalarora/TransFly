@@ -64,6 +64,7 @@ public class ShowInvoiceFragment extends Fragment implements SmoothDateRangePick
     private RelativeLayout no_internet_connection;
     private PullToRefreshView pullToRefreshView;
     private TextView no_booking_data;
+    private boolean fieldstaff;
 
     @Override
     public void onAttach(@NonNull Context context) {

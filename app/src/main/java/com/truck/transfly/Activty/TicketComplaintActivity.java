@@ -2,6 +2,7 @@ package com.truck.transfly.Activty;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -139,7 +140,7 @@ public class TicketComplaintActivity extends AppCompatActivity {
 
                 parent_of_loading.setVisibility(View.GONE);
 
-                Toast.makeText(TicketComplaintActivity.this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+                Toast.makeText(TicketComplaintActivity.this, "No Internet Connection"+t.getMessage(), Toast.LENGTH_SHORT).show();
 
             }
         });

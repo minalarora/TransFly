@@ -11,6 +11,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -161,6 +162,7 @@ public class SearchFieldStaffActivityy extends AppCompatActivity {
                 {
 
                     no_internet_connection.setVisibility(View.VISIBLE);
+
 
                 }
             }

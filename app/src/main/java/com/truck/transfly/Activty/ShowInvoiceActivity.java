@@ -56,9 +56,18 @@ public class ShowInvoiceActivity extends AppCompatActivity {
 
         linearLayout = findViewById(R.id.ll_linear);
 
+        getIntent();
+
         Intent intent = getIntent();
         shareBill = intent.getBooleanExtra("shareBill", false);
+        boolean vehicle_owner = intent.getBooleanExtra("vehicle_owner", false);
         ResponseInvoice responseInvoice = intent.getParcelableExtra("responseInvoice");
+
+        if(vehicle_owner){
+
+            activity.challanTransporterParent.setVisibility(View.GONE);
+
+        }
 
         findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,7 +78,7 @@ public class ShowInvoiceActivity extends AppCompatActivity {
             }
         });
 
-        activity.toFromDest.setText(responseInvoice.getLoading() +" - "+responseInvoice.getMinename());
+        activity.toFromDest.setText(responseInvoice.getMinename() +" - "+responseInvoice.getLoading());
         activity.dateCreated.setText(responseInvoice.getDate());
         activity.ownerName.setText(responseInvoice.getVehicleOwnerName());
         activity.ownerMobile.setText(responseInvoice.getVehicleownermobile());

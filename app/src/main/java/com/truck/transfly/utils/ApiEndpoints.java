@@ -221,8 +221,8 @@ public interface ApiEndpoints {
     Call<ResponseBody>  getAllLeaseList(@Header("Authorization")String token);
 
 
-    @POST("/resale/contact")
-    Call<ResponseBody> contactResale(@Header("Authorization")String token);
+    @POST("/resale/contact/{vehicle}")
+    Call<ResponseBody> contactResale(@Header("Authorization")String token,@Path("vehicle") String vehicle);
 
 
 

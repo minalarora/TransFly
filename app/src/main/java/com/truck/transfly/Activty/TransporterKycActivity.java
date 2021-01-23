@@ -231,7 +231,7 @@ public class TransporterKycActivity extends AppCompatActivity {
                     if(pendingList.isEmpty())
                     {
 
-                        Toast.makeText(TransporterKycActivity.this, "Your KYC has already been completed, thank you", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(TransporterKycActivity.this, "Thank you, your KYC is complete. You are now ready to have a great experience on our app.", Toast.LENGTH_SHORT).show();
 
                         finish();
 

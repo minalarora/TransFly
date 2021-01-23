@@ -23,7 +23,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TransFly">
-        <activity android:name=".Activty.OfficeStaffUserActivity"></activity>
+        <activity android:name=".Activty.FieldStaffInvoicesActivity"></activity>
+        <activity android:name=".Activty.WebViewActivity"></activity>
+        <activity android:name=".Activty.OfficeStaffUserActivity" />
         <activity android:name=".Activty.SearchFieldStaffActivityy" />
         <activity android:name=".Activty.FindFieldStafActivity" />
         <activity android:name=".Activty.ComplainProfileActivity" />

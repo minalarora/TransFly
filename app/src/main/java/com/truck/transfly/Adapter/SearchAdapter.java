@@ -55,8 +55,17 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.viewholder
 
         ResponseMine responseMine = responseMineList.get(position);
         holder.from_dest.setText(responseMine.getName());
-//        holder.rate.setText(String.valueOf(responseMine.getRate()));
-//        holder.etl.setText(String.valueOf(responseMine.getEtl()));
+        holder.rate.setText("Tyres: "+String.valueOf(responseMine.getTyres()));
+
+        if(responseMine.getTrailer()){
+
+            holder.etl.setText("Trailer: "+"YES");
+
+        } else {
+
+            holder.etl.setText("Trailer: "+"NO");
+
+        }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

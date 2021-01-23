@@ -39,7 +39,7 @@
             android:alpha="0.9"
             android:fontFamily="@font/poppins"
             android:letterSpacing="0.03"
-            android:text="Choose a loading"
+            android:text="Loading For"
             android:textColor="@color/black"
             android:textSize="14sp"
             tools:ignore="RelativeOverlap" />

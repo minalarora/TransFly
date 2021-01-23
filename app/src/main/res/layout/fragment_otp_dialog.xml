@@ -49,7 +49,7 @@
             android:fontFamily="@font/worksansregular"
             android:gravity="center"
             android:padding="6dp"
-            android:text="Did not Recieve?"
+            android:text="Did not Receive?"
             android:textColor="@color/black"
             android:textSize="14dp"
             android:textStyle="bold" />

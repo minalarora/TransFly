@@ -53,7 +53,7 @@ public class MyUtils {
                         .performClick(true)
                         .fadeinTextDuration(400)
                         .headingTvColor(Color.parseColor("#eb273f"))
-                        .headingTvSize(30)
+                        .headingTvSize(24)
                         .headingTvText(title)
                         .subHeadingTvColor(Color.parseColor("#ffffff"))
                         .subHeadingTvSize(16)

@@ -21,19 +21,19 @@ class ResponseInvoice() : Parcelable {
     var vehicleOwnerName: String? = null
 
     @SerializedName("tonnage")
-    var tonnage: Int? = null
+    var tonnage: Double? = null
 
     @SerializedName("rate")
-    var rate : Int?  = null
+    var rate : Double?  = null
 
     @SerializedName("amount")
-    var amount : Int?  = null
+    var amount : Double?  = null
 
     @SerializedName("hsd")
-    var hsd : Int?  = null
+    var hsd : Double?  = null
 
     @SerializedName("cash")
-    var cash : Int?  = null
+    var cash : Double?  = null
 
     @SerializedName("vehicleownermobile")
     var vehicleownermobile: String? = null
@@ -42,16 +42,16 @@ class ResponseInvoice() : Parcelable {
     var vehiclenumber: String? = null
 
     @SerializedName("tds")
-    var tds : Int?  = null
+    var tds : Double?  = null
 
     @SerializedName("officecharge")
-    var officecharge : Int?  = null
+    var officecharge : Double?  = null
 
     @SerializedName("shortage")
-    var shortage : Int?  = null
+    var shortage : Double?  = null
 
     @SerializedName("balanceamount")
-    var balanceamount : Int?  = null
+    var balanceamount : Double?  = null
 
     @SerializedName("challantotransporter")
     var challanToTransporter : String?  = null
@@ -66,22 +66,22 @@ class ResponseInvoice() : Parcelable {
     var transporterMobile: String?  =null
 
     constructor(parcel: Parcel) : this() {
-        id = parcel.readValue(Int::class.java.classLoader) as? Int
+        id = parcel.readValue(Double::class.java.classLoader) as? Int
         minename = parcel.readString()
         loading = parcel.readString()
         status = parcel.readString()
         vehicleOwnerName = parcel.readString()
-        tonnage = parcel.readValue(Int::class.java.classLoader) as? Int
-        rate = parcel.readValue(Int::class.java.classLoader) as? Int
-        amount = parcel.readValue(Int::class.java.classLoader) as? Int
-        hsd = parcel.readValue(Int::class.java.classLoader) as? Int
-        cash = parcel.readValue(Int::class.java.classLoader) as? Int
+        tonnage = parcel.readValue(Double::class.java.classLoader) as? Double
+        rate = parcel.readValue(Double::class.java.classLoader) as? Double
+        amount = parcel.readValue(Double::class.java.classLoader) as? Double
+        hsd = parcel.readValue(Double::class.java.classLoader) as? Double
+        cash = parcel.readValue(Double::class.java.classLoader) as? Double
         vehicleownermobile = parcel.readString()
         vehiclenumber = parcel.readString()
-        tds = parcel.readValue(Int::class.java.classLoader) as? Int
-        officecharge = parcel.readValue(Int::class.java.classLoader) as? Int
-        shortage = parcel.readValue(Int::class.java.classLoader) as? Int
-        balanceamount = parcel.readValue(Int::class.java.classLoader) as? Int
+        tds = parcel.readValue(Double::class.java.classLoader) as? Double
+        officecharge = parcel.readValue(Double::class.java.classLoader) as? Double
+        shortage = parcel.readValue(Double::class.java.classLoader) as? Double
+        balanceamount = parcel.readValue(Double::class.java.classLoader) as? Double
         challanToTransporter = parcel.readString()
         balanceAmountCleared = parcel.readString()
         date = parcel.readString()

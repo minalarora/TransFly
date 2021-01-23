@@ -88,6 +88,7 @@ public class PendingFragment extends Fragment implements SmoothDateRangePickerFr
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(fragmentActivity,LinearLayoutManager.VERTICAL,false);
         areaManagerRecycler.setLayoutManager(linearLayoutManager);
         fieldStafAdapter=new TransporterAdapter(fragmentActivity,invoicesList);
+        fieldStafAdapter.setVehicleOwnwer(true);
         fieldStafAdapter.setDecideKeywords(1);
         areaManagerRecycler.setAdapter(fieldStafAdapter);
 
@@ -232,8 +233,6 @@ public class PendingFragment extends Fragment implements SmoothDateRangePickerFr
         DateTime dateStart=new DateTime(yearStart,monthStart+1,dayStart,new DateTime().getHourOfDay(),new DateTime().getMinuteOfHour());
 
         DateTime dateEnd=new DateTime(yearEnd,monthEnd+1,dayEnd,new DateTime().getHourOfDay(),new DateTime().getMinuteOfHour()).plusDays(1);
-
-        Log.i("TAG", "onDateRangeSet: "+dateStart.getMillis() +" :to:  "+dateEnd.getMillis()+" :current:"+new DateTime().getMillis());
 
         invoicesList.clear();
         fieldStafAdapter.notifyDataSetChanged();

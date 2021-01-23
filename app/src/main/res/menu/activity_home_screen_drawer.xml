@@ -12,7 +12,7 @@
 
         <item
             android:id="@+id/kyc_drawer"
-            android:title="Kyc Details"
+            android:title="KYC Details"
             android:icon="@drawable/ic_action_fill_kyc_details"/>
 
         <item
@@ -24,6 +24,18 @@
             android:id="@+id/rate_etl"
             android:title="Rate And ETL"
             android:icon="@drawable/estimate_rate"/>
+
+        <item
+            android:id="@+id/booking_history"
+            android:visible="false"
+            android:title="Booking History"
+            android:icon="@drawable/ic_action_current_booking"/>
+
+        <item
+            android:id="@+id/allot_mines"
+            android:visible="false"
+            android:title="Allot Mines"
+            android:icon="@drawable/ic_action_allot_mines"/>
 
         <item
             android:id="@+id/ticket_drawer"

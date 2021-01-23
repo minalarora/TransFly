@@ -169,7 +169,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="@dimen/_4ssp"
                         android:fontFamily="@font/poppins"
-                        android:text="(Estimate Rate)"
+                        android:text="(Rate)"
                         android:textColor="#8c8c8c"
                         android:textSize="12dp" />
 
@@ -204,7 +204,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="@dimen/_4ssp"
                         android:fontFamily="@font/poppins"
-                        android:text="(Loading Time)"
+                        android:text="(Estimate Loading Time)"
                         android:textColor="#8c8c8c"
                         android:textSize="12dp" />
 

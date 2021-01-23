@@ -64,7 +64,7 @@ public class ShowOlxProductActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                contactForResale(PreferenceUtil.getData(ShowOlxProductActivity.this,"token"));
+                contactForResale(PreferenceUtil.getData(ShowOlxProductActivity.this,"token"),vehicleStore.getVehicleName());
 
             }
         });
@@ -115,11 +115,11 @@ public class ShowOlxProductActivity extends AppCompatActivity {
 
     }
 
-    private void contactForResale(String token)
+    private void contactForResale(String token, String vehicleName)
     {
         parent_of_loading.setVisibility(View.VISIBLE);
 
-        api.contactResale(token).enqueue(new Callback<ResponseBody>() {
+        api.contactResale(token,vehicleName).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
@@ -127,7 +127,7 @@ public class ShowOlxProductActivity extends AppCompatActivity {
 
                 if (response.code() == 200) {
 
-                    Toast.makeText(ShowOlxProductActivity.this, "Send Email Successful, Contact You Soon", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ShowOlxProductActivity.this, "Thank you! your message has been sent and you will soon get a call", Toast.LENGTH_SHORT).show();
 
                 } else {
 

@@ -1000,7 +1000,7 @@ public class PlaygroundActivity extends AppCompatActivity {
 
 
     private void contactForResale(String token) {
-        api.contactResale(token).enqueue(new Callback<ResponseBody>() {
+        api.contactResale(token,"").enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.code() == 200) {

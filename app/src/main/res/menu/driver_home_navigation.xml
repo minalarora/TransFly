@@ -12,7 +12,7 @@
 
         <item
             android:id="@+id/kyc_drawer"
-            android:title="Kyc Details"
+            android:title="KYC Details"
             android:icon="@drawable/ic_action_fill_kyc_details"/>
 
         <item

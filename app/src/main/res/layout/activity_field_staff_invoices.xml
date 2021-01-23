@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_height="match_parent">
+    tools:context=".Activty.FieldStaffInvoicesActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
@@ -63,53 +66,10 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <RelativeLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_marginTop="@dimen/_12ssp"
-        android:layout_height="wrap_content">
-
-        <com.google.android.material.tabs.TabLayout
-            android:layout_width="wrap_content"
-            android:layout_centerInParent="true"
-            app:tabIndicatorHeight="0dp"
-            app:tabPaddingStart="30dp"
-            app:tabMinWidth="160dp"
-            app:tabPaddingEnd="30dp"
-            app:tabPaddingBottom="1dp"
-            android:id="@+id/tabLayout"
-            app:tabMode="auto"
-            app:tabTextAppearance="@style/MineCustomTabText"
-            app:tabSelectedTextColor="@color/white"
-            android:theme="@style/Base.Widget.Design.TabLayout"
-            app:tabGravity="fill"
-            app:tabTextColor="@color/black"
-            android:clipToPadding="false"
-            android:layout_height="35dp"
-            >
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Jobs"
-                />
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Invitations (3)"
-                />
-
-        </com.google.android.material.tabs.TabLayout>
-
-    </RelativeLayout>
-
-    <androidx.viewpager.widget.ViewPager
-        android:layout_width="match_parent"
-        android:id="@+id/viewpager"
-        android:layout_height="match_parent">
-
-
-
-    </androidx.viewpager.widget.ViewPager>
+        android:layout_height="match_parent"
+        android:id="@+id/frame_layout"
+        />
 
 </LinearLayout>

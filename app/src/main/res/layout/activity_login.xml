@@ -20,11 +20,11 @@
             app:shape_arc_position="bottom">
 
             <LinearLayout
+                android:id="@+id/transluentView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/transluentView"
-                android:orientation="vertical"
-                android:background="@color/project_color" />
+                android:background="@color/project_color"
+                android:orientation="vertical" />
 
             <ImageView
                 android:layout_width="80dp"
@@ -38,10 +38,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="40dp"
             android:fontFamily="@font/poppinsbold"
             android:text="Sign In Now"
-            android:layout_marginTop="40dp"
-            android:layout_gravity="center_horizontal"
             android:textColor="@color/project_color"
             android:textSize="17dp" />
 
@@ -65,11 +65,11 @@
                 app:tint="@color/black" />
 
             <EditText
+                android:id="@+id/mobileNumber"
                 android:layout_width="match_parent"
                 android:layout_height="38dp"
                 android:layout_toEndOf="@+id/phone_icon"
                 android:background="@color/white"
-                android:id="@+id/mobileNumber"
                 android:fontFamily="@font/font_opensans"
                 android:hint="Please Enter Mobile or Email"
                 android:paddingStart="16dp"
@@ -98,16 +98,16 @@
                 app:tint="@color/black" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                app:passwordToggleEnabled="true"
-                app:boxStrokeWidth="0dp"
-                app:hintEnabled="false"
                 android:id="@+id/input_layout_password"
-                app:boxStrokeWidthFocused="0dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_toEndOf="@+id/password_lock"
-                app:passwordToggleTint="@color/black"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
+                app:hintEnabled="false"
                 app:passwordToggleDrawable="@drawable/show_password_selector"
-                android:layout_height="wrap_content">
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="@color/black">
 
                 <EditText
                     android:id="@+id/password"
@@ -126,6 +126,7 @@
         </RelativeLayout>
 
         <TextView
+            android:id="@+id/forgotPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -134,12 +135,11 @@
             android:fontFamily="@font/open_sans_semibold"
             android:gravity="center"
             android:maxLines="1"
-            android:id="@+id/forgotPassword"
-            android:textStyle="bold"
             android:paddingTop="8dp"
             android:text="Forgot Password?"
             android:textColor="@color/black"
             android:textSize="14sp"
+            android:textStyle="bold"
             android:visibility="visible" />
 
         <RelativeLayout
@@ -207,7 +207,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/font_regular"
-        android:text="©2021. All rights reserved to TransFly Infotech Pvt Ltd"
+        android:text="©2021. All rights reserved by TransFly Infotech Pvt Ltd"
         android:layout_above="@+id/signup_parent"
         android:gravity="center_horizontal"
         android:lineSpacingExtra="@dimen/_5ssp"

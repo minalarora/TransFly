@@ -144,6 +144,8 @@ dependencies {
     // https://firebase.google.com/docs/android/setup#available-libraries
 
 
+    // best webview library
+    implementation 'com.github.delight-im:Android-AdvancedWebView:v3.2.1'
 
 }
 

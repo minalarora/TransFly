@@ -8,7 +8,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/round_dialog_background"
     >
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -24,7 +23,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Connect us via "
+        android:text="Connect to us "
         android:layout_marginTop="@dimen/_6ssp"
         android:textSize="14sp"
         android:layout_marginBottom="@dimen/_12ssp"

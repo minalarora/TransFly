@@ -24,6 +24,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
@@ -35,6 +37,7 @@ import com.truck.transfly.Adapter.TransporterAdapter;
 import com.truck.transfly.Model.ResponseFirebase;
 import com.truck.transfly.Model.ResponseInvoice;
 import com.truck.transfly.Model.ResponseTransporter;
+import com.truck.transfly.Model.ResponseVehicleOwner;
 import com.truck.transfly.R;
 import com.truck.transfly.utils.ApiClient;
 import com.truck.transfly.utils.ApiEndpoints;
@@ -70,6 +73,7 @@ public class TransporterActivity extends AppCompatActivity implements SmoothDate
     private TextView no_booking_data;
     private PullToRefreshView pullToRefreshView;
     private String token;
+    private ImageView image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +105,40 @@ public class TransporterActivity extends AppCompatActivity implements SmoothDate
                     }
                 });
 
+        findViewById(R.id.export_report).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Calendar now = Calendar.getInstance();
+
+                SmoothDateRangePickerFragment smoothDateRangePickerFragment = SmoothDateRangePickerFragment.newInstance(new SmoothDateRangePickerFragment.OnDateRangeSetListener() {
+                    @Override
+                    public void onDateRangeSet(SmoothDateRangePickerFragment view, int yearStart, int monthStart, int dayStart, int yearEnd, int monthEnd, int dayEnd) {
+
+                        ResponseTransporter responseVehicleOwner = ((TransflyApplication) getApplication()).getResponseTransporterOwner();
+
+                        DateTime dateStart=new DateTime(yearStart,monthStart+1,dayStart,new DateTime().getHourOfDay(),new DateTime().getMinuteOfHour());
+
+                        DateTime dateEnd=new DateTime(yearEnd,monthEnd+1,dayEnd,new DateTime().getHourOfDay(),new DateTime().getMinuteOfHour()).plusDays(1);
+
+                        Intent intent=new Intent(TransporterActivity.this,WebViewActivity.class);
+                        intent.putExtra("from_time",dateStart.getMillis());
+                        intent.putExtra("to_time",dateEnd.getMillis());
+                        intent.putExtra("mobile",responseVehicleOwner.getMobile());
+                        intent.putExtra("keywords","mobinvoicetransporter");
+                        startActivity(intent);
+
+                    }
+                }, now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH));
+
+                smoothDateRangePickerFragment.setAccentColor(R.color.project_color);
+
+                smoothDateRangePickerFragment.setThemeDark(false);
+
+                smoothDateRangePickerFragment.show(getFragmentManager(), "smoothDateRangePicker");
+
+            }
+        });
 
         findViewById(R.id.search_bar).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -177,14 +215,27 @@ public class TransporterActivity extends AppCompatActivity implements SmoothDate
         TextView customerName = headerLayout.findViewById(R.id.customer_name);
         TextView number=headerLayout.findViewById(R.id.number);
 
+        image = headerLayout.findViewById(R.id.profile_image);
+
+        image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(new Intent(TransporterActivity.this, ProfileActivity.class));
+
+                Toast.makeText(TransporterActivity.this, "You can change your profile in My Profile section", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
         headerLayout.findViewById(R.id.appSetting).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                Uri uri = Uri.fromParts("package", getPackageName(), null);
-                intent.setData(uri);
-                startActivity(intent);
+//                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+//                Uri uri = Uri.fromParts("package", getPackageName(), null);
+//                intent.setData(uri);
+//                startActivity(intent);
 
             }
         });
@@ -194,7 +245,7 @@ public class TransporterActivity extends AppCompatActivity implements SmoothDate
 
         navigationViewListener(navigationView);
 
-        viewById = findViewById(R.id.drawer_icon);
+        this.viewById = findViewById(R.id.drawer_icon);
 
         drawerLayout = findViewById(R.id.drawer_layout);
 
@@ -230,7 +281,7 @@ public class TransporterActivity extends AppCompatActivity implements SmoothDate
             }
         });
 
-        viewById.setOnClickListener(new View.OnClickListener() {
+        this.viewById.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -247,6 +298,16 @@ public class TransporterActivity extends AppCompatActivity implements SmoothDate
         });
 
         getInvoiceTransporter(PreferenceUtil.getData(TransporterActivity.this,"token"));
+
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        ResponseTransporter responseFieldStaff = ((TransflyApplication) getApplication()).getResponseTransporterOwner();
+        Glide.with(TransporterActivity.this).load(responseFieldStaff.getProfile()).placeholder(R.drawable.dummy_user).skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.NONE).into(image);
 
     }
 

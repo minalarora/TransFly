@@ -27,9 +27,25 @@
                 android:src="@drawable/ic_action_menu"
                 app:tint="@color/black" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_alignWithParentIfMissing="true"
+                android:layout_marginStart="10dp"
+                android:id="@+id/export_report"
+                android:layout_toStartOf="@+id/field_staff_choose"
+                android:fontFamily="@font/poppinsbold"
+                android:text="Export Report"
+                android:layout_marginEnd="@dimen/_4ssp"
+                android:textColor="@android:color/holo_green_dark"
+                android:textSize="13dp" />
+
             <ImageView
                 android:id="@+id/field_staff_choose"
                 android:layout_width="24dp"
+                android:visibility="gone"
                 android:layout_height="match_parent"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
