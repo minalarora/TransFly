@@ -42,6 +42,7 @@ public class ShowOlxProductActivity extends AppCompatActivity {
     private ApiEndpoints api = null;
     private ActivityShowOlxProductBinding activity;
     private FrameLayout parent_of_loading;
+    private boolean lease;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,12 +60,20 @@ public class ShowOlxProductActivity extends AppCompatActivity {
         Intent intent = getIntent();
         vehicleStore = intent.getParcelableExtra("vehicleStore");
         stringImage =  intent.getStringArrayListExtra("stringImage");
+        lease =  intent.getBooleanExtra("lease",false);
 
         findViewById(R.id.contact_us).setOnClickListener(new View.OnClickListener() {
+            private String leaseString;
+
             @Override
             public void onClick(View v) {
 
-                contactForResale(PreferenceUtil.getData(ShowOlxProductActivity.this,"token"),vehicleStore.getVehicleName());
+                if(lease)
+                    leaseString="lease";
+                else
+                    leaseString="resale";
+
+                contactForResale(PreferenceUtil.getData(ShowOlxProductActivity.this,"token"),vehicleStore.getVehicleName(),leaseString);
 
             }
         });
@@ -115,11 +124,11 @@ public class ShowOlxProductActivity extends AppCompatActivity {
 
     }
 
-    private void contactForResale(String token, String vehicleName)
+    private void contactForResale(String token, String vehicleName, String leaseString)
     {
         parent_of_loading.setVisibility(View.VISIBLE);
 
-        api.contactResale(token,vehicleName).enqueue(new Callback<ResponseBody>() {
+        api.contactResale(token,vehicleName,leaseString).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 

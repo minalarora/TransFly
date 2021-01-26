@@ -132,7 +132,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     Alerter.create(LoginActivity.this)
                             .setTitle("Password Miss matched")
-                            .setText("Try different Password! Password seems to wrong!")
+                            .setText("Try different Password! Password seems to be wrong!")
                             .setIcon(R.drawable.ic_action_password_lock)
                             .setBackgroundColorRes(R.color.quantum_pink)
                             .enableSwipeToDismiss()

@@ -64,9 +64,11 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="@dimen/_30ssp"
-                android:layout_height="@dimen/_30ssp"
-                android:src="@drawable/ic_vehicle_owner_name" />
+                android:layout_width="@dimen/_20ssp"
+                android:layout_height="@dimen/_20ssp"
+                android:id="@+id/image_default"
+                android:layout_marginStart="6dp"
+                android:src="@drawable/ic_driver" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -74,6 +76,7 @@
                 android:layout_gravity="center_vertical"
                 android:fontFamily="@font/poppins"
                 android:text="Minal gareeb Driver"
+                android:layout_marginStart="12dp"
                 android:textColor="@color/black"
                 android:id="@+id/vehile_owner"
                 android:textSize="13dp" />

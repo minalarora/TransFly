@@ -488,7 +488,7 @@
                                 android:layout_weight="1"
                                 android:alpha="0.7"
                                 android:fontFamily="@font/poppins"
-                                android:text="Amount"
+                                android:text="Initial Amount"
                                 android:textColor="@color/black"
                                 android:textSize="13dp" />
 

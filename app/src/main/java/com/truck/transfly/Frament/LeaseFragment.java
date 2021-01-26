@@ -95,6 +95,7 @@ public class LeaseFragment extends Fragment {
 
         RecyclerView recyclerView =inflate.findViewById(R.id.recyclerView);
         olxRecyclerAdapter=new OlxRecyclerAdapter(fragmentActivity,responseList);
+        olxRecyclerAdapter.setLeaseValue(true);
         GridLayoutManager linearLayoutManager=new GridLayoutManager(fragmentActivity,2,RecyclerView.VERTICAL,false);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(olxRecyclerAdapter);

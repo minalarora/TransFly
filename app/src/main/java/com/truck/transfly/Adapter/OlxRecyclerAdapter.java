@@ -23,6 +23,7 @@ public class OlxRecyclerAdapter extends RecyclerView.Adapter<OlxRecyclerAdapter.
 
     private final Context context;
     private List<ResponseResale> responseResaleList;
+    private boolean lease;
 
     public OlxRecyclerAdapter(Context context, ArrayList<ResponseResale> responseResaleList) {
 
@@ -59,6 +60,7 @@ public class OlxRecyclerAdapter extends RecyclerView.Adapter<OlxRecyclerAdapter.
                 Intent intent = new Intent(context, ShowOlxProductActivity.class);
                 intent.putExtra("vehicleStore",responseResale);
                 intent.putExtra("stringImage",responseResale.getImageList());
+                intent.putExtra("lease",lease);
                 context.startActivity(intent);
 
             }
@@ -69,6 +71,12 @@ public class OlxRecyclerAdapter extends RecyclerView.Adapter<OlxRecyclerAdapter.
     @Override
     public int getItemCount() {
         return responseResaleList.size();
+    }
+
+    public void setLeaseValue(boolean b) {
+
+        this.lease=b;
+
     }
 
     public class viewholder extends RecyclerView.ViewHolder {
