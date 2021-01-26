@@ -146,7 +146,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     Alerter.create(LoginActivity.this)
                             .setTitle("User Not Found!")
-                            .setText("Mobile or Email And Password are miss matched!")
+                            .setText("This number is not registered, please register yourself by Clicking on ‘Create Here’ below.")
                             .setIcon(R.drawable.ic_action_password_lock)
                             .setBackgroundColorRes(R.color.quantum_pink)
                             .enableSwipeToDismiss()

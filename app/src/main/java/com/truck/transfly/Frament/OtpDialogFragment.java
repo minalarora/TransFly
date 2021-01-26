@@ -93,7 +93,7 @@ public class OtpDialogFragment extends DialogFragment implements VerificationLis
 
         TextView otp_string_text=inflate.findViewById(R.id.otp_string_text);
 
-        otp_string_text.setText("We have sent the otp in your registered mobile number xxxxxx"+lastFourDigits);
+        otp_string_text.setText("We have sent the OTP to your registered mobile number xxxxxx"+lastFourDigits);
 
         inflate.findViewById(R.id.cancel).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,7 +110,7 @@ public class OtpDialogFragment extends DialogFragment implements VerificationLis
 
                 if(TextUtils.isEmpty(otpView.getText().toString())){
 
-                    Toast.makeText(fragmentActivity, "Fill Otp, which is send on your number!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(fragmentActivity, "Fill OTP, which is send on your number!", Toast.LENGTH_SHORT).show();
 
                 } else {
 
@@ -169,7 +169,7 @@ public class OtpDialogFragment extends DialogFragment implements VerificationLis
                 .setVerifyWithoutOtp(true)//direct verification while connect with mobile network
                 .setAutoVerification(fragmentActivity)//Auto read otp from Sms And Verify
                 .setSenderId("ABCDEF")
-                .setMessage("##OTP## is Your verification digits.")
+                .setMessage("##OTP## is your OTP. TransFly")
                 .setOtpLength(4)
                 .setOtpExpireInMinute(10)
                 .setVerificationCallBack(this).build();

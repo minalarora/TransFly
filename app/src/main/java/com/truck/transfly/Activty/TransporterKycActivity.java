@@ -26,12 +26,15 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.nabinbhandari.android.permissions.PermissionHandler;
 import com.nabinbhandari.android.permissions.Permissions;
+import com.truck.transfly.Model.ResponseAreaManager;
+import com.truck.transfly.Model.ResponseTransporter;
 import com.truck.transfly.R;
 import com.truck.transfly.databinding.ActivityTransporterKycBinding;
 import com.truck.transfly.utils.ApiClient;
 import com.truck.transfly.utils.ApiEndpoints;
 import com.truck.transfly.utils.EndApi;
 import com.truck.transfly.utils.PreferenceUtil;
+import com.truck.transfly.utils.TransflyApplication;
 import com.zhihu.matisse.Matisse;
 import com.zhihu.matisse.MimeType;
 import com.zhihu.matisse.engine.impl.GlideEngine;
@@ -231,7 +234,17 @@ public class TransporterKycActivity extends AppCompatActivity {
                     if(pendingList.isEmpty())
                     {
 
-                        Toast.makeText(TransporterKycActivity.this, "Thank you, your KYC is complete. You are now ready to have a great experience on our app.", Toast.LENGTH_SHORT).show();
+                        ResponseTransporter responseTransporter = ((TransflyApplication) getApplication()).getResponseTransporterOwner();
+
+                        if(responseTransporter.getStatus()==1 ) {
+
+                            Toast.makeText(TransporterKycActivity.this, "Your KYC is in Pending status, please wait until this is Approved", Toast.LENGTH_SHORT).show();
+
+                        } else if(responseTransporter.getStatus() == 2) {
+
+                            Toast.makeText(TransporterKycActivity.this, "Thank you, your KYC is complete. You are now ready to have a great experience on our app.", Toast.LENGTH_SHORT).show();
+
+                        }
 
                         finish();
 

@@ -75,7 +75,7 @@ public class FeedbackActivity extends AppCompatActivity {
 
                     RequestRating requestRating=new RequestRating();
                     requestRating.setMessage(activity.feedbackText.getText().toString());
-                    requestRating.setRating((int) activity.ratingBar.getRating());
+                    requestRating.setRating(activity.ratingBar.getRating());
 
                     createRating(PreferenceUtil.getData(FeedbackActivity.this,"token"),requestRating);
 
@@ -147,7 +147,7 @@ public class FeedbackActivity extends AppCompatActivity {
 
                 if(response.code() == 200)
                 {
-                    Toast.makeText(FeedbackActivity.this, "Feedback Send", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FeedbackActivity.this, "Feedback Sent", Toast.LENGTH_SHORT).show();
 
                     finish();
                 }

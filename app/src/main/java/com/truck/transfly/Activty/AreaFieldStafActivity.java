@@ -25,12 +25,16 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.nabinbhandari.android.permissions.PermissionHandler;
 import com.nabinbhandari.android.permissions.Permissions;
+import com.truck.transfly.Model.ResponseAreaManager;
+import com.truck.transfly.Model.ResponseFieldStaff;
+import com.truck.transfly.Model.ResponseTransporter;
 import com.truck.transfly.R;
 import com.truck.transfly.databinding.ActivityAreaFieldStafBinding;
 import com.truck.transfly.utils.ApiClient;
 import com.truck.transfly.utils.ApiEndpoints;
 import com.truck.transfly.utils.EndApi;
 import com.truck.transfly.utils.PreferenceUtil;
+import com.truck.transfly.utils.TransflyApplication;
 import com.zhihu.matisse.Matisse;
 import com.zhihu.matisse.MimeType;
 import com.zhihu.matisse.engine.impl.GlideEngine;
@@ -239,7 +243,32 @@ public class AreaFieldStafActivity extends AppCompatActivity {
                     if(pendingList.isEmpty())
                     {
 
-                        Toast.makeText(AreaFieldStafActivity.this, "Thank you, your KYC is complete. You are now ready to have a great experience on our app.", Toast.LENGTH_SHORT).show();
+                        int status=0;
+
+                        if(PreferenceUtil.getData(AreaFieldStafActivity.this,"token").split(":")[0].equals("areamanager")) {
+
+                            ResponseAreaManager responseTransporter = ((TransflyApplication) getApplication()).getResponseAreaManager();
+
+                            status = responseTransporter.getStatus();
+
+                        } else {
+
+
+                            ResponseFieldStaff responseTransporter = ((TransflyApplication) getApplication()).getResponseFieldStaff();
+
+                            status = responseTransporter.getStatus();
+
+                        }
+
+                        if (status == 1) {
+
+                            Toast.makeText(AreaFieldStafActivity.this, "Your KYC is in Pending status, please wait until this is Approved", Toast.LENGTH_SHORT).show();
+
+                        }else if(status == 2) {
+
+                            Toast.makeText(AreaFieldStafActivity.this, "Thank you, your KYC is complete. You are now ready to have a great experience on our app.", Toast.LENGTH_SHORT).show();
+
+                        }
 
                         finish();
 

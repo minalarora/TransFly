@@ -110,7 +110,6 @@ public class FieldStafBookingConfirmationActivity extends AppCompatActivity {
                 android.R.layout.simple_list_item_1, android.R.id.text1, vehicleList);
 
         activity.registerCategory.setAdapter(adapter);
-        activity.registerCategory.setSelection(vehicleList.indexOf(responseBooking.getVehiclename()));
 
         getVehicleFieldStaff(PreferenceUtil.getData(FieldStafBookingConfirmationActivity.this, "token"), responseBooking.getOwner());
 
@@ -158,20 +157,23 @@ public class FieldStafBookingConfirmationActivity extends AppCompatActivity {
                             requestInvoice.setMineid(responseBooking.getMineid());
                             requestInvoice.setMinename(responseBooking.getMinename());
                             requestInvoice.setLoading(responseBooking.getLoading());
-                            requestInvoice.setHsd(Integer.valueOf(activity.hsd.getText().toString()));
-                            requestInvoice.setRate(Integer.valueOf(activity.rate.getText().toString()));
+                            requestInvoice.setHsd(Double.valueOf(activity.hsd.getText().toString()));
+                            requestInvoice.setRate(Double.valueOf(activity.rate.getText().toString()));
                             requestInvoice.setVehiclenumber(activity.registerCategory.getSelectedItem().toString());
                             requestInvoice.setVehicleowner(responseBooking.getVehicleowner());
                             requestInvoice.setVehicleownermobile(responseBooking.getVehicleownermobile());
-                            requestInvoice.setTonnage(Integer.valueOf(activity.tonnege.getText().toString()));
-                            requestInvoice.setCash(Integer.valueOf(activity.cash.getText().toString()));
+                            requestInvoice.setTonnage(Double.valueOf(activity.tonnege.getText().toString()));
+                            requestInvoice.setCash(Double.valueOf(activity.cash.getText().toString()));
                             requestInvoice.setOwner(responseBooking.getOwner());
 
                             if(transportersList.size()>0) {
 
                                 ResponseTransporter selectedItem = (ResponseTransporter) activity.transporterName.getSelectedItem();
+                                PreferenceUtil.putData(FieldStafBookingConfirmationActivity.this,"transporter",activity.transporterName.getSelectedItemPosition()+"");
 
                                 requestInvoice.setTransporterMobile(selectedItem.getId());
+
+
 
                             }
 
@@ -211,6 +213,16 @@ public class FieldStafBookingConfirmationActivity extends AppCompatActivity {
                         //['pan','aadhaar','bank']
 
                         spinnerTraspoterAdapter.notifyDataSetChanged();
+                      String t =  PreferenceUtil.getData(FieldStafBookingConfirmationActivity.this,"transporter");
+                      if(t==null)
+                      {
+                          activity.transporterName.setSelection(0);
+                      }
+                      else
+                      {
+                          activity.transporterName.setSelection(Integer.parseInt(t));
+                      }
+
                         Log.d("minal", transportersList.toString());
                     }
                 }
@@ -288,9 +300,8 @@ public class FieldStafBookingConfirmationActivity extends AppCompatActivity {
 
                     } else {
                         //list of all vehicle
-
                         adapter.notifyDataSetChanged();
-
+                        activity.registerCategory.setSelection(vehicleList.indexOf(responseBooking.getVehiclename()));
 
                     }
 

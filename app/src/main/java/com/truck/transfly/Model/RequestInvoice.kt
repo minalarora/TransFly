@@ -28,16 +28,16 @@ class RequestInvoice {
     var vehicleownermobile: String? = null
 
     @SerializedName("tonnage")
-    var tonnage: Int? = 0
+    var tonnage: Double? = 0.0
 
     @SerializedName("rate")
-    var rate: Int? = 0
+    var rate: Double? = 0.0
 
     @SerializedName("hsd")
-    var hsd: Int? = 0
+    var hsd: Double? = 0.0
 
     @SerializedName("cash")
-    var cash: Int? = 0
+    var cash: Double? = 0.0
 
     @SerializedName("transporter")
     var transporterMobile: String?  =null

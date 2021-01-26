@@ -103,6 +103,8 @@ public class TicketComplaintActivity extends AppCompatActivity {
                     requestTicket.setCategory(StringRadio);
                     requestTicket.setMessage("Driver name : "+driver_name.getText().toString()+"\n"+"Driver phone Number : "+driver_phone.getText().toString()+"\n"+" vehicle Number : "+vehicle_number.getText().toString()+"\nLocation : "+location_name.getText().toString()+"\nTicket : "+ticket_complaint.getText().toString());
 
+//                    Log.i("TAG", StringRadio+" Driver name : "+driver_name.getText().toString()+"\n"+"Driver phone Number : "+driver_phone.getText().toString()+"\n"+" vehicle Number : "+vehicle_number.getText().toString()+"\nLocation : "+location_name.getText().toString()+"\nTicket : "+ticket_complaint.getText().toString());
+
                     createBooking(PreferenceUtil.getData(TicketComplaintActivity.this, "token"), requestTicket);
 
                 } else {
@@ -126,7 +128,7 @@ public class TicketComplaintActivity extends AppCompatActivity {
                 parent_of_loading.setVisibility(View.GONE);
 
                 if (response.code() == 200) {
-                    Toast.makeText(TicketComplaintActivity.this, "Ticket Update Successful", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TicketComplaintActivity.this, "Ticket Updated Successfully", Toast.LENGTH_SHORT).show();
                     finish();
                 } else {
                     Toast.makeText(TicketComplaintActivity.this, "" + response.code(), Toast.LENGTH_SHORT).show();

@@ -199,7 +199,7 @@ public class CurrentBookingActivity extends AppCompatActivity {
                     bookingList.remove(position);
                     currentBookingAdapter.notifyDataSetChanged();
 
-                    Toast.makeText(CurrentBookingActivity.this, "Delete Successfully", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CurrentBookingActivity.this, "Booking deleted successfully", Toast.LENGTH_SHORT).show();
 
                 }
             }

@@ -11,6 +11,12 @@ class ResponseInvoice() : Parcelable {
     @SerializedName("minename")
     var minename: String? = null
 
+    @SerializedName("transportername")
+    var transportername: String? = null
+
+    @SerializedName("modeofpayment")
+    var modeofpayment: String? = null
+
     @SerializedName("loading")
     var loading: String? = null
 
@@ -86,6 +92,8 @@ class ResponseInvoice() : Parcelable {
         balanceAmountCleared = parcel.readString()
         date = parcel.readString()
         transporterMobile = parcel.readString()
+        transportername=parcel.readString()
+        modeofpayment=parcel.readString()
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -109,6 +117,8 @@ class ResponseInvoice() : Parcelable {
         parcel.writeString(balanceAmountCleared)
         parcel.writeString(date)
         parcel.writeString(transporterMobile)
+        parcel.writeString(transportername)
+        parcel.writeString(modeofpayment)
     }
 
     override fun describeContents(): Int {

@@ -241,7 +241,7 @@ public class AddVehicleActivity extends AppCompatActivity {
 //                                    intent.putExtra("listing_id", listing_id);
 //                                    startActivity(intent);
 
-                                    Toast.makeText(context, "Add Vehicle Successfully", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(context, "Vehicle Added Successfully", Toast.LENGTH_SHORT).show();
 
                                 }
                             }, 2000);

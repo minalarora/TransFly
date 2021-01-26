@@ -30,6 +30,7 @@ import com.nabinbhandari.android.permissions.Permissions;
 import com.truck.transfly.Model.ResponseInvoice;
 import com.truck.transfly.R;
 import com.truck.transfly.databinding.ActivityShowInvoiceBinding;
+import com.truck.transfly.utils.PreferenceUtil;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -63,9 +64,10 @@ public class ShowInvoiceActivity extends AppCompatActivity {
         boolean vehicle_owner = intent.getBooleanExtra("vehicle_owner", false);
         ResponseInvoice responseInvoice = intent.getParcelableExtra("responseInvoice");
 
-        if(vehicle_owner){
+        if(PreferenceUtil.getData(ShowInvoiceActivity.this,"token").split(":")[0].equals("vehicleowner")){
 
             activity.challanTransporterParent.setVisibility(View.GONE);
+            activity.transNameParent.setVisibility(View.GONE);
 
         }
 
@@ -94,6 +96,9 @@ public class ShowInvoiceActivity extends AppCompatActivity {
         activity.balanceAmount.setText(String.valueOf(responseInvoice.getBalanceamount()));
         activity.challanTransporter.setText(responseInvoice.getChallanToTransporter());
         activity.balanceAmountCleared.setText(responseInvoice.getBalanceAmountCleared());
+
+        activity.modeOfPayment.setText(responseInvoice.getModeofpayment());
+        activity.transName.setText(responseInvoice.getTransportername());
         activity.status.setText(responseInvoice.getStatus());
 
         if(responseInvoice.getStatus().toLowerCase().equals("pending")){

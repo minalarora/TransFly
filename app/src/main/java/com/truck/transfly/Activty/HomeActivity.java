@@ -11,7 +11,6 @@ import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.location.Location;
 import android.location.LocationManager;
-import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
@@ -181,7 +180,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         TextView customerName = headerLayout.findViewById(R.id.customer_name);
         TextView number = headerLayout.findViewById(R.id.number);
 
-        image=headerLayout.findViewById(R.id.profile_image);
+        image = headerLayout.findViewById(R.id.profile_image);
 
         image.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -262,7 +261,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         mapFragment.getMapAsync(this::onMapReady);
 
-        currentBooking =findViewById(R.id.current_booking);
+        currentBooking = findViewById(R.id.current_booking);
 
         currentBooking.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -603,7 +602,37 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                         }
 
                         loadinglist.addAll(loadings);
+
                         arealist.addAll(areass);
+                        ArrayList<RequestArea> modififyAreaList = new ArrayList<>();
+
+//                        modififyAreaList.add(arealist.get(0)); // joda
+//                        modififyAreaList.add(arealist.get(2));
+//                        modififyAreaList.add(arealist.get(4)); // ragudi
+//                        modififyAreaList.add(arealist.get(3)); // barbil
+//                        modififyAreaList.add(arealist.get(1)); // koira
+                        // jamda
+
+                        String[] arr = {"Joda", "Barbil", "Rugudi", "Koira", "Jamda"};
+                        int counter = 0;
+                        while (counter < (arealist.size()-1)) {
+                            for (RequestArea r : arealist) {
+                                if(counter == 5)
+                                {
+                                    break;
+                                }
+                                if (r.getName().equals(arr[counter])) {
+                                    modififyAreaList.add(r);
+                                    Log.d("minal","" + counter + r.getName());
+                                    counter++;
+
+                                }
+                            }
+                        }
+                        arealist.clear();
+                        arealist.addAll(modififyAreaList);
+                        //Joda, Barbil, Rugudi, Koida, Jamda
+
                         responseLoadingList.addAll(mines.get(0).getLoading());
                         locationAdapter.setLoading(true);
                         locationAdapter.notifyDataSetChanged();
@@ -787,7 +816,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                             }
 
-                            if(allMineOfSingleArea.size()>0){
+                            if (allMineOfSingleArea.size() > 0) {
 
                                 goToLocationWithAnimation(Double.parseDouble(allMineOfSingleArea.get(0).getArealatitude()), Double.parseDouble(allMineOfSingleArea.get(0).getArealongitude()), 12);
 
@@ -846,7 +875,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                     }
 
-                    if(allMineOfSingleArea.size()>0){
+                    if (allMineOfSingleArea.size() > 0) {
 
                         goToLocationWithAnimation(Double.parseDouble(allMineOfSingleArea.get(0).getArealatitude()), Double.parseDouble(allMineOfSingleArea.get(0).getArealongitude()), 12);
 
@@ -1267,29 +1296,33 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private void showMarkerOfArea(double latituteOfTajMahal, double longitudeOfTajMahal, ResponseMine responseMine, String loadingname) {
 
-        LatLng latLng = new LatLng(latituteOfTajMahal, longitudeOfTajMahal);
+        if(responseMine.getActive()!=null && responseMine.getActive()) {
 
-        IconGenerator iconFactory = new IconGenerator(this);
-        iconFactory.setStyle(IconGenerator.STYLE_RED);
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(latLng);
-        markerOptions.title(String.valueOf(responseMine.getName()));
-        markerOptions.snippet("This is my spot!");
-        Marker marker = mGoogleMap.addMarker(markerOptions);
+            LatLng latLng = new LatLng(latituteOfTajMahal, longitudeOfTajMahal);
 
-        ArrayList<ResponseLoading> arrayList = responseMine.getLoading();
-        int rate = 5;
-        int etl = 0;
-        for (ResponseLoading l : arrayList) {
-            if (l.getLoadingName().equalsIgnoreCase(loadingname)) {
-                rate = l.getRate();
-                etl = l.getEtl();
+            IconGenerator iconFactory = new IconGenerator(this);
+            iconFactory.setStyle(IconGenerator.STYLE_RED);
+            MarkerOptions markerOptions = new MarkerOptions();
+            markerOptions.position(latLng);
+            markerOptions.title(String.valueOf(responseMine.getName()));
+            markerOptions.snippet("This is my spot!");
+            Marker marker = mGoogleMap.addMarker(markerOptions);
 
+            ArrayList<ResponseLoading> arrayList = responseMine.getLoading();
+            int rate = 5;
+            int etl = 0;
+            for (ResponseLoading l : arrayList) {
+                if (l.getLoadingName().equalsIgnoreCase(loadingname)) {
+                    rate = l.getRate();
+                    etl = l.getEtl();
+
+                }
             }
-        }
-        marker.setIcon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon("Rate : " + rate + "\n" + "ETL : " + etl)));
+            marker.setIcon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon("Rate : " + rate + "\n" + "ETL : " + etl)));
 
-        marker.setTag(responseMine);
+            marker.setTag(responseMine);
+
+        }
 
     }
 
@@ -1318,7 +1351,6 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         if (Mylatitude != 0 && Mylongitude != 0)
             goToLocationWithAnimation(Mylatitude, Mylongitude, 9);
-
 
 
     }

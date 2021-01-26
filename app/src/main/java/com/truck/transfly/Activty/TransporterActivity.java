@@ -144,6 +144,16 @@ public class TransporterActivity extends AppCompatActivity implements SmoothDate
             @Override
             public void onClick(View v) {
 
+                ResponseTransporter responseTransporter = ((TransflyApplication) getApplication()).getResponseTransporterOwner();
+
+               if(responseTransporter.getStatus() !=2) {
+
+                    Toast.makeText(TransporterActivity.this, "Please wait until your KYC is approved.", Toast.LENGTH_SHORT).show();
+
+                    return;
+
+                }
+
                 startActivity(new Intent(TransporterActivity.this,SearchBarActivity.class));
 
             }

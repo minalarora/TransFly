@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -55,7 +56,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.viewholder
 
         ResponseMine responseMine = responseMineList.get(position);
         holder.from_dest.setText(responseMine.getName());
-        holder.rate.setText("Tyres: "+String.valueOf(responseMine.getTyres()));
+        holder.rate.setText("Max Tyres: "+String.valueOf(responseMine.getTyres()));
 
         if(responseMine.getTrailer()){
 
@@ -71,7 +72,15 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.viewholder
             @Override
             public void onClick(View v) {
 
-                onClickListener.onClick(responseMine);
+                if(responseMine.getActive()!=null && responseMine.getActive()) {
+
+                    onClickListener.onClick(responseMine);
+
+                } else {
+
+                    Toast.makeText(context, "This Mine is INACTIVE for the day, please try another Mine for your Loading.", Toast.LENGTH_SHORT).show();
+
+                }
 
             }
         });
