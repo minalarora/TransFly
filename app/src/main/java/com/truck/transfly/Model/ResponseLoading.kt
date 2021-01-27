@@ -12,6 +12,9 @@ class ResponseLoading {
     @SerializedName("etl")
     var etl:Int? = 0
 
+    @SerializedName("active")
+    var active: Boolean? = true
+
 
     var loadingimage: String? = "https://transfly-ftr2t.ondigitalocean.app/loading/" + loadingName
 }

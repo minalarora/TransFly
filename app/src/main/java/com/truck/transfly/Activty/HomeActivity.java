@@ -1296,7 +1296,18 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private void showMarkerOfArea(double latituteOfTajMahal, double longitudeOfTajMahal, ResponseMine responseMine, String loadingname) {
 
-        if(responseMine.getActive()!=null && responseMine.getActive()) {
+        ArrayList<ResponseLoading> list = responseMine.getLoading();
+        for(ResponseLoading loading: list)
+        {
+            if(loading.getLoadingName().equalsIgnoreCase(loadingname))
+            {
+                if(loading.getActive() == false)
+                {
+                    return;
+                }
+            }
+        }
+
 
             LatLng latLng = new LatLng(latituteOfTajMahal, longitudeOfTajMahal);
 
@@ -1322,7 +1333,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
             marker.setTag(responseMine);
 
-        }
+
 
     }
 
