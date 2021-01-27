@@ -147,6 +147,9 @@ dependencies {
     // best webview library
     implementation 'com.github.delight-im:Android-AdvancedWebView:v3.2.1'
 
+    // rendered problem
+    implementation 'com.android.support:appcompat-v7:28.0.0-rc01'
+
 }
 
 apply plugin: 'com.google.gms.google-services'

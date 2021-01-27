@@ -21,6 +21,11 @@
             android:icon="@drawable/ic_action_update_current_invoices" />
 
         <item
+            android:id="@+id/booking_history"
+            android:title="Booking History"
+            android:icon="@drawable/ic_action_current_booking"/>
+
+        <item
             android:title="Bank Details"
             android:id="@+id/bank_details"
             android:icon="@drawable/ic_action_update_bank_details" />

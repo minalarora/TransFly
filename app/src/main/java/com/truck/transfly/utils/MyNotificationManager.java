@@ -35,6 +35,7 @@ public class MyNotificationManager {
                 new NotificationCompat.Builder(mCtx, Constants_notifications.CHANNEL_ID)
                         .setSmallIcon(R.mipmap.ic_launcher_round)
                         .setContentTitle(title)
+                        .setStyle(new NotificationCompat.BigTextStyle().bigText(body))
                         .setContentText(body);
 
         if (bitmapfromUrl != null) {

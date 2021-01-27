@@ -99,6 +99,15 @@ public class FieldStafActivity extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.search_booking).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+
+            }
+        });
+
         headerLayout.findViewById(R.id.appSetting).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

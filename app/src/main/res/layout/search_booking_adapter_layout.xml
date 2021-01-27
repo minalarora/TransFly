@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/_8ssp"
+    android:layout_marginEnd="@dimen/_8ssp"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/city_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_15ssp"
+        android:layout_marginTop="@dimen/_17ssp"
+        android:layout_toEndOf="@+id/drawer_bar"
+        android:fontFamily="@font/poppins"
+        android:text="@string/title_home"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/_13ssp" />
+
+    <TextView
+        android:id="@+id/mobile_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_15ssp"
+        android:layout_marginTop="@dimen/_2ssp"
+        android:layout_marginBottom="@dimen/_17ssp"
+        android:layout_toEndOf="@+id/drawer_bar"
+        android:fontFamily="@font/poppins"
+        android:text="@string/title_home"
+        android:textColor="#8c8c8c"
+        android:textSize="@dimen/_11ssp" />
+
+    <include layout="@layout/layout_single_line" />
+
+</LinearLayout>

@@ -6,9 +6,34 @@
     android:orientation="vertical"
     tools:context=".Frament.ShowBooking">
 
+   <EditText
+       android:layout_width="match_parent"
+       android:layout_height="@dimen/_30ssp"
+       android:background="#eeeeee"
+       android:hint="Search Bookings"
+       android:id="@+id/search_booking"
+       android:layout_marginEnd="12dp"
+       android:paddingStart="12dp"
+       android:textStyle="bold"
+       android:layout_below="@+id/toolbar"
+       android:textSize="14sp"
+       android:layout_toStartOf="@+id/skip"
+       android:focusable="false"
+       android:focusableInTouchMode="false"
+       android:layout_marginBottom="8dp"
+       android:fontFamily="@font/font_regular"
+       android:paddingEnd="8dp"
+       android:drawableTint="@color/black"
+       android:drawableStart="@drawable/ic_action_search"
+       android:drawablePadding="8dp"
+       android:layout_marginStart="14dp"
+       android:layout_marginTop="8dp"
+       />
+
    <com.yalantis.phoenix.PullToRefreshView
        android:layout_width="match_parent"
        android:id="@+id/pullToRefresh"
+       android:layout_below="@+id/search_booking"
        android:layout_height="wrap_content">
 
    <androidx.recyclerview.widget.RecyclerView

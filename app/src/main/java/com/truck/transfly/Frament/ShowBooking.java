@@ -1,6 +1,7 @@
 package com.truck.transfly.Frament;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -23,6 +24,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.truck.transfly.Activty.CurrentBookingActivity;
 import com.truck.transfly.Activty.FieldStafActivity;
+import com.truck.transfly.Activty.SearchBookingActivity;
 import com.truck.transfly.Adapter.FieldStafAdapter;
 import com.truck.transfly.Model.ResponseBooking;
 import com.truck.transfly.R;
@@ -84,6 +86,15 @@ public class ShowBooking extends Fragment {
 
         parent_of_loading = inflate.findViewById(R.id.parent_of_loading);
         parent_of_loading.setVisibility(View.GONE);
+
+        inflate.findViewById(R.id.search_booking).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(new Intent(fragmentActivity, SearchBookingActivity.class));
+
+            }
+        });
 
         no_internet_connection = inflate.findViewById(R.id.no_internet_connection);
         inflate.findViewById(R.id.pullToRefresh_button).setOnClickListener(new View.OnClickListener() {

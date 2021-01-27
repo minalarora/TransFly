@@ -63,13 +63,13 @@
                     android:visibility="visible" />
 
                 <ImageView
-                    android:id="@+id/current_booking"
+                    android:id="@+id/notice"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_alignParentEnd="true"
                     android:layout_gravity="end"
                     android:layout_marginEnd="@dimen/_12ssp"
-                    android:src="@drawable/ic_action_current_booking"
+                    android:src="@drawable/ic_action_notification"
                     app:tint="@color/white" />
 
             </RelativeLayout>

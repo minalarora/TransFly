@@ -261,13 +261,14 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         mapFragment.getMapAsync(this::onMapReady);
 
-        currentBooking = findViewById(R.id.current_booking);
+        currentBooking = findViewById(R.id.notice);
 
         currentBooking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                startActivity(new Intent(HomeActivity.this, CurrentBookingActivity.class));
+//                startActivity(new Intent(HomeActivity.this, CurrentBookingActivity.class));
+                startActivity(new Intent(HomeActivity.this, NotificationActivity.class));
 
             }
         });
@@ -1015,6 +1016,12 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                         Intent rewardIntent = new Intent(HomeActivity.this, ReferActivity.class);
                         rewardIntent.putExtra("keyword", "reward");
                         startActivity(rewardIntent);
+
+                        break;
+
+                    case R.id.booking_history:
+
+                        startActivity(new Intent(HomeActivity.this,CurrentBookingActivity.class));
 
                         break;
 
