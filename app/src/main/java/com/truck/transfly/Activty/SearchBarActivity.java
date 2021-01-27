@@ -166,6 +166,19 @@ public class SearchBarActivity extends AppCompatActivity {
                     } else {
 
 
+                        ArrayList<ResponseLoading> list = responseMineGlobal.getLoading();
+                        for(ResponseLoading loading: list)
+                        {
+                            if(loading.getLoadingName().equalsIgnoreCase(to_search.getText().toString()))
+                            {
+                                if(loading.getActive() == false)
+                                {
+                                    Toast.makeText(SearchBarActivity.this, "This Mine is INACTIVE for the day, please try another Mine for your Loading.", Toast.LENGTH_SHORT).show();
+
+                                    return;
+                                }
+                            }
+                        }
                         Intent intent = new Intent(SearchBarActivity.this, SelectYourVehicleActivity.class);
                         intent.putExtra("vehicle",vehicleOwner);
                         ArrayList<ResponseLoading> arrayList = responseMineGlobal.getLoading();
@@ -181,6 +194,7 @@ public class SearchBarActivity extends AppCompatActivity {
                             }
                         }
 
+                        //loading =>
                         intent.putExtra("mineid", responseMineGlobal.getId());
                         intent.putExtra("minename", fromSearch.getText().toString());
                         intent.putExtra("loading", to_search.getText().toString());
