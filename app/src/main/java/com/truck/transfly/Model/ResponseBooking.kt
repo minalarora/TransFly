@@ -35,6 +35,9 @@ class ResponseBooking() : Parcelable {
     @SerializedName("owner")
     var owner: String? = null
 
+    @SerializedName("contact")
+    var contact: String? = null
+
     constructor(parcel: Parcel) : this() {
         id = parcel.readValue(Int::class.java.classLoader) as? Int
         loading = parcel.readString()
@@ -46,6 +49,7 @@ class ResponseBooking() : Parcelable {
         vehicleowner = parcel.readString()
         vehicleownermobile = parcel.readString()
         owner = parcel.readString()
+        contact=parcel.readString()
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -59,6 +63,7 @@ class ResponseBooking() : Parcelable {
         parcel.writeString(vehicleowner)
         parcel.writeString(vehicleownermobile)
         parcel.writeString(owner)
+        parcel.writeString(contact)
     }
 
     override fun describeContents(): Int {

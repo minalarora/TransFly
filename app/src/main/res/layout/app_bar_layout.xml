@@ -172,7 +172,8 @@
         android:layout_height="40dp"
         android:layout_above="@+id/navigation"
         android:layout_alignParentEnd="true"
-        android:layout_margin="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="@dimen/_20ssp"
         app:cardBackgroundColor="#ddffffff"
         app:cardCornerRadius="20dp">
 
@@ -182,6 +183,27 @@
             android:layout_gravity="center"
             android:src="@drawable/ic_action_location"
             app:tint="@color/blue" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/refresh_button"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_above="@+id/my_location"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="20dp"
+        app:cardBackgroundColor="#ddffffff"
+        android:layout_marginBottom="@dimen/_8ssp"
+        app:cardCornerRadius="20dp">
+
+        <ImageView
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:id="@+id/refresh_icon"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_action_refresh"
+            app:tint="@color/black" />
 
     </androidx.cardview.widget.CardView>
 

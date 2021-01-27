@@ -64,8 +64,8 @@ public class FieldStafBookingConfirmationActivity extends AppCompatActivity {
             api = retrofit.create(ApiEndpoints.class);
         }
 
-        activity.mobileNumber.setText(responseBooking.getVehicleownermobile());
-        activity.ownerName.setText(responseBooking.getVehicleowner());
+        activity.mobileNumber.setText(responseBooking.getContact());
+        activity.ownerName.setText(responseBooking.getVehiclename());
         activity.toFromDest.setText(responseBooking.getMinename() + " - " + responseBooking.getLoading());
 
         parent_of_loading = findViewById(R.id.parent_of_loading);

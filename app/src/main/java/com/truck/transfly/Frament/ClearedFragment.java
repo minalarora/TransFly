@@ -205,6 +205,7 @@ public class ClearedFragment extends Fragment implements SmoothDateRangePickerFr
                         //['pan','aadhaar','bank']
 
                         fieldStafAdapter.notifyDataSetChanged();
+
                         Log.d("minal", String.valueOf(invoicesList.size()));
                     }
 

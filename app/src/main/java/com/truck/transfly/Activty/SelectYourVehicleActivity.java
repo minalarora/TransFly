@@ -2,6 +2,7 @@ package com.truck.transfly.Activty;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -18,7 +19,6 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.truck.transfly.Adapter.SmallIconsAdapter;
 import com.truck.transfly.Model.RequestBooking;
-import com.truck.transfly.Model.ResponseLoading;
 import com.truck.transfly.Model.ResponseVehicle;
 import com.truck.transfly.Model.ResponseVehicleOwner;
 import com.truck.transfly.R;
@@ -32,7 +32,6 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -54,8 +53,10 @@ public class SelectYourVehicleActivity extends AppCompatActivity {
     private FrameLayout parent_of_loading;
     private ResponseVehicle responseVehicle;
     private RelativeLayout no_internet_connection;
-    private int rate,etl;
+    private int rate, etl;
     private boolean vehicleOwner;
+    private int tyres;
+    private boolean trailor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,11 +76,11 @@ public class SelectYourVehicleActivity extends AppCompatActivity {
             }
         });
 
-        if(getIntent()!=null){
+        if (getIntent() != null) {
 
-            vehicleOwner = getIntent().getBooleanExtra("vehicle",false);
+            vehicleOwner = getIntent().getBooleanExtra("vehicle", false);
 
-            if(!vehicleOwner){
+            if (!vehicleOwner) {
 
                 activity.showSmallIcons.setVisibility(View.GONE);
                 activity.toolbarText.setText("Rate And Etl");
@@ -111,8 +112,10 @@ public class SelectYourVehicleActivity extends AppCompatActivity {
         mineid = getIntent().getIntExtra("mineid", 0);
         minename = getIntent().getStringExtra("minename");
         loading = getIntent().getStringExtra("loading");
-        rate = getIntent().getIntExtra("rate",0);
-        etl = getIntent().getIntExtra("etl",0);
+        rate = getIntent().getIntExtra("rate", 0);
+        etl = getIntent().getIntExtra("etl", 0);
+        tyres = getIntent().getIntExtra("tyres", 0);
+        trailor = getIntent().getBooleanExtra("trailor", false);
 
         activity.fromDest.setText(minename);
         activity.fromDest.setEnabled(false);
@@ -121,7 +124,7 @@ public class SelectYourVehicleActivity extends AppCompatActivity {
         activity.toDest.setEnabled(false);
 
         activity.rate.setText(String.valueOf(rate));
-        activity.timeOfLoading.setText(String.valueOf(etl));
+        activity.timeOfLoading.setText(String.valueOf(etl+" hrs"));
 
         initSmallIconAdapter();
 
@@ -131,8 +134,8 @@ public class SelectYourVehicleActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(responseVehicle!=null)
-                sendDataOnServer(responseVehicle.getActive(),responseVehicle.getStatus());
+                if (responseVehicle != null)
+                    sendDataOnServer(responseVehicle.getActive(), responseVehicle.getStatus());
 
             }
         });
@@ -161,8 +164,8 @@ public class SelectYourVehicleActivity extends AppCompatActivity {
 
                         Log.d("minal", "no vehicle");
 
-                        if(vehicleOwner)
-                        activity.noVehicleFound.setVisibility(View.VISIBLE);
+                        if (vehicleOwner)
+                            activity.noVehicleFound.setVisibility(View.VISIBLE);
 
                     } else {
                         //['pan','aadhaar','bank']
@@ -199,7 +202,8 @@ public class SelectYourVehicleActivity extends AppCompatActivity {
             @Override
             public void onClick(ResponseVehicle responseVehicle) {
 
-                SelectYourVehicleActivity.this.responseVehicle=responseVehicle;
+                SelectYourVehicleActivity.this.responseVehicle = responseVehicle;
+                activity.mobileNumber.setText(responseVehicle.getContact());
 
             }
         });
@@ -210,47 +214,57 @@ public class SelectYourVehicleActivity extends AppCompatActivity {
 
         ResponseVehicleOwner responseVehicleOwner = ((TransflyApplication) getApplication()).getResponseVehicleOwner();
 
-        if(status==0){
+        if (status == 0) {
 
             Toast.makeText(this, "This vehicle is Not Approved", Toast.LENGTH_SHORT).show();
 
-        } else if(!active) {
+        } else if (!active) {
 
             Toast.makeText(this, "This vehicle is Already in booking", Toast.LENGTH_SHORT).show();
 
-        } else if(responseVehicleOwner.getStatus()!=2) {
+        } else if (responseVehicleOwner.getStatus() != 2) {
 
             Toast.makeText(this, "First! Complete Your KYC...", Toast.LENGTH_SHORT).show();
 
-        }
-        else {
+        } else if (TextUtils.isEmpty(activity.mobileNumber.getText().toString())) {
 
-            RequestBooking requestBooking=new RequestBooking();
+            Toast.makeText(this, "Please Enter Mobile Number", Toast.LENGTH_SHORT).show();
+
+        } else if (activity.mobileNumber.length() < 10) {
+
+            Toast.makeText(this, "Invalid Mobile Number", Toast.LENGTH_SHORT).show();
+
+        } else if (responseVehicle != null && responseVehicle.getTyres() != null && !isValid(tyres, trailor, responseVehicle.getTyres())) {
+
+            Toast.makeText(this, "This mine is not allowed Trailor Body", Toast.LENGTH_SHORT).show();
+
+        } else {
+
+            RequestBooking requestBooking = new RequestBooking();
             requestBooking.setLoading(loading);
             requestBooking.setMineid(mineid);
             requestBooking.setMinename(minename);
+            requestBooking.setContact(activity.mobileNumber.getText().toString());
             requestBooking.setVehiclenumber(responseVehicle.getNumber());
-            createBooking(PreferenceUtil.getData(SelectYourVehicleActivity.this,"token"),requestBooking);
+            createBooking(PreferenceUtil.getData(SelectYourVehicleActivity.this, "token"), requestBooking);
 
         }
 
     }
 
-    private void createBooking(String token, RequestBooking booking)
-    {
+    private void createBooking(String token, RequestBooking booking) {
         parent_of_loading.setVisibility(View.VISIBLE);
 
-        api.createBooking(token,booking).enqueue(new Callback<ResponseBody>() {
+        api.createBooking(token, booking).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
                 parent_of_loading.setVisibility(View.GONE);
 
-                if(response.code() == 200)
-                {
+                if (response.code() == 200) {
                     Toast.makeText(SelectYourVehicleActivity.this, "Booking Created Successfully", Toast.LENGTH_SHORT).show();
 
-                    Intent intent=new Intent(SelectYourVehicleActivity.this,HomeActivity.class);
+                    Intent intent = new Intent(SelectYourVehicleActivity.this, HomeActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP); //todo flAGS SETS IN FUTURE
                     startActivity(intent);
 
@@ -274,5 +288,36 @@ public class SelectYourVehicleActivity extends AppCompatActivity {
             }
         });
     }
+
+    private boolean isValid(int tyresMine, boolean mineTrailer, String vehicle) {
+        int vehicleTyres = Integer.parseInt(vehicle.split("-")[0].trim());
+        String trailerString = "";
+        try {
+            trailerString = vehicle.split("-")[1].trim();
+        } catch (Exception e) {
+
+        }
+
+        boolean vehicleTrailer = true;
+        if (vehicleTyres < 18) {
+            if (trailerString.equalsIgnoreCase("TRAILOR")) {
+
+            } else {
+                vehicleTrailer = false;
+            }
+        }
+        if (vehicleTyres > tyresMine) {
+            return false;
+        } else {
+            if (mineTrailer) {
+                return true;
+            } else {
+                return (vehicleTrailer == mineTrailer);
+            }
+        }
+
+
+    }
+
 
 }

@@ -1,7 +1,12 @@
 package com.truck.transfly.Activty;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
+import androidx.databinding.DataBindingUtil;
+
 import android.Manifest;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -9,51 +14,42 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
-import android.os.Parcelable;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
-import androidx.databinding.DataBindingUtil;
 
 import com.nabinbhandari.android.permissions.PermissionHandler;
 import com.nabinbhandari.android.permissions.Permissions;
 import com.truck.transfly.Model.ResponseInvoice;
 import com.truck.transfly.R;
 import com.truck.transfly.databinding.ActivityShowInvoiceBinding;
+import com.truck.transfly.databinding.ActivityTransporterKycBinding;
+import com.truck.transfly.databinding.ActivityTransporterShowInvoiceBinding;
 import com.truck.transfly.utils.PreferenceUtil;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.net.URLConnection;
 import java.util.ArrayList;
 
-public class ShowInvoiceActivity extends AppCompatActivity {
+public class TransporterShowInvoiceActivity extends AppCompatActivity {
 
     private static final int REQUEST_PERMISSIONS = 99;
     private boolean boolean_save;
     private boolean boolean_permission;
     private LinearLayout linearLayout;
-    private ActivityShowInvoiceBinding activity;
+    private ActivityTransporterShowInvoiceBinding activity;
     private boolean shareBill;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activity = DataBindingUtil.setContentView(this, R.layout.activity_show_invoice);
+        activity = DataBindingUtil.setContentView(this, R.layout.activity_transporter_show_invoice);
 
         linearLayout = findViewById(R.id.ll_linear);
 
@@ -64,9 +60,8 @@ public class ShowInvoiceActivity extends AppCompatActivity {
         boolean vehicle_owner = intent.getBooleanExtra("vehicle_owner", false);
         ResponseInvoice responseInvoice = intent.getParcelableExtra("responseInvoice");
 
-        if(PreferenceUtil.getData(ShowInvoiceActivity.this,"token").split(":")[0].equals("vehicleowner")){
+        if(PreferenceUtil.getData(TransporterShowInvoiceActivity.this,"token").split(":")[0].equals("vehicleowner")){
 
-            activity.challanTransporterParent.setVisibility(View.GONE);
             activity.transNameParent.setVisibility(View.GONE);
 
         }
@@ -88,23 +83,17 @@ public class ShowInvoiceActivity extends AppCompatActivity {
         activity.tonnege.setText(String.valueOf(responseInvoice.getTonnage()));
         activity.rate.setText(String.valueOf(responseInvoice.getRate()));
         activity.amount.setText(String.valueOf(responseInvoice.getAmount()));
-
         activity.hsd.setText(String.valueOf(responseInvoice.getHsd()));
         activity.cash.setText(String.valueOf(responseInvoice.getCash()));
-        activity.tds.setText(String.valueOf(responseInvoice.getTds()));
-        activity.officeCharge.setText(String.valueOf(responseInvoice.getOfficecharge()));
         activity.shortage.setText(String.valueOf(responseInvoice.getShortage()));
-        activity.balanceAmount.setText(String.valueOf(responseInvoice.getBalanceamount()));
-        activity.challanTransporter.setText(responseInvoice.getChallanToTransporter());
-        activity.balanceAmountCleared.setText(responseInvoice.getBalanceAmountCleared());
 
-        activity.modeOfPayment.setText(responseInvoice.getModeofpayment());
+        activity.amount.setText(String.valueOf(responseInvoice.getTransporterAmount()));
         activity.transName.setText(responseInvoice.getTransportername());
         activity.status.setText(responseInvoice.getStatus());
 
         if(responseInvoice.getStatus().toLowerCase().equals("pending")){
 
-             activity.iconOfGod.setImageResource(R.drawable.pending_icon);
+            activity.iconOfGod.setImageResource(R.drawable.pending_icon);
 
         } else {
 
@@ -121,18 +110,18 @@ public class ShowInvoiceActivity extends AppCompatActivity {
             }
         });
 
-       new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-           @Override
-           public void run() {
+        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+            @Override
+            public void run() {
 
-               if(shareBill){
+                if(shareBill){
 
-                   StartShareImage();
+                    StartShareImage();
 
-               }
+                }
 
-           }
-       },300);
+            }
+        },300);
 
     }
 
@@ -203,7 +192,7 @@ public class ShowInvoiceActivity extends AppCompatActivity {
         Intent intentShareFile = new Intent(Intent.ACTION_SEND);
 
         Uri imageUri = FileProvider.getUriForFile(
-                ShowInvoiceActivity.this,
+                TransporterShowInvoiceActivity.this,
                 "com.truck.transfly.provider", //(use your app signature + ".provider" )
                 file);
 
@@ -232,16 +221,16 @@ public class ShowInvoiceActivity extends AppCompatActivity {
         if ((ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) ||
                 (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)) {
 
-            if ((ActivityCompat.shouldShowRequestPermissionRationale(ShowInvoiceActivity.this, android.Manifest.permission.READ_EXTERNAL_STORAGE))) {
+            if ((ActivityCompat.shouldShowRequestPermissionRationale(TransporterShowInvoiceActivity.this, android.Manifest.permission.READ_EXTERNAL_STORAGE))) {
             } else {
-                ActivityCompat.requestPermissions(ShowInvoiceActivity.this, new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE},
+                ActivityCompat.requestPermissions(TransporterShowInvoiceActivity.this, new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE},
                         REQUEST_PERMISSIONS);
 
             }
 
-            if ((ActivityCompat.shouldShowRequestPermissionRationale(ShowInvoiceActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE))) {
+            if ((ActivityCompat.shouldShowRequestPermissionRationale(TransporterShowInvoiceActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE))) {
             } else {
-                ActivityCompat.requestPermissions(ShowInvoiceActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                ActivityCompat.requestPermissions(TransporterShowInvoiceActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                         REQUEST_PERMISSIONS);
 
             }

@@ -198,6 +198,8 @@ public class SearchBarActivity extends AppCompatActivity {
                         intent.putExtra("mineid", responseMineGlobal.getId());
                         intent.putExtra("minename", fromSearch.getText().toString());
                         intent.putExtra("loading", to_search.getText().toString());
+                        intent.putExtra("tyres",responseMineGlobal.getTyres());
+                        intent.putExtra("trailor",responseMineGlobal.getTrailer());
                         intent.putExtra("rate", rate);
                         intent.putExtra("etl", etl);
 

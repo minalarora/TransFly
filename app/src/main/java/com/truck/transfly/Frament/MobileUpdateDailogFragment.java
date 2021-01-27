@@ -60,6 +60,14 @@ public class MobileUpdateDailogFragment extends DialogFragment {
 
         EditText mobileNumber = inflate.findViewById(R.id.mobileNumber);
 
+        Bundle arguments = getArguments();
+        if(arguments!=null){
+
+            String number = arguments.getString("number");
+            mobileNumber.setText(number);
+
+        }
+
         inflate.findViewById(R.id.send_otp).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

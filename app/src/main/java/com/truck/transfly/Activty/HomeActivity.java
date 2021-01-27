@@ -13,6 +13,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.provider.Settings;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -20,6 +21,12 @@ import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.RotateAnimation;
+import android.view.animation.ScaleAnimation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -181,6 +188,45 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         TextView number = headerLayout.findViewById(R.id.number);
 
         image = headerLayout.findViewById(R.id.profile_image);
+        ImageView refresh_icon = findViewById(R.id.refresh_icon);
+
+        findViewById(R.id.refresh_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (Mylatitude != 0 && Mylongitude != 0)
+                    goToLocationWithAnimation(Mylatitude, Mylongitude, 9);
+
+                RotateAnimation anim = new RotateAnimation(0f, 360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+                anim.setInterpolator(new LinearInterpolator());
+                anim.setRepeatCount(Animation.INFINITE);
+                anim.setDuration(800);
+
+                // Start animating the image
+
+                refresh_icon.startAnimation(anim);
+
+                handler.removeCallbacks(runnable);
+
+                new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        //stop animation
+                        refresh_icon.setAnimation(null);
+
+                    }
+                },2500);
+
+                parent_of_loading.setVisibility(View.VISIBLE);
+                mGoogleMap.clear();
+                loadinglist.clear();
+                mines.clear();
+                no_internet_connection.setVisibility(View.GONE);
+                getMinesFromServer(PreferenceUtil.getData(HomeActivity.this, "token"));
+
+            }
+        });
 
         image.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -514,6 +560,26 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
+    public void startAnimation(ImageView ivDH)
+    {
+        Animation scaleAnim = new ScaleAnimation(0, 2, 0, 2);
+        scaleAnim.setDuration(5000);
+        scaleAnim.setRepeatCount(1);
+        scaleAnim.setInterpolator(new AccelerateInterpolator());
+        scaleAnim.setRepeatMode(Animation.REVERSE);
+
+        Animation rotateAnim = new RotateAnimation(0, 360, Animation.ABSOLUTE, Animation.ABSOLUTE, Animation.ABSOLUTE, Animation.RELATIVE_TO_SELF);
+        rotateAnim.setDuration(5000);
+        rotateAnim.setRepeatCount(1);
+        rotateAnim.setInterpolator(new AccelerateInterpolator());
+        rotateAnim.setRepeatMode(Animation.REVERSE);
+
+        AnimationSet animationSet = new AnimationSet(true);
+        animationSet.addAnimation(scaleAnim);
+        animationSet.addAnimation(rotateAnim);
+
+        ivDH.startAnimation(animationSet);
+    }
 
     private void getBanners(String token) {
         api.getBanners(token).enqueue(new Callback<ResponseBody>() {
@@ -564,6 +630,10 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         parent_of_loading.setVisibility(View.VISIBLE);
         no_internet_connection.setVisibility(View.GONE);
+
+        loadinglist.clear();
+        arealist.clear();
+        responseLoadingList.clear();
 
         api.getAllMineVehicleOwner(token).enqueue(new Callback<ResponseBody>() {
             @Override
@@ -1224,6 +1294,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
@@ -1284,6 +1355,8 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                             intent.putExtra("mineid", responseMine.getId());
                             intent.putExtra("minename", responseMine.getName());
+                            intent.putExtra("tyres",responseMine.getTyres());
+                            intent.putExtra("trailor",responseMine.getTrailer());
                             intent.putExtra("loading", loading);
                             intent.putExtra("rate", rate);
                             intent.putExtra("etl", etl);
@@ -1336,12 +1409,11 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 }
             }
-            marker.setIcon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon("Rate : " + rate + "\n" + "ETL : " + etl)));
+            marker.setIcon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon("Rate : " + rate + "\n" + "ETL : " + etl+" hrs")));
 
             marker.setTag(responseMine);
 
-
-
+            
     }
 
     private void showMarker(double latituteOfTajMahal, double longitudeOfTajMahal, int postion, String locationAddress) {

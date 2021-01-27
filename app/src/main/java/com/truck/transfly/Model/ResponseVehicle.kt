@@ -24,5 +24,11 @@ class ResponseVehicle {
     @SerializedName("date")
     var date: String? = null
 
+    @SerializedName("contact")
+    var contact: String? = null
+
+    @SerializedName("tyres")
+    var tyres: String? = null
+
 
 }

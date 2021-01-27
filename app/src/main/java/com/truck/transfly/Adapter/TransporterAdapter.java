@@ -14,14 +14,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.truck.transfly.Activty.ShowInvoiceActivity;
+import com.truck.transfly.Activty.TransporterShowInvoiceActivity;
 import com.truck.transfly.Model.ResponseInvoice;
 import com.truck.transfly.R;
+import com.truck.transfly.utils.PreferenceUtil;
 
 import java.util.List;
 
 public class TransporterAdapter extends RecyclerView.Adapter<TransporterAdapter.viewholder> {
 
     private final Context context;
+    private final boolean transporter;
     private List<ResponseInvoice> responseInvoiceList;
     private int decideKeywords;
     private boolean b;
@@ -30,6 +33,9 @@ public class TransporterAdapter extends RecyclerView.Adapter<TransporterAdapter.
 
         this.context=context;
         this.responseInvoiceList=responseInvoiceList;
+
+        String token = PreferenceUtil.getData(context, "token");
+        transporter = token.split(":")[0].equals("transporter");
 
     }
 
@@ -59,6 +65,17 @@ public class TransporterAdapter extends RecyclerView.Adapter<TransporterAdapter.
             @Override
             public void onClick(View v) {
 
+                if(transporter){
+
+                    Intent intent = new Intent(context, TransporterShowInvoiceActivity.class);
+                    intent.putExtra("responseInvoice",responseInvoice);
+                    intent.putExtra("shareBill",true);
+                    context.startActivity(intent);
+
+                    return;
+
+                }
+
                 Intent intent = new Intent(context, ShowInvoiceActivity.class);
                 intent.putExtra("responseInvoice",responseInvoice);
                 intent.putExtra("shareBill",true);
@@ -71,6 +88,17 @@ public class TransporterAdapter extends RecyclerView.Adapter<TransporterAdapter.
             @Override
             public void onClick(View v) {
 
+                if(transporter){
+
+                    Intent intent = new Intent(context, TransporterShowInvoiceActivity.class);
+                    intent.putExtra("vehicle_owner",b);
+                    intent.putExtra("responseInvoice",responseInvoice);
+                    context.startActivity(intent);
+
+                    return;
+
+                }
+
                 Intent intent = new Intent(context, ShowInvoiceActivity.class);
                 intent.putExtra("vehicle_owner",b);
                 intent.putExtra("responseInvoice",responseInvoice);
@@ -82,6 +110,16 @@ public class TransporterAdapter extends RecyclerView.Adapter<TransporterAdapter.
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if(transporter){
+
+                    Intent intent = new Intent(context, TransporterShowInvoiceActivity.class);
+                    intent.putExtra("responseInvoice",responseInvoice);
+                    context.startActivity(intent);
+
+                    return;
+
+                }
 
                 Intent intent = new Intent(context, ShowInvoiceActivity.class);
                 intent.putExtra("responseInvoice",responseInvoice);

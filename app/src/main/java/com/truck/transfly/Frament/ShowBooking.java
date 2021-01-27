@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +34,8 @@ import com.truck.transfly.utils.ApiClient;
 import com.truck.transfly.utils.ApiEndpoints;
 import com.truck.transfly.utils.PreferenceUtil;
 import com.yalantis.phoenix.PullToRefreshView;
+
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -84,14 +88,32 @@ public class ShowBooking extends Fragment {
             api = retrofit.create(ApiEndpoints.class);
         }
 
+        /*
+        * mine
+        * loading
+        * vehicle
+        * contact
+        * */
         parent_of_loading = inflate.findViewById(R.id.parent_of_loading);
         parent_of_loading.setVisibility(View.GONE);
 
-        inflate.findViewById(R.id.search_booking).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        TextView searchBooking = inflate.findViewById(R.id.search_booking);
 
-                startActivity(new Intent(fragmentActivity, SearchBookingActivity.class));
+        searchBooking.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                fieldStafAdapter.getFilter().filter(s);
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
 
             }
         });
@@ -171,7 +193,11 @@ public class ShowBooking extends Fragment {
                 {
                     Type collectionType = new TypeToken<ArrayList<ResponseBooking>>(){}.getType();
                     try {
+
+                        responseBookingList.clear();
+                        fieldStafAdapter.notifyDataSetChanged();
                         responseBookingList.addAll(new Gson().fromJson(response.body().string().toString(),collectionType));
+
                     } catch (IOException e) {
 
                     }

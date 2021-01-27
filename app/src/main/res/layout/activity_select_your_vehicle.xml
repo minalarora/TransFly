@@ -152,11 +152,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins"
-                        android:hint="Enter Mobile Number"
+                        android:hint="Driver Mobile Number"
                         android:imeOptions="actionNext"
                         android:id="@+id/mobile_number"
                         android:textColor="@color/black"
-                        android:inputType="textCapWords"
+                        android:maxLength="10"
+                        android:inputType="number"
                         android:textSize="@dimen/_12ssp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -226,7 +227,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="@dimen/_4ssp"
                         android:fontFamily="@font/poppins"
-                        android:text="(Estimated Loading Time)"
+                        android:text="(Estimated Loading Time )"
                         android:textColor="#8c8c8c"
                         android:textSize="12dp" />
 

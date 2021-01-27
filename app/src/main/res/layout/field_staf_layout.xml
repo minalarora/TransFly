@@ -74,8 +74,6 @@
         android:layout_below="@+id/toolbar"
         android:textSize="14sp"
         android:layout_toStartOf="@+id/skip"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/font_regular"
         android:paddingEnd="8dp"
@@ -87,7 +85,7 @@
         />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/searchBar"
+        android:id="@+id/fieldStafRecylcer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/search_booking" />

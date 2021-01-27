@@ -5,10 +5,13 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -99,11 +102,23 @@ public class FieldStafActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.search_booking).setOnClickListener(new View.OnClickListener() {
+        EditText searchBooking =findViewById(R.id.search_booking);
+
+        searchBooking.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onClick(View v) {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
 
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                fieldStafAdapter.getFilter().filter(s);
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
 
             }
         });

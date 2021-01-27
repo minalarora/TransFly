@@ -16,4 +16,7 @@ class RequestBooking {
 
     @SerializedName("loading")
     var loading: String? = null
+
+    @SerializedName("contact")
+    var contact: String? = null
 }

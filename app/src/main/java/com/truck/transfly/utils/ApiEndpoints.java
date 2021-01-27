@@ -35,6 +35,7 @@ import com.truck.transfly.Model.ResponseReward;
 import com.truck.transfly.Model.ResponseToken;
 import com.truck.transfly.Model.ResponseTransporter;
 import com.truck.transfly.Model.ResponseVehicleOwner;
+import com.truck.transfly.Model.UpdateVehicle;
 
 import okhttp3.Request;
 import okhttp3.ResponseBody;
@@ -51,6 +52,15 @@ import retrofit2.http.Query;
 
 public interface ApiEndpoints {
     //api
+
+    //updatevehicle
+    @PATCH("/vehicle")
+    Call<ResponseBody> updateVehicle(@Header("Authorization")String token,@Body UpdateVehicle vehicle);
+
+    //delete vehicle
+    @DELETE("/vehicle/{id}")
+    Call<ResponseBody> deleteVehicle(@Header("Authorization")String token,@Path("id") int id);
+
 
     //create user apis
     @POST("/vehicleowner")
@@ -203,7 +213,7 @@ public interface ApiEndpoints {
     Call<ResponseBody> updateFirebase(@Header("Authorization")String token, @Body RequestFirebase firebase);
 
     //update mobile
-    @POST("/me/delete")
+    @POST("/logout")
     Call<ResponseBody> deleteFirebase(@Header("Authorization")String token, @Body ResponseFirebase firebase);
 
     //update password
@@ -232,6 +242,10 @@ public interface ApiEndpoints {
 
     @GET("/mine/{id}")
     Call<ResponseMine> getSingleMine(@Header("Authorization")String token,@Path("id") int id);
+
+    //get notification
+    @GET("/allnotification")
+    Call<ResponseBody> getNotifications(@Header("Authorization")String token);
 
 
     @GET("/areamanager/mines")

@@ -23,7 +23,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TransFly">
-        <activity android:name=".Activty.SearchBookingActivity"></activity>
+        <activity android:name=".Activty.TransporterShowInvoiceActivity"></activity>
+        <activity android:name=".Activty.SearchBookingActivity" />
         <activity android:name=".Activty.NotificationActivity" />
         <activity android:name=".Activty.FieldStaffInvoicesActivity" />
         <activity android:name=".Activty.WebViewActivity" />

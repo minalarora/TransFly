@@ -71,9 +71,14 @@ class ResponseInvoice() : Parcelable {
     @SerializedName("transporter")
     var transporterMobile: String?  =null
 
+    @SerializedName("transporteramount")
+    var transporterAmount: Double?= 0.0
+
     constructor(parcel: Parcel) : this() {
-        id = parcel.readValue(Double::class.java.classLoader) as? Int
+        id = parcel.readValue(Int::class.java.classLoader) as? Int
         minename = parcel.readString()
+        transportername = parcel.readString()
+        modeofpayment = parcel.readString()
         loading = parcel.readString()
         status = parcel.readString()
         vehicleOwnerName = parcel.readString()
@@ -92,13 +97,14 @@ class ResponseInvoice() : Parcelable {
         balanceAmountCleared = parcel.readString()
         date = parcel.readString()
         transporterMobile = parcel.readString()
-        transportername=parcel.readString()
-        modeofpayment=parcel.readString()
+        transporterAmount = parcel.readValue(Double::class.java.classLoader) as? Double
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeValue(id)
         parcel.writeString(minename)
+        parcel.writeString(transportername)
+        parcel.writeString(modeofpayment)
         parcel.writeString(loading)
         parcel.writeString(status)
         parcel.writeString(vehicleOwnerName)
@@ -117,8 +123,7 @@ class ResponseInvoice() : Parcelable {
         parcel.writeString(balanceAmountCleared)
         parcel.writeString(date)
         parcel.writeString(transporterMobile)
-        parcel.writeString(transportername)
-        parcel.writeString(modeofpayment)
+        parcel.writeValue(transporterAmount)
     }
 
     override fun describeContents(): Int {

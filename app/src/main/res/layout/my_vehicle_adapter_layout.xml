@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_marginStart="@dimen/_12ssp"
-    android:layout_marginEnd="@dimen/_25ssp"
+    android:layout_marginStart="@dimen/_6ssp"
+    android:layout_marginEnd="@dimen/_6ssp"
     app:cardCornerRadius="@dimen/_7ssp"
     android:layout_marginTop="@dimen/_7ssp"
     android:layout_height="wrap_content">
@@ -15,17 +15,33 @@
         android:layout_margin="@dimen/_5ssp"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/_6ssp"
-            android:fontFamily="@font/poppins"
-            android:text="Vehicle 1"
-            android:id="@+id/vehicle_number_series"
-            android:gravity="center"
-            android:textColor="@color/black"
-            android:textSize="12dp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_6ssp"
+                android:fontFamily="@font/poppins"
+                android:text="Vehicle 1"
+                android:layout_centerInParent="true"
+                android:id="@+id/vehicle_number_series"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12dp" />
+
+            <ImageView
+                android:layout_width="@dimen/_23ssp"
+                android:id="@+id/btn_delete"
+                android:layout_height="@dimen/_23ssp"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/ic_action_delete"
+                app:tint="@color/black" />
+
+
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -122,6 +138,52 @@
                 android:text="21020202"
                 android:textColor="@color/black"
                 android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/_4ssp"
+                android:visibility="gone"
+                android:fontFamily="@font/poppins"
+                android:text="(Vehicle Number)"
+                android:textColor="#8c8c8c"
+                android:textSize="12dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20ssp"
+            android:layout_marginTop="@dimen/_3ssp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/_15ssp"
+                android:layout_height="@dimen/_20ssp"
+                android:src="@drawable/ic_action_call"
+                app:tint="@color/project_color" />
+
+            <TextView
+                android:id="@+id/contact_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/_12ssp"
+                android:fontFamily="@font/poppins"
+                android:text="21020202"
+                android:textColor="@color/black"
+                android:textSize="13dp" />
+
+            <ImageView
+                android:layout_width="@dimen/_15ssp"
+                android:layout_height="@dimen/_20ssp"
+                android:src="@drawable/ic_action_edit"
+                android:id="@+id/edit_contact"
+                app:tint="@color/black" />
+
 
             <TextView
                 android:layout_width="wrap_content"
