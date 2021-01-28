@@ -166,6 +166,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_13ssp"
+                            android:visibility="gone"
                             android:layout_marginTop="@dimen/_2ssp"
                             android:orientation="horizontal">
 
@@ -226,7 +227,7 @@
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginStart="@dimen/_4ssp"
                                 android:fontFamily="@font/poppins"
-                                android:text="(Owner Number)"
+                                android:text="(Driver Number)"
                                 android:textColor="#8c8c8c"
                                 android:textSize="12dp" />
 
@@ -764,11 +765,48 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_8ssp"
+                            android:layout_marginTop="@dimen/_7ssp"
+                            android:layout_marginEnd="@dimen/_8ssp"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/_6ssp"
+                            android:background="@drawable/round_as_invoice"
+                            android:id="@+id/mode_of_payment_parent"
+                            android:weightSum="2">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="@dimen/_8ssp"
+                                android:layout_weight="1"
+                                android:alpha="0.7"
+                                android:fontFamily="@font/poppins"
+                                android:text="Mode Of Payment"
+                                android:textColor="@color/black"
+                                android:textSize="13dp" />
+
+                            <TextView
+                                android:id="@+id/mode_of_payment"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="@dimen/_8ssp"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/poppins"
+                                android:text="33.33 %"
+                                android:textColor="@color/black"
+                                android:textSize="14dp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_9ssp"
                             android:layout_marginTop="@dimen/_7ssp"
                             android:layout_marginEnd="@dimen/_8ssp"
                             android:orientation="horizontal"
-                            android:background="@drawable/round_as_invoice"
                             android:padding="@dimen/_6ssp"
                             android:weightSum="2">
 
@@ -798,42 +836,6 @@
 
                         </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_8ssp"
-                            android:layout_marginTop="@dimen/_7ssp"
-                            android:layout_marginEnd="@dimen/_8ssp"
-                            android:orientation="horizontal"
-                            android:padding="@dimen/_6ssp"
-                            android:id="@+id/mode_of_payment_parent"
-                            android:weightSum="2">
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginStart="@dimen/_8ssp"
-                                android:layout_weight="1"
-                                android:alpha="0.7"
-                                android:fontFamily="@font/poppins"
-                                android:text="Mode Of Payment"
-                                android:textColor="@color/black"
-                                android:textSize="13dp" />
-
-                            <TextView
-                                android:id="@+id/mode_of_payment"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginStart="@dimen/_8ssp"
-                                android:layout_weight="1"
-                                android:fontFamily="@font/poppins"
-                                android:text="33.33 %"
-                                android:textColor="@color/black"
-                                android:textSize="14dp" />
-
-                        </LinearLayout>
 
 
                     </LinearLayout>

@@ -117,13 +117,9 @@ public class TransporterActivity extends AppCompatActivity implements SmoothDate
 
                         ResponseTransporter responseVehicleOwner = ((TransflyApplication) getApplication()).getResponseTransporterOwner();
 
-                        DateTime dateStart=new DateTime(yearStart,monthStart+1,dayStart,new DateTime().getHourOfDay(),new DateTime().getMinuteOfHour());
-
-                        DateTime dateEnd=new DateTime(yearEnd,monthEnd+1,dayEnd,new DateTime().getHourOfDay(),new DateTime().getMinuteOfHour()).plusDays(1);
-
                         Intent intent=new Intent(TransporterActivity.this,WebViewActivity.class);
-                        intent.putExtra("from_time",dateStart.getMillis());
-                        intent.putExtra("to_time",dateEnd.getMillis());
+                        intent.putExtra("from_time",yearStart+"-"+(monthStart+1)+"-"+dayStart);
+                        intent.putExtra("to_time",yearEnd+"-"+(monthEnd+1)+"-"+dayEnd);
                         intent.putExtra("mobile",responseVehicleOwner.getMobile());
                         intent.putExtra("keywords","mobinvoicetransporter");
                         startActivity(intent);
@@ -530,14 +526,9 @@ public class TransporterActivity extends AppCompatActivity implements SmoothDate
 
     @Override
     public void onDateRangeSet(SmoothDateRangePickerFragment view, int yearStart, int monthStart, int dayStart, int yearEnd, int monthEnd, int dayEnd) {
-
-        DateTime dateStart=new DateTime(yearStart,monthStart+1,dayStart,new DateTime().getHourOfDay(),new DateTime().getMinuteOfHour());
-
-        DateTime dateEnd=new DateTime(yearEnd,monthEnd+1,dayEnd,new DateTime().getHourOfDay(),new DateTime().getMinuteOfHour()).plusDays(1);
-
         invoicesList.clear();
         fieldStafAdapter.notifyDataSetChanged();
-        getInvoiceTransporter2(PreferenceUtil.getData(TransporterActivity.this, "token"), String.valueOf(dateStart.getMillis()),String.valueOf(dateEnd.getMillis()));
+        getInvoiceTransporter2(PreferenceUtil.getData(TransporterActivity.this, "token"), yearStart+"-"+(monthStart+1)+"-"+dayStart,yearEnd+"-"+(monthEnd+1)+"-"+dayEnd);
 
     }
 

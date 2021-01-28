@@ -228,7 +228,7 @@ public class ShowInvoiceFragment extends Fragment implements SmoothDateRangePick
 
         invoicesList.clear();
         fieldStafAdapter.notifyDataSetChanged();
-        getInvoiceAreaManager2(PreferenceUtil.getData(fragmentActivity, "token"), String.valueOf(dateStart.getMillis()),String.valueOf(dateEnd.getMillis()));
+        getInvoiceAreaManager2(PreferenceUtil.getData(fragmentActivity, "token"), yearStart+"-"+(monthStart+1)+"-"+dayStart,yearEnd+"-"+(monthEnd+1)+"-"+dayEnd);
 
 
     }

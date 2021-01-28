@@ -20,7 +20,7 @@ class ResponseBooking() : Parcelable {
     @SerializedName("minename")
     var minename: String? = null
 
-    @SerializedName("createdAt")
+    @SerializedName("date")
     var date: String? = null
 
     @SerializedName("vehicle")

@@ -726,7 +726,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                                         } else if (perfect != null && perfect.equals("1002")) {
 
-                                            myUtils.spotLightOnProfile(currentBooking, "1003", HomeActivity.this, "Click here to check your current bookings.", "BOOKING HISTORY");
+                                            myUtils.spotLightOnProfile(currentBooking, "1003", HomeActivity.this, "Click here to check all your notifications.", "NOTIFICATION");
 
                                         } else if (perfect != null && perfect.equals("1003")) {
 

@@ -236,7 +236,7 @@ public class PendingFragment extends Fragment implements SmoothDateRangePickerFr
 
         invoicesList.clear();
         fieldStafAdapter.notifyDataSetChanged();
-        getInvoiceVehicleOwner2(PreferenceUtil.getData(fragmentActivity, "token"), String.valueOf(dateStart.getMillis()),String.valueOf(dateEnd.getMillis()));
+        getInvoiceVehicleOwner2(PreferenceUtil.getData(fragmentActivity, "token"), yearStart+"-"+(monthStart+1)+"-"+dayStart,yearEnd+"-"+(monthEnd+1)+"-"+dayEnd);
 
     }
 

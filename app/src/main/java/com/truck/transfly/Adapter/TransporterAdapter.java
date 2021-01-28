@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -37,6 +38,7 @@ public class TransporterAdapter extends RecyclerView.Adapter<TransporterAdapter.
         String token = PreferenceUtil.getData(context, "token");
         transporter = token.split(":")[0].equals("transporter");
 
+
     }
 
     @NonNull
@@ -56,10 +58,18 @@ public class TransporterAdapter extends RecyclerView.Adapter<TransporterAdapter.
 
         holder.price_rate.setText(""+responseInvoice.getRate());
         holder.vehicle_number.setText(responseInvoice.getVehiclenumber());
-        holder.mobileNumber.setText(responseInvoice.getVehicleownermobile());
+        holder.mobileNumber.setText(responseInvoice.getContact());
         holder.vehile_owner.setText(responseInvoice.getVehicleOwnerName());
         holder.date_created.setText(responseInvoice.getDate());
         holder.to_from_dest.setText(responseInvoice.getMinename() +" - "+responseInvoice.getLoading());
+        holder.vehicleNamepParent.setVisibility(View.GONE);
+
+        if(transporter){
+
+            holder.vehicleNamepParent.setVisibility(View.GONE);
+            holder.mobileNumberParent.setVisibility(View.GONE);
+
+        }
 
         holder.share.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -151,12 +161,16 @@ public class TransporterAdapter extends RecyclerView.Adapter<TransporterAdapter.
 
         private TextView to_from_dest,date_created,vehile_owner,mobileNumber,vehicle_number,price_rate;
 
+        private LinearLayout mobileNumberParent,vehicleNamepParent;
+
         private RelativeLayout show_invoice,share;
 
         public viewholder(@NonNull View itemView) {
             super(itemView);
 
             to_from_dest=itemView.findViewById(R.id.to_from_dest);
+            mobileNumberParent=itemView.findViewById(R.id.mobileNumberParent);
+            vehicleNamepParent=itemView.findViewById(R.id.vehicleNamepParent);
             date_created=itemView.findViewById(R.id.date_created);
             vehile_owner=itemView.findViewById(R.id.vehile_owner);
             mobileNumber=itemView.findViewById(R.id.mobileNumber);

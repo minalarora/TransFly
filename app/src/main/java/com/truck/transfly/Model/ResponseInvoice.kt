@@ -71,6 +71,9 @@ class ResponseInvoice() : Parcelable {
     @SerializedName("transporter")
     var transporterMobile: String?  =null
 
+    @SerializedName("contact")
+    var contact : String?=null
+
     @SerializedName("transporteramount")
     var transporterAmount: Double?= 0.0
 
@@ -97,6 +100,7 @@ class ResponseInvoice() : Parcelable {
         balanceAmountCleared = parcel.readString()
         date = parcel.readString()
         transporterMobile = parcel.readString()
+        contact = parcel.readString()
         transporterAmount = parcel.readValue(Double::class.java.classLoader) as? Double
     }
 
@@ -123,6 +127,7 @@ class ResponseInvoice() : Parcelable {
         parcel.writeString(balanceAmountCleared)
         parcel.writeString(date)
         parcel.writeString(transporterMobile)
+        parcel.writeString(contact)
         parcel.writeValue(transporterAmount)
     }
 

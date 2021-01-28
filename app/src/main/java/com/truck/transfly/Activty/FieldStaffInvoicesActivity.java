@@ -58,8 +58,8 @@ public class FieldStaffInvoicesActivity extends AppCompatActivity implements Smo
         DateTime dateEnd = new DateTime(yearEnd, monthEnd + 1, dayEnd, new DateTime().getHourOfDay(), new DateTime().getMinuteOfHour()).plusDays(1);
 
         Intent intent = new Intent(FieldStaffInvoicesActivity.this, WebViewActivity.class);
-        intent.putExtra("from_time", dateStart.getMillis());
-        intent.putExtra("to_time", dateEnd.getMillis());
+        intent.putExtra("from_time",yearStart+"-"+(monthStart+1)+"-"+dayStart);
+        intent.putExtra("to_time",yearEnd+"-"+(monthEnd+1)+"-"+dayEnd);
         intent.putExtra("mobile", responseVehicleOwner.getMobile());
 
         intent.putExtra("keywords", "mobinvoicefieldstaff");

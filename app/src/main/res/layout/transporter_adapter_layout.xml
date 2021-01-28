@@ -60,6 +60,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_2ssp"
+            android:visibility="gone"
+            android:id="@+id/vehicleNamepParent"
             android:layout_marginStart="@dimen/_13ssp"
             android:orientation="horizontal">
 
@@ -94,8 +96,10 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/mobileNumberParent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="visible"
             android:layout_marginStart="@dimen/_13ssp"
             android:orientation="horizontal">
 
@@ -105,12 +109,12 @@
                 android:src="@drawable/ic_smartphone_number" />
 
             <TextView
+                android:id="@+id/mobileNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:fontFamily="@font/poppins"
-                android:id="@+id/mobileNumber"
-                android:text="+91 9399104906"
+                android:text="+91 "
                 android:textColor="@color/black"
                 android:textSize="13dp" />
 
@@ -120,7 +124,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="@dimen/_4ssp"
                 android:fontFamily="@font/poppins"
-                android:text="(Owner Number)"
+                android:text="(Driver Number)"
                 android:textColor="#8c8c8c"
                 android:textSize="12dp" />
 
@@ -165,6 +169,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_6ssp"
+            android:visibility="gone"
             android:layout_marginStart="@dimen/_20ssp"
             android:orientation="horizontal">
 

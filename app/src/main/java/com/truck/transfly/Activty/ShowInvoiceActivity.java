@@ -83,7 +83,7 @@ public class ShowInvoiceActivity extends AppCompatActivity {
         activity.toFromDest.setText(responseInvoice.getMinename() +" - "+responseInvoice.getLoading());
         activity.dateCreated.setText(responseInvoice.getDate());
         activity.ownerName.setText(responseInvoice.getVehicleOwnerName());
-        activity.ownerMobile.setText(responseInvoice.getVehicleownermobile());
+        activity.ownerMobile.setText(responseInvoice.getContact());
         activity.vehicleNumber.setText(responseInvoice.getVehiclenumber());
         activity.tonnege.setText(String.valueOf(responseInvoice.getTonnage()));
         activity.rate.setText(String.valueOf(responseInvoice.getRate()));

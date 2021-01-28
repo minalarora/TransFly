@@ -165,6 +165,7 @@ public class FieldStafBookingConfirmationActivity extends AppCompatActivity {
                             requestInvoice.setTonnage(Double.valueOf(activity.tonnege.getText().toString()));
                             requestInvoice.setCash(Double.valueOf(activity.cash.getText().toString()));
                             requestInvoice.setOwner(responseBooking.getOwner());
+                            requestInvoice.setContact(responseBooking.getContact());
 
                             if(transportersList.size()>0) {
 

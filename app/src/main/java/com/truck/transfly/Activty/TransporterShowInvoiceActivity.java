@@ -88,7 +88,6 @@ public class TransporterShowInvoiceActivity extends AppCompatActivity {
         activity.shortage.setText(String.valueOf(responseInvoice.getShortage()));
 
         activity.amount.setText(String.valueOf(responseInvoice.getTransporterAmount()));
-        activity.transName.setText(responseInvoice.getTransportername());
         activity.status.setText(responseInvoice.getStatus());
 
         if(responseInvoice.getStatus().toLowerCase().equals("pending")){

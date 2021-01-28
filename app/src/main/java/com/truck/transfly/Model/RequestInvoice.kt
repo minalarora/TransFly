@@ -42,5 +42,8 @@ class RequestInvoice {
     @SerializedName("transporter")
     var transporterMobile: String?  =null
 
+    @SerializedName("contact")
+    var contact : String?=null
+
 
 }

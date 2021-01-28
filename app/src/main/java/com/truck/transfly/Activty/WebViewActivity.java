@@ -31,8 +31,8 @@ public class WebViewActivity extends AppCompatActivity implements AdvancedWebVie
         setContentView(R.layout.activity_web_view);
 
         Intent intent = getIntent();
-        long from_time = intent.getLongExtra("from_time",0);
-        long to_time = intent.getLongExtra("to_time",0);
+        String from_time = intent.getStringExtra("from_time");
+        String to_time = intent.getStringExtra("to_time");
         String mobile = intent.getStringExtra("mobile");
         String keywords = intent.getStringExtra("keywords");
 
