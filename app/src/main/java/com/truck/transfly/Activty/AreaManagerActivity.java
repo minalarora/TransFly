@@ -368,11 +368,8 @@ public class AreaManagerActivity extends AppCompatActivity implements SmoothDate
 
         ResponseAreaManager responseVehicleOwner = ((TransflyApplication) getApplication()).getResponseAreaManager();
 
-        Intent intent=new Intent(AreaManagerActivity.this,WebViewActivity.class);
-        intent.putExtra("from_time",yearStart+"-"+(monthStart+1)+"-"+dayStart);
-        intent.putExtra("to_time",yearEnd+"-"+(monthEnd+1)+"-"+dayEnd);
-        intent.putExtra("mobile",responseVehicleOwner.getMobile());
-        intent.putExtra("keywords","mobinvoiceareamanager");
+        Uri uri = Uri.parse("https://transfly-ftr2t.ondigitalocean.app/mobinvoiceareamanager"+"?mobile="+responseVehicleOwner.getMobile()+"&from="+yearStart+"-"+(monthStart+1)+"-"+dayStart+"&"+"to="+yearEnd+"-"+(monthEnd+1)+"-"+dayEnd);
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         startActivity(intent);
 
     }

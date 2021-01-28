@@ -1,6 +1,9 @@
 package com.truck.transfly.Activty;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
@@ -70,6 +73,18 @@ public class NotificationActivity extends AppCompatActivity {
                 responseNotificationList.clear();
                 no_internet_connection.setVisibility(View.GONE);
                 getNotification(PreferenceUtil.getData(NotificationActivity.this, "token"));
+
+            }
+        });
+
+        findViewById(R.id.appSetting).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                Uri uri = Uri.fromParts("package", getPackageName(), null);
+                intent.setData(uri);
+                startActivity(intent);
 
             }
         });

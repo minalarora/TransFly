@@ -176,7 +176,7 @@
                         app:boxBackgroundColor="@color/white"
                         android:padding="@dimen/_4ssp"
                         android:layout_height="wrap_content"
-                        android:hint="Enter Bank IFC">
+                        android:hint="Enter Bank IFSC">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"

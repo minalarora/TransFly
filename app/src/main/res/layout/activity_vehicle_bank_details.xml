@@ -85,7 +85,6 @@
                     android:layout_height="@dimen/_150ssp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="30dp"
-                    android:visibility="gone"
                     android:id="@+id/choose_image"
                     android:background="@drawable/round_dotted_line">
 
@@ -131,8 +130,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_12ssp"
-                        android:layout_marginTop="@dimen/_50ssp"
                         android:layout_marginEnd="@dimen/_12ssp"
+                        android:layout_marginTop="@dimen/_10ssp"
                         android:hint="Enter Person Name"
                         android:padding="@dimen/_4ssp"
                         app:boxBackgroundColor="@color/white">

@@ -770,7 +770,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                     parent_of_loading.setVisibility(View.GONE);
                     no_internet_connection.setVisibility(View.VISIBLE);
 
-                    Toast.makeText(HomeActivity.this, "Somrthing Went Wrong! Try Again", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(HomeActivity.this, "Something Went Wrong! Try Again", Toast.LENGTH_SHORT).show();
 
                 }
             }
@@ -781,7 +781,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                 parent_of_loading.setVisibility(View.GONE);
                 no_internet_connection.setVisibility(View.VISIBLE);
 
-                Toast.makeText(HomeActivity.this, "Somrthing Went Wrong! Try Again", Toast.LENGTH_SHORT).show();
+                Toast.makeText(HomeActivity.this, "Something Went Wrong! Try Again", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -1106,7 +1106,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                     case R.id.bank_details:
 
-                        Intent bank_details = new Intent(HomeActivity.this, BankDetailsActivity.class);
+                        Intent bank_details = new Intent(HomeActivity.this, VehicleBankDetailsActivity.class);
                         startActivity(bank_details);
 
                         break;

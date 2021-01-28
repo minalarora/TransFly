@@ -1,6 +1,7 @@
 package com.truck.transfly.Activty;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
@@ -75,24 +76,20 @@ public class CurrentInvoicesActivity extends AppCompatActivity implements Smooth
 
         ResponseVehicleOwner responseVehicleOwner = ((TransflyApplication) getApplication()).getResponseVehicleOwner();
 
-        DateTime dateStart = new DateTime(yearStart, monthStart + 1, dayStart, new DateTime().getHourOfDay(), new DateTime().getMinuteOfHour());
-
-        DateTime dateEnd = new DateTime(yearEnd, monthEnd + 1, dayEnd, new DateTime().getHourOfDay(), new DateTime().getMinuteOfHour()).plusDays(1);
-
-        Intent intent = new Intent(CurrentInvoicesActivity.this, WebViewActivity.class);
-        intent.putExtra("from_time",yearStart+"-"+(monthStart+1)+"-"+dayStart);
-        intent.putExtra("to_time",yearEnd+"-"+(monthEnd+1)+"-"+dayEnd);
-        intent.putExtra("mobile", responseVehicleOwner.getMobile());
-
         if (fieldstaffKeyword) {
 
-            intent.putExtra("keywords", "mobinvoicefieldstaff");
+            Uri uri = Uri.parse("https://transfly-ftr2t.ondigitalocean.app/mobinvoicefieldstaff"+"?mobile="+responseVehicleOwner.getMobile()+"&from="+yearStart+"-"+(monthStart+1)+"-"+dayStart+"&"+"to="+yearEnd+"-"+(monthEnd+1)+"-"+dayEnd);
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            startActivity(intent);
 
-        } else
 
-            intent.putExtra("keywords", "mobinvoicevehicleowner");
+        } else{
 
-        startActivity(intent);
+            Uri uri = Uri.parse("https://transfly-ftr2t.ondigitalocean.app/mobinvoicevehicleowner"+"?mobile="+responseVehicleOwner.getMobile()+"&from="+yearStart+"-"+(monthStart+1)+"-"+dayStart+"&"+"to="+yearEnd+"-"+(monthEnd+1)+"-"+dayEnd);
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            startActivity(intent);
+        }
+
 
     }
 }

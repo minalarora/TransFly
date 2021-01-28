@@ -117,12 +117,11 @@ public class TransporterActivity extends AppCompatActivity implements SmoothDate
 
                         ResponseTransporter responseVehicleOwner = ((TransflyApplication) getApplication()).getResponseTransporterOwner();
 
-                        Intent intent=new Intent(TransporterActivity.this,WebViewActivity.class);
-                        intent.putExtra("from_time",yearStart+"-"+(monthStart+1)+"-"+dayStart);
-                        intent.putExtra("to_time",yearEnd+"-"+(monthEnd+1)+"-"+dayEnd);
-                        intent.putExtra("mobile",responseVehicleOwner.getMobile());
-                        intent.putExtra("keywords","mobinvoicetransporter");
+                        Uri uri = Uri.parse("https://transfly-ftr2t.ondigitalocean.app/mobinvoicetransporter"+"?mobile="+responseVehicleOwner.getMobile()+"&from="+yearStart+"-"+(monthStart+1)+"-"+dayStart+"&"+"to="+yearEnd+"-"+(monthEnd+1)+"-"+dayEnd);
+                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                         startActivity(intent);
+
+
 
                     }
                 }, now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH));

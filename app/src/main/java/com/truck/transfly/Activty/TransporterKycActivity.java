@@ -236,19 +236,18 @@ public class TransporterKycActivity extends AppCompatActivity {
 
                         ResponseTransporter responseTransporter = ((TransflyApplication) getApplication()).getResponseTransporterOwner();
 
-                        if(responseTransporter.getStatus()==1 ) {
-
-                            Toast.makeText(TransporterKycActivity.this, "Your KYC is in Pending status, please wait until this is Approved", Toast.LENGTH_SHORT).show();
-
-                        } else if(responseTransporter.getStatus() == 2) {
+                         if(responseTransporter.getStatus() == 2) {
 
                             Toast.makeText(TransporterKycActivity.this, "Thank you, your KYC is complete. You are now ready to have a great experience on our app.", Toast.LENGTH_SHORT).show();
 
-                        }
+                        } else {
+
+                             Toast.makeText(TransporterKycActivity.this, "Your KYC is in Pending status, please wait until this is Approved", Toast.LENGTH_SHORT).show();
+
+                         }
 
                         finish();
 
-                        Log.d("minal","kyc completed");
                     }
                     else
                     {

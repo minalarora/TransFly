@@ -164,6 +164,24 @@
 
                     </com.google.android.material.textfield.TextInputLayout>
 
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_12ssp"
+                        android:layout_marginTop="@dimen/_30ssp"
+                        android:layout_marginEnd="@dimen/_12ssp"
+                        android:hint="Confirm Account Number"
+                        android:padding="@dimen/_4ssp"
+                        app:boxBackgroundColor="@color/white">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/confirm_bank_number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/opensansregular"
+                            android:textSize="@dimen/_15ssp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
@@ -171,7 +189,7 @@
                         android:layout_marginStart="@dimen/_12ssp"
                         android:layout_marginTop="@dimen/_30ssp"
                         android:layout_marginEnd="@dimen/_12ssp"
-                        android:hint="Enter Bank IFC"
+                        android:hint="Enter Bank IFSC"
                         android:padding="@dimen/_4ssp"
                         app:boxBackgroundColor="@color/white">
 

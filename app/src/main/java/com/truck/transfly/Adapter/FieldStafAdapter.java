@@ -56,6 +56,7 @@ public class FieldStafAdapter extends RecyclerView.Adapter<FieldStafAdapter.view
         holder.to_from_dest.setText(responseBooking.getMinename()+" - "+responseBooking.getLoading());
         holder.number.setText(responseBooking.getContact());
         holder.name_of_owner.setText(responseBooking.getVehiclename());
+        holder.date_created.setText(responseBooking.getDate());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,7 +135,7 @@ public class FieldStafAdapter extends RecyclerView.Adapter<FieldStafAdapter.view
     public class viewholder extends RecyclerView.ViewHolder {
 
         private RelativeLayout confirm_booking,call_now;
-        private TextView to_from_dest,name_of_owner,number;
+        private TextView to_from_dest,name_of_owner,number,date_created;
 
         public viewholder(@NonNull View itemView) {
             super(itemView);
@@ -144,6 +145,7 @@ public class FieldStafAdapter extends RecyclerView.Adapter<FieldStafAdapter.view
             name_of_owner=itemView.findViewById(R.id.name_of_owner);
             number=itemView.findViewById(R.id.number);
             call_now=itemView.findViewById(R.id.call_now);
+            date_created=itemView.findViewById(R.id.date_created);
 
         }
     }

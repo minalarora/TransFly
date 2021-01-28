@@ -1,5 +1,9 @@
 package com.truck.transfly.Activty;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
@@ -12,12 +16,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
-
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -25,10 +24,16 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.nabinbhandari.android.permissions.PermissionHandler;
 import com.nabinbhandari.android.permissions.Permissions;
+import com.truck.transfly.Frament.OtpDialogFragment;
+import com.truck.transfly.Model.ResponseAreaManager;
+import com.truck.transfly.Model.ResponseFieldStaff;
 import com.truck.transfly.Model.ResponseTransporter;
+import com.truck.transfly.Model.ResponseVehicle;
 import com.truck.transfly.Model.ResponseVehicleOwner;
 import com.truck.transfly.R;
+import com.truck.transfly.databinding.ActivityBankDetailsBinding;
 import com.truck.transfly.databinding.ActivityKycEditBinding;
+import com.truck.transfly.databinding.ActivityVehicleBankDetailsBinding;
 import com.truck.transfly.utils.ApiClient;
 import com.truck.transfly.utils.ApiEndpoints;
 import com.truck.transfly.utils.EndApi;
@@ -58,35 +63,31 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class VehicleOwnerKycActivity extends AppCompatActivity {
+public class VehicleBankDetailsActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE_CHOOSE = 99;
-    private ActivityKycEditBinding activity;
+    private ActivityVehicleBankDetailsBinding activity;
     private ArrayList<String> storageList=new ArrayList<>();
     private FrameLayout parent_of_loading;
     private Retrofit retrofit = null;
     private ApiEndpoints api = null;
     private ArrayAdapter<String> adapter;
     ArrayList<String> pendingList  =  new ArrayList<>();
-    private RelativeLayout no_internet_connection;
+    private String mobileNoOfOtp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activity = DataBindingUtil.setContentView(this, R.layout.activity_kyc_edit);
+        activity = DataBindingUtil.setContentView(this, R.layout.activity_vehicle_bank_details);
 
         parent_of_loading = findViewById(R.id.parent_of_loading);
-        parent_of_loading.setVisibility(View.VISIBLE);
+        parent_of_loading.setVisibility(View.GONE);
 
-        no_internet_connection = findViewById(R.id.no_internet_connection);
-        findViewById(R.id.pullToRefresh_button).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
 
-                no_internet_connection.setVisibility(View.GONE);
-                pendingList.clear();
-                adapter.notifyDataSetChanged();
-                getPendingList(PreferenceUtil.getData(VehicleOwnerKycActivity.this,"token"));
+                onBackPressed();
 
             }
         });
@@ -106,30 +107,74 @@ public class VehicleOwnerKycActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        String token = PreferenceUtil.getData(VehicleBankDetailsActivity.this, "token");
 
-                onBackPressed();
+        String s = token.split(":")[0];
 
-            }
-        });
+        switch (s){
+
+            case "vehicleowner":
+
+                ResponseVehicleOwner responseVehicleOwner = ((TransflyApplication) getApplication()).getResponseVehicleOwner();
+
+                mobileNoOfOtp = responseVehicleOwner.getMobile();
+
+                activity.bankName.setText(responseVehicleOwner.getBankname());
+                activity.bankIfc.setText(responseVehicleOwner.getIfsc());
+                activity.bankNumber.setText(responseVehicleOwner.getAccountno());
+                activity.personName.setText(responseVehicleOwner.getBankpersonname());
+                activity.confirmAccountName.setText(responseVehicleOwner.getAccountno());
+
+                break;
+
+            case "areamanager":
+
+                ResponseAreaManager responseAreaManager = ((TransflyApplication) getApplication()).getResponseAreaManager();
+
+                mobileNoOfOtp = responseAreaManager.getMobile();
+
+                activity.bankName.setText(responseAreaManager.getBankname());
+                activity.bankIfc.setText(responseAreaManager.getIfsc());
+                activity.bankNumber.setText(responseAreaManager.getAccountno());
+                activity.personName.setText(responseAreaManager.getBankpersonname());
+                activity.confirmAccountName.setText(responseAreaManager.getAccountno());
+
+                break;
+
+            case "fieldstaff":
+
+                ResponseFieldStaff responseFieldStaff = ((TransflyApplication) getApplication()).getResponseFieldStaff();
+
+                mobileNoOfOtp = responseFieldStaff.getMobile();
+
+                activity.bankName.setText(responseFieldStaff.getBankname());
+                activity.bankIfc.setText(responseFieldStaff.getIfsc());
+                activity.bankNumber.setText(responseFieldStaff.getAccountno());
+                activity.personName.setText(responseFieldStaff.getBankpersonname());
+                activity.confirmAccountName.setText(responseFieldStaff.getAccountno());
+
+                break;
+
+
+
+        }
 
         activity.submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                int position=activity.registerCategory.getSelectedItemPosition();
+
                 if(storageList==null || storageList.size()==0){
 
-                    Toast.makeText(VehicleOwnerKycActivity.this, "Please upload a document image*", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(VehicleBankDetailsActivity.this, "Upload an Bank Image Please", Toast.LENGTH_SHORT).show();
 
                     return;
 
                 }
 
-                int position=activity.registerCategory.getSelectedItemPosition();
 
-                if (activity.registerCategory.getSelectedItem().toString().toLowerCase().equals("tds")) {
+                if (activity.registerCategory.getSelectedItem().toString().equals("tds")) {
 
                     if(!TextUtils.isEmpty(activity.enterTdsNumber.getText().toString())){
 
@@ -137,12 +182,12 @@ public class VehicleOwnerKycActivity extends AppCompatActivity {
 
                     } else {
 
-                        Toast.makeText(VehicleOwnerKycActivity.this, "Enter Tds Number", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(VehicleBankDetailsActivity.this, "Enter Tds Number", Toast.LENGTH_SHORT).show();
 
                     }
 
 
-                } else if (activity.registerCategory.getSelectedItem().toString().toLowerCase().equals("pan")) {
+                } else if (activity.registerCategory.getSelectedItem().toString().equals("pan")) {
 
                     if(!TextUtils.isEmpty(activity.panEdittext.getText().toString())){
 
@@ -150,35 +195,53 @@ public class VehicleOwnerKycActivity extends AppCompatActivity {
 
                     } else {
 
-                        Toast.makeText(VehicleOwnerKycActivity.this, "Enter Pan Number", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(VehicleBankDetailsActivity.this, "Enter Pan Number", Toast.LENGTH_SHORT).show();
 
                     }
 
-                } else if (activity.registerCategory.getSelectedItem().toString().toLowerCase().equals("bank")) {
+                } else if (activity.registerCategory.getSelectedItem().toString().equals("bank")) {
 
                     if(TextUtils.isEmpty(activity.bankName.getText().toString())){
 
-                        Toast.makeText(VehicleOwnerKycActivity.this, "Enter bank Name", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(VehicleBankDetailsActivity.this, "Enter bank Name", Toast.LENGTH_SHORT).show();
 
                     } else if(TextUtils.isEmpty(activity.bankNumber.getText().toString())){
 
-                        Toast.makeText(VehicleOwnerKycActivity.this, "Enter Bank Number", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(VehicleBankDetailsActivity.this, "Enter Bank Number", Toast.LENGTH_SHORT).show();
 
                     } else if(TextUtils.isEmpty(activity.bankIfc.getText().toString())){
 
-                        Toast.makeText(VehicleOwnerKycActivity.this, "Enter Bank IFSC", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(VehicleBankDetailsActivity.this, "Enter Bank IFSC", Toast.LENGTH_SHORT).show();
 
-                    } else if(TextUtils.isEmpty(activity.confirmBankNumber.getText().toString())){
+                    } else if(TextUtils.isEmpty(activity.personName.getText().toString())){
 
-                        Toast.makeText(VehicleOwnerKycActivity.this, "Enter Confirm Bank Account Number", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(VehicleBankDetailsActivity.this, "Enter Person Name", Toast.LENGTH_SHORT).show();
 
-                    } else if(!activity.bankNumber.getText().toString().equals(activity.confirmBankNumber.getText().toString())) {
+                    } else if(!activity.confirmAccountName.getText().toString().equals(activity.bankNumber.getText().toString())){
 
-                        Toast.makeText(VehicleOwnerKycActivity.this, "Account Number Mismatched", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(VehicleBankDetailsActivity.this, "Account Number MisMatched", Toast.LENGTH_SHORT).show();
 
-                    } else {
+                    } else{
 
-                        uploadBankMultipart();
+                        OtpDialogFragment otpDialogFragment=new OtpDialogFragment();
+                        Bundle bundle = new Bundle();
+                        bundle.putString("mobileNo", mobileNoOfOtp);
+                        otpDialogFragment.setArguments(bundle);
+                        otpDialogFragment.setCancelable(false);
+                        otpDialogFragment.show(getSupportFragmentManager(),"otpDialogFragment");
+
+                        otpDialogFragment.setOnClickListener(new OtpDialogFragment.onClickListener() {
+                            @Override
+                            public void onClick(int i) {
+
+                                if(i==1){
+
+                                    uploadBankMultipart();
+
+                                }
+
+                            }
+                        });
 
                     }
 
@@ -186,13 +249,6 @@ public class VehicleOwnerKycActivity extends AppCompatActivity {
 
             }
         });
-
-        adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, android.R.id.text1, pendingList);
-
-        activity.registerCategory.setAdapter(adapter);
-
-        getPendingList(PreferenceUtil.getData(VehicleOwnerKycActivity.this,"token"));
 
         activity.registerCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -202,15 +258,15 @@ public class VehicleOwnerKycActivity extends AppCompatActivity {
                 activity.bankParent.setVisibility(View.GONE);
                 activity.tdsEditLayout.setVisibility(View.GONE);
 
-                if (activity.registerCategory.getSelectedItem().toString().toLowerCase().equals("tds")) {
+                if (activity.registerCategory.getSelectedItem().toString().equals("tds")) {
 
                     activity.tdsEditLayout.setVisibility(View.VISIBLE);
 
-                } else if (activity.registerCategory.getSelectedItem().toString().toLowerCase().equals("pan")) {
+                } else if (activity.registerCategory.getSelectedItem().toString().equals("pan")) {
 
                     activity.panEditLayout.setVisibility(View.VISIBLE);
 
-                } else if (activity.registerCategory.getSelectedItem().toString().toLowerCase().equals("bank")) {
+                } else if (activity.registerCategory.getSelectedItem().toString().equals("bank")) {
 
                     activity.bankParent.setVisibility(View.VISIBLE);
 
@@ -241,26 +297,12 @@ public class VehicleOwnerKycActivity extends AppCompatActivity {
 
                     Type collectionType = new TypeToken<ArrayList<String>>(){}.getType();
                     try {
-                        pendingList.addAll(new Gson().fromJson(response.body().string().toString().toUpperCase(),collectionType));
+                        pendingList.addAll(new Gson().fromJson(response.body().string().toString(),collectionType));
                     } catch (IOException e) {
 
                     }
                     if(pendingList.isEmpty())
                     {
-
-                        ResponseVehicleOwner responseTransporter = ((TransflyApplication) getApplication()).getResponseVehicleOwner();
-
-                         if(responseTransporter.getStatus() == 2) {
-
-                            Toast.makeText(VehicleOwnerKycActivity.this, "Thank you, your KYC is complete. You are now ready to have a great experience on our app.", Toast.LENGTH_SHORT).show();
-
-                        } else {
-
-                             Toast.makeText(VehicleOwnerKycActivity.this, "Your KYC is in Pending status, please wait until this is Approved", Toast.LENGTH_SHORT).show();
-
-                         }
-
-                        finish();
 
                         Log.d("minal","kyc completed");
                     }
@@ -281,8 +323,6 @@ public class VehicleOwnerKycActivity extends AppCompatActivity {
 
                 parent_of_loading.setVisibility(View.GONE);
 
-                no_internet_connection.setVisibility(View.VISIBLE);
-
             }
         });
     }
@@ -296,9 +336,10 @@ public class VehicleOwnerKycActivity extends AppCompatActivity {
             multipartUploadRequest = new MultipartUploadRequest(this, EndApi.VEHICLE_OWNER_KYC)
                     .setNotificationConfig(new UploadNotificationConfig())
                     .setMaxRetries(5)
-                    .addHeader("Authorization", PreferenceUtil.getData(VehicleOwnerKycActivity.this,"token"))
+                    .addHeader("Authorization", PreferenceUtil.getData(VehicleBankDetailsActivity.this,"token"))
                     .addParameter("bankname",activity.bankName.getText().toString())
                     .addParameter("accountno",activity.bankNumber.getText().toString())
+                    .addParameter("bankpersonname",activity.personName.getText().toString())
                     .addParameter("ifsc",activity.bankIfc.getText().toString())
                     .setUtf8Charset()
                     .setMethod("POST")
@@ -331,12 +372,11 @@ public class VehicleOwnerKycActivity extends AppCompatActivity {
 
                                     parent_of_loading.setVisibility(View.GONE);
 
+                                    setDataOnModels();
+
+                                    Toast.makeText(context, "Update Successful", Toast.LENGTH_SHORT).show();
+
                                     finish();
-
-                                    Intent intent = new Intent(VehicleOwnerKycActivity.this, VehicleOwnerKycActivity.class);
-                                    startActivity(intent);
-
-                                    Toast.makeText(context, "Updated Successfully", Toast.LENGTH_SHORT).show();
 
                                 }
                             }, 2000);
@@ -369,16 +409,69 @@ public class VehicleOwnerKycActivity extends AppCompatActivity {
 
     }
 
+    private void setDataOnModels() {
+
+
+        String token = PreferenceUtil.getData(VehicleBankDetailsActivity.this, "token");
+
+        String s = token.split(":")[0];
+
+        switch (s){
+
+            case "vehicleowner":
+
+                ResponseVehicleOwner responseVehicleOwner = ((TransflyApplication) getApplication()).getResponseVehicleOwner();
+                responseVehicleOwner.setAccountno(activity.bankNumber.getText().toString());
+                responseVehicleOwner.setBankname(activity.bankName.getText().toString());
+                responseVehicleOwner.setIfsc(activity.bankIfc.getText().toString());
+                responseVehicleOwner.setBankpersonname(activity.personName.getText().toString());
+
+                ((TransflyApplication) getApplication()).setResponseVehicleOwner(responseVehicleOwner);
+
+                break;
+
+            case "areamanager":
+
+                ResponseAreaManager responseAreaManager = ((TransflyApplication) getApplication()).getResponseAreaManager();
+                responseAreaManager.setAccountno(activity.bankNumber.getText().toString());
+                responseAreaManager.setBankname(activity.bankName.getText().toString());
+                responseAreaManager.setIfsc(activity.bankIfc.getText().toString());
+                responseAreaManager.setBankpersonname(activity.personName.getText().toString());
+
+                ((TransflyApplication) getApplication()).setResponseAreaManager(responseAreaManager);
+
+
+                break;
+
+            case "fieldstaff":
+
+                ResponseFieldStaff responseFieldStaff = ((TransflyApplication) getApplication()).getResponseFieldStaff();
+                responseFieldStaff.setAccountno(activity.bankNumber.getText().toString());
+                responseFieldStaff.setBankname(activity.bankName.getText().toString());
+                responseFieldStaff.setIfsc(activity.bankIfc.getText().toString());
+                responseFieldStaff.setBankpersonname(activity.personName.getText().toString());
+
+                ((TransflyApplication) getApplication()).setResponseFieldStaff(responseFieldStaff);
+
+                break;
+
+
+        }
+
+    }
+
     private void uploadMultipartSingle(String number_us, String numberName, String imageName) {
 
         parent_of_loading.setVisibility(View.VISIBLE);
+
+        Log.i("TAG", "uploadMultipartSingle: "+storageList.get(0));
 
         MultipartUploadRequest multipartUploadRequest = null;
         try {
             multipartUploadRequest = new MultipartUploadRequest(this, EndApi.VEHICLE_OWNER_KYC)
                     .setNotificationConfig(new UploadNotificationConfig())
                     .setMaxRetries(5)
-                    .addHeader("Authorization", PreferenceUtil.getData(VehicleOwnerKycActivity.this,"token"))
+                    .addHeader("Authorization", PreferenceUtil.getData(VehicleBankDetailsActivity.this,"token"))
                     .addParameter(numberName, number_us)
                     .setUtf8Charset()
                     .setMethod("POST")
@@ -415,13 +508,9 @@ public class VehicleOwnerKycActivity extends AppCompatActivity {
                                     activity.bankName.setText("");
                                     activity.bankIfc.setText("");
 
+                                    Toast.makeText(context, "Update Successfully", Toast.LENGTH_SHORT).show();
+
                                     finish();
-
-                                    Intent intent = new Intent(VehicleOwnerKycActivity.this, VehicleOwnerKycActivity.class);
-                                    startActivity(intent);
-
-                                    Toast.makeText(context, "Updated Successfully", Toast.LENGTH_SHORT).show();
-
 
 
                                 }
@@ -480,7 +569,7 @@ public class VehicleOwnerKycActivity extends AppCompatActivity {
 
     private void openStorage() {
 
-        Matisse.from(VehicleOwnerKycActivity.this)
+        Matisse.from(VehicleBankDetailsActivity.this)
                 .choose(MimeType.ofImage(), false)
                 .countable(true)
                 .maxSelectable(1)
@@ -513,7 +602,7 @@ public class VehicleOwnerKycActivity extends AppCompatActivity {
                 storageList.clear();
                 storageList.addAll(Matisse.obtainPathResult(data));
 
-                Glide.with(VehicleOwnerKycActivity.this).load(storageList.get(0)).skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.NONE).into(activity.chooseImageView);
+                Glide.with(VehicleBankDetailsActivity.this).load(storageList.get(0)).skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.NONE).into(activity.chooseImageView);
 
                 activity.chooseTextView.setText("1 Image Selected");
 
@@ -522,5 +611,4 @@ public class VehicleOwnerKycActivity extends AppCompatActivity {
 
         super.onActivityResult(requestCode, resultCode, data);
     }
-
 }
