@@ -400,6 +400,16 @@ public class TransporterActivity extends AppCompatActivity implements SmoothDate
 
                     case R.id.rate_etl:
 
+                        ResponseTransporter responseTransporter = ((TransflyApplication) getApplication()).getResponseTransporterOwner();
+
+                        if(responseTransporter.getStatus() !=2) {
+
+                            Toast.makeText(TransporterActivity.this, "Please wait until your KYC is approved.", Toast.LENGTH_SHORT).show();
+
+                            break;
+
+                        }
+
                         startActivity(new Intent(TransporterActivity.this,SearchBarActivity.class));
 
                         break;

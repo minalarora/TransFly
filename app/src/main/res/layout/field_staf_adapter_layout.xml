@@ -58,7 +58,41 @@
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_13ssp"
             android:layout_marginTop="@dimen/_8ssp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/_30ssp"
+                android:layout_height="@dimen/_30ssp"
+                android:src="@drawable/ic_delivery_truck_foder" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:id="@+id/name_of_owner"
+                android:fontFamily="@font/poppins"
+                android:text="John deo"
+                android:textColor="@color/black"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/_4ssp"
+                android:fontFamily="@font/poppins"
+                android:text="(Vehicle number)"
+                android:textColor="#8c8c8c"
+                android:textSize="12dp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_13ssp"
             android:orientation="horizontal">
@@ -85,40 +119,6 @@
                 android:layout_marginStart="@dimen/_4ssp"
                 android:fontFamily="@font/poppins"
                 android:text="(Driver Number)"
-                android:textColor="#8c8c8c"
-                android:textSize="12dp" />
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_13ssp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="@dimen/_30ssp"
-                android:layout_height="@dimen/_30ssp"
-                android:src="@drawable/ic_delivery_truck_foder" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:id="@+id/name_of_owner"
-                android:fontFamily="@font/poppins"
-                android:text="John deo"
-                android:textColor="@color/black"
-                android:textSize="13dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="@dimen/_4ssp"
-                android:fontFamily="@font/poppins"
-                android:text="(Vehicle number)"
                 android:textColor="#8c8c8c"
                 android:textSize="12dp" />
 
