@@ -59,6 +59,7 @@ public class ForgotPasswordDialog extends DialogFragment {
                     return;
 
                 }
+
                 Intent intent = new Intent(fragmentActivity, OtpValidation.class);
                 intent.putExtra("fromForgot",true);
                 intent.putExtra("mobileNo",mobileNumber.getText().toString());

@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
@@ -96,7 +97,7 @@ public class LeaseFragment extends Fragment {
         RecyclerView recyclerView =inflate.findViewById(R.id.recyclerView);
         olxRecyclerAdapter=new OlxRecyclerAdapter(fragmentActivity,responseList);
         olxRecyclerAdapter.setLeaseValue(true);
-        GridLayoutManager linearLayoutManager=new GridLayoutManager(fragmentActivity,2,RecyclerView.VERTICAL,false);
+        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(fragmentActivity,RecyclerView.VERTICAL,false);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(olxRecyclerAdapter);
 

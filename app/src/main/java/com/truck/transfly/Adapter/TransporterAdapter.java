@@ -4,6 +4,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,6 +62,14 @@ public class TransporterAdapter extends RecyclerView.Adapter<TransporterAdapter.
         holder.mobileNumber.setText(responseInvoice.getContact());
         holder.vehile_owner.setText(responseInvoice.getVehicleOwnerName());
         holder.date_created.setText(responseInvoice.getDate());
+
+        if(!TextUtils.isEmpty(responseInvoice.getDate())) {
+
+            holder.date_name.setText(responseInvoice.getDate().split(" ")[0]);
+            holder.time.setText(responseInvoice.getDate().split(" ")[1]);
+
+        }
+
         holder.to_from_dest.setText(responseInvoice.getMinename() +" - "+responseInvoice.getLoading());
         holder.vehicleNamepParent.setVisibility(View.GONE);
 
@@ -159,7 +168,7 @@ public class TransporterAdapter extends RecyclerView.Adapter<TransporterAdapter.
 
     public class viewholder extends RecyclerView.ViewHolder {
 
-        private TextView to_from_dest,date_created,vehile_owner,mobileNumber,vehicle_number,price_rate;
+        private TextView to_from_dest,date_created,vehile_owner,mobileNumber,vehicle_number,price_rate,date_name,time;
 
         private LinearLayout mobileNumberParent,vehicleNamepParent;
 
@@ -178,6 +187,8 @@ public class TransporterAdapter extends RecyclerView.Adapter<TransporterAdapter.
             price_rate=itemView.findViewById(R.id.price_rate);
             show_invoice=itemView.findViewById(R.id.show_invoice);
             share=itemView.findViewById(R.id.share);
+            date_name=itemView.findViewById(R.id.date_name);
+            time=itemView.findViewById(R.id.time);
 
         }
     }

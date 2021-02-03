@@ -6,52 +6,44 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Activty.LoginActivity">
+    >
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:fillViewport="true"
+        android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <com.github.florent37.shapeofview.shapes.ArcView
-            android:layout_width="match_parent"
-            android:layout_height="140dp"
-            app:shape_arc_height="60dp"
-            app:shape_arc_position="bottom">
-
-            <LinearLayout
-                android:id="@+id/transluentView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/project_color"
-                android:orientation="vertical" />
-
-            <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_baseline_login_imp_images"
-                app:tint="@color/white" />
-
-        </com.github.florent37.shapeofview.shapes.ArcView>
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="40dp"
-            android:fontFamily="@font/poppinsbold"
-            android:text="Sign In Now"
+            android:fontFamily="@font/poppins"
+            android:text="Login"
             android:textColor="@color/project_color"
-            android:textSize="17dp" />
+            android:textSize="25dp" />
 
-        <RelativeLayout
-            android:layout_width="320dp"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="26dp"
+            android:fontFamily="@font/poppins"
+            android:layout_marginTop="@dimen/_8ssp"
+            android:text="Add your details to login"
+            android:textColor="#8c8c8c"
+            android:textSize="13dp" />
+
+        <RelativeLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="35dp"
             android:background="@drawable/design_as_edittext"
-            android:elevation="6dp"
             android:padding="5dp">
 
             <ImageView
@@ -61,17 +53,19 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="12dp"
                 android:alpha="0.6"
+                android:visibility="gone"
                 android:src="@drawable/ic_action_phone_number"
                 app:tint="@color/black" />
 
             <EditText
                 android:id="@+id/mobileNumber"
                 android:layout_width="match_parent"
-                android:layout_height="38dp"
+                android:layout_height="43dp"
+                android:layout_marginStart="2dp"
                 android:layout_toEndOf="@+id/phone_icon"
-                android:background="@color/white"
+                android:background="#f2f2f2"
                 android:fontFamily="@font/font_opensans"
-                android:hint="Please Enter Mobile or Email"
+                android:hint="Your Mobile or Email"
                 android:paddingStart="16dp"
                 android:paddingEnd="12dp"
                 android:textSize="14dp" />
@@ -79,12 +73,11 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="320dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="28dp"
             android:background="@drawable/design_as_edittext"
-            android:elevation="6dp"
             android:padding="5dp">
 
             <ImageView
@@ -94,6 +87,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="12dp"
                 android:alpha="0.6"
+                android:visibility="gone"
                 android:src="@drawable/ic_action_password_lock"
                 app:tint="@color/black" />
 
@@ -112,10 +106,10 @@
                 <EditText
                     android:id="@+id/password"
                     android:layout_width="match_parent"
-                    android:layout_height="38dp"
-                    android:background="@color/white"
+                    android:layout_height="40dp"
+                    android:background="#f2f2f2"
                     android:fontFamily="@font/font_opensans"
-                    android:hint="Please Enter Password"
+                    android:hint="Password"
                     android:inputType="textPassword"
                     android:paddingStart="16dp"
                     android:paddingEnd="12dp"
@@ -125,29 +119,12 @@
 
         </RelativeLayout>
 
-        <TextView
-            android:id="@+id/forgotPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="18dp"
-            android:alpha="0.6"
-            android:fontFamily="@font/open_sans_semibold"
-            android:gravity="center"
-            android:maxLines="1"
-            android:paddingTop="8dp"
-            android:text="Forgot Password?"
-            android:textColor="@color/black"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:visibility="visible" />
-
         <RelativeLayout
             android:id="@+id/login_button"
-            android:layout_width="150dp"
-            android:layout_height="45dp"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="28dp"
             android:background="@drawable/design_as_edittext_gradient"
             android:elevation="6dp">
 
@@ -155,20 +132,113 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:fontFamily="@font/poppinsbold"
+                android:fontFamily="@font/poppins"
                 android:text="Login"
                 android:textColor="@color/white"
                 android:textSize="14dp" />
 
         </RelativeLayout>
 
+        <TextView
+            android:id="@+id/forgotPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:alpha="0.4"
+            android:fontFamily="@font/poppins"
+            android:gravity="center"
+            android:maxLines="1"
+            android:paddingTop="8dp"
+            android:text="Forgot Your Password?"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            android:visibility="visible" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="28dp"
+            android:alpha="0.4"
+            android:fontFamily="@font/poppins"
+            android:gravity="center"
+            android:maxLines="1"
+            android:paddingTop="8dp"
+            android:text="or Login With"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:visibility="visible" />
+
+        <RelativeLayout
+            android:layout_width="300dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:onClick="showLoginToast"
+            android:layout_marginTop="@dimen/_20ssp"
+            android:background="@drawable/facebook_login_design">
+
+            <ImageView
+                android:layout_width="@dimen/_16ssp"
+                android:layout_height="@dimen/_16ssp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_14ssp"
+                android:src="@drawable/ic_google_logo" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:alpha="0.6"
+                android:fontFamily="@font/poppinsmedium"
+                android:maxLines="1"
+                android:text="Login With Google"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:visibility="visible" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="300dp"
+            android:layout_gravity="center"
+            android:layout_height="48dp"
+            android:onClick="showLoginToast"
+            android:layout_marginTop="@dimen/_20ssp"
+            android:background="@drawable/facebook_login_design"
+            >
+
+            <ImageView
+                android:layout_width="@dimen/_16ssp"
+                android:layout_height="@dimen/_16ssp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_14ssp"
+                android:src="@drawable/ic_facebook_logo"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0.6"
+                android:fontFamily="@font/poppinsmedium"
+                android:maxLines="1"
+                android:text="Login With Facebook"
+                android:layout_centerInParent="true"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:visibility="visible" />
+
+        </RelativeLayout>
+
+
     </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:id="@+id/signup_parent"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/design_as_gradient"
         android:layout_height="45dp">
 
         <LinearLayout
@@ -183,8 +253,9 @@
                 android:layout_alignParentBottom="true"
                 android:fontFamily="@font/font_medium"
                 android:gravity="center"
+                android:alpha="0.7"
                 android:text="@string/do_not_have_and_account_create_account"
-                android:textColor="@android:color/white"
+                android:textColor="@android:color/black"
                 android:textSize="12dp" />
 
             <TextView
@@ -194,8 +265,8 @@
                 android:layout_alignParentBottom="true"
                 android:fontFamily="@font/poppinsbold"
                 android:gravity="center"
-                android:text=" Create Here"
-                android:textColor="@color/blue"
+                android:text=" Sign Up"
+                android:textColor="@color/project_color"
                 android:textSize="12dp" />
 
 
@@ -224,4 +295,5 @@
     <include layout="@layout/loading_view_transparent"/>
 
 </RelativeLayout>
+
 </layout>

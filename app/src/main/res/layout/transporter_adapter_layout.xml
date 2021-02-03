@@ -17,12 +17,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8ssp"
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="@dimen/_50ssp"
-                android:layout_height="@dimen/_50ssp"
-                android:src="@drawable/box_animation" />
+                android:layout_width="@dimen/_30ssp"
+                android:layout_marginStart="@dimen/_12ssp"
+                android:layout_height="@dimen/_30ssp"
+                android:src="@drawable/ic_map_location" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -42,7 +44,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:id="@+id/date_created"
+            android:visibility="gone"
             android:layout_marginStart="@dimen/_15ssp"
+            android:layout_marginTop="@dimen/_12ssp"
             android:fontFamily="@font/poppins"
             android:text="Posted at 21 Dec, 10:12 AM | Expires in 45 hours"
             android:textColor="#8c8c8c"
@@ -51,8 +55,8 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="@dimen/_13ssp"
             android:layout_marginStart="@dimen/_15ssp"
+            android:layout_marginTop="@dimen/_7ssp"
             android:layout_marginEnd="@dimen/_15ssp"
             android:background="#dcdcdc" />
 
@@ -95,77 +99,152 @@
 
         </LinearLayout>
 
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_3ssp"
-            android:layout_marginStart="@dimen/_20ssp"
-            android:orientation="horizontal">
+            android:gravity="center"
+            android:layout_marginTop="@dimen/_7ssp"
+            android:layout_height="wrap_content">
 
-            <ImageView
-                android:layout_width="@dimen/_15ssp"
-                android:layout_height="@dimen/_20ssp"
-                android:src="@drawable/delivery_truck" />
+            <LinearLayout
+                android:layout_width="140dp"
+                android:orientation="vertical"
+                android:background="#FAFBFF"
+                android:layout_height="100dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:id="@+id/vehicle_number"
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:gravity="center"
+                    android:padding="6dp"
+                    android:background="#eeeeee"
+                    android:alpha="0.7"
+                    android:text="Vehicle Number"
+                    android:textColor="@color/black"
+                    android:textSize="12dp" />
+
+                <ImageView
+                    android:layout_width="@dimen/_30ssp"
+                    android:layout_height="@dimen/_30ssp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="6dp"
+                    android:src="@drawable/ic_container_truck"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:id="@+id/vehicle_number"
+                    android:gravity="center"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/poppins"
+                    android:text="RWE - 56789"
+                    android:textColor="@color/black"
+                    android:textSize="13dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="140dp"
+                android:orientation="vertical"
+                android:id="@+id/mobileNumberParent"
+                android:background="#FAFBFF"
                 android:layout_marginStart="@dimen/_12ssp"
-                android:fontFamily="@font/poppins"
-                android:text="21020202"
-                android:textColor="@color/black"
-                android:textSize="13dp" />
+                android:layout_height="100dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="@dimen/_4ssp"
-                android:fontFamily="@font/poppins"
-                android:text="(Vehicle Number)"
-                android:textColor="#8c8c8c"
-                android:textSize="12dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:gravity="center"
+                    android:padding="6dp"
+                    android:background="#eeeeee"
+                    android:alpha="0.7"
+                    android:text="Driver Number"
+                    android:textColor="@color/black"
+                    android:textSize="12dp" />
+
+                <ImageView
+                    android:layout_width="@dimen/_30ssp"
+                    android:layout_height="@dimen/_30ssp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="6dp"
+                    android:src="@drawable/ic__mobile_number_invoices"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:id="@+id/mobileNumber"
+                    android:gravity="center"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/poppins"
+                    android:text="RWE - 56789"
+                    android:textColor="@color/black"
+                    android:textSize="13dp" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
-
-        <LinearLayout
-            android:id="@+id/mobileNumberParent"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="visible"
-            android:layout_marginStart="@dimen/_13ssp"
-            android:orientation="horizontal">
+            android:layout_marginTop="@dimen/_14ssp"
+            android:layout_marginStart="@dimen/_21ssp"
+            android:layout_marginEnd="@dimen/_8ssp"
+            android:layout_height="wrap_content">
 
-            <ImageView
-                android:layout_width="@dimen/_30ssp"
-                android:layout_height="@dimen/_30ssp"
-                android:src="@drawable/ic_smartphone_number" />
-
-            <TextView
-                android:id="@+id/mobileNumber"
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:fontFamily="@font/poppins"
-                android:text="+91 "
-                android:textColor="@color/black"
-                android:textSize="13dp" />
+                android:layout_alignParentStart="true"
+                android:layout_height="wrap_content">
 
-            <TextView
+                <ImageView
+                    android:layout_width="@dimen/_20ssp"
+                    android:layout_height="@dimen/_20ssp"
+                    android:src="@drawable/clander_planner"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:text="02 - 01 - 2021"
+                    android:id="@+id/date_name"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/_12ssp"
+                    android:textColor="@color/black"
+                    android:textSize="13dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="@dimen/_4ssp"
-                android:fontFamily="@font/poppins"
-                android:text="(Driver Number)"
-                android:textColor="#8c8c8c"
-                android:textSize="12dp" />
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/_12ssp"
+                android:layout_height="wrap_content">
 
-        </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:layout_alignParentStart="true"
+                    android:text="2:59 PM"
+                    android:id="@+id/time"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="@dimen/_12ssp"
+                    android:textColor="@color/black"
+                    android:textSize="13dp" />
+
+                <ImageView
+                    android:layout_width="@dimen/_20ssp"
+                    android:layout_height="@dimen/_20ssp"
+                    android:src="@drawable/ic__clock_images"
+                    />
+
+            </LinearLayout>
+
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -208,7 +287,7 @@
             android:layout_alignParentBottom="true"
             android:background="@color/white"
             android:layout_marginTop="@dimen/_12ssp"
-            android:layout_height="30dp">
+            android:layout_height="40dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -256,6 +335,7 @@
                 android:id="@+id/show_invoice"
                 android:foreground="?attr/selectableItemBackground"
                 android:clickable="true"
+                android:background="@color/project_color"
                 android:focusable="true"
                 android:layout_height="match_parent">
 
@@ -269,7 +349,7 @@
                     android:gravity="center_horizontal|center_vertical"
                     android:text="Show Invoice"
                     android:textAllCaps="true"
-                    android:textColor="@color/project_color"
+                    android:textColor="@color/white"
                     android:textSize="11dp"
                     android:textStyle="bold"
                     />

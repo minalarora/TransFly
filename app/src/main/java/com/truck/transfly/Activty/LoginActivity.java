@@ -73,9 +73,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                ForgotPasswordDialog forgotPasswordDialog = new ForgotPasswordDialog();
-                forgotPasswordDialog.setCancelable(false);
-                forgotPasswordDialog.show(getSupportFragmentManager(), "forgotPasswordDialog");
+                startActivity(new Intent(LoginActivity.this,ResetPasswordActivity.class));
 
             }
         });
@@ -95,6 +93,11 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    public void showLoginToast(View view){
+
+        Toast.makeText(this, "Please log in with your mobile number for now", Toast.LENGTH_SHORT).show();
+        
+    }
 
     private void onLoginButton() {
 

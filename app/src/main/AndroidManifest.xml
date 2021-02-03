@@ -23,7 +23,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TransFly">
-        <activity android:name=".Activty.VehicleBankDetailsActivity"></activity>
+        <activity android:name=".Activty.ResetPasswordActivity"></activity>
+        <activity android:name=".Activty.VehicleBankDetailsActivity" />
         <activity android:name=".Activty.TransporterShowInvoiceActivity" />
         <activity android:name=".Activty.SearchBookingActivity" />
         <activity android:name=".Activty.NotificationActivity" />
