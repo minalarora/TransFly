@@ -97,7 +97,7 @@
                         android:id="@+id/choose_text_view"
                         android:layout_toEndOf="@+id/back"
                         android:fontFamily="@font/poppins"
-                        android:text="Choose R.c Image"
+                        android:text="Choose R.C. Image"
                         android:textColor="@android:color/black"
                         android:textSize="14dp" />
 
@@ -210,7 +210,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins"
-                    android:hint="R.c Number"
+                    android:hint="R.C. Number"
                     android:imeOptions="actionNext"
                     android:id="@+id/rcnumber"
                     android:inputType="textCapWords"

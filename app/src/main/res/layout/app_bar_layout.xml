@@ -149,7 +149,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignWithParentIfMissing="true"
-        android:layout_above="@+id/navigation"
         android:layout_below="@+id/viewPager">
 
         <fragment
@@ -174,10 +173,9 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_alignWithParentIfMissing="true"
-        android:layout_above="@+id/navigation"
+        android:layout_above="@+id/bottom_space"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="@dimen/_20ssp"
         app:cardBackgroundColor="#ddffffff"
         app:cardCornerRadius="20dp">
 
@@ -212,6 +210,22 @@
 
     </androidx.cardview.widget.CardView>
 
+    <com.irfaan008.irbottomnavigation.SpaceNavigationView
+        android:id="@+id/bottom_space"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:space_background_color="@color/white"
+        app:active_item_color="@color/project_color"
+        app:inactive_item_color="@color/project_color"
+        app:active_centre_button_background_color="@color/project_color"
+        app:centre_button_color="@color/project_color"
+        app:inactive_centre_button_icon_color="@color/white"
+        app:active_centre_button_icon_color="@color/white"
+        app:space_item_icon_only_size="@dimen/_18ssp"
+        app:centre_button_icon="@drawable/ic_action_home_white"
+        android:layout_gravity="bottom"/>
+
     <com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
         android:id="@+id/navigation"
         android:layout_width="match_parent"
@@ -219,7 +233,7 @@
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
         android:background="@android:color/white"
-        android:visibility="visible"
+        android:visibility="invisible"
         app:itemIconTint="@drawable/select_color_bottom_nav"
         app:itemTextAppearance="@style/bottom_typeface"
         app:itemTextColor="@drawable/color_bottom_nav_text"

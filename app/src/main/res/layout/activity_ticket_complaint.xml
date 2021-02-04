@@ -12,6 +12,8 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:fillViewport="true"
+        android:layout_above="@+id/bottom_space"
+        android:layout_marginBottom="-23dp"
         android:layout_height="match_parent">
 
         <LinearLayout
@@ -272,6 +274,7 @@
                     android:layout_height="45dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="40dp"
+                    android:layout_marginBottom="@dimen/_30ssp"
                     android:background="@drawable/design_as_edittext_gradient"
                     android:elevation="6dp">
 
@@ -291,6 +294,23 @@
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
+
+    <com.irfaan008.irbottomnavigation.SpaceNavigationView
+        android:id="@+id/bottom_space"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:space_background_color="@color/white"
+        app:active_item_color="@color/project_color"
+        app:inactive_item_color="@color/project_color"
+        app:active_centre_button_background_color="@color/project_color"
+        app:centre_button_color="@color/project_color"
+        app:inactive_centre_button_icon_color="@color/white"
+        app:active_centre_button_icon_color="@color/white"
+        app:space_item_icon_only_size="@dimen/_18ssp"
+        app:centre_button_icon="@drawable/ic_action_home_white"
+        android:layout_gravity="bottom"/>
+
 
     <include layout="@layout/loading_view_transparent"/>
 

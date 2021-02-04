@@ -1,5 +1,6 @@
 package com.truck.transfly.Activty;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -10,6 +11,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
+import com.irfaan008.irbottomnavigation.SpaceItem;
+import com.irfaan008.irbottomnavigation.SpaceNavigationView;
+import com.irfaan008.irbottomnavigation.SpaceOnClickListener;
 import com.truck.transfly.Adapter.OlxRecyclerAdapter;
 import com.truck.transfly.Adapter.ViewPagerAdapter;
 import com.truck.transfly.Frament.LeaseFragment;
@@ -50,6 +54,98 @@ public class OlxPageActivity extends AppCompatActivity {
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
 
+        SpaceNavigationView spaceNavigationView = findViewById(R.id.bottom_space);
+        spaceNavigationView.showIconOnly();
+        spaceNavigationView.initWithSaveInstanceState(savedInstanceState);
+        spaceNavigationView.addSpaceItem(new SpaceItem("", R.drawable.cargo_truck));
+        spaceNavigationView.addSpaceItem(new SpaceItem("", R.drawable.new_booking_icon));
+        spaceNavigationView.addSpaceItem(new SpaceItem("", R.drawable.release_lease_icon_image));
+        spaceNavigationView.addSpaceItem(new SpaceItem("", R.drawable.help_attain_icon));
+
+        spaceNavigationView.setSpaceOnClickListener(new SpaceOnClickListener() {
+            @Override
+            public void onCentreButtonClick() {
+
+                startActivity(new Intent(OlxPageActivity.this, HomeActivity.class));
+
+            }
+
+            @Override
+            public void onItemClick(int itemIndex, String itemName) {
+
+                switch (itemIndex) {
+
+                    case 0:
+
+                        Intent currentBookingActivity = new Intent(OlxPageActivity.this, CurrentBookingActivity.class);
+
+                        startActivity(currentBookingActivity);
+
+                        break;
+
+                    case 1:
+
+                        Intent searchBarAcivity = new Intent(OlxPageActivity.this, SearchBarActivity.class);
+
+                        searchBarAcivity.putExtra("vehicle", true);
+
+                        startActivity(searchBarAcivity);
+
+                        break;
+
+
+                    case 2:
+
+                        break;
+
+                    case 3:
+
+                        startActivity(new Intent(OlxPageActivity.this, TicketComplaintActivity.class));
+
+                        break;
+
+                }
+
+            }
+
+            @Override
+            public void onItemReselected(int itemIndex, String itemName) {
+
+                switch (itemIndex) {
+
+                    case 0:
+
+                        Intent currentBookingActivity = new Intent(OlxPageActivity.this, CurrentBookingActivity.class);
+
+                        startActivity(currentBookingActivity);
+
+                        break;
+
+                    case 1:
+
+                        Intent searchBarAcivity = new Intent(OlxPageActivity.this, SearchBarActivity.class);
+
+                        searchBarAcivity.putExtra("vehicle", true);
+
+                        startActivity(searchBarAcivity);
+
+                        break;
+
+
+                    case 2:
+
+                        break;
+
+                    case 3:
+
+                        startActivity(new Intent(OlxPageActivity.this, TicketComplaintActivity.class));
+
+                        break;
+
+                }
+
+            }
+        });
 
         findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
             @Override

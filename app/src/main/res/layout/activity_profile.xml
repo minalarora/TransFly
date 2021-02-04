@@ -145,7 +145,6 @@
                         android:layout_marginTop="@dimen/_6ssp"
                         android:id="@+id/name_of_user"
                         android:fontFamily="@font/font_opensans"
-                        android:text="Shani Gupta"
                         android:textColor="@android:color/black"
                         android:textSize="15dp" />
 
@@ -197,7 +196,6 @@
                         android:layout_marginTop="@dimen/_6ssp"
                         android:id="@+id/email"
                         android:fontFamily="@font/font_opensans"
-                        android:text="Shanipratap6615@gmail.com"
                         android:textColor="@android:color/black"
                         android:textSize="15dp" />
 

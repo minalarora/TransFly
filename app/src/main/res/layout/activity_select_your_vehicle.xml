@@ -146,6 +146,7 @@
                     android:layout_marginTop="@dimen/_10ssp"
                     android:layout_marginEnd="@dimen/_10ssp"
                     android:textColorHint="#8c8c8c"
+                    android:id="@+id/parent_of_number"
                     app:hintAnimationEnabled="true">
 
                     <EditText

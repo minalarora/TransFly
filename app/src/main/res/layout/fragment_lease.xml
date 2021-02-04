@@ -5,10 +5,32 @@
     android:layout_height="match_parent"
     tools:context=".Frament.ResaleFragment">
 
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_30ssp"
+        android:background="@drawable/round_as_search_grey"
+        android:hint="Search Lease"
+        android:id="@+id/search_lease"
+        android:layout_marginEnd="12dp"
+        android:paddingStart="12dp"
+        android:textStyle="bold"
+        android:layout_below="@+id/toolbar"
+        android:textSize="14sp"
+        android:layout_toStartOf="@+id/skip"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/poppins"
+        android:paddingEnd="8dp"
+        android:drawableTint="@color/black"
+        android:drawableStart="@drawable/ic_action_search"
+        android:drawablePadding="8dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="8dp"
+        />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_below="@+id/tabLayout"
+        android:layout_below="@+id/search_lease"
         android:background="#eeeeee"
         android:layout_height="match_parent" />
 

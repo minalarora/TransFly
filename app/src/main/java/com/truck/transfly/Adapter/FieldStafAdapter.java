@@ -3,6 +3,7 @@ package com.truck.transfly.Adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,8 +56,15 @@ public class FieldStafAdapter extends RecyclerView.Adapter<FieldStafAdapter.view
 
         holder.to_from_dest.setText(responseBooking.getMinename()+" - "+responseBooking.getLoading());
         holder.number.setText(responseBooking.getContact());
-        holder.name_of_owner.setText(responseBooking.getVehiclename());
+        holder.vehicle_number.setText(responseBooking.getVehiclename());
         holder.date_created.setText(responseBooking.getDate());
+
+        if(!TextUtils.isEmpty(responseBooking.getDate())) {
+
+            holder.date_name.setText(responseBooking.getDate().split(" ")[0]);
+            holder.time.setText(responseBooking.getDate().split(" ")[1]);
+
+        }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -135,17 +143,19 @@ public class FieldStafAdapter extends RecyclerView.Adapter<FieldStafAdapter.view
     public class viewholder extends RecyclerView.ViewHolder {
 
         private RelativeLayout confirm_booking,call_now;
-        private TextView to_from_dest,name_of_owner,number,date_created;
+        private TextView to_from_dest,vehicle_number,number,date_created,date_name,time;
 
         public viewholder(@NonNull View itemView) {
             super(itemView);
 
             confirm_booking=itemView.findViewById(R.id.confirm_booking);
             to_from_dest=itemView.findViewById(R.id.to_from_dest);
-            name_of_owner=itemView.findViewById(R.id.name_of_owner);
-            number=itemView.findViewById(R.id.number);
+            vehicle_number=itemView.findViewById(R.id.vehicle_number);
+            number=itemView.findViewById(R.id.mobileNumber);
             call_now=itemView.findViewById(R.id.call_now);
             date_created=itemView.findViewById(R.id.date_created);
+            date_name=itemView.findViewById(R.id.date_name);
+            time=itemView.findViewById(R.id.time);
 
         }
     }

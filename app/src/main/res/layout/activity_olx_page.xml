@@ -86,7 +86,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tabLayout"
+        android:layout_above="@+id/bottom_space"
+        android:layout_marginBottom="-23dp"
         android:id="@+id/viewPager"
         />
+
+    <com.irfaan008.irbottomnavigation.SpaceNavigationView
+        android:id="@+id/bottom_space"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:space_background_color="@color/white"
+        app:active_item_color="@color/project_color"
+        app:inactive_item_color="@color/project_color"
+        app:active_centre_button_background_color="@color/project_color"
+        app:centre_button_color="@color/project_color"
+        app:inactive_centre_button_icon_color="@color/white"
+        app:active_centre_button_icon_color="@color/white"
+        app:space_item_icon_only_size="@dimen/_18ssp"
+        app:centre_button_icon="@drawable/ic_action_home_white"
+        android:layout_gravity="bottom"/>
 
 </RelativeLayout>

@@ -19,6 +19,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.irfaan008.irbottomnavigation.SpaceItem;
+import com.irfaan008.irbottomnavigation.SpaceNavigationView;
+import com.irfaan008.irbottomnavigation.SpaceOnClickListener;
 import com.truck.transfly.Adapter.CurrentBookingAdapter;
 import com.truck.transfly.Frament.RemoveDialogFragment;
 import com.truck.transfly.Model.ResponseBooking;
@@ -70,6 +73,95 @@ public class CurrentBookingActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences=getSharedPreferences("currentLocation", Context.MODE_PRIVATE);
         lat = sharedPreferences.getString("lat", "");
         aLongitude = sharedPreferences.getString("long", "");
+
+        SpaceNavigationView spaceNavigationView = findViewById(R.id.bottom_space);
+        spaceNavigationView.showIconOnly();
+        spaceNavigationView.initWithSaveInstanceState(savedInstanceState);
+        spaceNavigationView.addSpaceItem(new SpaceItem("", R.drawable.cargo_truck));
+        spaceNavigationView.addSpaceItem(new SpaceItem("", R.drawable.new_booking_icon));
+        spaceNavigationView.addSpaceItem(new SpaceItem("", R.drawable.release_lease_icon_image));
+        spaceNavigationView.addSpaceItem(new SpaceItem("", R.drawable.help_attain_icon));
+
+        spaceNavigationView.setSpaceOnClickListener(new SpaceOnClickListener() {
+            @Override
+            public void onCentreButtonClick() {
+
+                startActivity(new Intent(CurrentBookingActivity.this, HomeActivity.class));
+
+            }
+
+            @Override
+            public void onItemClick(int itemIndex, String itemName) {
+
+                switch (itemIndex) {
+
+                    case 0:
+
+                        break;
+
+                    case 1:
+
+                        Intent searchBarAcivity = new Intent(CurrentBookingActivity.this, SearchBarActivity.class);
+
+                        searchBarAcivity.putExtra("vehicle", true);
+
+                        startActivity(searchBarAcivity);
+
+                        break;
+
+
+                    case 2:
+
+                        startActivity(new Intent(CurrentBookingActivity.this, OlxPageActivity.class));
+
+                        break;
+
+                    case 3:
+
+                        startActivity(new Intent(CurrentBookingActivity.this, TicketComplaintActivity.class));
+
+                        break;
+
+                }
+
+            }
+
+            @Override
+            public void onItemReselected(int itemIndex, String itemName) {
+
+                switch (itemIndex) {
+
+                    case 0:
+
+                        break;
+
+                    case 1:
+
+                        Intent searchBarAcivity = new Intent(CurrentBookingActivity.this, SearchBarActivity.class);
+
+                        searchBarAcivity.putExtra("vehicle", true);
+
+                        startActivity(searchBarAcivity);
+
+                        break;
+
+
+                    case 2:
+
+                        startActivity(new Intent(CurrentBookingActivity.this, OlxPageActivity.class));
+
+                        break;
+
+                    case 3:
+
+                        startActivity(new Intent(CurrentBookingActivity.this, TicketComplaintActivity.class));
+
+                        break;
+
+                }
+
+            }
+        });
 
         findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
             @Override

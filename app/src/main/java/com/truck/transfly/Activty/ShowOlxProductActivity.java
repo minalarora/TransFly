@@ -15,6 +15,9 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.irfaan008.irbottomnavigation.SpaceItem;
+import com.irfaan008.irbottomnavigation.SpaceNavigationView;
+import com.irfaan008.irbottomnavigation.SpaceOnClickListener;
 import com.truck.transfly.Adapter.ViewPagerImageCarouselAdapter;
 import com.truck.transfly.Model.ResponseResale;
 import com.truck.transfly.R;

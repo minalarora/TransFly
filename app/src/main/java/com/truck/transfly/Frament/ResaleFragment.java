@@ -10,10 +10,13 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -81,6 +84,27 @@ public class ResaleFragment extends Fragment {
 
         no_vehicle_found = inflate.findViewById(R.id.no_vehicle_found);
         no_vehicle_found.setVisibility(View.GONE);
+
+        EditText searchLease =inflate.findViewById(R.id.search_lease);
+
+        searchLease.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                olxRecyclerAdapter.getFilter().filter(s);
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
         no_internet_connection = inflate.findViewById(R.id.no_internet_connection);
         inflate.findViewById(R.id.pullToRefresh_button).setOnClickListener(new View.OnClickListener() {

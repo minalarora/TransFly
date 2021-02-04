@@ -83,9 +83,10 @@ public class SelectYourVehicleActivity extends AppCompatActivity {
             if (!vehicleOwner) {
 
                 activity.showSmallIcons.setVisibility(View.GONE);
-                activity.toolbarText.setText("Rate And Etl");
+                activity.toolbarText.setText("Rate And ETL");
                 activity.creaateBooking.setVisibility(View.GONE);
                 activity.noVehicleFound.setVisibility(View.GONE);
+                activity.parentOfNumber.setVisibility(View.GONE);
 
             }
 

@@ -77,6 +77,9 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.google.maps.android.ui.IconGenerator;
+import com.irfaan008.irbottomnavigation.SpaceItem;
+import com.irfaan008.irbottomnavigation.SpaceNavigationView;
+import com.irfaan008.irbottomnavigation.SpaceOnClickListener;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.nabinbhandari.android.permissions.PermissionHandler;
 import com.nabinbhandari.android.permissions.Permissions;
@@ -181,6 +184,96 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         Menu menu = navigationView.getMenu();
         MenuItem kyc_drawer = menu.findItem(R.id.kyc_drawer);
 
+        SpaceNavigationView spaceNavigationView = findViewById(R.id.bottom_space);
+        spaceNavigationView.showIconOnly();
+        spaceNavigationView.initWithSaveInstanceState(savedInstanceState);
+        spaceNavigationView.addSpaceItem(new SpaceItem("", R.drawable.cargo_truck));
+        spaceNavigationView.addSpaceItem(new SpaceItem("", R.drawable.new_booking_icon));
+        spaceNavigationView.addSpaceItem(new SpaceItem("", R.drawable.release_lease_icon_image));
+        spaceNavigationView.addSpaceItem(new SpaceItem("", R.drawable.help_attain_icon));
+
+        spaceNavigationView.setSpaceOnClickListener(new SpaceOnClickListener() {
+            @Override
+            public void onCentreButtonClick() {
+            }
+
+            @Override
+            public void onItemClick(int itemIndex, String itemName) {
+
+                switch (itemIndex) {
+
+                    case 0:
+
+                        startActivity(new Intent(HomeActivity.this, CurrentBookingActivity.class));
+
+                        break;
+
+                    case 1:
+
+                        Intent searchBarAcivity = new Intent(HomeActivity.this, SearchBarActivity.class);
+
+                        searchBarAcivity.putExtra("vehicle", true);
+
+                        startActivity(searchBarAcivity);
+
+                        break;
+
+
+                    case 2:
+
+                        startActivity(new Intent(HomeActivity.this, OlxPageActivity.class));
+
+                        break;
+
+                    case 3:
+
+                        startActivity(new Intent(HomeActivity.this, TicketComplaintActivity.class));
+
+                        break;
+
+                }
+
+            }
+
+            @Override
+            public void onItemReselected(int itemIndex, String itemName) {
+
+                switch (itemIndex) {
+
+                    case 0:
+
+                        startActivity(new Intent(HomeActivity.this, CurrentBookingActivity.class));
+
+                        break;
+
+                    case 1:
+
+                        Intent searchBarAcivity = new Intent(HomeActivity.this, SearchBarActivity.class);
+
+                        searchBarAcivity.putExtra("vehicle", true);
+
+                        startActivity(searchBarAcivity);
+
+                        break;
+
+
+                    case 2:
+
+                        startActivity(new Intent(HomeActivity.this, OlxPageActivity.class));
+
+                        break;
+
+                    case 3:
+
+                        startActivity(new Intent(HomeActivity.this, TicketComplaintActivity.class));
+
+                        break;
+
+                }
+
+            }
+        });
+
         ResponseVehicleOwner responseFieldStaff = ((TransflyApplication) getApplication()).getResponseVehicleOwner();
 
         View headerLayout = navigationView.getHeaderView(0);
@@ -216,7 +309,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                         refresh_icon.setAnimation(null);
 
                     }
-                },2500);
+                }, 2500);
 
                 parent_of_loading.setVisibility(View.VISIBLE);
                 mGoogleMap.clear();
@@ -560,8 +653,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
-    public void startAnimation(ImageView ivDH)
-    {
+    public void startAnimation(ImageView ivDH) {
         Animation scaleAnim = new ScaleAnimation(0, 2, 0, 2);
         scaleAnim.setDuration(5000);
         scaleAnim.setRepeatCount(1);
@@ -686,15 +778,14 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                         String[] arr = {"Joda", "Barbil", "Rugudi", "Koira", "Jamda"};
                         int counter = 0;
-                        while (counter < (arealist.size()-1)) {
+                        while (counter < (arealist.size() - 1)) {
                             for (RequestArea r : arealist) {
-                                if(counter == 5)
-                                {
+                                if (counter == 5) {
                                     break;
                                 }
                                 if (r.getName().equals(arr[counter])) {
                                     modififyAreaList.add(r);
-                                    Log.d("minal","" + counter + r.getName());
+                                    Log.d("minal", "" + counter + r.getName());
                                     counter++;
 
                                 }
@@ -751,7 +842,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                                         } else if (perfect != null && perfect.equals("1005")) {
 
-                                            myUtils.spotLightOnProfile(navigation.getIconAt(2), "1006", HomeActivity.this, "Click here to create booking", "BOOKING");
+                                            myUtils.spotLightOnProfile(navigation.getIconAt(1), "1006", HomeActivity.this, "Click here to create booking", "BOOKING");
 
 
                                         }
@@ -1091,7 +1182,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                     case R.id.booking_history:
 
-                        startActivity(new Intent(HomeActivity.this,CurrentBookingActivity.class));
+                        startActivity(new Intent(HomeActivity.this, CurrentBookingActivity.class));
 
                         break;
 
@@ -1355,8 +1446,8 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                             intent.putExtra("mineid", responseMine.getId());
                             intent.putExtra("minename", responseMine.getName());
-                            intent.putExtra("tyres",responseMine.getTyres());
-                            intent.putExtra("trailor",responseMine.getTrailer());
+                            intent.putExtra("tyres", responseMine.getTyres());
+                            intent.putExtra("trailor", responseMine.getTrailer());
                             intent.putExtra("loading", loading);
                             intent.putExtra("rate", rate);
                             intent.putExtra("etl", etl);
@@ -1377,43 +1468,40 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
     private void showMarkerOfArea(double latituteOfTajMahal, double longitudeOfTajMahal, ResponseMine responseMine, String loadingname) {
 
         ArrayList<ResponseLoading> list = responseMine.getLoading();
-        for(ResponseLoading loading: list)
-        {
-            if(loading.getLoadingName().equalsIgnoreCase(loadingname))
-            {
-                if(loading.getActive() == false)
-                {
+        for (ResponseLoading loading : list) {
+            if (loading.getLoadingName().equalsIgnoreCase(loadingname)) {
+                if (loading.getActive() == false) {
                     return;
                 }
             }
         }
 
 
-            LatLng latLng = new LatLng(latituteOfTajMahal, longitudeOfTajMahal);
+        LatLng latLng = new LatLng(latituteOfTajMahal, longitudeOfTajMahal);
 
-            IconGenerator iconFactory = new IconGenerator(this);
-            iconFactory.setStyle(IconGenerator.STYLE_RED);
-            MarkerOptions markerOptions = new MarkerOptions();
-            markerOptions.position(latLng);
-            markerOptions.title(String.valueOf(responseMine.getName()));
-            markerOptions.snippet("This is my spot!");
-            Marker marker = mGoogleMap.addMarker(markerOptions);
+        IconGenerator iconFactory = new IconGenerator(this);
+        iconFactory.setStyle(IconGenerator.STYLE_RED);
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(latLng);
+        markerOptions.title(String.valueOf(responseMine.getName()));
+        markerOptions.snippet("This is my spot!");
+        Marker marker = mGoogleMap.addMarker(markerOptions);
 
-            ArrayList<ResponseLoading> arrayList = responseMine.getLoading();
-            int rate = 5;
-            int etl = 0;
-            for (ResponseLoading l : arrayList) {
-                if (l.getLoadingName().equalsIgnoreCase(loadingname)) {
-                    rate = l.getRate();
-                    etl = l.getEtl();
+        ArrayList<ResponseLoading> arrayList = responseMine.getLoading();
+        int rate = 5;
+        int etl = 0;
+        for (ResponseLoading l : arrayList) {
+            if (l.getLoadingName().equalsIgnoreCase(loadingname)) {
+                rate = l.getRate();
+                etl = l.getEtl();
 
-                }
             }
-            marker.setIcon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon("Rate : " + rate + "\n" + "ETL : " + etl+" hrs")));
+        }
+        marker.setIcon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon("Rate : " + rate + "\n" + "ETL : " + etl + " hrs")));
 
-            marker.setTag(responseMine);
+        marker.setTag(responseMine);
 
-            
+
     }
 
     private void showMarker(double latituteOfTajMahal, double longitudeOfTajMahal, int postion, String locationAddress) {

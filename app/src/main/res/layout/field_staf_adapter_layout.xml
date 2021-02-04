@@ -11,18 +11,20 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8ssp"
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="@dimen/_50ssp"
-                android:layout_height="@dimen/_50ssp"
-                android:src="@drawable/box_animation" />
+                android:layout_width="@dimen/_30ssp"
+                android:layout_marginStart="@dimen/_12ssp"
+                android:layout_height="@dimen/_30ssp"
+                android:src="@drawable/ic_map_location" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -41,41 +43,48 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginStart="@dimen/_20ssp"
-            android:fontFamily="@font/poppins"
-            android:text="27-01-2021 20;20;55"
-            android:layout_marginBottom="@dimen/_6ssp"
             android:id="@+id/date_created"
+            android:visibility="gone"
+            android:layout_marginStart="@dimen/_15ssp"
+            android:layout_marginTop="@dimen/_12ssp"
+            android:fontFamily="@font/poppins"
+            android:text="Posted at 21 Dec, 10:12 AM | Expires in 45 hours"
             android:textColor="#8c8c8c"
-            android:textSize="12dp" />
+            android:textSize="13dp" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginStart="@dimen/_15ssp"
+            android:layout_marginTop="@dimen/_7ssp"
             android:layout_marginEnd="@dimen/_15ssp"
             android:background="#dcdcdc" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_2ssp"
+            android:visibility="gone"
+            android:id="@+id/vehicleNamepParent"
             android:layout_marginStart="@dimen/_13ssp"
-            android:layout_marginTop="@dimen/_8ssp"
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="@dimen/_30ssp"
-                android:layout_height="@dimen/_30ssp"
-                android:src="@drawable/ic_delivery_truck_foder" />
+                android:layout_width="@dimen/_20ssp"
+                android:layout_height="@dimen/_20ssp"
+                android:id="@+id/image_default"
+                android:layout_marginStart="6dp"
+                android:src="@drawable/ic_driver" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:id="@+id/name_of_owner"
                 android:fontFamily="@font/poppins"
-                android:text="John deo"
+                android:text="Minal gareeb Driver"
+                android:layout_marginStart="12dp"
                 android:textColor="@color/black"
+                android:id="@+id/vehile_owner"
                 android:textSize="13dp" />
 
             <TextView
@@ -84,31 +93,180 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="@dimen/_4ssp"
                 android:fontFamily="@font/poppins"
-                android:text="(Vehicle number)"
+                android:text="(Owner name)"
                 android:textColor="#8c8c8c"
                 android:textSize="12dp" />
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/_7ssp"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="140dp"
+                android:orientation="vertical"
+                android:background="#FAFBFF"
+                android:layout_height="100dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:gravity="center"
+                    android:padding="6dp"
+                    android:background="#eeeeee"
+                    android:alpha="0.7"
+                    android:text="Vehicle Number"
+                    android:textColor="@color/black"
+                    android:textSize="12dp" />
+
+                <ImageView
+                    android:layout_width="@dimen/_30ssp"
+                    android:layout_height="@dimen/_30ssp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="6dp"
+                    android:src="@drawable/truck_image_at_invoice"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:id="@+id/vehicle_number"
+                    android:gravity="center"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/poppins"
+                    android:text="RWE - 56789"
+                    android:textColor="@color/black"
+                    android:textSize="13dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="140dp"
+                android:orientation="vertical"
+                android:id="@+id/mobileNumberParent"
+                android:background="#FAFBFF"
+                android:layout_marginStart="@dimen/_12ssp"
+                android:layout_height="100dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:gravity="center"
+                    android:padding="6dp"
+                    android:background="#eeeeee"
+                    android:alpha="0.7"
+                    android:text="Driver Number"
+                    android:textColor="@color/black"
+                    android:textSize="12dp" />
+
+                <ImageView
+                    android:layout_width="@dimen/_30ssp"
+                    android:layout_height="@dimen/_30ssp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="6dp"
+                    android:src="@drawable/ic__mobile_number_invoices"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:id="@+id/mobileNumber"
+                    android:gravity="center"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/poppins"
+                    android:text="RWE - 56789"
+                    android:textColor="@color/black"
+                    android:textSize="13dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/_14ssp"
+            android:layout_marginStart="@dimen/_21ssp"
+            android:layout_marginEnd="@dimen/_8ssp"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="@dimen/_20ssp"
+                    android:layout_height="@dimen/_20ssp"
+                    android:src="@drawable/clander_planner"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:text="02 - 01 - 2021"
+                    android:id="@+id/date_name"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/_12ssp"
+                    android:textColor="@color/black"
+                    android:textSize="13dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/_12ssp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:layout_alignParentStart="true"
+                    android:text="2:59 PM"
+                    android:id="@+id/time"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="@dimen/_12ssp"
+                    android:textColor="@color/black"
+                    android:textSize="13dp" />
+
+                <ImageView
+                    android:layout_width="@dimen/_20ssp"
+                    android:layout_height="@dimen/_20ssp"
+                    android:src="@drawable/ic__clock_images"
+                    />
+
+            </LinearLayout>
+
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_13ssp"
+            android:layout_marginTop="@dimen/_6ssp"
+            android:visibility="gone"
+            android:layout_marginStart="@dimen/_20ssp"
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="@dimen/_30ssp"
-                android:layout_height="@dimen/_30ssp"
-                android:src="@drawable/ic_smartphone_number" />
+                android:layout_width="@dimen/_15ssp"
+                android:layout_height="@dimen/_20ssp"
+                android:src="@drawable/estimate_rate" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:id="@+id/number"
+                android:layout_marginStart="@dimen/_12ssp"
                 android:fontFamily="@font/poppins"
-                android:text="+91 "
+                android:id="@+id/price_rate"
+                android:text="5000"
                 android:textColor="@color/black"
                 android:textSize="13dp" />
 
@@ -118,7 +276,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="@dimen/_4ssp"
                 android:fontFamily="@font/poppins"
-                android:text="(Driver Number)"
+                android:text="(In R.s)"
                 android:textColor="#8c8c8c"
                 android:textSize="12dp" />
 
@@ -128,7 +286,8 @@
             android:layout_width="match_parent"
             android:layout_alignParentBottom="true"
             android:background="@color/white"
-            android:layout_height="42dp">
+            android:layout_marginTop="@dimen/_12ssp"
+            android:layout_height="40dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -172,12 +331,13 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:id="@+id/confirm_booking"
+                android:foreground="?attr/selectableItemBackground"
                 android:clickable="true"
+                android:background="@color/project_color"
                 android:focusable="true"
-                android:foreground="?attr/selectableItemBackground">
+                android:layout_height="match_parent">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -185,19 +345,21 @@
                     android:layout_centerInParent="true"
                     android:layout_gravity="center_vertical"
                     android:drawablePadding="@dimen/_8ssp"
-                    android:fontFamily="@font/poppins"
+                    android:fontFamily="@font/open_sans_semibold"
                     android:gravity="center_horizontal|center_vertical"
                     android:text="Confirm Booking"
                     android:textAllCaps="true"
-                    android:textColor="@color/project_color"
-                    android:textSize="13dp"
-                    android:textStyle="bold" />
+                    android:textColor="@color/white"
+                    android:textSize="11dp"
+                    android:textStyle="bold"
+                    />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
+                    android:background="#dcdcdc"
                     android:layout_alignParentTop="true"
-                    android:background="#dcdcdc" />
+                    />
             </RelativeLayout>
 
         </LinearLayout>

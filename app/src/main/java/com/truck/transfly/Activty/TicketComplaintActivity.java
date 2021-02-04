@@ -1,5 +1,6 @@
 package com.truck.transfly.Activty;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -12,6 +13,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.irfaan008.irbottomnavigation.SpaceItem;
+import com.irfaan008.irbottomnavigation.SpaceNavigationView;
+import com.irfaan008.irbottomnavigation.SpaceOnClickListener;
 import com.truck.transfly.Model.RequestTicket;
 import com.truck.transfly.R;
 import com.truck.transfly.utils.ApiClient;
@@ -57,6 +61,99 @@ public class TicketComplaintActivity extends AppCompatActivity {
         RelativeLayout submit = findViewById(R.id.submit);
 
         StringRadio = "Vehicle Break Down";
+
+        SpaceNavigationView spaceNavigationView = findViewById(R.id.bottom_space);
+        spaceNavigationView.showIconOnly();
+        spaceNavigationView.initWithSaveInstanceState(savedInstanceState);
+        spaceNavigationView.addSpaceItem(new SpaceItem("", R.drawable.cargo_truck));
+        spaceNavigationView.addSpaceItem(new SpaceItem("", R.drawable.new_booking_icon));
+        spaceNavigationView.addSpaceItem(new SpaceItem("", R.drawable.release_lease_icon_image));
+        spaceNavigationView.addSpaceItem(new SpaceItem("", R.drawable.help_attain_icon));
+
+        spaceNavigationView.setSpaceOnClickListener(new SpaceOnClickListener() {
+            @Override
+            public void onCentreButtonClick() {
+
+                startActivity(new Intent(TicketComplaintActivity.this, HomeActivity.class));
+
+            }
+
+            @Override
+            public void onItemClick(int itemIndex, String itemName) {
+
+                switch (itemIndex) {
+
+                    case 0:
+
+                        Intent currentBookingActivity = new Intent(TicketComplaintActivity.this, CurrentBookingActivity.class);
+
+                        startActivity(currentBookingActivity);
+
+                        break;
+
+                    case 1:
+
+                        Intent searchBarAcivity = new Intent(TicketComplaintActivity.this, SearchBarActivity.class);
+
+                        searchBarAcivity.putExtra("vehicle", true);
+
+                        startActivity(searchBarAcivity);
+
+                        break;
+
+
+                    case 2:
+
+                        startActivity(new Intent(TicketComplaintActivity.this, OlxPageActivity.class));
+
+                        break;
+
+                    case 3:
+
+                        break;
+
+                }
+
+            }
+
+            @Override
+            public void onItemReselected(int itemIndex, String itemName) {
+
+                switch (itemIndex) {
+
+                    case 0:
+
+                        Intent currentBookingActivity = new Intent(TicketComplaintActivity.this, CurrentBookingActivity.class);
+
+                        startActivity(currentBookingActivity);
+
+                        break;
+
+                    case 1:
+
+                        Intent searchBarAcivity = new Intent(TicketComplaintActivity.this, SearchBarActivity.class);
+
+                        searchBarAcivity.putExtra("vehicle", true);
+
+                        startActivity(searchBarAcivity);
+
+                        break;
+
+
+                    case 2:
+
+                        startActivity(new Intent(TicketComplaintActivity.this, OlxPageActivity.class));
+
+                        break;
+
+                    case 3:
+
+                        break;
+
+                }
+
+            }
+        });
 
         ticket_spinner.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
