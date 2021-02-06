@@ -56,7 +56,7 @@ public class SignUpActivity extends AppCompatActivity {
     private LinearLayout progressPassword;
     private CheckBox email_sent_av,accept_condition;
     private InstallationTokenResult result;
-    private String token;
+    private String token ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

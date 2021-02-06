@@ -120,14 +120,14 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="@dimen/_25ssp"
                 android:fontFamily="@font/poppinsbold"
-                android:text="What would like to improve"
+                android:text="What would you like us to improve"
                 android:textColor="@color/project_color"
                 android:textSize="14dp" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:lines="5"
-                android:hint="Modify your feedback here"
+                android:hint="Provide your feedback here"
                 android:fontFamily="@font/font_opensans"
                 android:gravity="top"
                 android:id="@+id/feedbackText"

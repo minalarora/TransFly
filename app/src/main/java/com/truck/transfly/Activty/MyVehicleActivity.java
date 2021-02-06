@@ -234,7 +234,7 @@ public class MyVehicleActivity extends AppCompatActivity {
 
                 if (response.code() == 200) {
 
-                    Toast.makeText(MyVehicleActivity.this, "Vehicle Updated Successfully", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MyVehicleActivity.this, "Vehicle Info Updated Successfully", Toast.LENGTH_SHORT).show();
 
                     ResponseVehicle responseVehicle = responseVehicleList.get(position);
                     responseVehicle.setContact(vehicle.getContact());

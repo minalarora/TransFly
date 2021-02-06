@@ -80,15 +80,20 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_gravity="center_vertical"
+                        android:layout_gravity="center_vertical|left"
                         android:layout_marginStart="10dp"
+                        android:gravity="center"
                         android:layout_marginTop="@dimen/_12ssp"
                         android:id="@+id/no_vehicle_found"
                         android:layout_centerInParent="true"
                         android:fontFamily="@font/poppins"
-                        android:text="No Vehicle Found"
-                        android:textColor="@android:color/black"
-                        android:textSize="16dp" />
+                        android:text="@string/no_registered_vehicles_found_n_add_your_vehicles_by_clicking_here"
+                        android:textColor="@color/red"
+                        android:textSize="14dp"
+                        android:onClick="gotoAdd"
+                        android:textStyle="bold"
+                        />
+
 
                 </RelativeLayout>
 

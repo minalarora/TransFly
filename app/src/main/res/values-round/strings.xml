@@ -1,3 +1,4 @@
 <resources>
     <string name="hello_world">Hello Round World!</string>
+    <string name="no_registered_vehicles_found_n_add_your_vehicles_by_clicking_here">No Registered Vehicles Found!\n Add your vehicles by clicking <u>here</u></string>
 </resources>

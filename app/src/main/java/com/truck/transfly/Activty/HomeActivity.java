@@ -204,13 +204,16 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                     case 0:
 
-                        startActivity(new Intent(HomeActivity.this, CurrentBookingActivity.class));
 
-                        break;
+                        Toast.makeText(HomeActivity.this,"CURRENT BOOKINGS",Toast.LENGTH_LONG).show();
+
+                        startActivity(new Intent(HomeActivity.this, CurrentBookingActivity.class));
+                       break;
 
                     case 1:
 
                         Intent searchBarAcivity = new Intent(HomeActivity.this, SearchBarActivity.class);
+                        Toast.makeText(HomeActivity.this,"CREATE BOOKING",Toast.LENGTH_LONG).show();
 
                         searchBarAcivity.putExtra("vehicle", true);
 
@@ -222,10 +225,12 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                     case 2:
 
                         startActivity(new Intent(HomeActivity.this, OlxPageActivity.class));
+                        Toast.makeText(HomeActivity.this,"RESALE/LEASE VEHICLES",Toast.LENGTH_LONG).show();
 
                         break;
 
                     case 3:
+                        Toast.makeText(HomeActivity.this,"ON-ROAD ASSISTANCE",Toast.LENGTH_LONG).show();
 
                         startActivity(new Intent(HomeActivity.this, TicketComplaintActivity.class));
 
@@ -241,6 +246,8 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                 switch (itemIndex) {
 
                     case 0:
+
+                        Toast.makeText(HomeActivity.this,"CURRENT BOOKINGS",Toast.LENGTH_LONG).show();
 
                         startActivity(new Intent(HomeActivity.this, CurrentBookingActivity.class));
 
@@ -381,7 +388,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                         ResponseFirebase responseFirebase = new ResponseFirebase();
                         responseFirebase.setFirebase(token);
-
+                        Log.d("minal","done0");
                         updateFirebase(PreferenceUtil.getData(HomeActivity.this, "token"), responseFirebase);
 
                     }
@@ -900,7 +907,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         api.updateFirebase(token, firebase).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-
+                Log.d("minal","done");
             }
 
             @Override

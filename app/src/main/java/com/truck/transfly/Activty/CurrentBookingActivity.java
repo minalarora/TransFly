@@ -106,6 +106,8 @@ public class CurrentBookingActivity extends AppCompatActivity {
                         searchBarAcivity.putExtra("vehicle", true);
 
                         startActivity(searchBarAcivity);
+                        Toast.makeText(CurrentBookingActivity.this,"CREATE BOOKING",Toast.LENGTH_LONG).show();
+
 
                         break;
 
@@ -113,12 +115,16 @@ public class CurrentBookingActivity extends AppCompatActivity {
                     case 2:
 
                         startActivity(new Intent(CurrentBookingActivity.this, OlxPageActivity.class));
+                        Toast.makeText(CurrentBookingActivity.this,"RESALE/LEASE VEHICLES",Toast.LENGTH_LONG).show();
+
 
                         break;
 
                     case 3:
 
                         startActivity(new Intent(CurrentBookingActivity.this, TicketComplaintActivity.class));
+                        Toast.makeText(CurrentBookingActivity.this,"ON-ROAD ASSISTANCE",Toast.LENGTH_LONG).show();
+
 
                         break;
 

@@ -230,22 +230,7 @@
 
         </RelativeLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/signup_parent"
-            android:layout_centerInParent="true"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="@dimen/_20ssp"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="@dimen/_20ssp"
-            android:alpha="0.6"
-            android:fontFamily="@font/font_regular"
-            android:gravity="center_horizontal"
-            android:lineSpacingExtra="@dimen/_5ssp"
-            android:text="©2021. All rights reserved by TransFly Infotech Pvt Ltd"
-            android:textColor="@color/black"
-            android:textSize="8dp" />
+
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -287,6 +272,22 @@
             </LinearLayout>
 
         </RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/signup_parent"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="@dimen/_20ssp"
+            android:layout_marginTop="60dp"
+            android:layout_marginEnd="@dimen/_20ssp"
+            android:alpha="0.6"
+            android:fontFamily="@font/font_regular"
+            android:gravity="center_horizontal"
+            android:lineSpacingExtra="@dimen/_5ssp"
+            android:text="©2021. All rights reserved by TransFly Infotech Pvt Ltd"
+            android:textColor="@color/black"
+            android:textSize="8dp" />
 
     </LinearLayout>
 

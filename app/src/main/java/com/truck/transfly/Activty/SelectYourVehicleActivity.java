@@ -217,15 +217,20 @@ public class SelectYourVehicleActivity extends AppCompatActivity {
 
         if (status == 0) {
 
-            Toast.makeText(this, "This vehicle is Not Approved", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "This Vehicle is not approved", Toast.LENGTH_SHORT).show();
 
-        } else if (!active) {
+        }
+        else if(activity.noVehicleFound.getVisibility()==View.VISIBLE)
+        {
+            Toast.makeText(this, "Please Add Your Vehicles First", Toast.LENGTH_SHORT).show();
+        }
+        else if (!active) {
 
-            Toast.makeText(this, "This vehicle is Already in booking", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "This Vehicle is Already in booking", Toast.LENGTH_SHORT).show();
 
         } else if (responseVehicleOwner.getStatus() != 2) {
 
-            Toast.makeText(this, "First! Complete Your KYC...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Complete Your KYC First!", Toast.LENGTH_SHORT).show();
 
         } else if (TextUtils.isEmpty(activity.mobileNumber.getText().toString())) {
 
@@ -321,4 +326,8 @@ public class SelectYourVehicleActivity extends AppCompatActivity {
     }
 
 
+    public void gotoAdd(View view) {
+        Intent i =new Intent(SelectYourVehicleActivity.this,AddVehicleActivity.class);
+        startActivity(i);
+    }
 }

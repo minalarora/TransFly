@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
@@ -79,6 +80,8 @@ public class OlxPageActivity extends AppCompatActivity {
 
                         Intent currentBookingActivity = new Intent(OlxPageActivity.this, CurrentBookingActivity.class);
 
+                        Toast.makeText(OlxPageActivity.this,"CURRENT BOOKINGS",Toast.LENGTH_LONG).show();
+
                         startActivity(currentBookingActivity);
 
                         break;
@@ -88,6 +91,8 @@ public class OlxPageActivity extends AppCompatActivity {
                         Intent searchBarAcivity = new Intent(OlxPageActivity.this, SearchBarActivity.class);
 
                         searchBarAcivity.putExtra("vehicle", true);
+                        Toast.makeText(OlxPageActivity.this,"CREATE BOOKING",Toast.LENGTH_LONG).show();
+
 
                         startActivity(searchBarAcivity);
 
@@ -101,6 +106,8 @@ public class OlxPageActivity extends AppCompatActivity {
                     case 3:
 
                         startActivity(new Intent(OlxPageActivity.this, TicketComplaintActivity.class));
+                        Toast.makeText(OlxPageActivity.this,"ON-ROAD ASSISTANCE",Toast.LENGTH_LONG).show();
+
 
                         break;
 
@@ -116,6 +123,8 @@ public class OlxPageActivity extends AppCompatActivity {
                     case 0:
 
                         Intent currentBookingActivity = new Intent(OlxPageActivity.this, CurrentBookingActivity.class);
+
+                        Toast.makeText(OlxPageActivity.this,"CURRENT BOOKINGS",Toast.LENGTH_LONG).show();
 
                         startActivity(currentBookingActivity);
 

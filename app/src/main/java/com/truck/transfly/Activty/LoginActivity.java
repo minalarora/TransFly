@@ -134,8 +134,8 @@ public class LoginActivity extends AppCompatActivity {
                 } else if(response.code() == 402) {
 
                     Alerter.create(LoginActivity.this)
-                            .setTitle("Password Miss matched")
-                            .setText("Try different Password! Password seems to be wrong!")
+                            .setTitle("Password did not match!")
+                            .setText("Please try different password or tap on 'Forgot Your Password' below.")
                             .setIcon(R.drawable.ic_action_password_lock)
                             .setBackgroundColorRes(R.color.quantum_pink)
                             .enableSwipeToDismiss()
@@ -149,7 +149,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     Alerter.create(LoginActivity.this)
                             .setTitle("User Not Found!")
-                            .setText("This number is not registered, please register yourself by Clicking on ‘Create Here’ below.")
+                            .setText("This number is not registered, please 'Sign up' yourself below.")
                             .setIcon(R.drawable.ic_action_password_lock)
                             .setBackgroundColorRes(R.color.quantum_pink)
                             .enableSwipeToDismiss()
@@ -197,8 +197,8 @@ public class LoginActivity extends AppCompatActivity {
                             } else {
 
                                 Alerter.create(LoginActivity.this)
-                                        .setTitle("Password Miss matched")
-                                        .setText("Try different Password! Password seems to wrong!")
+                                        .setTitle("Password did not match.")
+                                        .setText("Please try different password or tap on 'Forgot Your Password' below.")
                                         .setIcon(R.drawable.ic_action_password_lock)
                                         .setBackgroundColorRes(R.color.quantum_pink)
                                         .enableSwipeToDismiss()

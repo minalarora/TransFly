@@ -33,7 +33,7 @@
         <item
             android:title="My Vehicle"
             android:id="@+id/my_vehicle"
-            android:icon="@drawable/ic_action_my_vehicle" />
+            android:icon="@drawable/truck_first_icon" />
 
         <item
             android:title="Add Vehicles"
