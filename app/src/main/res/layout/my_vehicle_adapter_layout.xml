@@ -63,7 +63,7 @@
                 android:fontFamily="@font/poppins"
                 android:layout_marginStart="@dimen/_8ssp"
                 android:text="Tracktor"
-                android:id="@+id/vehicle_name"
+                android:id="@+id/vehicle_number"
                 android:textColor="@color/black"
                 android:textSize="13dp" />
 
@@ -129,7 +129,7 @@
                 android:src="@drawable/delivery_truck" />
 
             <TextView
-                android:id="@+id/vehicle_number"
+                android:id="@+id/vehicle_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

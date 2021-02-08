@@ -59,7 +59,7 @@ public class MyVehicleAdapter extends RecyclerView.Adapter<MyVehicleAdapter.view
 
         holder.vehicle_number_series.setText("Vehicle "+String.valueOf(position+1));
 
-        holder.vehicle_number.setText(responseVehicle.getNumber());
+        holder.vehicle_number.setText(responseVehicle.getNumber() +"       "+responseVehicle.getTyres());
         holder.vehicle_name.setText(responseVehicle.getVehiclename());
 
         holder.date_created.setText(responseVehicle.getDate().substring(0,15));

@@ -217,7 +217,7 @@ public class SelectYourVehicleActivity extends AppCompatActivity {
 
         if (status == 0) {
 
-            Toast.makeText(this, "This Vehicle is not approved", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "This vehicle is getting approved, ensure KYC completion under 'My Profile'", Toast.LENGTH_SHORT).show();
 
         }
         else if(activity.noVehicleFound.getVisibility()==View.VISIBLE)
@@ -242,7 +242,7 @@ public class SelectYourVehicleActivity extends AppCompatActivity {
 
         } else if (responseVehicle != null && responseVehicle.getTyres() != null && !isValid(tyres, trailor, responseVehicle.getTyres())) {
 
-            Toast.makeText(this, "This mine is not allowed Trailor Body", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Trailer not allowed in this mine, find more mines from Search field", Toast.LENGTH_SHORT).show();
 
         } else {
 
@@ -329,5 +329,8 @@ public class SelectYourVehicleActivity extends AppCompatActivity {
     public void gotoAdd(View view) {
         Intent i =new Intent(SelectYourVehicleActivity.this,AddVehicleActivity.class);
         startActivity(i);
+
+        finish();
+
     }
 }

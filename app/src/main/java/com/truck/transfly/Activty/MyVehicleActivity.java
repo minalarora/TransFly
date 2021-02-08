@@ -175,6 +175,7 @@ public class MyVehicleActivity extends AppCompatActivity {
                             responseVehicle.setVehiclename(jsonObject.getString("vehiclename"));
                             responseVehicle.setStatus(jsonObject.getInt("status"));
                             responseVehicle.setActive(jsonObject.getBoolean("active"));
+                            responseVehicle.setTyres(jsonObject.getString("tyres"));
                             responseVehicle.setDate(jsonObject.getString("date"));
 
                             responseVehicleList.add(responseVehicle);

@@ -124,7 +124,7 @@ public class TermsAndCondition extends AppCompatActivity {
                     "If anywhere, any user is not clear about any of mentioned terms and conditions above, we recommend to contact us via customer care, whatsapp, email etc to take full clarity and don’t blindly agree to any of these terms and conditions. \n" +
                     "\n" +
                     "TransFly Infotech Pvt Ltd ®\n" +
-                    "Keonjhar, Odisha (India) 758001");
+                    "");
 
         } else {
 
@@ -193,7 +193,7 @@ public class TermsAndCondition extends AppCompatActivity {
                     "If anywhere, any user is not clear about any of mentioned terms and conditions above, we recommend to contact us via customer care, whatsapp, email etc to take full clarity and don’t blindly agree to any of these terms and conditions. \n" +
                     "\n" +
                     "TransFly Infotech Pvt Ltd ®\n" +
-                    "Keonjhar, Odisha (India) 758001\n" +
+                    "\n" +
                     "\n" +
                     "\n");
 
