@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.truck.transfly.R;
+import com.truck.transfly.utils.EndApi;
 
 public class ContactUsDialogFragment extends DialogFragment {
 
@@ -39,6 +40,18 @@ public class ContactUsDialogFragment extends DialogFragment {
 
         RelativeLayout phone =inflate.findViewById(R.id.phone);
         RelativeLayout telegram =inflate.findViewById(R.id.telegram);
+
+        inflate.findViewById(R.id.faq).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent telegram = new Intent(Intent.ACTION_VIEW , Uri.parse(EndApi.faq));
+                startActivity(telegram);
+
+                dismiss();
+
+            }
+        });
 
         phone.setOnClickListener(new View.OnClickListener() {
             @Override

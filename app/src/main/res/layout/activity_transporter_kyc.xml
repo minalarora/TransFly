@@ -222,7 +222,7 @@
                     app:boxBackgroundColor="@color/white"
                     android:padding="@dimen/_4ssp"
                     android:layout_height="wrap_content"
-                    android:hint="Enter TDS Number">
+                    android:hint="Enter TDS Declaration">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"

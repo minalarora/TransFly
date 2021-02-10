@@ -185,7 +185,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                 } else if(!activity.password.getText().toString().equals(activity.retypePassword.getText().toString())){
 
-                    activity.retypePassword.setError("Password No Matched*");
+                    activity.retypePassword.setError("Confirm Password did not match");
                     activity.retypePassword.requestFocus();
 
                 }else if (!activity.acceptCondition.isChecked()){

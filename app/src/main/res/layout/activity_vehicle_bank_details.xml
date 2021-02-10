@@ -254,7 +254,7 @@
                     android:layout_marginStart="@dimen/_12ssp"
                     android:layout_marginTop="@dimen/_30ssp"
                     android:layout_marginEnd="@dimen/_12ssp"
-                    android:hint="Enter TDS Number"
+                    android:hint="Enter TDS Declaration"
                     android:visibility="gone"
                     android:padding="@dimen/_4ssp"
                     app:boxBackgroundColor="@color/white">

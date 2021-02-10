@@ -3,12 +3,15 @@ package com.truck.transfly.Activty;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -101,6 +104,8 @@ import com.truck.transfly.MuUtils.MetalRecyclerViewPager;
 import com.truck.transfly.R;
 import com.truck.transfly.utils.ApiClient;
 import com.truck.transfly.utils.ApiEndpoints;
+import com.truck.transfly.utils.Constants_notifications;
+import com.truck.transfly.utils.MyNotificationManager;
 import com.truck.transfly.utils.MyUtils;
 import com.truck.transfly.utils.PreferenceUtil;
 import com.truck.transfly.utils.TransflyApplication;
@@ -205,15 +210,15 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                     case 0:
 
 
-                        Toast.makeText(HomeActivity.this,"CURRENT BOOKINGS",Toast.LENGTH_LONG).show();
+                        Toast.makeText(HomeActivity.this, "CURRENT BOOKINGS", Toast.LENGTH_LONG).show();
 
                         startActivity(new Intent(HomeActivity.this, CurrentBookingActivity.class));
-                       break;
+                        break;
 
                     case 1:
 
                         Intent searchBarAcivity = new Intent(HomeActivity.this, SearchBarActivity.class);
-                        Toast.makeText(HomeActivity.this,"CREATE BOOKING",Toast.LENGTH_LONG).show();
+                        Toast.makeText(HomeActivity.this, "CREATE BOOKING", Toast.LENGTH_LONG).show();
 
                         searchBarAcivity.putExtra("vehicle", true);
 
@@ -225,12 +230,12 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                     case 2:
 
                         startActivity(new Intent(HomeActivity.this, OlxPageActivity.class));
-                        Toast.makeText(HomeActivity.this,"RESALE/LEASE VEHICLES",Toast.LENGTH_LONG).show();
+                        Toast.makeText(HomeActivity.this, "RESALE/LEASE VEHICLES", Toast.LENGTH_LONG).show();
 
                         break;
 
                     case 3:
-                        Toast.makeText(HomeActivity.this,"ON-ROAD ASSISTANCE",Toast.LENGTH_LONG).show();
+                        Toast.makeText(HomeActivity.this, "ON-ROAD ASSISTANCE", Toast.LENGTH_LONG).show();
 
                         startActivity(new Intent(HomeActivity.this, TicketComplaintActivity.class));
 
@@ -247,7 +252,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                     case 0:
 
-                        Toast.makeText(HomeActivity.this,"CURRENT BOOKINGS",Toast.LENGTH_LONG).show();
+                        Toast.makeText(HomeActivity.this, "CURRENT BOOKINGS", Toast.LENGTH_LONG).show();
 
                         startActivity(new Intent(HomeActivity.this, CurrentBookingActivity.class));
 
@@ -388,7 +393,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                         ResponseFirebase responseFirebase = new ResponseFirebase();
                         responseFirebase.setFirebase(token);
-                        Log.d("minal","done0");
+                        Log.d("minal", "done0");
                         updateFirebase(PreferenceUtil.getData(HomeActivity.this, "token"), responseFirebase);
 
                     }
@@ -852,6 +857,41 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                                             myUtils.spotLightOnProfile(navigation.getIconAt(1), "1006", HomeActivity.this, "Click here to create booking", "BOOKING");
 
 
+                                        } else if (perfect != null && perfect.equals("1006")) {
+
+                                            SharedPreferences sharedPreferences = getSharedPreferences("first_run", MODE_PRIVATE);
+
+                                            if (sharedPreferences.getBoolean("firstrun", true)) {
+
+                                                new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+
+                                                        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                                                            NotificationManager mNotificationManager =
+                                                                    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                                                            int importance = NotificationManager.IMPORTANCE_HIGH;
+                                                            NotificationChannel mChannel = new NotificationChannel(Constants_notifications.CHANNEL_ID, Constants_notifications.CHANNEL_NAME, importance);
+                                                            mChannel.setDescription(Constants_notifications.CHANNEL_DESCRIPTION);
+                                                            mChannel.enableLights(true);
+                                                            mChannel.setLightColor(Color.RED);
+                                                            mChannel.enableVibration(true);
+                                                            mChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
+                                                            mNotificationManager.createNotificationChannel(mChannel);
+                                                        }
+
+                                                        /*
+                                                         * Displaying a notification locally
+                                                         */
+                                                        MyNotificationManager.getInstance(HomeActivity.this).displayNotification("TRANSFLY", "Please complete your KYC and add vehicles under My Profile to start with your Bookings/Loadings", null);
+
+
+                                                    }
+                                                }, 1200);
+
+                                                sharedPreferences.edit().putBoolean("firstrun", false).apply();
+                                            }
+
                                         }
 
                                     }
@@ -907,7 +947,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         api.updateFirebase(token, firebase).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                Log.d("minal","done");
+                Log.d("minal", "done");
             }
 
             @Override

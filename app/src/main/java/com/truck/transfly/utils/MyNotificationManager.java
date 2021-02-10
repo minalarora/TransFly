@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 
 import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
 
 import com.truck.transfly.Activty.SplashActivity;
 import com.truck.transfly.R;
@@ -33,8 +34,9 @@ public class MyNotificationManager {
 
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(mCtx, Constants_notifications.CHANNEL_ID)
-                        .setSmallIcon(R.mipmap.ic_launcher_round)
+                        .setSmallIcon(getNotificationIcon())
                         .setContentTitle(title)
+                        .setColor(ContextCompat.getColor(mCtx,R.color.project_color))
                         .setStyle(new NotificationCompat.BigTextStyle().bigText(body))
                         .setContentText(body);
 
@@ -83,6 +85,11 @@ public class MyNotificationManager {
         if (mNotifyMgr != null) {
             mNotifyMgr.notify(1, mBuilder.build());
         }
+    }
+
+    private int getNotificationIcon() {
+        boolean useWhiteIcon = (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O);
+        return useWhiteIcon ? R.drawable.ic_action_notification : R.drawable.ic_action_notification;
     }
 
 }
