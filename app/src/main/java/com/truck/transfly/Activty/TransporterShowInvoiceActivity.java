@@ -77,9 +77,9 @@ public class TransporterShowInvoiceActivity extends AppCompatActivity {
 
         activity.toFromDest.setText(responseInvoice.getMinename() +" - "+responseInvoice.getLoading());
         activity.dateCreated.setText(responseInvoice.getDate());
-        activity.ownerName.setText(responseInvoice.getVehicleOwnerName());
+        activity.ownerName.setText(responseInvoice.getVehicleowner());
         activity.ownerMobile.setText(responseInvoice.getVehicleownermobile());
-        activity.vehicleNumber.setText(responseInvoice.getVehiclenumber());
+        activity.vehicleNumber.setText(responseInvoice.getVehicle());
         activity.tonnege.setText(String.valueOf(responseInvoice.getTonnage()));
         activity.rate.setText(String.valueOf(responseInvoice.getRate()));
         activity.amount.setText(String.valueOf(responseInvoice.getAmount()));
@@ -87,7 +87,7 @@ public class TransporterShowInvoiceActivity extends AppCompatActivity {
         activity.cash.setText(String.valueOf(responseInvoice.getCash()));
         activity.shortage.setText(String.valueOf(responseInvoice.getShortage()));
 
-        activity.amount.setText(String.valueOf(responseInvoice.getTransporterAmount()));
+        activity.amount.setText(String.valueOf(responseInvoice.getTransporteramount()));
         activity.status.setText(responseInvoice.getStatus());
 
         if(responseInvoice.getStatus().toLowerCase().equals("pending")){

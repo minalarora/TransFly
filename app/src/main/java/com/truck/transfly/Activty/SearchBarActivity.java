@@ -169,7 +169,7 @@ public class SearchBarActivity extends AppCompatActivity {
                         ArrayList<ResponseLoading> list = responseMineGlobal.getLoading();
                         for(ResponseLoading loading: list)
                         {
-                            if(loading.getLoadingName().equalsIgnoreCase(to_search.getText().toString()))
+                            if(loading.getLoadingname().equalsIgnoreCase(to_search.getText().toString()))
                             {
                                 if(loading.getActive() == false)
                                 {
@@ -186,7 +186,7 @@ public class SearchBarActivity extends AppCompatActivity {
                         int etl = 0;
                         for(ResponseLoading l: arrayList)
                         {
-                            if(l.getLoadingName().equalsIgnoreCase(to_search.getText().toString()))
+                            if(l.getLoadingname().equalsIgnoreCase(to_search.getText().toString()))
                             {
                                 rate = l.getRate();
                                 etl = l.getEtl();
@@ -355,7 +355,7 @@ public class SearchBarActivity extends AppCompatActivity {
         ArrayList<String> loadingName = new ArrayList<>();
         for (ResponseLoading responseLoading : mine.getLoading()) {
 
-            loadingName.add(responseLoading.getLoadingName());
+            loadingName.add(responseLoading.getLoadingname());
 
         }
         return loadingName;
@@ -471,7 +471,7 @@ public class SearchBarActivity extends AppCompatActivity {
                         for (ResponseMine mine : mines) {
                             areas.put(mine.getArea(), new RequestArea(mine.getArea(), mine.getArealatitude(), mine.getArealongitude(),mine.getAreaimageurl()));
                             for (ResponseLoading loading : mine.getLoading()) {
-                                loadings.add(loading.getLoadingName());
+                                loadings.add(loading.getLoadingname());
                             }
                         }
 

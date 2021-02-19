@@ -589,7 +589,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                 RequestCoordinates requestCoordinates = new RequestCoordinates();
                 requestCoordinates.setLatitude(Mylatitude);
                 requestCoordinates.setLongitude(Mylongitude);
-                getNearmeArea2(PreferenceUtil.getData(HomeActivity.this, "token"), requestCoordinates, requestArea.getLoadingName());
+                getNearmeArea2(PreferenceUtil.getData(HomeActivity.this, "token"), requestCoordinates, requestArea.getLoadingname());
 
             }
         });
@@ -766,7 +766,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                         for (ResponseMine mine : mines) {
                             areas.put(mine.getArea(), new RequestArea(mine.getArea(), mine.getArealatitude(), mine.getArealongitude(), mine.getAreaimageurl()));
                             for (ResponseLoading loading : mine.getLoading()) {
-                                loadings.add(loading.getLoadingName());
+                                loadings.add(loading.getLoadingname());
                             }
                         }
 
@@ -1135,7 +1135,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         for (ResponseMine m : mines) {
             if (m.getArea().equalsIgnoreCase(area)) {
                 for (ResponseLoading l : m.getLoading()) {
-                    if (l.getLoadingName().equalsIgnoreCase(loading)) {
+                    if (l.getLoadingname().equalsIgnoreCase(loading)) {
                         selectedmines.add(m);
                     }
                 }
@@ -1482,7 +1482,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                             int rate = 5;
                             int etl = 0;
                             for (ResponseLoading l : arrayList) {
-                                if (l.getLoadingName().equalsIgnoreCase(loading)) {
+                                if (l.getLoadingname().equalsIgnoreCase(loading)) {
                                     rate = l.getRate();
                                     etl = l.getEtl();
 
@@ -1514,7 +1514,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         ArrayList<ResponseLoading> list = responseMine.getLoading();
         for (ResponseLoading loading : list) {
-            if (loading.getLoadingName().equalsIgnoreCase(loadingname)) {
+            if (loading.getLoadingname().equalsIgnoreCase(loadingname)) {
                 if (loading.getActive() == false) {
                     return;
                 }
@@ -1536,7 +1536,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         int rate = 5;
         int etl = 0;
         for (ResponseLoading l : arrayList) {
-            if (l.getLoadingName().equalsIgnoreCase(loadingname)) {
+            if (l.getLoadingname().equalsIgnoreCase(loadingname)) {
                 rate = l.getRate();
                 etl = l.getEtl();
 

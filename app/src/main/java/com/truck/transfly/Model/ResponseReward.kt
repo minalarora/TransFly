@@ -4,18 +4,18 @@ import com.google.gson.annotations.SerializedName
 
 class ResponseReward {
 
-    @SerializedName("id")
+   // @SerializedName("id")
     var id: Int? = 0
 
-    @SerializedName("text")
+   // @SerializedName("text")
     var text: String? = null
 
 
-    @SerializedName("status")
+    //@SerializedName("status")
     var status: Int? = 0
 
     @SerializedName("createdAt")
-    var date: String? = null
+    var createdAt: String? = null
 
     var im: String? = null
 }

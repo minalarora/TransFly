@@ -3,9 +3,9 @@ package com.truck.transfly.Model
 import com.google.gson.annotations.SerializedName
 
 class UpdateVehicle {
-    @SerializedName("id")
+  //  @SerializedName("id")
     var id: Int? = 0
 
-    @SerializedName("contact")
+  //  @SerializedName("contact")
     var contact: String? = null
 }

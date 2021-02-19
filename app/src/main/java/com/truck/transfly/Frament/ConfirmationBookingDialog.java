@@ -67,7 +67,7 @@ public class ConfirmationBookingDialog extends DialogFragment {
         RelativeLayout yes=inflate.findViewById(R.id.yes);
         RelativeLayout no=inflate.findViewById(R.id.no);
 
-        vehicleNo.setText(responseBooking.getVehiclename());
+        vehicleNo.setText(responseBooking.getVehicle());
         hsd_value.setText(hsd);
         cashValue.setText(cash);
         rate.setText(rate_string);

@@ -3,10 +3,10 @@ package com.truck.transfly.Model
 import com.google.gson.annotations.SerializedName
 
 class ResponseNotification {
-    @SerializedName("text")
+   // @SerializedName("text")
     var text: String? = null
 
-    @SerializedName("date")
+    //@SerializedName("date")
     var date: String? = null
 
 

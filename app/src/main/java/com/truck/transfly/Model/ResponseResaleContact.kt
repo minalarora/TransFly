@@ -3,9 +3,9 @@ package com.truck.transfly.Model
 import com.google.gson.annotations.SerializedName
 
 class ResponseResaleContact {
-    @SerializedName("id")
+    //@SerializedName("id")
     var id: Int? = 0
 
-    @SerializedName("amount")
+   // @SerializedName("amount")
     var amount: Int? = 0
 }

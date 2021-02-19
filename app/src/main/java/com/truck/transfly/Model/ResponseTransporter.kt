@@ -4,46 +4,46 @@ import com.google.gson.annotations.SerializedName
 
 class ResponseTransporter {
 
-    @SerializedName("profile")
+   // @SerializedName("profile")
     var profile: String? = null
 
-    @SerializedName("id")
+   // @SerializedName("id")
     var id: String? = null
 
-    @SerializedName("name")
+    //@SerializedName("name")
     var  name: String? = null;
 
-    @SerializedName("mobile")
+   // @SerializedName("mobile")
     var mobile: String? = null;
 
-    @SerializedName("email")
+   // @SerializedName("email")
     var email: String? = null
 
-    @SerializedName("token")
+   // @SerializedName("token")
     var token: String? = null
 
-    @SerializedName("status")
+    //@SerializedName("status")
     var status: Int? = null
 
-    @SerializedName("gst")
+    //@SerializedName("gst")
     var gst: String? = null
 
-    @SerializedName("sta")
+    //@SerializedName("sta")
     var sta: String? = null
 
-    @SerializedName("aadhaar")
+   // @SerializedName("aadhaar")
     var aadhaar: String? = null
 
-    @SerializedName("mininglicense")
+   // @SerializedName("mininglicense")
     var mininglicense: String? = null
 
-    @SerializedName("ename")
+    //@SerializedName("ename")
     var ename: String? = null
 
-    @SerializedName("erelation")
+    //@SerializedName("erelation")
     var erelation: String? = null
 
-    @SerializedName("emobile")
+   // @SerializedName("emobile")
     var emobile: String? = null
 
     @SerializedName("pan")

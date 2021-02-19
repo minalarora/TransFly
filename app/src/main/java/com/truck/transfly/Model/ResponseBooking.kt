@@ -5,37 +5,37 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
 class ResponseBooking() : Parcelable {
-    @SerializedName("id")
+    //@SerializedName("id")
     var id: Int? = null
 
-    @SerializedName("loading")
+    //@SerializedName("loading")
     var loading: String? = null
 
-    @SerializedName("status")
+    //@SerializedName("status")
     var status: String? = null
 
-    @SerializedName("mineid")
+    //@SerializedName("mineid")
     var mineid: Int? = null
 
-    @SerializedName("minename")
+    //@SerializedName("minename")
     var minename: String? = null
 
-    @SerializedName("date")
+    //@SerializedName("date")
     var date: String? = null
 
-    @SerializedName("vehicle")
-    var vehiclename: String? = null
+    //@SerializedName("vehicle")
+    var vehicle: String? = null
 
-    @SerializedName("vehicleowner")
+    //@SerializedName("vehicleowner")
     var vehicleowner: String? = null
 
-    @SerializedName("vehicleownermobile")
+    //@SerializedName("vehicleownermobile")
     var vehicleownermobile: String? = null
 
-    @SerializedName("owner")
+    //@SerializedName("owner")
     var owner: String? = null
 
-    @SerializedName("contact")
+    //@SerializedName("contact")
     var contact: String? = null
 
     constructor(parcel: Parcel) : this() {
@@ -45,7 +45,7 @@ class ResponseBooking() : Parcelable {
         mineid = parcel.readValue(Int::class.java.classLoader) as? Int
         minename = parcel.readString()
         date = parcel.readString()
-        vehiclename = parcel.readString()
+        vehicle = parcel.readString()
         vehicleowner = parcel.readString()
         vehicleownermobile = parcel.readString()
         owner = parcel.readString()
@@ -59,7 +59,7 @@ class ResponseBooking() : Parcelable {
         parcel.writeValue(mineid)
         parcel.writeString(minename)
         parcel.writeString(date)
-        parcel.writeString(vehiclename)
+        parcel.writeString(vehicle)
         parcel.writeString(vehicleowner)
         parcel.writeString(vehicleownermobile)
         parcel.writeString(owner)

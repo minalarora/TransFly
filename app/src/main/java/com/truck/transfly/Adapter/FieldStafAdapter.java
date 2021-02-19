@@ -56,7 +56,7 @@ public class FieldStafAdapter extends RecyclerView.Adapter<FieldStafAdapter.view
 
         holder.to_from_dest.setText(responseBooking.getMinename()+" - "+responseBooking.getLoading());
         holder.number.setText(responseBooking.getContact());
-        holder.vehicle_number.setText(responseBooking.getVehiclename());
+        holder.vehicle_number.setText(responseBooking.getVehicle());
         holder.date_created.setText(responseBooking.getDate());
 
         if(!TextUtils.isEmpty(responseBooking.getDate())) {
@@ -116,7 +116,7 @@ public class FieldStafAdapter extends RecyclerView.Adapter<FieldStafAdapter.view
                 } else {
                     List<ResponseBooking> filteredList = new ArrayList<>();
                     for (ResponseBooking row : responseBookingList) {
-                        if (row.getVehiclename().toLowerCase().contains(charString.toLowerCase()) || row.getContact().toLowerCase().contains(charString.toLowerCase())) {
+                        if (row.getVehicle().toLowerCase().contains(charString.toLowerCase()) || row.getContact().toLowerCase().contains(charString.toLowerCase())) {
                             Log.d(TAG, "performFiltering: " + charString + " == " + row);
                             filteredList.add(row);
                         }

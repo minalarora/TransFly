@@ -14,9 +14,9 @@ class RequestTicket {
         type: String
     }
     * */
-    @SerializedName("category")
+
     var category: String? = null;
 
-    @SerializedName("message")
+
     var message: String? = null;
 }

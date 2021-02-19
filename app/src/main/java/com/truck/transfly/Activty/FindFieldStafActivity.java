@@ -114,7 +114,7 @@ public class FindFieldStafActivity extends AppCompatActivity implements SearchFi
                     ResponseMine responseMine = (ResponseMine) activity.spinnerMines.getSelectedItem();
 
                     ResponseFieldStaffForMine responseFieldStaffForMine=new ResponseFieldStaffForMine();
-                    responseFieldStaffForMine.setFieldStaffid(responseFieldStaffGlobal.getId());
+                    responseFieldStaffForMine.setFieldstaffid(responseFieldStaffGlobal.getId());
                     responseFieldStaffForMine.setMineid(String.valueOf(responseMine.getId()));
 
                     giveAccess(PreferenceUtil.getData(FindFieldStafActivity.this,"token"),responseFieldStaffForMine);

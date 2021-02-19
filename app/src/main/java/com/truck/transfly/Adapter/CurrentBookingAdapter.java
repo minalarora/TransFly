@@ -63,7 +63,7 @@ public class CurrentBookingAdapter extends RecyclerView.Adapter<CurrentBookingAd
 
         holder.to_from.setText(responseBooking.getMinename()+" - "+responseBooking.getLoading());
         holder.created_date.setText(responseBooking.getDate());
-        holder.vehicle_number.setText(responseBooking.getVehiclename());
+        holder.vehicle_number.setText(responseBooking.getVehicle());
 
         holder.directions.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -82,9 +82,9 @@ public class ShowInvoiceActivity extends AppCompatActivity {
 
         activity.toFromDest.setText(responseInvoice.getMinename() +" - "+responseInvoice.getLoading());
         activity.dateCreated.setText(responseInvoice.getDate());
-        activity.ownerName.setText(responseInvoice.getVehicleOwnerName());
+        activity.ownerName.setText(responseInvoice.getVehicleowner());
         activity.ownerMobile.setText(responseInvoice.getContact());
-        activity.vehicleNumber.setText(responseInvoice.getVehiclenumber());
+        activity.vehicleNumber.setText(responseInvoice.getVehicle());
         activity.tonnege.setText(String.valueOf(responseInvoice.getTonnage()));
         activity.rate.setText(String.valueOf(responseInvoice.getRate()));
         activity.amount.setText(String.valueOf(responseInvoice.getAmount()));
@@ -95,8 +95,8 @@ public class ShowInvoiceActivity extends AppCompatActivity {
         activity.officeCharge.setText(String.valueOf(responseInvoice.getOfficecharge()));
         activity.shortage.setText(String.valueOf(responseInvoice.getShortage()));
         activity.balanceAmount.setText(String.valueOf(responseInvoice.getBalanceamount()));
-        activity.challanTransporter.setText(responseInvoice.getChallanToTransporter());
-        activity.balanceAmountCleared.setText(responseInvoice.getBalanceAmountCleared());
+        activity.challanTransporter.setText(responseInvoice.getChallantotransporter());
+        activity.balanceAmountCleared.setText(responseInvoice.getBalanceamountcleared());
 
         activity.modeOfPayment.setText(responseInvoice.getModeofpayment());
         activity.transName.setText(responseInvoice.getTransportername());

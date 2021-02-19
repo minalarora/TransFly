@@ -4,19 +4,19 @@ import com.google.gson.annotations.SerializedName
 
 class ResponseRefer {
 
-    @SerializedName("id")
+  //  @SerializedName("id")
     var id: Int? = 0
 
-    @SerializedName("text")
+    //@SerializedName("text")
     var text: String? = null
 
-    @SerializedName("image")
+    //@SerializedName("image")
     var image: String? = null
 
-    @SerializedName("status")
+    //@SerializedName("status")
     var status: Int? = 0
 
-    @SerializedName("createdAt")
-    var date: String? = null
+    //@SerializedName("createdAt")
+    var createdAt: String? = null
 
    }

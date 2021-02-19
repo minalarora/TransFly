@@ -3,31 +3,31 @@ package com.truck.transfly.Model
 import com.google.gson.annotations.SerializedName
 
 class ResponseVehicle {
-    @SerializedName("id")
+    //@SerializedName("id")
     var id: Int? = 0
 
-    @SerializedName("number")
+   // @SerializedName("number")
     var number: String? = null
 
-    @SerializedName("rc")
+    //@SerializedName("rc")
     var rc: String? = null
 
-    @SerializedName("vehiclename")
+    //@SerializedName("vehiclename")
     var vehiclename: String? = null
 
-    @SerializedName("status")
+    //@SerializedName("status")
     var status: Int? = 0
 
-    @SerializedName("active")
+    //@SerializedName("active")
     var active: Boolean? = false
 
-    @SerializedName("date")
+    //@SerializedName("date")
     var date: String? = null
 
-    @SerializedName("contact")
+    //@SerializedName("contact")
     var contact: String? = null
 
-    @SerializedName("tyres")
+    //@SerializedName("tyres")
     var tyres: String? = null
 
 
