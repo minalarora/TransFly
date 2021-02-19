@@ -4,9 +4,9 @@ import com.google.gson.annotations.SerializedName
 
 class ResponseFieldStaffForMine {
 
-    @SerializedName("fieldstaffid")
-    var fieldStaffid: String ? = null
+    //@SerializedName("fieldstaffid")
+    var fieldstaffid: String ? = null
 
-    @SerializedName("mineid")
+    //@SerializedName("mineid")
     var mineid: String ? = null
 }

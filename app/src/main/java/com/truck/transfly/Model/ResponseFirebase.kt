@@ -4,6 +4,6 @@ import com.google.gson.annotations.SerializedName
 
 class ResponseFirebase {
 
-    @SerializedName("firebase")
+//    @SerializedName("firebase")
     var firebase: String? = null
 }

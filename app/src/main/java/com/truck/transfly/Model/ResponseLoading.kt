@@ -3,18 +3,18 @@ package com.truck.transfly.Model
 import com.google.gson.annotations.SerializedName
 
 class ResponseLoading {
-    @SerializedName("loadingname")
-    var loadingName: String? = null
+    //@SerializedName("loadingname")
+    var loadingname: String? = null
 
-    @SerializedName("rate")
+    //@SerializedName("rate")
     var rate:Int? = 0
 
-    @SerializedName("etl")
+    //@SerializedName("etl")
     var etl:Int? = 0
 
-    @SerializedName("active")
+    //@SerializedName("active")
     var active: Boolean? = true
 
 
-    var loadingimage: String? = "https://transflyhome.club/loading/" + loadingName
+    var loadingimage: String? = "https://transflyhome.club/loading/" + loadingname
 }

@@ -4,52 +4,52 @@ import com.google.gson.annotations.SerializedName
 
 class ResponseFieldStaff {
 
-    @SerializedName("id")
+    //@SerializedName("id")
     var id: String? = null
 
-    @SerializedName("name")
+    //@SerializedName("name")
     var  name: String? = null;
 
-    @SerializedName("profile")
+    //@SerializedName("profile")
     var profile: String? = null
 
-    @SerializedName("mobile")
+    //@SerializedName("mobile")
     var mobile: String? = null;
 
-    @SerializedName("email")
+    //@SerializedName("email")
     var email: String? = null
     
-    @SerializedName("bankpersonname")
+    //@SerializedName("bankpersonname")
     var bankpersonname: String? = null
 
-    @SerializedName("status")
+    //@SerializedName("status")
     var status: Int? = null
 
-    @SerializedName("accountno")
+    //@SerializedName("accountno")
     var accountno: String? = null
 
-    @SerializedName("ifsc")
+    //@SerializedName("ifsc")
     var ifsc: String? = null
 
-    @SerializedName("bankname")
+    //@SerializedName("bankname")
     var bankname: String? = null
 
-    @SerializedName("pan")
+    //@SerializedName("pan")
     var pan: String? = null
 
-    @SerializedName("aadhaar")
+    //@SerializedName("aadhaar")
     var aadhaar: String? = null
 
-    @SerializedName("ename")
+    //@SerializedName("ename")
     var ename: String? = null
 
-    @SerializedName("erelation")
+    //@SerializedName("erelation")
     var erelation: String? = null
 
-    @SerializedName("emobile")
+    //@SerializedName("emobile")
     var emobile: String? = null
 
-    @SerializedName("token")
+    //@SerializedName("token")
     var token: String? = null
 
     override fun toString(): String {

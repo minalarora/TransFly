@@ -5,10 +5,10 @@ import com.google.gson.annotations.SerializedName
 class RequestArea {
     var name: String? = null
 
-    @SerializedName("arealatitude")
+
     var arealatitude: String? = null
 
-    @SerializedName("arealongitude")
+
     var arealongitude: String? = null
 
     var areaimage: String? = null

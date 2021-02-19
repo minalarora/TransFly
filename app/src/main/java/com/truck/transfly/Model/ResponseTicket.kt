@@ -4,12 +4,12 @@ import com.google.gson.annotations.SerializedName
 
 class ResponseTicket {
 
-    @SerializedName("id")
+   // @SerializedName("id")
     var id: Int? = 0;
 
-    @SerializedName("category")
+   // @SerializedName("category")
     var category: String? = null;
 
-    @SerializedName("message")
+  //  @SerializedName("message")
     var message: String? = null;
 }

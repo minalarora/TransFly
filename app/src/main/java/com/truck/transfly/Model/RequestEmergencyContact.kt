@@ -4,6 +4,6 @@ import com.google.gson.annotations.SerializedName
 
 class RequestEmergencyContact {
 
-    @SerializedName("emergencycontact")
-    var emergencyContact: String? = null
+
+    var emergencycontact: String? = null
 }

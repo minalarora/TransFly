@@ -4,12 +4,12 @@ import com.google.gson.annotations.SerializedName
 
 class RequestEmergencyDetails {
 
-    @SerializedName("ename")
-    var emergencyName: String? = null
+   
+    var ename: String? = null
 
-    @SerializedName("emobile")
-    var emergencyNumber: String? = null
 
-    @SerializedName("erelation")
-    var emergencyRelation: String? = null
+    var emobile: String? = null
+
+
+    var erelation: String? = null
 }

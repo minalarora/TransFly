@@ -1,15 +1,13 @@
 package com.truck.transfly.Model
 
-import com.google.gson.annotations.SerializedName
-
 class ResponseBanner {
-    @SerializedName("id")
+   // @SerializedName("id")
     var id: Int? = 0
 
     var imageUrl: String? = null
 
-    @SerializedName("bannertype")
-    var bannerType: String? = "none";
+    //@SerializedName("bannertype")
+    var bannertype: String? = "none";
 
     //booking
     //resale

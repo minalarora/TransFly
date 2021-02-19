@@ -65,7 +65,7 @@ public class FieldStafBookingConfirmationActivity extends AppCompatActivity {
         }
 
         activity.mobileNumber.setText(responseBooking.getContact());
-        activity.ownerName.setText(responseBooking.getVehiclename());
+        activity.ownerName.setText(responseBooking.getVehicle());
         activity.toFromDest.setText(responseBooking.getMinename() + " - " + responseBooking.getLoading());
 
         parent_of_loading = findViewById(R.id.parent_of_loading);
@@ -159,7 +159,7 @@ public class FieldStafBookingConfirmationActivity extends AppCompatActivity {
                             requestInvoice.setLoading(responseBooking.getLoading());
                             requestInvoice.setHsd(Double.valueOf(activity.hsd.getText().toString()));
                             requestInvoice.setRate(Double.valueOf(activity.rate.getText().toString()));
-                            requestInvoice.setVehiclenumber(activity.registerCategory.getSelectedItem().toString());
+                            requestInvoice.setVehicle(activity.registerCategory.getSelectedItem().toString());
                             requestInvoice.setVehicleowner(responseBooking.getVehicleowner());
                             requestInvoice.setVehicleownermobile(responseBooking.getVehicleownermobile());
                             requestInvoice.setTonnage(Double.valueOf(activity.tonnege.getText().toString()));
@@ -172,7 +172,7 @@ public class FieldStafBookingConfirmationActivity extends AppCompatActivity {
                                 ResponseTransporter selectedItem = (ResponseTransporter) activity.transporterName.getSelectedItem();
                                 PreferenceUtil.putData(FieldStafBookingConfirmationActivity.this,"transporter",activity.transporterName.getSelectedItemPosition()+"");
 
-                                requestInvoice.setTransporterMobile(selectedItem.getId());
+                                requestInvoice.setTransporter(selectedItem.getId());
 
 
 
@@ -302,7 +302,7 @@ public class FieldStafBookingConfirmationActivity extends AppCompatActivity {
                     } else {
                         //list of all vehicle
                         adapter.notifyDataSetChanged();
-                        activity.registerCategory.setSelection(vehicleList.indexOf(responseBooking.getVehiclename()));
+                        activity.registerCategory.setSelection(vehicleList.indexOf(responseBooking.getVehicle()));
 
                     }
 

@@ -4,28 +4,28 @@ import com.google.gson.annotations.SerializedName
 import java.util.ArrayList
 
 class ResponseMine {
-    @SerializedName("id")
+   // @SerializedName("id")
     var id: Int? = 0
 
-    @SerializedName("name")
+    //@SerializedName("name")
     var name: String? = null
 
-    @SerializedName("area")
+    //@SerializedName("area")
     var area: String? = null
 
-    @SerializedName("trailer")
+    //@SerializedName("trailer")
     var trailer: Boolean? = null
 
-    @SerializedName("active")
+    //@SerializedName("active")
     var active: Boolean? = null
 
-    @SerializedName("tyres")
+    //@SerializedName("tyres")
     var tyres: Int? = 0
 
-    @SerializedName("bodytype")
+    //@SerializedName("bodytype")
     var bodytype: String? = null
 
-    @SerializedName("loading")
+    //@SerializedName("loading")
     var loading: ArrayList<ResponseLoading>? = ArrayList<ResponseLoading>();
 
 //    @SerializedName("rate")
@@ -35,28 +35,28 @@ class ResponseMine {
 //    var etl: Int? = null
 
 
-    @SerializedName("latitude")
+    //@SerializedName("latitude")
     var latitude: String? = null
 
-    @SerializedName("longitude")
+    //@SerializedName("longitude")
     var longitude: String? = null
 
-    @SerializedName("arealatitude")
+    //@SerializedName("arealatitude")
     var arealatitude: String? = null
 
-    @SerializedName("arealongitude")
+    //@SerializedName("arealongitude")
     var arealongitude: String? = null
 
-    @SerializedName("landmark")
+    //@SerializedName("landmark")
     var landmark: String? = null
 
-    @SerializedName("fieldstaff")
+    //@SerializedName("fieldstaff")
     var fieldstaff: String? = null
 
-    @SerializedName("areamanager")
+    //@SerializedName("areamanager")
     var areamanager: String? = null
 
-    @SerializedName("areaimageurl")
+    //@SerializedName("areaimageurl")
     var areaimageurl: String? = null
     
     constructor(id: Int?, name: String?, area: String?, trailer: Boolean?, tyres: Int?, bodytype: String?, loading: ArrayList<ResponseLoading>?, latitude: String?, longitude: String?, arealatitude: String?, arealongitude: String?, landmark: String?, fieldstaff: String?, areamanager: String?) {

@@ -4,55 +4,55 @@ import com.google.gson.annotations.SerializedName
 
 class ResponseVehicleOwner {
 
-    @SerializedName("id")
+   // @SerializedName("id")
     var id: String? = null
 
-    @SerializedName("name")
+   // @SerializedName("name")
     var  name: String? = null;
 
-    @SerializedName("mobile")
+    //@SerializedName("mobile")
     var mobile: String? = null;
 
-    @SerializedName("email")
+    //@SerializedName("email")
     var email: String? = null
 
-    @SerializedName("status")
+    //@SerializedName("status")
     var status: Int? = null
 
-    @SerializedName("profile")
+    //@SerializedName("profile")
     var profile: String? = null
     //0 document upload pending
     //1 kyc pending
     //2 approved
 
-    @SerializedName("ename")
+    //@SerializedName("ename")
     var ename: String? = null
 
-    @SerializedName("erelation")
+    //@SerializedName("erelation")
     var erelation: String? = null
 
-    @SerializedName("emobile")
+    //@SerializedName("emobile")
     var emobile: String? = null
 
-    @SerializedName("accountno")
+   // @SerializedName("accountno")
     var accountno: String? = null
 
-    @SerializedName("ifsc")
+   // @SerializedName("ifsc")
     var ifsc: String? = null
 
-    @SerializedName("bankname")
+   // @SerializedName("bankname")
     var bankname: String? = null
 
-    @SerializedName("bankpersonname")
+    //@SerializedName("bankpersonname")
     var bankpersonname: String? = null
 
-    @SerializedName("pan")
+    //@SerializedName("pan")
     var pan: String? = null
 
-    @SerializedName("tds")
+   // @SerializedName("tds")
     var tds: String? = null
 
-    @SerializedName("token")
+    //@SerializedName("token")
     var token: String? = null
 
     override fun toString(): String {

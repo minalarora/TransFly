@@ -251,7 +251,7 @@ public class SelectYourVehicleActivity extends AppCompatActivity {
             requestBooking.setMineid(mineid);
             requestBooking.setMinename(minename);
             requestBooking.setContact(activity.mobileNumber.getText().toString());
-            requestBooking.setVehiclenumber(responseVehicle.getNumber());
+            requestBooking.setVehicle(responseVehicle.getNumber());
             createBooking(PreferenceUtil.getData(SelectYourVehicleActivity.this, "token"), requestBooking);
 
         }

@@ -71,7 +71,7 @@ public class YourCoolAdapter extends MetalRecyclerViewPager.MetalAdapter<YourCoo
             @Override
             public void onClick(View v) {
 
-                if(sliderModel.getBannerType().equals("booking")){
+                if(sliderModel.getBannertype().equals("booking")){
 
                     Intent searchBarAcivity = new Intent(context, SearchBarActivity.class);
 
@@ -79,7 +79,7 @@ public class YourCoolAdapter extends MetalRecyclerViewPager.MetalAdapter<YourCoo
 
                     context.startActivity(searchBarAcivity);
 
-                } else if(sliderModel.getBannerType().equals("resale")){
+                } else if(sliderModel.getBannertype().equals("resale")){
 
                     context.startActivity(new Intent(context, OlxPageActivity.class));
 

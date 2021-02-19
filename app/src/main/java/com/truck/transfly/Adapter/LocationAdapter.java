@@ -107,8 +107,8 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.viewho
             ResponseLoading loading = responseLoadingList.get(position-(positionModelList.size()+1));
             holder.position_any.setVisibility(View.VISIBLE);
 
-            holder.cityName.setText(loading.getLoadingName()+"\n Loading");
-            Glide.with(context).load("https://transflyhome.club/loading/"+loading.getLoadingName()).into(holder.circleImageView);
+            holder.cityName.setText(loading.getLoadingname()+"\n Loading");
+            Glide.with(context).load("https://transflyhome.club/loading/"+loading.getLoadingname()).into(holder.circleImageView);
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

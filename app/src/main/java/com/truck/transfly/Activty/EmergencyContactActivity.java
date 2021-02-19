@@ -117,9 +117,9 @@ public class EmergencyContactActivity extends AppCompatActivity {
                 } else {
 
                     RequestEmergencyContact2 contact=new RequestEmergencyContact2();
-                    contact.setEmergencyName(activity.name.getText().toString());
-                    contact.setEmergencyMobile(activity.phoneNumber.getText().toString());
-                    contact.setEmergencyRelation(activity.relative.getText().toString());
+                    contact.setEname(activity.name.getText().toString());
+                    contact.setEmobile(activity.phoneNumber.getText().toString());
+                    contact.setErelation(activity.relative.getText().toString());
 
                     updateEmergencyContact(PreferenceUtil.getData(EmergencyContactActivity.this,"token"),contact);
 

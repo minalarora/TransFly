@@ -60,7 +60,7 @@ public class EmergencyContactVehicleActivity extends AppCompatActivity {
                 } else {
 
                     RequestEmergencyContact requestEmergencyContact = new RequestEmergencyContact();
-                    requestEmergencyContact.setEmergencyContact(activity.phoneNumber.getText().toString());
+                    requestEmergencyContact.setEmergencycontact(activity.phoneNumber.getText().toString());
 
                     updateEmergencyContact(PreferenceUtil.getData(EmergencyContactVehicleActivity.this, "token"), requestEmergencyContact);
 

@@ -58,9 +58,9 @@ public class TransporterAdapter extends RecyclerView.Adapter<TransporterAdapter.
         ResponseInvoice responseInvoice = responseInvoiceList.get(position);
 
         holder.price_rate.setText(""+responseInvoice.getRate());
-        holder.vehicle_number.setText(responseInvoice.getVehiclenumber());
+        holder.vehicle_number.setText(responseInvoice.getVehicle());
         holder.mobileNumber.setText(responseInvoice.getContact());
-        holder.vehile_owner.setText(responseInvoice.getVehicleOwnerName());
+        holder.vehile_owner.setText(responseInvoice.getVehicleowner());
         holder.date_created.setText(responseInvoice.getDate());
 
         if(!TextUtils.isEmpty(responseInvoice.getDate())) {
