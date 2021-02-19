@@ -21,7 +21,7 @@ class ApiClient {
                     .build()
 
             retrofitUser = Retrofit.Builder()
-                    .baseUrl("https://transfly-ftr2t.ondigitalocean.app")
+                    .baseUrl("https://transflyhome.club")
                     .client(client)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()

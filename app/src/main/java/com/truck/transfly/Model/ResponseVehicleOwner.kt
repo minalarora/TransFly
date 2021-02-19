@@ -3,6 +3,7 @@ package com.truck.transfly.Model
 import com.google.gson.annotations.SerializedName
 
 class ResponseVehicleOwner {
+
     @SerializedName("id")
     var id: String? = null
 
@@ -25,13 +26,13 @@ class ResponseVehicleOwner {
     //2 approved
 
     @SerializedName("ename")
-    var emergencyName: String? = null
+    var ename: String? = null
 
     @SerializedName("erelation")
-    var emergencyRelation: String? = null
+    var erelation: String? = null
 
     @SerializedName("emobile")
-    var emergencyMobile: String? = null
+    var emobile: String? = null
 
     @SerializedName("accountno")
     var accountno: String? = null

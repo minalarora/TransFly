@@ -123,13 +123,31 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/font_regular"
+                android:gravity="center_horizontal"
+                android:lineSpacingExtra="@dimen/_5ssp"
+                android:layout_marginStart="@dimen/_20ssp"
+                android:layout_marginEnd="@dimen/_20ssp"
+                android:layout_marginTop="24dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:alpha="0.6"
+                android:text="We will use this number if you are not reachable on your registered number"
+                android:layout_marginBottom="@dimen/_10ssp"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/black"
+                android:textSize="9dp" />
+
             <RelativeLayout
                 android:id="@+id/submit_details"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginStart="@dimen/_15ssp"
-                android:layout_marginTop="@dimen/_30ssp"
+                android:layout_marginTop="@dimen/_15ssp"
                 android:layout_marginEnd="@dimen/_15ssp"
                 android:layout_marginBottom="@dimen/_15ssp"
                 android:background="@drawable/design_as_edittext_gradient"
@@ -147,24 +165,6 @@
             </RelativeLayout>
 
         </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/font_regular"
-            android:gravity="center_horizontal"
-            android:lineSpacingExtra="@dimen/_5ssp"
-            android:layout_marginStart="@dimen/_20ssp"
-            android:layout_marginEnd="@dimen/_20ssp"
-            android:layout_marginTop="20dp"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:alpha="0.6"
-            android:text="We will use this number if you are not reachable on your registered number"
-            android:layout_marginBottom="@dimen/_10ssp"
-            android:layout_gravity="center_horizontal"
-            android:textColor="@color/black"
-            android:textSize="9dp" />
 
         <include layout="@layout/loading_view_transparent"/>
 

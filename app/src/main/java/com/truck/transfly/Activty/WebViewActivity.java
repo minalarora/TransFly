@@ -93,10 +93,10 @@ public class WebViewActivity extends AppCompatActivity implements AdvancedWebVie
             }
         });
 
-        Log.i("TAG", "https://transfly-ftr2t.ondigitalocean.app/"+keywords+"?mobile="+mobile+"&from="+from_time+"&"+"to="+to_time);
+        Log.i("TAG", "https://transflyhome.club/"+keywords+"?mobile="+mobile+"&from="+from_time+"&"+"to="+to_time);
 
         mWebView.setThirdPartyCookiesEnabled(true);
-        mWebView.loadUrl("https://transfly-ftr2t.ondigitalocean.app/"+keywords+"?mobile="+mobile+"&from="+from_time+"&"+"to="+to_time);
+        mWebView.loadUrl("https://transflyhome.club/"+keywords+"?mobile="+mobile+"&from="+from_time+"&"+"to="+to_time);
 
     }
 

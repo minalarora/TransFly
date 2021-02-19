@@ -2,7 +2,7 @@ package com.truck.transfly.utils;
 
 public class EndApi {
 
-    private static final String BaseURL="https://transfly-ftr2t.ondigitalocean.app/";
+    private static final String BaseURL="https://transflyhome.club/";
 
     public static final String TICKET=BaseURL+"ticket";
     public static final String faq=BaseURL+"faq";

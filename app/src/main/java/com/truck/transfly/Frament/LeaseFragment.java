@@ -164,7 +164,7 @@ public class LeaseFragment extends Fragment  {
                             ArrayList<String> imageList = new ArrayList<>();
                             for(int j =1;j<=resale.getTotalImage();j++)
                             {
-                                imageList.add("https://transfly-ftr2t.ondigitalocean.app/resaleimage/" + resale.getId() + "/" + j);
+                                imageList.add("https://transflyhome.club/resaleimage/" + resale.getId() + "/" + j);
                             }
 
                             resale.setImageList(imageList);

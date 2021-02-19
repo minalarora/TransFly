@@ -148,11 +148,11 @@ public class ReferActivity extends AppCompatActivity {
 
                             if (reward.getStatus() == 1) {
 
-                                reward.setIm("https://transfly-ftr2t.ondigitalocean.app/rewardimage/" + reward.getId());
+                                reward.setIm("https://transflyhome.club/rewardimage/" + reward.getId());
 
                             } else if (reward.getStatus() == 0) {
 
-                                reward.setIm("https://transfly-ftr2t.ondigitalocean.app/rewardimage/" + reward.getId());
+                                reward.setIm("https://transflyhome.club/rewardimage/" + reward.getId());
 
                             }
                         }
@@ -207,11 +207,11 @@ public class ReferActivity extends AppCompatActivity {
 
                         if (reward.getStatus() == 1) {
 
-                            reward.setIm("https://transfly-ftr2t.ondigitalocean.app/referralimage/" + reward.getId());
+                            reward.setIm("https://transflyhome.club/referralimage/" + reward.getId());
 
                         } else if (reward.getStatus() == 0) {
 
-                            reward.setIm("https://transfly-ftr2t.ondigitalocean.app/referralimage/" + reward.getId());
+                            reward.setIm("https://transflyhome.club/referralimage/" + reward.getId());
 
                         }
                     }

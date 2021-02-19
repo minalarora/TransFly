@@ -16,5 +16,5 @@ class ResponseLoading {
     var active: Boolean? = true
 
 
-    var loadingimage: String? = "https://transfly-ftr2t.ondigitalocean.app/loading/" + loadingName
+    var loadingimage: String? = "https://transflyhome.club/loading/" + loadingName
 }

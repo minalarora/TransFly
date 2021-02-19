@@ -214,7 +214,7 @@ public class TicketComplaintActivity extends AppCompatActivity {
 
                 } else {
 
-                    Toast.makeText(TicketComplaintActivity.this, "Ticket Greater then 10 characters", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TicketComplaintActivity.this, "'Add Message' field to have minimum 10 characters", Toast.LENGTH_SHORT).show();
 
                 }
 

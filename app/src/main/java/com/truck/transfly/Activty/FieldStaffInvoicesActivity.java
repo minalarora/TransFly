@@ -63,7 +63,7 @@ public class FieldStaffInvoicesActivity extends AppCompatActivity implements Smo
 
         ResponseFieldStaff responseVehicleOwner = ((TransflyApplication) getApplication()).getResponseFieldStaff();
 
-        Uri uri = Uri.parse("https://transfly-ftr2t.ondigitalocean.app/mobinvoicefieldstaff"+"?mobile="+responseVehicleOwner.getMobile()+"&from="+yearStart+"-"+(monthStart+1)+"-"+dayStart+"&"+"to="+yearEnd+"-"+(monthEnd+1)+"-"+dayEnd);
+        Uri uri = Uri.parse("https://transflyhome.club/mobinvoicefieldstaff"+"?mobile="+responseVehicleOwner.getMobile()+"&from="+yearStart+"-"+(monthStart+1)+"-"+dayStart+"&"+"to="+yearEnd+"-"+(monthEnd+1)+"-"+dayEnd);
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         startActivity(intent);
 

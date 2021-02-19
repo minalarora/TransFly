@@ -78,14 +78,14 @@ public class CurrentInvoicesActivity extends AppCompatActivity implements Smooth
 
         if (fieldstaffKeyword) {
 
-            Uri uri = Uri.parse("https://transfly-ftr2t.ondigitalocean.app/mobinvoicefieldstaff"+"?mobile="+responseVehicleOwner.getMobile()+"&from="+yearStart+"-"+(monthStart+1)+"-"+dayStart+"&"+"to="+yearEnd+"-"+(monthEnd+1)+"-"+dayEnd);
+            Uri uri = Uri.parse("https://transflyhome.club/mobinvoicefieldstaff"+"?mobile="+responseVehicleOwner.getMobile()+"&from="+yearStart+"-"+(monthStart+1)+"-"+dayStart+"&"+"to="+yearEnd+"-"+(monthEnd+1)+"-"+dayEnd);
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
             startActivity(intent);
 
 
         } else{
 
-            Uri uri = Uri.parse("https://transfly-ftr2t.ondigitalocean.app/mobinvoicevehicleowner"+"?mobile="+responseVehicleOwner.getMobile()+"&from="+yearStart+"-"+(monthStart+1)+"-"+dayStart+"&"+"to="+yearEnd+"-"+(monthEnd+1)+"-"+dayEnd);
+            Uri uri = Uri.parse("https://transflyhome.club/mobinvoicevehicleowner"+"?mobile="+responseVehicleOwner.getMobile()+"&from="+yearStart+"-"+(monthStart+1)+"-"+dayStart+"&"+"to="+yearEnd+"-"+(monthEnd+1)+"-"+dayEnd);
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
             startActivity(intent);
         }

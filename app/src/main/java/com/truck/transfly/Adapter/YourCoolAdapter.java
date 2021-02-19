@@ -88,7 +88,7 @@ public class YourCoolAdapter extends MetalRecyclerViewPager.MetalAdapter<YourCoo
             }
         });
 
-        Glide.with(context).load("https://transfly-ftr2t.ondigitalocean.app/bannerimage/" + sliderModel.getId()).into(holder.image);
+        Glide.with(context).load("https://transflyhome.club/bannerimage/" + sliderModel.getId()).into(holder.image);
 
         // ...
     }

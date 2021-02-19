@@ -9,12 +9,10 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
-import com.truck.transfly.Model.RequestEmergencyContact;
 import com.truck.transfly.Model.RequestEmergencyContact2;
 import com.truck.transfly.Model.ResponseAreaManager;
 import com.truck.transfly.Model.ResponseFieldStaff;
 import com.truck.transfly.Model.ResponseTransporter;
-import com.truck.transfly.Model.ResponseVehicle;
 import com.truck.transfly.Model.ResponseVehicleOwner;
 import com.truck.transfly.R;
 import com.truck.transfly.databinding.ActivityEmergencyContactBinding;
@@ -59,9 +57,9 @@ public class EmergencyContactActivity extends AppCompatActivity {
 
                 ResponseAreaManager responseAreaManager = ((TransflyApplication) getApplication()).getResponseAreaManager();
 
-                activity.name.setText(responseAreaManager.getEmergencyName());
-                activity.phoneNumber.setText(responseAreaManager.getEmergencyMobile());
-                activity.relative.setText(responseAreaManager.getEmergencyRelation());
+                activity.name.setText(responseAreaManager.getEname());
+                activity.phoneNumber.setText(responseAreaManager.getEmobile());
+                activity.relative.setText(responseAreaManager.getErelation());
 
                 break;
 
@@ -69,9 +67,9 @@ public class EmergencyContactActivity extends AppCompatActivity {
 
                 ResponseFieldStaff responseFieldStaff = ((TransflyApplication) getApplication()).getResponseFieldStaff();
 
-                activity.name.setText(responseFieldStaff.getEmergencyName());
-                activity.phoneNumber.setText(responseFieldStaff.getEmergencyMobile());
-                activity.relative.setText(responseFieldStaff.getEmergencyRelation());
+                activity.name.setText(responseFieldStaff.getEname());
+                activity.phoneNumber.setText(responseFieldStaff.getEmobile());
+                activity.relative.setText(responseFieldStaff.getErelation());
 
                 break;
 
@@ -79,9 +77,9 @@ public class EmergencyContactActivity extends AppCompatActivity {
 
                 ResponseTransporter responseTransporter = ((TransflyApplication) getApplication()).getResponseTransporterOwner();
 
-                activity.name.setText(responseTransporter.getEmergencyName());
-                activity.phoneNumber.setText(responseTransporter.getEmergencyMobile());
-                activity.relative.setText(responseTransporter.getEmergencyRelation());
+                activity.name.setText(responseTransporter.getEname());
+                activity.phoneNumber.setText(responseTransporter.getEmobile());
+                activity.relative.setText(responseTransporter.getErelation());
 
                 break;
 
@@ -89,9 +87,9 @@ public class EmergencyContactActivity extends AppCompatActivity {
 
                 ResponseVehicleOwner responseVehicleOwner = ((TransflyApplication) getApplication()).getResponseVehicleOwner();
 
-                activity.name.setText(responseVehicleOwner.getEmergencyName());
-                activity.phoneNumber.setText(responseVehicleOwner.getEmergencyMobile());
-                activity.relative.setText(responseVehicleOwner.getEmergencyRelation());
+                activity.name.setText(responseVehicleOwner.getEname());
+                activity.phoneNumber.setText(responseVehicleOwner.getEmobile());
+                activity.relative.setText(responseVehicleOwner.getErelation());
 
                 break;
 
@@ -189,9 +187,9 @@ public class EmergencyContactActivity extends AppCompatActivity {
 
                 ResponseTransporter responseTransporterOwner = ((TransflyApplication) getApplication()).getResponseTransporterOwner();
 
-                responseTransporterOwner.setEmergencyMobile(activity.phoneNumber.getText().toString());
-                responseTransporterOwner.setEmergencyName(activity.name.getText().toString());
-                responseTransporterOwner.setEmergencyRelation(activity.relative.getText().toString());
+                responseTransporterOwner.setEmobile(activity.phoneNumber.getText().toString());
+                responseTransporterOwner.setEname(activity.name.getText().toString());
+                responseTransporterOwner.setErelation(activity.relative.getText().toString());
 
                 ((TransflyApplication) getApplication()).setResponseTransporterOwner(responseTransporterOwner);
 
@@ -201,9 +199,9 @@ public class EmergencyContactActivity extends AppCompatActivity {
 
                 ResponseAreaManager responseAreaManager = ((TransflyApplication) getApplication()).getResponseAreaManager();
 
-                responseAreaManager.setEmergencyMobile(activity.phoneNumber.getText().toString());
-                responseAreaManager.setEmergencyName(activity.name.getText().toString());
-                responseAreaManager.setEmergencyRelation(activity.relative.getText().toString());
+                responseAreaManager.setEmobile(activity.phoneNumber.getText().toString());
+                responseAreaManager.setEname(activity.name.getText().toString());
+                responseAreaManager.setErelation(activity.relative.getText().toString());
 
                 ((TransflyApplication) getApplication()).setResponseAreaManager(responseAreaManager);
 
@@ -212,9 +210,9 @@ public class EmergencyContactActivity extends AppCompatActivity {
             case "fieldstaff":
 
                 ResponseFieldStaff responseFieldStaff = ((TransflyApplication) getApplication()).getResponseFieldStaff();
-                responseFieldStaff.setEmergencyMobile(activity.phoneNumber.getText().toString());
-                responseFieldStaff.setEmergencyName(activity.name.getText().toString());
-                responseFieldStaff.setEmergencyRelation(activity.relative.getText().toString());
+                responseFieldStaff.setEmobile(activity.phoneNumber.getText().toString());
+                responseFieldStaff.setEname(activity.name.getText().toString());
+                responseFieldStaff.setErelation(activity.relative.getText().toString());
 
                 ((TransflyApplication) getApplication()).setResponseFieldStaff(responseFieldStaff);
 
@@ -223,9 +221,9 @@ public class EmergencyContactActivity extends AppCompatActivity {
             case "vehicleowner":
 
                 ResponseVehicleOwner responseVehicleOwner = ((TransflyApplication) getApplication()).getResponseVehicleOwner();
-                responseVehicleOwner.setEmergencyMobile(activity.phoneNumber.getText().toString());
-                responseVehicleOwner.setEmergencyName(activity.name.getText().toString());
-                responseVehicleOwner.setEmergencyRelation(activity.relative.getText().toString());
+                responseVehicleOwner.setEmobile(activity.phoneNumber.getText().toString());
+                responseVehicleOwner.setEname(activity.name.getText().toString());
+                responseVehicleOwner.setErelation(activity.relative.getText().toString());
 
                 ((TransflyApplication) getApplication()).setResponseVehicleOwner(responseVehicleOwner);
 

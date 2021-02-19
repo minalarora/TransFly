@@ -43,13 +43,13 @@ class ResponseAreaManager {
     var aadhaar: String? = null
 
     @SerializedName("ename")
-    var emergencyName: String? = null
+    var ename: String? = null
 
     @SerializedName("erelation")
-    var emergencyRelation: String? = null
+    var erelation: String? = null
 
     @SerializedName("emobile")
-    var emergencyMobile: String? = null
+    var emobile: String? = null
 
     @SerializedName("token")
     var token: String? = null

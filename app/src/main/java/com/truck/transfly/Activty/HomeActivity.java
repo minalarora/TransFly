@@ -137,11 +137,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
     private ApiEndpoints api = null;
 
     private ArrayList<RequestArea> arealist = new ArrayList<>();
-    private double new1 = 22.163690366420184, new2 = 85.41610695158445;
-    private double new3 = 22.018251428199196, new4 = 85.40548247296358;
-    private double new5 = 21.908011041198012, new6 = 85.2509771962851;
-    private double tulsipurLat = 26.216539779866235, tulsipurLong = 81.25079189586448;
-    private double rugudi_lat = 21.887970812746232, rugudi_log = 85.81699947599559;
+
     private DrawerLayout drawerLayout;
     private ImageView viewById;
     private LocationCallback mLocationCallBack;
@@ -285,6 +281,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
             }
         });
+
 
         ResponseVehicleOwner responseFieldStaff = ((TransflyApplication) getApplication()).getResponseVehicleOwner();
 
@@ -437,6 +434,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         ImageViewCompat.setImageTintList(iconAt, ColorStateList.valueOf(ContextCompat.getColor(HomeActivity.this, R.color.quantum_grey2)));
 
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 

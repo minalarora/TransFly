@@ -12,16 +12,15 @@ android {
         applicationId "com.truck.transfly"
         minSdkVersion 23
         targetSdkVersion 30
-        versionCode 2
-        versionName "1.1"
+        versionCode 3
+        versionName "1.2"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         release {
-            minifyEnabled true
-            shrinkResources true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -151,6 +150,11 @@ dependencies {
     implementation 'com.github.curioustechizen.android-ago:library:1.4.0'
 
     implementation 'com.github.irfaan008:IRBottomNavigationView:1.0.1'
+
+    compileOnly 'org.glassfish:javax.annotation:10.0-b28'
+
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    implementation 'com.google.code.gson:gson:2.8.6'
 
 
 

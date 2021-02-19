@@ -6,6 +6,7 @@ class ResponseFieldStaff {
 
     @SerializedName("id")
     var id: String? = null
+
     @SerializedName("name")
     var  name: String? = null;
 
@@ -40,16 +41,17 @@ class ResponseFieldStaff {
     var aadhaar: String? = null
 
     @SerializedName("ename")
-    var emergencyName: String? = null
+    var ename: String? = null
 
     @SerializedName("erelation")
-    var emergencyRelation: String? = null
+    var erelation: String? = null
 
     @SerializedName("emobile")
-    var emergencyMobile: String? = null
+    var emobile: String? = null
 
     @SerializedName("token")
     var token: String? = null
+
     override fun toString(): String {
         return "ResponseFieldStaff(name=$name, mobile=$mobile, email=$email, status=$status, accountno=$accountno, ifsc=$ifsc, bankname=$bankname, pan=$pan, aadhaar=$aadhaar, token=$token)"
     }

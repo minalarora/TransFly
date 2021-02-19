@@ -785,7 +785,7 @@ public class PlaygroundActivity extends AppCompatActivity {
                         //['pan','aadhaar','bank']
 
                         for (ResponseReward reward : i) {
-                            reward.setIm("https://transfly-ftr2t.ondigitalocean.app/rewardimage/" + reward.getId());
+                            reward.setIm("https://transflyhome.club/rewardimage/" + reward.getId());
                         }
                         Log.d("minal", i.toString());
                     }
@@ -820,7 +820,7 @@ public class PlaygroundActivity extends AppCompatActivity {
                     //['pan','aadhaar','bank']
 
                     for (ResponseReferral reward : i) {
-                        reward.setImage("https://transfly-ftr2t.ondigitalocean.app/referralimage/" + reward.getId());
+                        reward.setImage("https://transflyhome.club/referralimage/" + reward.getId());
                     }
                     Log.d("minal", i.toString());
                 }
@@ -915,7 +915,7 @@ public class PlaygroundActivity extends AppCompatActivity {
                         //['pan','aadhaar','bank']
 
                         for (ResponseBanner banner : i) {
-                            banner.setImageUrl("https://transfly-ftr2t.ondigitalocean.app/bannerimage/" + banner.getId());
+                            banner.setImageUrl("https://transflyhome.club/bannerimage/" + banner.getId());
                         }
                         Log.d("minal", i.toString());
                     }
@@ -950,7 +950,7 @@ public class PlaygroundActivity extends AppCompatActivity {
                         for (ResponseResale resale : i) {
                             ArrayList<String> imageList = new ArrayList<>();
                             for (int j = 1; j <= resale.getTotalImage(); j++) {
-                                imageList.add("https://transfly-ftr2t.ondigitalocean.app/resaleimage/" + resale.getId() + "/" + j);
+                                imageList.add("https://transflyhome.club/resaleimage/" + resale.getId() + "/" + j);
                             }
                             resale.setImageList(imageList);
                         }
