@@ -6,97 +6,97 @@ import com.google.gson.annotations.SerializedName
 import java.util.ArrayList
 
 class ResponseResale() : Parcelable {
-    @SerializedName("1")
-    var ownership: Boolean? = false;
+    //@SerializedName("1")
+    var a: Boolean? = false;
 
-    @SerializedName("2")
-    var insurancepapers: Boolean? = false;
+    //@SerializedName("2")
+    var b: Boolean? = false;
 
-    @SerializedName("3")
-    var checkAndClearances: Boolean? = false;
+    //@SerializedName("3")
+    var c: Boolean? = false;
 
-    @SerializedName("4")
-    var roadTaxReceipt: Boolean? = false;
+    //@SerializedName("4")
+    var d: Boolean? = false;
 
-    @SerializedName("5")
-    var vehicleServicesBook: Boolean? = false;
+    //@SerializedName("5")
+    var e: Boolean? = false;
 
-    @SerializedName("6")
-    var loanClearanceCheck: Boolean? = false;
+    //@SerializedName("6")
+    var f: Boolean? = false;
 
-    @SerializedName("7")
-    var pollutionCertificate: Boolean? = false;
+    //@SerializedName("7")
+    var g: Boolean? = false;
 
-    @SerializedName("8")
-    var engineAndChassisCheck: Boolean? = false;
+    //@SerializedName("8")
+    var h: Boolean? = false;
 
-    @SerializedName("9")
-    var body: Boolean? = false;
+    //@SerializedName("9")
+    var i: Boolean? = false;
 
-    @SerializedName("10")
-    var cabin: Boolean? = false;
+    //@SerializedName("10")
+    var j: Boolean? = false;
 
-    @SerializedName("11")
-    var tyres: Boolean? = false;
+    //@SerializedName("11")
+    var k: Boolean? = false;
 
-    @SerializedName("12")
-    var otherImportantDeclarations: Boolean? = false;
+    //@SerializedName("12")
+    var l: Boolean? = false;
 
-    @SerializedName("id")
+    //@SerializedName("id")
     var id: Int? = 0
 
-    @SerializedName("vehiclename")
-    var vehicleName: String?= null;
+    //@SerializedName("vehiclename")
+    var vehiclename: String?= null;
 
-    @SerializedName("company")
+    //@SerializedName("company")
     var company: String?= null;
 
-    @SerializedName("year")
+    //@SerializedName("year")
     var year: String?= null;
 
-    @SerializedName("totalimage")
-    var totalImage: Int?= 0;
+   // @SerializedName("totalimage")
+    var totalimage: Int?= 0;
 
     var imageList: ArrayList<String>? = ArrayList()
 
     constructor(parcel: Parcel) : this() {
-        ownership = parcel.readValue(Boolean::class.java.classLoader) as? Boolean
-        insurancepapers = parcel.readValue(Boolean::class.java.classLoader) as? Boolean
-        checkAndClearances = parcel.readValue(Boolean::class.java.classLoader) as? Boolean
-        roadTaxReceipt = parcel.readValue(Boolean::class.java.classLoader) as? Boolean
-        vehicleServicesBook = parcel.readValue(Boolean::class.java.classLoader) as? Boolean
-        loanClearanceCheck = parcel.readValue(Boolean::class.java.classLoader) as? Boolean
-        pollutionCertificate = parcel.readValue(Boolean::class.java.classLoader) as? Boolean
-        engineAndChassisCheck = parcel.readValue(Boolean::class.java.classLoader) as? Boolean
-        body = parcel.readValue(Boolean::class.java.classLoader) as? Boolean
-        cabin = parcel.readValue(Boolean::class.java.classLoader) as? Boolean
-        tyres = parcel.readValue(Boolean::class.java.classLoader) as? Boolean
-        otherImportantDeclarations = parcel.readValue(Boolean::class.java.classLoader) as? Boolean
+        a = parcel.readValue(Boolean::class.java.classLoader) as? Boolean
+        b = parcel.readValue(Boolean::class.java.classLoader) as? Boolean
+        c = parcel.readValue(Boolean::class.java.classLoader) as? Boolean
+        d = parcel.readValue(Boolean::class.java.classLoader) as? Boolean
+        e = parcel.readValue(Boolean::class.java.classLoader) as? Boolean
+        f = parcel.readValue(Boolean::class.java.classLoader) as? Boolean
+        g = parcel.readValue(Boolean::class.java.classLoader) as? Boolean
+        h = parcel.readValue(Boolean::class.java.classLoader) as? Boolean
+        i = parcel.readValue(Boolean::class.java.classLoader) as? Boolean
+        j = parcel.readValue(Boolean::class.java.classLoader) as? Boolean
+        k = parcel.readValue(Boolean::class.java.classLoader) as? Boolean
+        l = parcel.readValue(Boolean::class.java.classLoader) as? Boolean
         id = parcel.readValue(Int::class.java.classLoader) as? Int
-        vehicleName = parcel.readString()
+        vehiclename = parcel.readString()
         company = parcel.readString()
         year = parcel.readString()
-        totalImage = parcel.readValue(Int::class.java.classLoader) as? Int
+        totalimage = parcel.readValue(Int::class.java.classLoader) as? Int
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeValue(ownership)
-        parcel.writeValue(insurancepapers)
-        parcel.writeValue(checkAndClearances)
-        parcel.writeValue(roadTaxReceipt)
-        parcel.writeValue(vehicleServicesBook)
-        parcel.writeValue(loanClearanceCheck)
-        parcel.writeValue(pollutionCertificate)
-        parcel.writeValue(engineAndChassisCheck)
-        parcel.writeValue(body)
-        parcel.writeValue(cabin)
-        parcel.writeValue(tyres)
-        parcel.writeValue(otherImportantDeclarations)
+        parcel.writeValue(a)
+        parcel.writeValue(b)
+        parcel.writeValue(c)
+        parcel.writeValue(d)
+        parcel.writeValue(e)
+        parcel.writeValue(f)
+        parcel.writeValue(g)
+        parcel.writeValue(h)
+        parcel.writeValue(i)
+        parcel.writeValue(j)
+        parcel.writeValue(k)
+        parcel.writeValue(l)
         parcel.writeValue(id)
-        parcel.writeString(vehicleName)
+        parcel.writeString(vehiclename)
         parcel.writeString(company)
         parcel.writeString(year)
-        parcel.writeValue(totalImage)
+        parcel.writeValue(totalimage)
     }
 
     override fun describeContents(): Int {

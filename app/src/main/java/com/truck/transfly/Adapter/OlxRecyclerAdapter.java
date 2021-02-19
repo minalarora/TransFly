@@ -59,7 +59,7 @@ public class OlxRecyclerAdapter extends RecyclerView.Adapter<OlxRecyclerAdapter.
             Glide.with(context).load(responseResale.getImageList().get(0)).into(holder.imageProduct);
 
         holder.title.setText(responseResale.getCompany());
-        holder.price.setText(responseResale.getVehicleName());
+        holder.price.setText(responseResale.getVehiclename());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,7 +98,7 @@ public class OlxRecyclerAdapter extends RecyclerView.Adapter<OlxRecyclerAdapter.
                 } else {
                     List<ResponseResale> filteredList = new ArrayList<>();
                     for (ResponseResale row : responseResaleList) {
-                        if (row.getVehicleName().toLowerCase().contains(charString.toLowerCase())) {
+                        if (row.getVehiclename().toLowerCase().contains(charString.toLowerCase())) {
                             Log.d(TAG, "performFiltering: " + charString + " == " + row);
                             filteredList.add(row);
                         }

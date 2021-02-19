@@ -76,7 +76,7 @@ public class ShowOlxProductActivity extends AppCompatActivity {
                 else
                     leaseString="resale";
 
-                contactForResale(PreferenceUtil.getData(ShowOlxProductActivity.this,"token"),vehicleStore.getVehicleName(),leaseString);
+                contactForResale(PreferenceUtil.getData(ShowOlxProductActivity.this,"token"),vehicleStore.getVehiclename(),leaseString);
 
             }
         });
@@ -92,20 +92,20 @@ public class ShowOlxProductActivity extends AppCompatActivity {
 
         initViewPager();
 
-        activity.vehicleName.setText(vehicleStore.getVehicleName());
+        activity.vehicleName.setText(vehicleStore.getVehiclename());
         activity.dateName.setText(vehicleStore.getCompany()+" . "+vehicleStore.getYear());
-        setAvailable(activity.ownership,vehicleStore.getOwnership());
-        setAvailable(activity.insurance,vehicleStore.getInsurancepapers());
-        setAvailable(activity.resold,vehicleStore.getCheckAndClearances());
-        setAvailable(activity.vehicleService,vehicleStore.getVehicleServicesBook());
-        setAvailable(activity.loanClearence,vehicleStore.getLoanClearanceCheck());
-        setAvailable(activity.pollutionCertificate,vehicleStore.getPollutionCertificate());
-        setAvailable(activity.engineChassis,vehicleStore.getEngineAndChassisCheck());
-        setAvailable(activity.body,vehicleStore.getBody());
-        setAvailable(activity.cabin,vehicleStore.getCabin());
-        setAvailable(activity.tyres,vehicleStore.getTyres());
-        setAvailable(activity.otherDeclaration,vehicleStore.getOtherImportantDeclarations());
-        setAvailable(activity.readTax,vehicleStore.getRoadTaxReceipt());
+        setAvailable(activity.ownership,vehicleStore.getA());
+        setAvailable(activity.insurance,vehicleStore.getB());
+        setAvailable(activity.resold,vehicleStore.getC());
+        setAvailable(activity.vehicleService,vehicleStore.getE());
+        setAvailable(activity.loanClearence,vehicleStore.getF());
+        setAvailable(activity.pollutionCertificate,vehicleStore.getG());
+        setAvailable(activity.engineChassis,vehicleStore.getH());
+        setAvailable(activity.body,vehicleStore.getI());
+        setAvailable(activity.cabin,vehicleStore.getJ());
+        setAvailable(activity.tyres,vehicleStore.getK());
+        setAvailable(activity.otherDeclaration,vehicleStore.getL());
+        setAvailable(activity.readTax,vehicleStore.getD());
 
     }
 

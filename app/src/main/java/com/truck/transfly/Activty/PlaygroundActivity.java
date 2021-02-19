@@ -949,7 +949,7 @@ public class PlaygroundActivity extends AppCompatActivity {
 
                         for (ResponseResale resale : i) {
                             ArrayList<String> imageList = new ArrayList<>();
-                            for (int j = 1; j <= resale.getTotalImage(); j++) {
+                            for (int j = 1; j <= resale.getTotalimage(); j++) {
                                 imageList.add("https://transflyhome.club/resaleimage/" + resale.getId() + "/" + j);
                             }
                             resale.setImageList(imageList);
