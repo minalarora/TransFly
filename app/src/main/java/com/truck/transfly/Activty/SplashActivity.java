@@ -11,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -19,8 +20,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.installations.FirebaseInstallations;
+import com.google.firebase.installations.InstallationTokenResult;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.truck.transfly.Model.ResponseAreaManager;
 import com.truck.transfly.Model.ResponseFieldStaff;
@@ -57,6 +63,8 @@ public class SplashActivity extends AppCompatActivity {
         if (retrofit != null) {
             api = retrofit.create(ApiEndpoints.class);
         }
+
+        getFireBaseTokenInit();
 
         getFireBaseToken();
 
@@ -351,6 +359,12 @@ public class SplashActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+
+    }
+
+    private void getFireBaseTokenInit() {
+
+        FirebaseMessaging.getInstance().setAutoInitEnabled(true);
 
     }
 

@@ -14,6 +14,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "368090939042-13gou2g2hvrd4s676qdr21hc0nduc4ue.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.truck.transfly",
+            "certificate_hash": "bffe7ebaef8d511e00a3111587879cf6b2c85ea8"
+          }
+        },
+        {
+          "client_id": "368090939042-dlk8bvvrleml7p9bgdsf8c376kr21oro.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.truck.transfly",
+            "certificate_hash": "aa0cc42aed15d74cffcd42fc5131cc46e01c9f94"
+          }
+        },
+        {
           "client_id": "368090939042-gq0l165qoq30m3d7p1ri574m88eao4nv.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

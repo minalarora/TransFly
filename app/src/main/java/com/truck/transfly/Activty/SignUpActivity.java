@@ -72,6 +72,8 @@ public class SignUpActivity extends AppCompatActivity {
         mobileNo = getIntent().getStringExtra("mobileNo");
         userType = getIntent().getStringExtra("type");
 
+        getFireBaseToken();
+
         FirebaseMessaging.getInstance().getToken()
                 .addOnCompleteListener(new OnCompleteListener<String>() {
                     @Override
@@ -283,6 +285,12 @@ public class SignUpActivity extends AppCompatActivity {
                 //no internet connection
             }
         });
+    }
+
+    private void getFireBaseToken() {
+
+        FirebaseMessaging.getInstance().setAutoInitEnabled(true);
+
     }
 
     private  void createFieldStaff(RequestUser user)

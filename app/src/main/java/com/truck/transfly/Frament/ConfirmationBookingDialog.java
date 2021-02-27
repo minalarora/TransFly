@@ -21,6 +21,7 @@ public class ConfirmationBookingDialog extends DialogFragment {
     private onClickListener onClickListener;
     private ResponseBooking responseBooking;
     private String hsd,rate_string,cash;
+    private View inflate;
 
     public ConfirmationBookingDialog() {
         // Required empty public constructor
@@ -47,7 +48,7 @@ public class ConfirmationBookingDialog extends DialogFragment {
             getDialog().getWindow().setBackgroundDrawableResource(R.drawable.round_dialog_min);
         }
 
-        View inflate = inflater.inflate(R.layout.fragment_confirmation_booking_dialog, container, false);
+        inflate = inflater.inflate(R.layout.fragment_confirmation_booking_dialog, container, false);
 
         Bundle arguments = getArguments();
 
