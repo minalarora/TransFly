@@ -94,6 +94,7 @@ public class ShowOlxProductActivity extends AppCompatActivity {
 
         activity.vehicleName.setText(vehicleStore.getVehiclename());
         activity.dateName.setText(vehicleStore.getCompany()+" . "+vehicleStore.getYear());
+        activity.price.setText("Price: " + vehicleStore.getPrice() + "/-");
         setAvailable(activity.ownership,vehicleStore.getA());
         setAvailable(activity.insurance,vehicleStore.getB());
         setAvailable(activity.resold,vehicleStore.getC());

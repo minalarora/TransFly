@@ -54,6 +54,8 @@ class ResponseResale() : Parcelable {
     //@SerializedName("year")
     var year: String?= null;
 
+    var price: String?= null;
+
    // @SerializedName("totalimage")
     var totalimage: Int?= 0;
 
@@ -76,6 +78,7 @@ class ResponseResale() : Parcelable {
         vehiclename = parcel.readString()
         company = parcel.readString()
         year = parcel.readString()
+        price = parcel.readString()
         totalimage = parcel.readValue(Int::class.java.classLoader) as? Int
     }
 
@@ -96,6 +99,7 @@ class ResponseResale() : Parcelable {
         parcel.writeString(vehiclename)
         parcel.writeString(company)
         parcel.writeString(year)
+        parcel.writeString(price)
         parcel.writeValue(totalimage)
     }
 

@@ -586,10 +586,12 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void onClickLoading(ResponseLoading requestArea) {
 
+
                 RequestCoordinates requestCoordinates = new RequestCoordinates();
                 requestCoordinates.setLatitude(Mylatitude);
                 requestCoordinates.setLongitude(Mylongitude);
-                getNearmeArea2(PreferenceUtil.getData(HomeActivity.this, "token"), requestCoordinates, requestArea.getLoadingname());
+                getLoadingPoint(requestArea.getLoadingname());
+               // getNearmeArea2(PreferenceUtil.getData(HomeActivity.this, "token"), requestCoordinates, requestArea.getLoadingname());
 
             }
         });
@@ -1107,6 +1109,25 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         });
     }
 
+    private void getLoadingPoint(String loading)
+    {
+        mGoogleMap.clear();
+        HomeActivity.this.loading = loading;
+        ArrayList<ResponseMine> allMineOfSingleArea = getAllMineOfSingleLoading( loading);
+        for (ResponseMine responseMine : allMineOfSingleArea) {
+
+            showMarkerOfArea(Double.parseDouble(responseMine.getLatitude()), Double.parseDouble(responseMine.getLongitude()), responseMine, loading);
+
+        }
+
+        if (allMineOfSingleArea.size() > 0) {
+
+            goToLocationWithAnimation(Double.parseDouble("21.638911631096953"), Double.parseDouble("85.60881554372779"), 8);
+
+        }
+
+    }
+
 
     static final int SPEED_SCROLL = 3000;
     final Runnable runnable = new Runnable() {
@@ -1142,6 +1163,22 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         }
         return selectedmines;
+    }
+
+    private ArrayList<ResponseMine> getAllMineOfSingleLoading(String loading)
+    {
+        ArrayList<ResponseMine> selectedmines = new ArrayList<>();
+        for(ResponseMine  m: mines)
+        {
+            for(ResponseLoading l: m.getLoading())
+            {
+                if(l.getLoadingname().equalsIgnoreCase(loading) && l.getActive())
+                {
+                    selectedmines.add(m);
+                }
+            }
+        }
+        return  selectedmines;
     }
 
     private void navigationViewListener(NavigationView navigationView) {

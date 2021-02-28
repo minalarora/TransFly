@@ -79,6 +79,20 @@
                 android:layout_marginEnd="@dimen/_12ssp"
                 android:layout_marginStart="@dimen/_20ssp"
                 />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Microsoft. 20/12/2020"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_11ssp"
+                android:fontFamily="@font/poppinsmedium"
+                android:alpha="0.5"
+                android:id="@+id/price"
+                android:layout_marginTop="4dp"
+                android:letterSpacing="0.06"
+                android:layout_marginEnd="@dimen/_12ssp"
+                android:layout_marginStart="@dimen/_20ssp"
+                />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
