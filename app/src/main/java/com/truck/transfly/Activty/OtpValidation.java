@@ -167,7 +167,7 @@ public class OtpValidation extends AppCompatActivity implements VerificationList
                 .setMobileNumber(number)
                 .setVerifyWithoutOtp(true)//direct verification while connect with mobile network
                 .setAutoVerification(OtpValidation.this)//Auto read otp from Sms And Verify
-                .setSenderId("ABCDEF")
+                .setSenderId("TFIKJR")
                 .setMessage("##OTP## is your confirmation on OTP, Please do not share your OTP and confidential info with anyone.TransFly")
                 .setOtpLength(4)
                 .setOtpExpireInMinute(10)

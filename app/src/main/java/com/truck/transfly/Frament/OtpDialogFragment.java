@@ -168,7 +168,7 @@ public class OtpDialogFragment extends DialogFragment implements VerificationLis
                 .setMobileNumber(number)
                 .setVerifyWithoutOtp(true)//direct verification while connect with mobile network
                 .setAutoVerification(fragmentActivity)//Auto read otp from Sms And Verify
-                .setSenderId("ABCDEF")
+                .setSenderId("TFIKJR")
                 .setMessage("##OTP## is your OTP. TransFly")
                 .setOtpLength(4)
                 .setOtpExpireInMinute(10)
