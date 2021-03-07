@@ -19,8 +19,6 @@ import com.truck.transfly.Adapter.OlxRecyclerAdapter;
 import com.truck.transfly.Adapter.ViewPagerAdapter;
 import com.truck.transfly.Frament.LeaseFragment;
 import com.truck.transfly.Frament.ResaleFragment;
-import com.truck.transfly.Frament.ShowBooking;
-import com.truck.transfly.Frament.ShowInvoiceFragment;
 import com.truck.transfly.Model.ResponseResale;
 import com.truck.transfly.R;
 import com.truck.transfly.utils.ApiEndpoints;

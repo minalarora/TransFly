@@ -25,6 +25,12 @@
             android:title="Booking History"
             android:icon="@drawable/ic_action_current_booking"/>
 
+
+        <item
+            android:id="@+id/export_report"
+            android:title="Export Reports"
+            android:icon="@drawable/ic_action_fill_kyc_details"/>
+
         <item
             android:title="Bank Details"
             android:id="@+id/bank_details"

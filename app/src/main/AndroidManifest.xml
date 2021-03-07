@@ -23,7 +23,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TransFly">
-        <activity android:name=".Activty.ResetPasswordActivity"></activity>
+        <activity android:name=".Activty.NotificationActivity2"></activity>
+        <activity android:name=".Activty.UpdateRate2Activity" />
+        <activity android:name=".Activty.UpdateRateActivity" />
+        <activity android:name=".Activty.ResetPasswordActivity" />
         <activity android:name=".Activty.VehicleBankDetailsActivity" />
         <activity android:name=".Activty.TransporterShowInvoiceActivity" />
         <activity android:name=".Activty.SearchBookingActivity" />
@@ -158,11 +161,9 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="@string/API_KEY" />
-
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="my_channel_01" />
@@ -182,7 +183,6 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/ic_action_notification" />
-
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/project_color" />

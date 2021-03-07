@@ -22,7 +22,16 @@ import com.msg91.sendotpandroid.library.roots.RetryType;
 import com.msg91.sendotpandroid.library.roots.SendOTPConfigBuilder;
 import com.msg91.sendotpandroid.library.roots.SendOTPResponseCode;
 import com.mukesh.OtpView;
+import com.truck.transfly.Activty.OtpValidation;
 import com.truck.transfly.R;
+import com.truck.transfly.utils.ApiClient;
+import com.truck.transfly.utils.ApiEndpoints;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class OtpDialogFragment extends DialogFragment implements VerificationListener {
 
@@ -33,6 +42,8 @@ public class OtpDialogFragment extends DialogFragment implements VerificationLis
     private String otp;
     private onClickListener onClickListener;
     private String lastFourDigits;
+    private Retrofit retrofit = null;
+    private ApiEndpoints api = null;
 
     public OtpDialogFragment() {
         // Required empty public constructor
@@ -65,6 +76,11 @@ public class OtpDialogFragment extends DialogFragment implements VerificationLis
 
         Bundle arguments = getArguments();
 
+        retrofit = ApiClient.getRetrofitClient();
+        if (retrofit != null) {
+            api = retrofit.create(ApiEndpoints.class);
+        }
+
         if(arguments!=null){
 
             mobileNo = arguments.getString("mobileNo");
@@ -85,7 +101,7 @@ public class OtpDialogFragment extends DialogFragment implements VerificationLis
 
         sendOtpConfirmation(mobileNo);
 
-        SendOTP.getInstance().getTrigger().initiate();
+        //SendOTP.getInstance().getTrigger().initiate();
 
         otpView = inflate.findViewById(R.id.otp_view);
 
@@ -114,7 +130,28 @@ public class OtpDialogFragment extends DialogFragment implements VerificationLis
 
                 } else {
 
-                    SendOTP.getInstance().getTrigger().verify(otpView.getText().toString());
+                    api.verifyOtp(mobileNo,otpView.getText().toString()).enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            if(response.code() == 200)
+                            {
+//                             //   confirmOtp("SD");
+                                Toast.makeText(fragmentActivity, "Mobile Number Verified Successfully", Toast.LENGTH_SHORT).show();
+                                confirmOtp("ffjfjfj");
+                                dismiss();
+                            }
+                            else
+                            {
+                                Toast.makeText(getActivity(), "Wrong OTP! Try Again", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            Toast.makeText(getActivity(), "Wrong OTP! Try Again", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    //SendOTP.getInstance().getTrigger().verify(otpView.getText().toString());
 
                 }
 
@@ -131,7 +168,18 @@ public class OtpDialogFragment extends DialogFragment implements VerificationLis
 
                 } else if(!isTimerOn){
 
-                    SendOTP.getInstance().getTrigger().resend(RetryType.TEXT);
+                    //SendOTP.getInstance().getTrigger().resend(RetryType.TEXT);
+                    api.resendOtp(mobileNo).enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                        }
+                    });
 
                     new CountDownTimer(30000, 1000) {
 
@@ -163,16 +211,28 @@ public class OtpDialogFragment extends DialogFragment implements VerificationLis
 
     private void sendOtpConfirmation(String number) {
 
-        new SendOTPConfigBuilder()
-                .setCountryCode(91)
-                .setMobileNumber(number)
-                .setVerifyWithoutOtp(true)//direct verification while connect with mobile network
-                .setAutoVerification(fragmentActivity)//Auto read otp from Sms And Verify
-                .setSenderId("TFIKJR")
-                .setMessage("##OTP## is your OTP. TransFly")
-                .setOtpLength(4)
-                .setOtpExpireInMinute(10)
-                .setVerificationCallBack(this).build();
+//        new SendOTPConfigBuilder()
+//                .setCountryCode(91)
+//                .setMobileNumber(number)
+//                .setVerifyWithoutOtp(true)//direct verification while connect with mobile network
+//                .setAutoVerification(fragmentActivity)//Auto read otp from Sms And Verify
+//                .setSenderId("ABCDEF")
+//                .setMessage("##OTP## is your OTP. TransFly")
+//                .setOtpLength(4)
+//                .setOtpExpireInMinute(10)
+//                .setVerificationCallBack(this).build();
+
+        api.sendOtpOther(number).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
 
     }
 
@@ -233,7 +293,7 @@ public class OtpDialogFragment extends DialogFragment implements VerificationLis
     public void onDestroy() {
         super.onDestroy();
 
-        SendOTP.getInstance().getTrigger().stop();
+    //        SendOTP.getInstance().getTrigger().stop();
 
     }
 }

@@ -22,7 +22,7 @@
 
         <item
             android:id="@+id/rate_etl"
-            android:title="Update Rate"
+            android:title="Rate and ETL"
             android:icon="@drawable/estimate_rate"/>
 
         <item

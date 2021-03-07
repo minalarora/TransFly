@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.Settings;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -37,7 +36,6 @@ import com.truck.transfly.Adapter.TransporterAdapter;
 import com.truck.transfly.Model.ResponseFirebase;
 import com.truck.transfly.Model.ResponseInvoice;
 import com.truck.transfly.Model.ResponseTransporter;
-import com.truck.transfly.Model.ResponseVehicleOwner;
 import com.truck.transfly.R;
 import com.truck.transfly.utils.ApiClient;
 import com.truck.transfly.utils.ApiEndpoints;
@@ -45,13 +43,10 @@ import com.truck.transfly.utils.PreferenceUtil;
 import com.truck.transfly.utils.TransflyApplication;
 import com.yalantis.phoenix.PullToRefreshView;
 
-import org.joda.time.DateTime;
-
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -74,6 +69,7 @@ public class TransporterActivity extends AppCompatActivity implements SmoothDate
     private PullToRefreshView pullToRefreshView;
     private String token;
     private ImageView image;
+    private ImageView currentBooking;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,35 +101,35 @@ public class TransporterActivity extends AppCompatActivity implements SmoothDate
                     }
                 });
 
-        findViewById(R.id.export_report).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Calendar now = Calendar.getInstance();
-
-                SmoothDateRangePickerFragment smoothDateRangePickerFragment = SmoothDateRangePickerFragment.newInstance(new SmoothDateRangePickerFragment.OnDateRangeSetListener() {
-                    @Override
-                    public void onDateRangeSet(SmoothDateRangePickerFragment view, int yearStart, int monthStart, int dayStart, int yearEnd, int monthEnd, int dayEnd) {
-
-                        ResponseTransporter responseVehicleOwner = ((TransflyApplication) getApplication()).getResponseTransporterOwner();
-
-                        Uri uri = Uri.parse("https://transflyhome.club/mobinvoicetransporter"+"?mobile="+responseVehicleOwner.getMobile()+"&from="+yearStart+"-"+(monthStart+1)+"-"+dayStart+"&"+"to="+yearEnd+"-"+(monthEnd+1)+"-"+dayEnd);
-                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                        startActivity(intent);
-
-
-
-                    }
-                }, now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH));
-
-                smoothDateRangePickerFragment.setAccentColor(R.color.project_color);
-
-                smoothDateRangePickerFragment.setThemeDark(false);
-
-                smoothDateRangePickerFragment.show(getFragmentManager(), "smoothDateRangePicker");
-
-            }
-        });
+//        findViewById(R.id.export_report).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                Calendar now = Calendar.getInstance();
+//
+//                SmoothDateRangePickerFragment smoothDateRangePickerFragment = SmoothDateRangePickerFragment.newInstance(new SmoothDateRangePickerFragment.OnDateRangeSetListener() {
+//                    @Override
+//                    public void onDateRangeSet(SmoothDateRangePickerFragment view, int yearStart, int monthStart, int dayStart, int yearEnd, int monthEnd, int dayEnd) {
+//
+//                        ResponseTransporter responseVehicleOwner = ((TransflyApplication) getApplication()).getResponseTransporterOwner();
+//
+//                        Uri uri = Uri.parse("https://transflyhome.club/mobinvoicetransporter"+"?mobile="+responseVehicleOwner.getMobile()+"&from="+yearStart+"-"+(monthStart+1)+"-"+dayStart+"&"+"to="+yearEnd+"-"+(monthEnd+1)+"-"+dayEnd);
+//                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+//                        startActivity(intent);
+//
+//
+//
+//                    }
+//                }, now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH));
+//
+//                smoothDateRangePickerFragment.setAccentColor(R.color.project_color);
+//
+//                smoothDateRangePickerFragment.setThemeDark(false);
+//
+//                smoothDateRangePickerFragment.show(getFragmentManager(), "smoothDateRangePicker");
+//
+//            }
+//        });
 
         findViewById(R.id.search_bar).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -150,6 +146,18 @@ public class TransporterActivity extends AppCompatActivity implements SmoothDate
                 }
 
                 startActivity(new Intent(TransporterActivity.this,SearchBarActivity.class));
+
+            }
+        });
+
+        currentBooking = findViewById(R.id.notice);
+
+        currentBooking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+//                startActivity(new Intent(HomeActivity.this, CurrentBookingActivity.class));
+                startActivity(new Intent(TransporterActivity.this, NotificationActivity2.class));
 
             }
         });
@@ -410,7 +418,7 @@ public class TransporterActivity extends AppCompatActivity implements SmoothDate
 
                         }
 
-                        startActivity(new Intent(TransporterActivity.this,SearchBarActivity.class));
+                        startActivity(new Intent(TransporterActivity.this,UpdateRateActivity.class));
 
                         break;
 
@@ -432,6 +440,32 @@ public class TransporterActivity extends AppCompatActivity implements SmoothDate
                         PreferenceUtil.putData(TransporterActivity.this,"token","");
 
                         break;
+
+                    case R.id.export_report:
+                        Calendar now = Calendar.getInstance();
+
+                        SmoothDateRangePickerFragment smoothDateRangePickerFragment = SmoothDateRangePickerFragment.newInstance(new SmoothDateRangePickerFragment.OnDateRangeSetListener() {
+                            @Override
+                            public void onDateRangeSet(SmoothDateRangePickerFragment view, int yearStart, int monthStart, int dayStart, int yearEnd, int monthEnd, int dayEnd) {
+
+                                ResponseTransporter responseVehicleOwner = ((TransflyApplication) getApplication()).getResponseTransporterOwner();
+
+                                Uri uri = Uri.parse("https://transflyhome.club/mobinvoicetransporter"+"?mobile="+responseVehicleOwner.getMobile()+"&from="+yearStart+"-"+(monthStart+1)+"-"+dayStart+"&"+"to="+yearEnd+"-"+(monthEnd+1)+"-"+dayEnd);
+                                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                                startActivity(intent);
+
+
+
+                            }
+                        }, now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH));
+
+                        smoothDateRangePickerFragment.setAccentColor(R.color.project_color);
+
+                        smoothDateRangePickerFragment.setThemeDark(false);
+
+                        smoothDateRangePickerFragment.show(getFragmentManager(), "smoothDateRangePicker");
+                        break;
+
 
 
                 }

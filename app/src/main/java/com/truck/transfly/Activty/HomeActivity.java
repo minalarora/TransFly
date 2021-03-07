@@ -14,6 +14,7 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -84,6 +85,7 @@ import com.irfaan008.irbottomnavigation.SpaceItem;
 import com.irfaan008.irbottomnavigation.SpaceNavigationView;
 import com.irfaan008.irbottomnavigation.SpaceOnClickListener;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
+import com.leavjenn.smoothdaterangepicker.date.SmoothDateRangePickerFragment;
 import com.nabinbhandari.android.permissions.PermissionHandler;
 import com.nabinbhandari.android.permissions.Permissions;
 import com.truck.transfly.Adapter.LocationAdapter;
@@ -95,6 +97,7 @@ import com.truck.transfly.Model.PositionModel;
 import com.truck.transfly.Model.RequestArea;
 import com.truck.transfly.Model.RequestCoordinates;
 import com.truck.transfly.Model.ResponseBanner;
+import com.truck.transfly.Model.ResponseFieldStaff;
 import com.truck.transfly.Model.ResponseFirebase;
 import com.truck.transfly.Model.ResponseLoading;
 import com.truck.transfly.Model.ResponseMine;
@@ -113,6 +116,7 @@ import com.truck.transfly.utils.TransflyApplication;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -125,7 +129,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class HomeActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class HomeActivity extends AppCompatActivity implements OnMapReadyCallback, SmoothDateRangePickerFragment.OnDateRangeSetListener {
 
     private GoogleMap mGoogleMap;
     private double LatituteOfTajMahal = 22.106364561666886;
@@ -467,6 +471,19 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                         startActivity(new Intent(HomeActivity.this, TicketComplaintActivity.class));
 
                         return false;
+
+                    case R.id.export_report:
+                        Calendar now = Calendar.getInstance();
+
+                        SmoothDateRangePickerFragment smoothDateRangePickerFragment = SmoothDateRangePickerFragment.newInstance(HomeActivity.this::onDateRangeSet, now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH));
+
+                        smoothDateRangePickerFragment.setAccentColor(R.color.project_color);
+
+                        smoothDateRangePickerFragment.setThemeDark(false);
+
+                        smoothDateRangePickerFragment.show(getFragmentManager(), "smoothDateRangePicker");
+
+
 
                 }
 
@@ -1629,6 +1646,17 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         CameraUpdate cameraUpdateFactory = CameraUpdateFactory.newLatLngZoom(latLng, 9);
 
         mGoogleMap.moveCamera(cameraUpdateFactory);
+
+    }
+
+    @Override
+    public void onDateRangeSet(SmoothDateRangePickerFragment view, int yearStart, int monthStart, int dayStart, int yearEnd, int monthEnd, int dayEnd) {
+
+        ResponseVehicleOwner responseVehicleOwner = ((TransflyApplication) getApplication()).getResponseVehicleOwner();
+
+        Uri uri = Uri.parse("https://transflyhome.club/mobinvoicevehicleowner"+"?mobile="+responseVehicleOwner.getMobile()+"&from="+yearStart+"-"+(monthStart+1)+"-"+dayStart+"&"+"to="+yearEnd+"-"+(monthEnd+1)+"-"+dayEnd);
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(intent);
 
     }
 }
