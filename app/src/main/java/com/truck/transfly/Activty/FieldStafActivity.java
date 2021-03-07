@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -33,11 +32,12 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.leavjenn.smoothdaterangepicker.date.SmoothDateRangePickerFragment;
 import com.truck.transfly.Adapter.FieldStafAdapter;
+import com.truck.transfly.Model.ResponseAreaManager;
 import com.truck.transfly.Model.ResponseBooking;
 import com.truck.transfly.Model.ResponseFieldStaff;
 import com.truck.transfly.Model.ResponseFirebase;
-import com.truck.transfly.Model.ResponseVehicleOwner;
 import com.truck.transfly.R;
 import com.truck.transfly.utils.ApiClient;
 import com.truck.transfly.utils.ApiEndpoints;
@@ -47,6 +47,7 @@ import com.truck.transfly.utils.TransflyApplication;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import okhttp3.ResponseBody;
@@ -55,7 +56,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class FieldStafActivity extends AppCompatActivity {
+public class FieldStafActivity extends AppCompatActivity implements SmoothDateRangePickerFragment.OnDateRangeSetListener  {
 
     private RecyclerView fieldStafRecylcer;
     private List<String> stringList = new ArrayList<>();
@@ -162,6 +163,9 @@ public class FieldStafActivity extends AppCompatActivity {
         MenuItem bookingHistory = menu.findItem(R.id.booking_history);
 
         bookingHistory.setVisible(true);
+
+//        MenuItem emergency_details = menu.findItem(R.id.update_rate);
+//        emergency_details.setVisible(false);
 
         customerName.setText(responseFieldStaff.getName());
         number.setText(responseFieldStaff.getMobile());
@@ -350,6 +354,20 @@ public class FieldStafActivity extends AppCompatActivity {
 
                         break;
 
+                    case R.id.export_report:
+                        Calendar now = Calendar.getInstance();
+
+                        SmoothDateRangePickerFragment smoothDateRangePickerFragment = SmoothDateRangePickerFragment.newInstance(FieldStafActivity.this::onDateRangeSet, now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH));
+
+                        smoothDateRangePickerFragment.setAccentColor(R.color.project_color);
+
+                        smoothDateRangePickerFragment.setThemeDark(false);
+
+                        smoothDateRangePickerFragment.show(getFragmentManager(), "smoothDateRangePicker");
+                        break;
+
+
+
 
                 }
 
@@ -359,6 +377,18 @@ public class FieldStafActivity extends AppCompatActivity {
             }
         });
 
+
+    }
+
+
+    @Override
+    public void onDateRangeSet(SmoothDateRangePickerFragment view, int yearStart, int monthStart, int dayStart, int yearEnd, int monthEnd, int dayEnd) {
+
+        ResponseFieldStaff responseVehicleOwner = ((TransflyApplication) getApplication()).getResponseFieldStaff();
+
+        Uri uri = Uri.parse("https://transflyhome.club/mobinvoicefieldstaff"+"?mobile="+responseVehicleOwner.getMobile()+"&from="+yearStart+"-"+(monthStart+1)+"-"+dayStart+"&"+"to="+yearEnd+"-"+(monthEnd+1)+"-"+dayEnd);
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(intent);
 
     }
 

@@ -35,6 +35,7 @@ import com.truck.transfly.Model.ResponseReward;
 import com.truck.transfly.Model.ResponseToken;
 import com.truck.transfly.Model.ResponseTransporter;
 import com.truck.transfly.Model.ResponseVehicleOwner;
+import com.truck.transfly.Model.TransporterRequest;
 import com.truck.transfly.Model.UpdateVehicle;
 
 import okhttp3.Request;
@@ -247,6 +248,10 @@ public interface ApiEndpoints {
     @GET("/allnotification")
     Call<ResponseBody> getNotifications(@Header("Authorization")String token);
 
+    //get notification
+    @GET("/allnotificationtransporter")
+    Call<ResponseBody> getNotifications2(@Header("Authorization")String token);
+
 
     @GET("/areamanager/mines")
     Call<ResponseBody> getAreaManagerMines(@Header("Authorization")String token);
@@ -257,6 +262,24 @@ public interface ApiEndpoints {
     @POST("/areamanager/confirm")
     Call<ResponseBody> getAreaManagerAccess(@Header("Authorization")String token,@Body ResponseFieldStaffForMine responseFieldStaffForMine);
 
+
+    //otp
+    @GET("/otp/login")
+    Call<ResponseBody> sendOtpOther(@Query("mobile") String mobile);
+
+    @GET("/otp/other")
+    Call<ResponseBody> sendOtpLogin(@Query("mobile") String mobile);
+
+    @GET("/otp/verify")
+    Call<ResponseBody> verifyOtp(@Query("mobile") String mobile,@Query("otp") String otp);
+
+    @GET("/otp/resend")
+    Call<ResponseBody> resendOtp(@Query("mobile") String mobile);
+
+
+    //transporter request
+    @POST("/transporterrequest")
+    Call<ResponseBody> requestTransporter(@Header("Authorization")String token,@Body TransporterRequest responseFieldStaffForMine);
 
     ///////////////////////////////////////
 

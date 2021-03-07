@@ -20,6 +20,14 @@ import com.msg91.sendotpandroid.library.roots.SendOTPResponseCode;
 import com.mukesh.OtpView;
 import com.truck.transfly.R;
 import com.truck.transfly.databinding.ActivityOtpValidationBinding;
+import com.truck.transfly.utils.ApiClient;
+import com.truck.transfly.utils.ApiEndpoints;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class OtpValidation extends AppCompatActivity implements VerificationListener {
 
@@ -29,22 +37,31 @@ public class OtpValidation extends AppCompatActivity implements VerificationList
     private boolean isTimerOn;
     private OtpView otpView;
     private String otp;
+    private Retrofit retrofit = null;
+    private ApiEndpoints api = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity = DataBindingUtil.setContentView(this, R.layout.activity_otp_validation);
 
+        retrofit = ApiClient.getRetrofitClient();
+        if (retrofit != null) {
+            api = retrofit.create(ApiEndpoints.class);
+        }
+
         Intent intent = getIntent();
+
+
 
         fromForgot = intent.getBooleanExtra("fromForgot", false);
         mobileNo = intent.getStringExtra("mobileNo");
 
         String lastFourDigits = mobileNo.substring(mobileNo.length() - 4);
 
-        sendOtpConfirmation(mobileNo);
+       sendOtpConfirmation(mobileNo);
 
-        SendOTP.getInstance().getTrigger().initiate();
+       // SendOTP.getInstance().getTrigger().initiate();
 
         otpView = findViewById(R.id.otp_view);
 
@@ -64,7 +81,19 @@ public class OtpValidation extends AppCompatActivity implements VerificationList
 
                 } else if(!isTimerOn){
 
-                    SendOTP.getInstance().getTrigger().resend(RetryType.TEXT);
+                   // SendOTP.getInstance().getTrigger().resend(RetryType.TEXT);
+
+                    api.resendOtp(mobileNo).enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                        }
+                    });
 
                     otp_string_text.setText("OTP Sent to registered Mobile Number "+lastFourDigits);
 
@@ -103,7 +132,27 @@ public class OtpValidation extends AppCompatActivity implements VerificationList
 
                 } else {
 
-                    SendOTP.getInstance().getTrigger().verify(otpView.getText().toString());
+                    api.verifyOtp(mobileNo,otpView.getText().toString()).enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            if(response.code() == 200)
+                            {
+//                             //   confirmOtp("SD");
+                                Toast.makeText(OtpValidation.this, "Mobile Number Verified Successfully", Toast.LENGTH_SHORT).show();
+                                confirmOtp("ffjfjfj");
+                            }
+                            else
+                            {
+                                Toast.makeText(OtpValidation.this, "Wrong OTP! Try Again", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            Toast.makeText(OtpValidation.this, "Wrong OTP! Try Again", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    //SendOTP.getInstance().getTrigger().verify(otpView.getText().toString());
 
                 }
 
@@ -129,7 +178,7 @@ public class OtpValidation extends AppCompatActivity implements VerificationList
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        SendOTP.getInstance().getTrigger().stop();
+        //SendOTP.getInstance().getTrigger().stop();
     }
 
     private void confirmOtp(String text) {
@@ -162,16 +211,29 @@ public class OtpValidation extends AppCompatActivity implements VerificationList
 
     private void sendOtpConfirmation(String number) {
 
-        new SendOTPConfigBuilder()
-                .setCountryCode(91)
-                .setMobileNumber(number)
-                .setVerifyWithoutOtp(true)//direct verification while connect with mobile network
-                .setAutoVerification(OtpValidation.this)//Auto read otp from Sms And Verify
-                .setSenderId("ABCDEF")
-                .setMessage("##OTP## is your confirmation on OTP, Please do not share your OTP and confidential info with anyone.TransFly")
-                .setOtpLength(4)
-                .setOtpExpireInMinute(10)
-                .setVerificationCallBack(this).build();
+//        new SendOTPConfigBuilder()
+//                .setCountryCode(91)
+//                .setMobileNumber(number)
+//                .setVerifyWithoutOtp(true)//direct verification while connect with mobile network
+//                .setAutoVerification(OtpValidation.this)//Auto read otp from Sms And Verify
+//                .setSenderId("ABCDEF")
+//                .setMessage("##OTP## is your confirmation on OTP, Please do not share your OTP and confidential info with anyone.TransFly")
+//                .setOtpLength(4)
+//                .setOtpExpireInMinute(10)
+//                .setVerificationCallBack(this).build();
+
+
+        api.sendOtpLogin(number).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
 
     }
 
@@ -188,12 +250,14 @@ public class OtpValidation extends AppCompatActivity implements VerificationList
 
                     confirmOtp("ffjfjfj");
 
-                } else if (responseCode == SendOTPResponseCode.READ_OTP_SUCCESS) {
+                }
+                else if (responseCode == SendOTPResponseCode.READ_OTP_SUCCESS) {
 
                     otp=message;
                     otpView.setText(message);
 
-                } else if (responseCode == SendOTPResponseCode.SMS_SUCCESSFUL_SEND_TO_NUMBER || responseCode == SendOTPResponseCode.DIRECT_VERIFICATION_FAILED_SMS_SUCCESSFUL_SEND_TO_NUMBER) {
+                }
+                else if (responseCode == SendOTPResponseCode.SMS_SUCCESSFUL_SEND_TO_NUMBER || responseCode == SendOTPResponseCode.DIRECT_VERIFICATION_FAILED_SMS_SUCCESSFUL_SEND_TO_NUMBER) {
 
                     Toast.makeText(OtpValidation.this, "OTP sent to your mobile number", Toast.LENGTH_SHORT).show();
 

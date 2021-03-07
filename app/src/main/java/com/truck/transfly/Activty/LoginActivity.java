@@ -124,6 +124,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 if(response.code() == 200)
                 {
+                    Toast.makeText(LoginActivity.this, "f", Toast.LENGTH_SHORT).show();
                     ResponseToken tokenobj = response.body();
                     String token  = tokenobj.getToken();
 
@@ -175,6 +176,7 @@ public class LoginActivity extends AppCompatActivity {
     private void validateToken(String token) {
         try {
             String type = token.split(":")[0];
+            Toast.makeText(this, token, Toast.LENGTH_SHORT).show();
             switch (type) {
                 case "vehicleowner": {
 

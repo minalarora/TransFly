@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,14 +32,11 @@ import com.truck.transfly.Frament.ShowBooking;
 import com.truck.transfly.Frament.ShowInvoiceFragment;
 import com.truck.transfly.Model.ResponseAreaManager;
 import com.truck.transfly.Model.ResponseFirebase;
-import com.truck.transfly.Model.ResponseVehicleOwner;
 import com.truck.transfly.R;
 import com.truck.transfly.utils.ApiClient;
 import com.truck.transfly.utils.ApiEndpoints;
 import com.truck.transfly.utils.PreferenceUtil;
 import com.truck.transfly.utils.TransflyApplication;
-
-import org.joda.time.DateTime;
 
 import java.util.Calendar;
 
@@ -110,6 +106,8 @@ public class AreaManagerActivity extends AppCompatActivity implements SmoothDate
         tabLayout.setupWithViewPager(viewPager);
 
         NavigationView navigationView = findViewById(R.id.nav_view);
+
+
 //        navigationView.setNavigationItemSelectedListener(map);
 
         FirebaseMessaging.getInstance().getToken()
@@ -174,6 +172,9 @@ public class AreaManagerActivity extends AppCompatActivity implements SmoothDate
 
         MenuItem allotMines=menu.findItem(R.id.allot_mines);
         allotMines.setVisible(true);
+
+//        MenuItem emergency_details = menu.findItem(R.id.rate_etl);
+//        emergency_details.setVisible(false);
 
 //        Menu menu = navigationView.getMenu();
 //
@@ -350,6 +351,16 @@ public class AreaManagerActivity extends AppCompatActivity implements SmoothDate
                         PreferenceUtil.putData(AreaManagerActivity.this, "token", "");
 
                         break;
+                    case R.id.export_report:
+                        Calendar now = Calendar.getInstance();
+
+                        SmoothDateRangePickerFragment smoothDateRangePickerFragment = SmoothDateRangePickerFragment.newInstance(AreaManagerActivity.this::onDateRangeSet, now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH));
+
+                        smoothDateRangePickerFragment.setAccentColor(R.color.project_color);
+
+                        smoothDateRangePickerFragment.setThemeDark(false);
+
+                        smoothDateRangePickerFragment.show(getFragmentManager(), "smoothDateRangePicker");
 
 
                 }

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+<RelativeLayout
+
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@color/project_color"
+    android:layout_height="match_parent"
+    tools:context=".Activty.UpdateRateActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/_8ssp"
+        android:id="@+id/toolbar"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="@dimen/_22ssp"
+            android:layout_height="@dimen/_22ssp"
+            android:layout_marginStart="@dimen/_8ssp"
+            android:layout_gravity="center"
+            android:id="@+id/back"
+            android:src="@drawable/ic_action_back"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerInParent="true"
+            android:textStyle="bold"
+            android:fontFamily="@font/poppinsbold"
+            android:text="My Search"
+            android:textColor="@color/white"
+            android:textSize="15dp" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/_35ssp"
+        android:background="@drawable/round_as_project_code_upper_white"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/_10ssp"
+            android:layout_height="@dimen/_50ssp">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/round_as_eddittext_search"
+                android:hint="From Mines"
+                android:id="@+id/from_search"
+                android:layout_marginEnd="12dp"
+                android:paddingStart="12dp"
+                android:textSize="14sp"
+                android:focusable="true"
+                android:drawableTint="@color/black"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/worksansmedium"
+                android:paddingEnd="8dp"
+                android:drawableStart="@drawable/ic_action_search"
+                android:drawablePadding="8dp"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="8dp"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:id="@+id/to_search_parent"
+            android:visibility="visible"
+            android:layout_height="@dimen/_50ssp">
+
+            <EditText
+                android:id="@+id/to_search"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/round_as_eddittext_search"
+                android:drawableStart="@drawable/ic_action_search"
+                android:drawablePadding="8dp"
+                android:drawableTint="@color/black"
+                android:focusable="true"
+                android:fontFamily="@font/worksansmedium"
+                android:hint="To Loading"
+                android:paddingStart="12dp"
+                android:paddingEnd="8dp"
+                android:textSize="14sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:id="@+id/recyclerView"
+                android:layout_above="@+id/creaate_booking"
+                android:layout_height="match_parent">
+
+
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                android:id="@+id/list_item_loading"
+                />
+
+            <RelativeLayout
+                android:id="@+id/creaate_booking"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="@dimen/_15ssp"
+                android:layout_marginEnd="@dimen/_15ssp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/_15ssp"
+                android:background="@drawable/design_as_edittext_gradient"
+                android:elevation="6dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/poppinsbold"
+                    android:text="Update Rate"
+                    android:id="@+id/bookingButton"
+                    android:textColor="@color/white"
+                    android:textSize="14dp" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <include layout="@layout/loading_view"/>
+
+    <include layout="@layout/no_internet_connection"/>
+
+</RelativeLayout>
+</layout>

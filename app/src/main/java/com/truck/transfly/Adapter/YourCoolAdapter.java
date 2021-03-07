@@ -7,18 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 
 
 import com.bumptech.glide.Glide;
-import com.truck.transfly.Activty.HomeActivity;
 import com.truck.transfly.Activty.OlxPageActivity;
 import com.truck.transfly.Activty.SearchBarActivity;
 import com.truck.transfly.Model.ResponseBanner;
-import com.truck.transfly.Model.SliderModel;
 import com.truck.transfly.MuUtils.MetalRecyclerViewPager;
 import com.truck.transfly.R;
 
