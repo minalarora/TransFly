@@ -1313,6 +1313,18 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                         break;
 
+                    case R.id.export_report:
+
+                        Calendar now = Calendar.getInstance();
+
+                        SmoothDateRangePickerFragment smoothDateRangePickerFragment = SmoothDateRangePickerFragment.newInstance(HomeActivity.this::onDateRangeSet, now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH));
+
+                        smoothDateRangePickerFragment.setAccentColor(R.color.project_color);
+
+                        smoothDateRangePickerFragment.setThemeDark(false);
+
+                        smoothDateRangePickerFragment.show(getFragmentManager(), "smoothDateRangePicker");
+
                 }
 
                 drawerLayout.closeDrawer(GravityCompat.START);
