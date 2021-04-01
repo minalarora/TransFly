@@ -63,47 +63,47 @@
             android:orientation="vertical"
             android:layout_height="match_parent">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_90ssp"
-                android:layout_marginStart="@dimen/_12ssp"
-                android:layout_marginEnd="@dimen/_12ssp"
-                android:id="@+id/add_rc_image"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/round_dotted_line_pink"
-                >
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="@dimen/_90ssp"-->
+<!--                android:layout_marginStart="@dimen/_12ssp"-->
+<!--                android:layout_marginEnd="@dimen/_12ssp"-->
+<!--                android:id="@+id/add_rc_image"-->
+<!--                android:layout_gravity="center_horizontal"-->
+<!--                android:layout_marginTop="30dp"-->
+<!--                android:background="@drawable/round_dotted_line_pink"-->
+<!--                >-->
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_centerInParent="true"
-                    android:layout_height="wrap_content">
+<!--                <LinearLayout-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:orientation="vertical"-->
+<!--                    android:layout_centerInParent="true"-->
+<!--                    android:layout_height="wrap_content">-->
 
-                    <ImageView
-                        android:layout_width="@dimen/_40ssp"
-                        android:layout_height="@dimen/_40ssp"
-                        android:layout_gravity="center_horizontal"
-                        android:src="@drawable/ic_action_choose_image"
-                        android:id="@+id/image_link"
-                         />
+<!--                    <ImageView-->
+<!--                        android:layout_width="@dimen/_40ssp"-->
+<!--                        android:layout_height="@dimen/_40ssp"-->
+<!--                        android:layout_gravity="center_horizontal"-->
+<!--                        android:src="@drawable/ic_action_choose_image"-->
+<!--                        android:id="@+id/image_link"-->
+<!--                         />-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="@dimen/_12ssp"
-                        android:id="@+id/choose_text_view"
-                        android:layout_toEndOf="@+id/back"
-                        android:fontFamily="@font/poppins"
-                        android:text="Choose R.C. Image"
-                        android:textColor="@android:color/black"
-                        android:textSize="14dp" />
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center_vertical"-->
+<!--                        android:layout_marginStart="10dp"-->
+<!--                        android:layout_marginTop="@dimen/_12ssp"-->
+<!--                        android:id="@+id/choose_text_view"-->
+<!--                        android:layout_toEndOf="@+id/back"-->
+<!--                        android:fontFamily="@font/poppins"-->
+<!--                        android:text="Choose R.C. Image"-->
+<!--                        android:textColor="@android:color/black"-->
+<!--                        android:textSize="14dp" />-->
 
-                </LinearLayout>
+<!--                </LinearLayout>-->
 
-            </RelativeLayout>
+<!--            </RelativeLayout>-->
 
 
             <com.google.android.material.textfield.TextInputLayout
@@ -149,74 +149,74 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/margin_10dp"
-                android:layout_height="wrap_content">
+<!--            <RelativeLayout-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_gravity="center_horizontal"-->
+<!--                android:layout_marginTop="@dimen/margin_10dp"-->
+<!--                android:layout_height="wrap_content">-->
 
-                <Spinner android:entries="@array/vehicle_name"
-                    android:id="@+id/vehicle_name_spinner"
-                    android:layout_width="match_parent"
-                    android:layout_marginStart="@dimen/_12ssp"
-                    android:layout_height="@dimen/field_height"
-                    android:fontFamily="@font/worksansmedium"/>
+<!--                <Spinner android:entries="@array/vehicle_name"-->
+<!--                    android:id="@+id/vehicle_name_spinner"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_marginStart="@dimen/_12ssp"-->
+<!--                    android:layout_height="@dimen/field_height"-->
+<!--                    android:fontFamily="@font/worksansmedium"/>-->
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_below="@+id/vehicle_name_spinner"
-                    android:layout_marginStart="@dimen/_12ssp"
-                    android:layout_marginEnd="@dimen/_12ssp"
-                    android:background="@color/quantum_pink"
-                    />
+<!--                <View-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="1dp"-->
+<!--                    android:layout_below="@+id/vehicle_name_spinner"-->
+<!--                    android:layout_marginStart="@dimen/_12ssp"-->
+<!--                    android:layout_marginEnd="@dimen/_12ssp"-->
+<!--                    android:background="@color/quantum_pink"-->
+<!--                    />-->
 
-            </RelativeLayout>
+<!--            </RelativeLayout>-->
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/margin_10dp"
-                android:layout_height="wrap_content">
+<!--            <RelativeLayout-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_gravity="center_horizontal"-->
+<!--                android:layout_marginTop="@dimen/margin_10dp"-->
+<!--                android:layout_height="wrap_content">-->
 
-                <Spinner android:entries="@array/Tyres_selection"
-                    android:id="@+id/vehicle_own_tyres"
-                    android:layout_width="match_parent"
-                    android:layout_marginStart="@dimen/_12ssp"
-                    android:layout_height="@dimen/field_height"
-                    android:fontFamily="@font/worksansmedium"/>
+<!--                <Spinner android:entries="@array/Tyres_selection"-->
+<!--                    android:id="@+id/vehicle_own_tyres"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_marginStart="@dimen/_12ssp"-->
+<!--                    android:layout_height="@dimen/field_height"-->
+<!--                    android:fontFamily="@font/worksansmedium"/>-->
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_below="@+id/vehicle_own_tyres"
-                    android:layout_marginStart="@dimen/_12ssp"
-                    android:layout_marginEnd="@dimen/_12ssp"
-                    android:background="@color/quantum_pink"
-                    />
+<!--                <View-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="1dp"-->
+<!--                    android:layout_below="@+id/vehicle_own_tyres"-->
+<!--                    android:layout_marginStart="@dimen/_12ssp"-->
+<!--                    android:layout_marginEnd="@dimen/_12ssp"-->
+<!--                    android:background="@color/quantum_pink"-->
+<!--                    />-->
 
-            </RelativeLayout>
+<!--            </RelativeLayout>-->
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10ssp"
-                android:layout_marginTop="@dimen/_4ssp"
-                android:layout_marginEnd="@dimen/_10ssp"
-                android:textColorHint="#8c8c8c"
-                app:hintAnimationEnabled="true">
+<!--            <com.google.android.material.textfield.TextInputLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="@dimen/_10ssp"-->
+<!--                android:layout_marginTop="@dimen/_4ssp"-->
+<!--                android:layout_marginEnd="@dimen/_10ssp"-->
+<!--                android:textColorHint="#8c8c8c"-->
+<!--                app:hintAnimationEnabled="true">-->
 
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins"
-                    android:hint="R.C. Number"
-                    android:imeOptions="actionNext"
-                    android:id="@+id/rcnumber"
-                    android:inputType="textCapWords"
-                    android:textSize="@dimen/_12ssp" />
+<!--                <EditText-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:fontFamily="@font/poppins"-->
+<!--                    android:hint="R.C. Number"-->
+<!--                    android:imeOptions="actionNext"-->
+<!--                    android:id="@+id/rcnumber"-->
+<!--                    android:inputType="textCapWords"-->
+<!--                    android:textSize="@dimen/_12ssp" />-->
 
-            </com.google.android.material.textfield.TextInputLayout>
+<!--            </com.google.android.material.textfield.TextInputLayout>-->
 
             <RelativeLayout
                 android:id="@+id/add_vehicle"

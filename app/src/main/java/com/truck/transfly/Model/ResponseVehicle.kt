@@ -10,10 +10,10 @@ class ResponseVehicle {
     var number: String? = null
 
     //@SerializedName("rc")
-    var rc: String? = null
+  //  var rc: String? = null
 
     //@SerializedName("vehiclename")
-    var vehiclename: String? = null
+    //var vehiclename: String? = null
 
     //@SerializedName("status")
     var status: Int? = 0
@@ -28,7 +28,7 @@ class ResponseVehicle {
     var contact: String? = null
 
     //@SerializedName("tyres")
-    var tyres: String? = null
+    //var tyres: String? = null
 
 
 }

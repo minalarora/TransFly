@@ -58,7 +58,7 @@ public class SmallIconsAdapter extends RecyclerView.Adapter<SmallIconsAdapter.vi
 
         ResponseVehicle responseVehicle = vehicleList.get(position);
 
-        holder.vehicle_name.setText(responseVehicle.getVehiclename());
+//        holder.vehicle_name.setText(responseVehicle.getVehiclename());
         holder.vehicle_number.setText(responseVehicle.getNumber());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {

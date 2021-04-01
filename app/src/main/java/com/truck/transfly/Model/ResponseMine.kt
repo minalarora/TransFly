@@ -77,7 +77,7 @@ class ResponseMine {
     }
 
     override fun toString(): String {
-        return "ResponseMine(id=$id, name=$name, area=$area, trailer=$trailer, tyres=$tyres, bodytype=$bodytype, loading=$loading,  latitude=$latitude, longitude=$longitude, arealatitude=$arealatitude, arealongitude=$arealongitude, landmark=$landmark, fieldstaff=$fieldstaff, areamanager=$areamanager)"
+        return "ResponseMine(name=$name, area=$area,)"
     }
 
 

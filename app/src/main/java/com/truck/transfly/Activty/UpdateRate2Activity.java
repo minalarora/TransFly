@@ -259,7 +259,7 @@ public class UpdateRate2Activity extends AppCompatActivity {
 
             Toast.makeText(this, "Invalid Mobile Number", Toast.LENGTH_SHORT).show();
 
-        } else if (responseVehicle != null && responseVehicle.getTyres() != null && !isValid(tyres, trailor, responseVehicle.getTyres())) {
+        } else if (responseVehicle != null ) {
 
             Toast.makeText(this, "Trailer not allowed in this mine, find more mines from Search field", Toast.LENGTH_SHORT).show();
 

@@ -41,6 +41,7 @@ import com.truck.transfly.Model.UpdateVehicle;
 import okhttp3.Request;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
@@ -57,6 +58,9 @@ public interface ApiEndpoints {
     //updatevehicle
     @PATCH("/vehicle")
     Call<ResponseBody> updateVehicle(@Header("Authorization")String token,@Body UpdateVehicle vehicle);
+
+    @POST("/vehicle")
+    Call<ResponseBody> createVehicle(@Header("Authorization")String token,@Body RequestVehicle vehicle);
 
     //delete vehicle
     @DELETE("/vehicle/{id}")
@@ -267,13 +271,13 @@ public interface ApiEndpoints {
     @GET("/otp/login")
     Call<ResponseBody> sendOtpOther(@Query("mobile") String mobile);
 
-    @GET("/otp/other")
+    @GET("/otp/login")
     Call<ResponseBody> sendOtpLogin(@Query("mobile") String mobile);
 
     @GET("/otp/verify")
     Call<ResponseBody> verifyOtp(@Query("mobile") String mobile,@Query("otp") String otp);
 
-    @GET("/otp/resend")
+    @GET("/otp/login")
     Call<ResponseBody> resendOtp(@Query("mobile") String mobile);
 
 

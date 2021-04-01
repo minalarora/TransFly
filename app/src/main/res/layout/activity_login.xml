@@ -168,7 +168,7 @@
             android:text="or Login With"
             android:textColor="@color/black"
             android:textSize="12sp"
-            android:visibility="visible" />
+            android:visibility="gone" />
 
         <RelativeLayout
             android:layout_width="300dp"
@@ -176,6 +176,7 @@
             android:layout_gravity="center"
             android:onClick="showLoginToast"
             android:layout_marginTop="@dimen/_20ssp"
+            android:visibility="gone"
             android:background="@drawable/facebook_login_design">
 
             <ImageView
@@ -204,7 +205,8 @@
             android:layout_gravity="center"
             android:layout_height="48dp"
             android:onClick="showLoginToast"
-            android:layout_marginTop="@dimen/_20ssp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:visibility="gone"
             android:background="@drawable/facebook_login_design"
             >
 
@@ -236,7 +238,7 @@
             android:layout_width="match_parent"
             android:id="@+id/signup_parent"
             android:layout_alignParentBottom="true"
-            android:layout_marginTop="@dimen/_12ssp"
+            android:layout_marginTop="@dimen/_20sdp"
             android:layout_marginBottom="@dimen/_12ssp"
             android:layout_height="30dp">
 
@@ -272,28 +274,29 @@
             </LinearLayout>
 
         </RelativeLayout>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/signup_parent"
-            android:layout_centerInParent="true"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="@dimen/_20ssp"
-            android:layout_marginTop="60dp"
-            android:layout_marginEnd="@dimen/_20ssp"
-            android:alpha="0.6"
-            android:fontFamily="@font/font_regular"
-            android:gravity="center_horizontal"
-            android:lineSpacingExtra="@dimen/_5ssp"
-            android:text="©2021. All rights reserved by TransFly Infotech Pvt Ltd"
-            android:textColor="@color/black"
-            android:textSize="8dp" />
+
 
     </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
 
     <include layout="@layout/loading_view_transparent"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/signup_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="@dimen/_20ssp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="@dimen/_20ssp"
+        android:alpha="0.6"
+        android:fontFamily="@font/font_regular"
+        android:gravity="center_horizontal"
+        android:lineSpacingExtra="@dimen/_5ssp"
+        android:text="©2021. All rights reserved by TransFly Infotech Pvt Ltd"
+        android:textColor="@color/black"
+        android:textSize="8dp" />
 
 </RelativeLayout>
 

@@ -1,6 +1,7 @@
 package com.truck.transfly.Activty;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.Toast;
@@ -160,6 +161,8 @@ public class MyVehicleActivity extends AppCompatActivity {
 
                 try {
                     JSONArray jsonArray = new JSONArray(response);
+                    Log.d("5000",jsonArray.toString());
+
 
                     if (jsonArray.length() > 0) {
 
@@ -171,15 +174,16 @@ public class MyVehicleActivity extends AppCompatActivity {
                             responseVehicle.setNumber(jsonObject.getString("number"));
                             responseVehicle.setId(jsonObject.getInt("id"));
                             responseVehicle.setContact(jsonObject.getString("contact"));
-                            responseVehicle.setRc(jsonObject.getString("rc"));
-                            responseVehicle.setVehiclename(jsonObject.getString("vehiclename"));
+                            //responseVehicle.setRc(jsonObject.getString("rc"));
+                           // responseVehicle.setVehiclename(jsonObject.getString("vehiclename"));
                             responseVehicle.setStatus(jsonObject.getInt("status"));
                             responseVehicle.setActive(jsonObject.getBoolean("active"));
-                            responseVehicle.setTyres(jsonObject.getString("tyres"));
+                           // responseVehicle.setTyres(jsonObject.getString("tyres"));
                             responseVehicle.setDate(jsonObject.getString("date"));
 
                             responseVehicleList.add(responseVehicle);
                         }
+                        Log.d("5000",responseVehicleList.size()+"");
 
                         myVehicleAdapter.notifyDataSetChanged();
 

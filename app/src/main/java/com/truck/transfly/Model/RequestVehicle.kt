@@ -8,16 +8,18 @@ class RequestVehicle {
 
     var number: String? = null
 
-
-    var rc: String? = null
-
-
-    var rcimage: String? = null
+    var contact: String? = null
 
 
-    var vehiclename: String? = null
+//    var rc: String? = null
+//
+//
+//    var rcimage: String? = null
 
 
-    var tyres: String? = null
+  //  var vehiclename: String? = null
+
+
+//    var tyres: String? = null
 
 }

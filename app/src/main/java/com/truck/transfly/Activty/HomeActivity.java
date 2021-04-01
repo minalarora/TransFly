@@ -45,6 +45,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.core.widget.ImageViewCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -91,16 +92,19 @@ import com.nabinbhandari.android.permissions.Permissions;
 import com.truck.transfly.Adapter.LocationAdapter;
 import com.truck.transfly.Adapter.YourCoolAdapter;
 import com.truck.transfly.Frament.ContactUsDialogFragment;
+import com.truck.transfly.Frament.CreatebookingFragment;
 import com.truck.transfly.Frament.MineChooseFragment;
 import com.truck.transfly.Frament.ShowLoadingDialogFragment;
 import com.truck.transfly.Model.PositionModel;
 import com.truck.transfly.Model.RequestArea;
+import com.truck.transfly.Model.RequestBooking;
 import com.truck.transfly.Model.RequestCoordinates;
 import com.truck.transfly.Model.ResponseBanner;
 import com.truck.transfly.Model.ResponseFieldStaff;
 import com.truck.transfly.Model.ResponseFirebase;
 import com.truck.transfly.Model.ResponseLoading;
 import com.truck.transfly.Model.ResponseMine;
+import com.truck.transfly.Model.ResponseVehicle;
 import com.truck.transfly.Model.ResponseVehicleOwner;
 import com.truck.transfly.Model.SliderModel;
 import com.truck.transfly.MuUtils.MetalRecyclerViewPager;
@@ -112,6 +116,8 @@ import com.truck.transfly.utils.MyNotificationManager;
 import com.truck.transfly.utils.MyUtils;
 import com.truck.transfly.utils.PreferenceUtil;
 import com.truck.transfly.utils.TransflyApplication;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -129,7 +135,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class HomeActivity extends AppCompatActivity implements OnMapReadyCallback, SmoothDateRangePickerFragment.OnDateRangeSetListener {
+public class HomeActivity extends AppCompatActivity implements OnMapReadyCallback, SmoothDateRangePickerFragment.OnDateRangeSetListener , CreatebookingFragment.CreateBookingListener {
 
     private GoogleMap mGoogleMap;
     private double LatituteOfTajMahal = 22.106364561666886;
@@ -175,6 +181,9 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
     private Marker marker;
     private ImageView currentBooking;
     private ImageView image;
+
+
+    private CreatebookingFragment fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -301,7 +310,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
             public void onClick(View v) {
 
                 if (Mylatitude != 0 && Mylongitude != 0)
-                    goToLocationWithAnimation(Mylatitude, Mylongitude, 9);
+                    goToLocationWithAnimation(Mylatitude, Mylongitude, 12);
 
                 RotateAnimation anim = new RotateAnimation(0f, 360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
                 anim.setInterpolator(new LinearInterpolator());
@@ -577,7 +586,9 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                             ArrayList<ResponseMine> allMineOfSingleArea = getAllMineOfSingleArea(requestArea.getName(), loading);
 
+                            Log.d("fuck", "onClick: " + allMineOfSingleArea.toString());
                             for (ResponseMine responseMine : allMineOfSingleArea) {
+
 
                                 showMarkerOfArea(Double.parseDouble(responseMine.getLatitude()), Double.parseDouble(responseMine.getLongitude()), responseMine, loading);
 
@@ -900,7 +911,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                                                         /*
                                                          * Displaying a notification locally
                                                          */
-                                                        MyNotificationManager.getInstance(HomeActivity.this).displayNotification("TRANSFLY", "Please complete your KYC and add vehicles under My Profile to start with your Bookings/Loadings", null);
+                                                      //  MyNotificationManager.getInstance(HomeActivity.this).displayNotification("TRANSFLY", "Please complete your KYC and add vehicles under My Profile to start with your Bookings/Loadings", null);
 
 
                                                     }
@@ -1337,6 +1348,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private void goToLocationWithAnimation(double latitude, double longitude, int i) {
 
+        i = 7;
         LatLng latLng = new LatLng(latitude, longitude);
 
         CameraUpdate cameraUpdateFactory = CameraUpdateFactory.newLatLngZoom(latLng, i);
@@ -1563,7 +1575,23 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                             intent.putExtra("rate", rate);
                             intent.putExtra("etl", etl);
 
-                            startActivity(intent);
+                            fragment = CreatebookingFragment.newInstance(
+                                    responseMine.getId(),
+                                    responseMine.getName(),
+                                    responseMine.getTyres().toString(),
+                                    responseMine.getTrailer(),
+                                    loading,
+                                    rate,
+                                    etl
+                            );
+                            fragment.setStyle(DialogFragment.STYLE_NORMAL,R.style.Dialog_FullScreen);
+                            fragment.show(getSupportFragmentManager(),"booking");
+                            fragment.setListener(HomeActivity.this);
+                            getAllVehicles(token,fragment);
+
+                            //show fragment
+
+                            //startActivity(intent);
 
                         }
                     });
@@ -1608,6 +1636,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
             }
         }
+        Log.d("fuckagain", "onClick: " + responseMine.getName() + rate + " " +etl + responseMine.getLongitude() + "\n");
         marker.setIcon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon("Rate : " + rate + "\n" + "ETL : " + etl + " hrs")));
 
         marker.setTag(responseMine);
@@ -1670,5 +1699,90 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         startActivity(intent);
 
+    }
+
+    @Override
+    public void createBooking(@NotNull RequestBooking requestBooking) {
+
+        parent_of_loading.setVisibility(View.VISIBLE);
+
+        Log.d("5000",requestBooking.toString());
+        Log.d("5000",token);
+
+        api.createBooking(PreferenceUtil.getData(this,"token"), requestBooking).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                parent_of_loading.setVisibility(View.GONE);
+
+
+                if (response.code() == 200) {
+                    Toast.makeText(HomeActivity.this, "Booking Created Successfully", Toast.LENGTH_SHORT).show();
+
+
+
+
+                }
+                else if(response.code()== 401)
+                {
+                    Toast.makeText(HomeActivity.this, "Unable to register vehicle for the booking! Try Again", Toast.LENGTH_SHORT).show();
+                }
+                else {
+
+                    Toast.makeText(HomeActivity.this, "Something Went Wrong! Try Again", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                parent_of_loading.setVisibility(View.GONE);
+
+                Toast.makeText(HomeActivity.this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+    }
+
+    private void getAllVehicles(String token,CreatebookingFragment fragment) {
+
+        parent_of_loading.setVisibility(View.VISIBLE);
+
+
+        ArrayList<ResponseVehicle> vehicleList = new ArrayList<>();
+        api.getAllVehicles(PreferenceUtil.getData(this,"token")).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                parent_of_loading.setVisibility(View.GONE);
+
+                if (response.code() == 200) {
+                    Type collectionType = new TypeToken<ArrayList<ResponseVehicle>>() {
+                    }.getType();
+                    try {
+
+                        vehicleList.addAll(new Gson().fromJson(response.body().string().toString(), collectionType));
+                        Log.d("5-000",vehicleList.size() + "");
+                        fragment.getList(vehicleList);
+                    } catch (IOException e) {
+
+                    }
+
+
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                parent_of_loading.setVisibility(View.GONE);
+
+                no_internet_connection.setVisibility(View.VISIBLE);
+
+            }
+        });
     }
 }

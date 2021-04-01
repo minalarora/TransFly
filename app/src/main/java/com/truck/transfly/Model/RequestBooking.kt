@@ -19,4 +19,9 @@ class RequestBooking {
 
 
     var contact: String? = null
+    override fun toString(): String {
+        return "RequestBooking(vehicle=$vehicle, mineid=$mineid, minename=$minename, loading=$loading, contact=$contact)"
+    }
+
+
 }
