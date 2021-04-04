@@ -166,7 +166,7 @@ public class UpdateRateActivity extends AppCompatActivity {
                     } else {
 
 
-                        ArrayList<ResponseLoading> list = responseMineGlobal.getLoading();
+                        ArrayList<ResponseLoading> list = (ArrayList<ResponseLoading>) responseMineGlobal.getLoading();
 //                        for(ResponseLoading loading: list)
 //                        {
 //                            if(loading.getLoadingname().equalsIgnoreCase(to_search.getText().toString()))
@@ -181,7 +181,7 @@ public class UpdateRateActivity extends AppCompatActivity {
 //                        }
                         Intent intent = new Intent(UpdateRateActivity.this, UpdateRate2Activity.class);
                         intent.putExtra("vehicle",vehicleOwner);
-                        ArrayList<ResponseLoading> arrayList = responseMineGlobal.getLoading();
+                        ArrayList<ResponseLoading> arrayList =  responseMineGlobal.getLoading();
                         int rate = 5;
                         int etl = 0;
                         for(ResponseLoading l: arrayList)

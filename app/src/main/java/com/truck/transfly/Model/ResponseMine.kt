@@ -1,9 +1,11 @@
 package com.truck.transfly.Model
 
+import android.os.Parcel
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import java.util.ArrayList
 
-class ResponseMine {
+class ResponseMine() : Parcelable {
    // @SerializedName("id")
     var id: Int? = 0
 
@@ -26,7 +28,7 @@ class ResponseMine {
     var bodytype: String? = null
 
     //@SerializedName("loading")
-    var loading: ArrayList<ResponseLoading>? = ArrayList<ResponseLoading>();
+    var loading: ArrayList<ResponseLoading> = ArrayList<ResponseLoading>();
 
 //    @SerializedName("rate")
 //    var rate: Int? = null
@@ -58,15 +60,35 @@ class ResponseMine {
 
     //@SerializedName("areaimageurl")
     var areaimageurl: String? = null
-    
-    constructor(id: Int?, name: String?, area: String?, trailer: Boolean?, tyres: Int?, bodytype: String?, loading: ArrayList<ResponseLoading>?, latitude: String?, longitude: String?, arealatitude: String?, arealongitude: String?, landmark: String?, fieldstaff: String?, areamanager: String?) {
+
+    constructor(parcel: Parcel) : this() {
+        id = parcel.readValue(Int::class.java.classLoader) as? Int
+        name = parcel.readString()
+        area = parcel.readString()
+        trailer = parcel.readValue(Boolean::class.java.classLoader) as? Boolean
+        active = parcel.readValue(Boolean::class.java.classLoader) as? Boolean
+        tyres = parcel.readValue(Int::class.java.classLoader) as? Int
+        bodytype = parcel.readString()
+        latitude = parcel.readString()
+        longitude = parcel.readString()
+        arealatitude = parcel.readString()
+        arealongitude = parcel.readString()
+        landmark = parcel.readString()
+        fieldstaff = parcel.readString()
+        areamanager = parcel.readString()
+        areaimageurl = parcel.readString()
+       // parcel.readTypedList(loading.toMutableList(),ResponseLoading.CREATOR)
+        loading = parcel.createTypedArrayList(ResponseLoading.CREATOR)!!
+    }
+
+    constructor(id: Int?, name: String?, area: String?, trailer: Boolean?, tyres: Int?, bodytype: String?, loading: ArrayList<ResponseLoading>?, latitude: String?, longitude: String?, arealatitude: String?, arealongitude: String?, landmark: String?, fieldstaff: String?, areamanager: String?) : this() {
         this.id = id
         this.name = name
         this.area = area
         this.trailer = trailer
         this.tyres = tyres
         this.bodytype = bodytype
-        this.loading = loading
+        this.loading = loading!!
         this.latitude = latitude
         this.longitude = longitude
         this.arealatitude = arealatitude
@@ -174,6 +196,38 @@ class ResponseMine {
         ref: 'Fieldstaff'
     }
     * */
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeValue(id)
+        parcel.writeString(name)
+        parcel.writeString(area)
+        parcel.writeValue(trailer)
+        parcel.writeValue(active)
+        parcel.writeValue(tyres)
+        parcel.writeString(bodytype)
+        parcel.writeString(latitude)
+        parcel.writeString(longitude)
+        parcel.writeString(arealatitude)
+        parcel.writeString(arealongitude)
+        parcel.writeString(landmark)
+        parcel.writeString(fieldstaff)
+        parcel.writeString(areamanager)
+        parcel.writeString(areaimageurl)
+        parcel.writeTypedList(loading)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<ResponseMine> {
+        override fun createFromParcel(parcel: Parcel): ResponseMine {
+            return ResponseMine(parcel)
+        }
+
+        override fun newArray(size: Int): Array<ResponseMine?> {
+            return arrayOfNulls(size)
+        }
+    }
 
 
 }

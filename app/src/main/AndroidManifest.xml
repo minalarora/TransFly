@@ -23,7 +23,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TransFly">
-        <activity android:name=".Activty.NotificationActivity2"></activity>
+        <activity android:name=".Activty.BeforeActivity"></activity>
+        <activity android:name=".Activty.NotificationActivity2" />
         <activity android:name=".Activty.UpdateRate2Activity" />
         <activity android:name=".Activty.UpdateRateActivity" />
         <activity android:name=".Activty.ResetPasswordActivity" />

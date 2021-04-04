@@ -578,6 +578,9 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                     showLoadingDialogFragment.show(getSupportFragmentManager(), "showLoadingFragment");
 
+
+                    Intent i =new Intent(HomeActivity.this,BeforeActivity.class);
+
                     showLoadingDialogFragment.setOnClickListener(new ShowLoadingDialogFragment.onClickListener() {
                         @Override
                         public void onClick(String loading) {
@@ -586,7 +589,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                             ArrayList<ResponseMine> allMineOfSingleArea = getAllMineOfSingleArea(requestArea.getName(), loading);
 
-                            Log.d("fuck", "onClick: " + allMineOfSingleArea.toString());
+                          //  Log.d("fuck", "onClick: " + allMineOfSingleArea.toString());
                             for (ResponseMine responseMine : allMineOfSingleArea) {
 
 
@@ -594,11 +597,20 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
                             }
+                            Bundle b=new Bundle();
+                            b.putParcelableArrayList("mines",allMineOfSingleArea);
+                            b.putString("loading",loading);
+                            i.putParcelableArrayListExtra("mines2",allMineOfSingleArea);
+                            i.putExtra("bundle",b);
+
 
                         }
                     });
 
                     goToLocationWithAnimation(Double.parseDouble(requestArea.getArealatitude()), Double.parseDouble(requestArea.getArealongitude()), 12);
+                    startActivity(i);
+
+
 
                 } else {
 
@@ -1039,6 +1051,8 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                     showLoadingDialogFragment.show(getSupportFragmentManager(), "showLoadingFragment");
 
+
+                    Intent i =new Intent(HomeActivity.this,BeforeActivity.class);
                     showLoadingDialogFragment.setOnClickListener(new ShowLoadingDialogFragment.onClickListener() {
                         @Override
                         public void onClick(String loading) {
@@ -1053,11 +1067,20 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                             }
 
+                            Bundle b=new Bundle();
+                            b.putParcelableArrayList("mines",allMineOfSingleArea);
+                            b.putString("loading",loading);
+                           // Intent i =new Intent(HomeActivity.this,BeforeActivity.class);
+                            i.putExtra("bundle",b);
+                            i.putParcelableArrayListExtra("mines2",allMineOfSingleArea);
+                           // startActivity(i);
+
                             if (allMineOfSingleArea.size() > 0) {
 
                                 goToLocationWithAnimation(Double.parseDouble(allMineOfSingleArea.get(0).getArealatitude()), Double.parseDouble(allMineOfSingleArea.get(0).getArealongitude()), 12);
 
                             }
+                            startActivity(i);
 
                         }
 
@@ -1112,9 +1135,17 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                     }
 
+                    Bundle b=new Bundle();
+                    b.putParcelableArrayList("mines",allMineOfSingleArea);
+                    b.putString("loading",loading);
+                    Intent i =new Intent(HomeActivity.this,BeforeActivity.class);
+                    i.putExtra("bundle",b);
+                    i.putParcelableArrayListExtra("mines2",allMineOfSingleArea);
+                   // startActivity(i);
                     if (allMineOfSingleArea.size() > 0) {
 
                         goToLocationWithAnimation(Double.parseDouble(allMineOfSingleArea.get(0).getArealatitude()), Double.parseDouble(allMineOfSingleArea.get(0).getArealongitude()), 12);
+                        startActivity(i);
 
                     }
                 } else {
@@ -1147,10 +1178,18 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
             showMarkerOfArea(Double.parseDouble(responseMine.getLatitude()), Double.parseDouble(responseMine.getLongitude()), responseMine, loading);
 
         }
+        Bundle b=new Bundle();
+        b.putParcelableArrayList("mines",allMineOfSingleArea);
+        b.putString("loading",loading);
+        Intent i =new Intent(HomeActivity.this,BeforeActivity.class);
+        i.putExtra("bundle",b);
+        i.putParcelableArrayListExtra("mines2",allMineOfSingleArea);
+       // startActivity(i);
 
         if (allMineOfSingleArea.size() > 0) {
 
             goToLocationWithAnimation(Double.parseDouble("21.638911631096953"), Double.parseDouble("85.60881554372779"), 8);
+            startActivity(i);
 
         }
 
@@ -1556,7 +1595,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                             Intent intent = new Intent(HomeActivity.this, SelectYourVehicleActivity.class);
                             intent.putExtra("vehicle", true);
-                            ArrayList<ResponseLoading> arrayList = responseMine.getLoading();
+                            ArrayList<ResponseLoading> arrayList = (ArrayList<ResponseLoading>) responseMine.getLoading();
                             int rate = 5;
                             int etl = 0;
                             for (ResponseLoading l : arrayList) {
@@ -1606,7 +1645,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private void showMarkerOfArea(double latituteOfTajMahal, double longitudeOfTajMahal, ResponseMine responseMine, String loadingname) {
 
-        ArrayList<ResponseLoading> list = responseMine.getLoading();
+        ArrayList<ResponseLoading> list = (ArrayList<ResponseLoading>) responseMine.getLoading();
         for (ResponseLoading loading : list) {
             if (loading.getLoadingname().equalsIgnoreCase(loadingname)) {
                 if (loading.getActive() == false) {
@@ -1626,7 +1665,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         markerOptions.snippet("This is my spot!");
         Marker marker = mGoogleMap.addMarker(markerOptions);
 
-        ArrayList<ResponseLoading> arrayList = responseMine.getLoading();
+        ArrayList<ResponseLoading> arrayList = (ArrayList<ResponseLoading>) responseMine.getLoading();
         int rate = 5;
         int etl = 0;
         for (ResponseLoading l : arrayList) {
@@ -1636,7 +1675,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
             }
         }
-        Log.d("fuckagain", "onClick: " + responseMine.getName() + rate + " " +etl + responseMine.getLongitude() + "\n");
+        //Log.d("fuckagain", "onClick: " + responseMine.getName() + rate + " " +etl + responseMine.getLongitude() + "\n");
         marker.setIcon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon("Rate : " + rate + "\n" + "ETL : " + etl + " hrs")));
 
         marker.setTag(responseMine);

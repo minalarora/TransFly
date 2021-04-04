@@ -166,7 +166,7 @@ public class SearchBarActivity extends AppCompatActivity {
                     } else {
 
 
-                        ArrayList<ResponseLoading> list = responseMineGlobal.getLoading();
+                        ArrayList<ResponseLoading> list = (ArrayList<ResponseLoading>) responseMineGlobal.getLoading();
                         for(ResponseLoading loading: list)
                         {
                             if(loading.getLoadingname().equalsIgnoreCase(to_search.getText().toString()))
@@ -181,7 +181,7 @@ public class SearchBarActivity extends AppCompatActivity {
                         }
                         Intent intent = new Intent(SearchBarActivity.this, SelectYourVehicleActivity.class);
                         intent.putExtra("vehicle",vehicleOwner);
-                        ArrayList<ResponseLoading> arrayList = responseMineGlobal.getLoading();
+                        ArrayList<ResponseLoading> arrayList = (ArrayList<ResponseLoading>) responseMineGlobal.getLoading();
                         int rate = 5;
                         int etl = 0;
                         for(ResponseLoading l: arrayList)
