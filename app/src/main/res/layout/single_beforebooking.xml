@@ -8,7 +8,7 @@
     android:layout_marginStart="@dimen/_12ssp"
     app:cardCornerRadius="@dimen/_8ssp"
     android:id="@+id/parent"
-    android:layout_marginTop="@dimen/_10sdp"
+    android:layout_marginTop="10dp"
     android:layout_marginEnd="@dimen/_12ssp"
     android:layout_height="wrap_content">
 
@@ -291,48 +291,9 @@
             android:layout_alignParentBottom="true"
             android:background="@color/white"
             android:layout_marginTop="@dimen/_12ssp"
-            android:visibility="gone"
             android:layout_height="40dp">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:foreground="?attr/selectableItemBackground"
-                android:clickable="true"
-                android:focusable="true"
-                android:id="@+id/share"
-                android:layout_height="match_parent">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:fontFamily="@font/open_sans_semibold"
-                    android:text="Share"
-                    android:layout_centerInParent="true"
-                    android:drawablePadding="@dimen/_7ssp"
-                    android:gravity="center_horizontal|center_vertical"
-                    android:layout_gravity="center_vertical"
-                    android:textAllCaps="true"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:textSize="11dp" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#dcdcdc"
-                    android:layout_alignParentTop="true"
-                    />
-
-            </RelativeLayout>
-
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="#dcdcdc"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -352,7 +313,7 @@
                     android:drawablePadding="@dimen/_8ssp"
                     android:fontFamily="@font/open_sans_semibold"
                     android:gravity="center_horizontal|center_vertical"
-                    android:text="Show Invoice"
+                    android:text="Create Booking"
                     android:textAllCaps="true"
                     android:textColor="@color/white"
                     android:textSize="11dp"

@@ -579,6 +579,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                     showLoadingDialogFragment.show(getSupportFragmentManager(), "showLoadingFragment");
 
 
+                    Log.d("minal", "onClick:582 ");
                     Intent i =new Intent(HomeActivity.this,BeforeActivity.class);
 
                     showLoadingDialogFragment.setOnClickListener(new ShowLoadingDialogFragment.onClickListener() {
@@ -597,18 +598,21 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
                             }
+                            Log.d("minal605", "onClick: ");
+
                             Bundle b=new Bundle();
                             b.putParcelableArrayList("mines",allMineOfSingleArea);
                             b.putString("loading",loading);
                             i.putParcelableArrayListExtra("mines2",allMineOfSingleArea);
                             i.putExtra("bundle",b);
+                            startActivity(i);
 
 
                         }
                     });
 
+
                     goToLocationWithAnimation(Double.parseDouble(requestArea.getArealatitude()), Double.parseDouble(requestArea.getArealongitude()), 12);
-                    startActivity(i);
 
 
 
@@ -1067,6 +1071,8 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                             }
 
+                            Log.d("minal1077", "onClick: ");
+
                             Bundle b=new Bundle();
                             b.putParcelableArrayList("mines",allMineOfSingleArea);
                             b.putString("loading",loading);
@@ -1135,6 +1141,8 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                     }
 
+                    Log.d("minal1147","OnClick: ");
+
                     Bundle b=new Bundle();
                     b.putParcelableArrayList("mines",allMineOfSingleArea);
                     b.putString("loading",loading);
@@ -1178,9 +1186,11 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
             showMarkerOfArea(Double.parseDouble(responseMine.getLatitude()), Double.parseDouble(responseMine.getLongitude()), responseMine, loading);
 
         }
+
         Bundle b=new Bundle();
         b.putParcelableArrayList("mines",allMineOfSingleArea);
         b.putString("loading",loading);
+        Log.d("minal", "onClick:2 ");
         Intent i =new Intent(HomeActivity.this,BeforeActivity.class);
         i.putExtra("bundle",b);
         i.putParcelableArrayListExtra("mines2",allMineOfSingleArea);
