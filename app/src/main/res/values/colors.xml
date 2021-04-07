@@ -18,4 +18,10 @@
     <color name="quantum_googgreen900">#055524</color>
     <color name="mdtp_accent_color">@color/quantum_pink</color>
     <color name="mdtp_accent_color_dark">@color/quantum_pink</color>
+
+        <!-- Here you can add color of your choice  -->
+        <color name="ucrop_color_toolbar">@color/red_900</color>
+        <color name="ucrop_color_statusbar">@color/teal_700</color>
+        <color name="ucrop_color_widget_active">@color/red_900</color>
+
 </resources>

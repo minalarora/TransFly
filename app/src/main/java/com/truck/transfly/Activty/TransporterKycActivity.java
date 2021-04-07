@@ -22,6 +22,7 @@ import androidx.databinding.DataBindingUtil;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.nabinbhandari.android.permissions.PermissionHandler;
@@ -361,7 +362,7 @@ public class TransporterKycActivity extends AppCompatActivity {
             @Override
             public void onGranted() {
 
-                openStorage();
+                openStorage2();
 
             }
 
@@ -397,6 +398,23 @@ public class TransporterKycActivity extends AppCompatActivity {
 
     }
 
+    private void openStorage2()
+    {
+        ImagePicker.Companion.with(this)
+                .galleryMimeTypes(new String[]{"image/png","image/jpg","image/jpeg"})
+                .crop() //Crop image(Optional), Check Customization for more option
+                .start(REQUEST_CODE_CHOOSE);
+
+//        .galleryMimeTypes(  //Exclude gif images
+//            mimeTypes = arrayOf(
+//                    "image/png",
+//                    "image/jpg",
+//                    "image/jpeg"
+//            )
+//    )
+
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 
@@ -405,8 +423,8 @@ public class TransporterKycActivity extends AppCompatActivity {
             if (requestCode == REQUEST_CODE_CHOOSE && data != null) {
 
                 storageList.clear();
-                storageList.addAll(Matisse.obtainPathResult(data));
-
+//                storageList.addAll(Matisse.obtainPathResult(data));
+                storageList.add(ImagePicker.Companion.getFilePath(data));
                 Glide.with(TransporterKycActivity.this).load(storageList.get(0)).skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.NONE).into(activity.chooseImageView);
 
                 activity.chooseTextView.setText("1 Image Selected");
