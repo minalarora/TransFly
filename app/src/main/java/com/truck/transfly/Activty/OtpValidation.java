@@ -22,6 +22,8 @@ import com.truck.transfly.R;
 import com.truck.transfly.databinding.ActivityOtpValidationBinding;
 import com.truck.transfly.utils.ApiClient;
 import com.truck.transfly.utils.ApiEndpoints;
+import com.truck.transfly.utils.Common;
+import com.truck.transfly.utils.SMSListener;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -166,6 +168,52 @@ public class OtpValidation extends AppCompatActivity implements VerificationList
 //
 //            }
 //        });
+
+        SMSListener.bindListener(new Common.OTPListener() {
+            @Override
+            public void onOTPReceived(String otp) {
+                try {
+
+                    String extractedOTP = otp.substring(0,4);
+                    otpView.setText(extractedOTP.trim());
+                    if(TextUtils.isEmpty(otpView.getText().toString())){
+
+                        Toast.makeText(OtpValidation.this, "Fill OTP, which is send on your number!", Toast.LENGTH_SHORT).show();
+
+                    } else {
+
+                        api.verifyOtp(mobileNo,otpView.getText().toString()).enqueue(new Callback<ResponseBody>() {
+                            @Override
+                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                if(response.code() == 200)
+                                {
+//                             //   confirmOtp("SD");
+                                    Toast.makeText(OtpValidation.this, "Mobile Number Verified Successfully", Toast.LENGTH_SHORT).show();
+                                    confirmOtp("ffjfjfj");
+                                }
+                                else
+                                {
+                                    Toast.makeText(OtpValidation.this, "Wrong OTP! Try Again", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                Toast.makeText(OtpValidation.this, "Wrong OTP! Try Again", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        //SendOTP.getInstance().getTrigger().verify(otpView.getText().toString());
+
+                    }
+
+                   // Toast.makeText(OtpValidation.this, extractedOTP, Toast.LENGTH_SHORT).show();
+                    }
+                catch (Exception e)
+                {
+                 //   Log.d("minal",e.message.toString())
+                }
+            }
+        });
 
     }
 

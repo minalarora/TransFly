@@ -1,9 +1,11 @@
 package com.truck.transfly.Adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -20,7 +22,7 @@ import com.truck.transfly.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BeforeAdapter extends RecyclerView.Adapter<BeforeAdapter.viewholder> {
+public class BeforeAdapter extends RecyclerView.Adapter<BeforeAdapter.Viewholder> {
 
     private final Context context;
     private final FragmentActivity fragmentActivity;
@@ -50,16 +52,16 @@ public class BeforeAdapter extends RecyclerView.Adapter<BeforeAdapter.viewholder
 
     @NonNull
     @Override
-    public viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         LayoutInflater layoutInflater=LayoutInflater.from(context);
         View inflate = layoutInflater.inflate(R.layout.single_beforebooking, parent, false);
 
-        return new viewholder(inflate);
+        return new Viewholder(inflate);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull viewholder holder, int position) {
+    public void onBindViewHolder(@NonNull Viewholder holder, int position) {
 
         ResponseMine responseBooking = responseBookingList.get(position);
 
@@ -74,7 +76,7 @@ public class BeforeAdapter extends RecyclerView.Adapter<BeforeAdapter.viewholder
             }
         }
           holder.created_date.setText(dummyloading.getRate().toString() + " PMT");
-          holder.vehicle_number.setText(dummyloading.getEtl().toString() + "HRS");
+          holder.vehicle_number.setText(dummyloading.getEtl().toString() + " HRS");
           holder.tyres.setText("Tyres:-" + responseBooking.getTyres() + "   " + "Trailer:-" + (responseBooking.getTrailer()?"ALLOWED":"NOT ALLOWED"));
 
           holder.parent.setOnClickListener(new View.OnClickListener() {
@@ -83,6 +85,13 @@ public class BeforeAdapter extends RecyclerView.Adapter<BeforeAdapter.viewholder
                   onClickListener.createBooking(responseBooking);
               }
           });
+
+        holder.showInvoice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickListener.createBooking(responseBooking);
+            }
+        });
 
 //        holder.directions.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -109,21 +118,26 @@ public class BeforeAdapter extends RecyclerView.Adapter<BeforeAdapter.viewholder
         return responseBookingList.size();
     }
 
-    public class viewholder extends RecyclerView.ViewHolder {
+    public class Viewholder extends RecyclerView.ViewHolder {
 
         private TextView to_from,created_date,vehicle_number,tyres;
         private RelativeLayout remove;
         private RelativeLayout directions;
         private CardView parent;
+        private final LinearLayout showInvoice;
 
-        public viewholder(@NonNull View itemView) {
+        public Viewholder(@NonNull View itemView) {
             super(itemView);
+
+
+            parent = itemView.findViewById(R.id.parent);
+            showInvoice = itemView.findViewById(R.id.show_invoices);
 
             to_from=itemView.findViewById(R.id.to_from);
             created_date=itemView.findViewById(R.id.date_name);
             vehicle_number=itemView.findViewById(R.id.time2);
             tyres = itemView.findViewById(R.id.tyres);
-            parent = itemView.findViewById(R.id.parent);
+
 //            etl=itemView.findViewById(R.id.etl);
 //            remove=itemView.findViewById(R.id.remove);
 //            directions=itemView.findViewById(R.id.directions);

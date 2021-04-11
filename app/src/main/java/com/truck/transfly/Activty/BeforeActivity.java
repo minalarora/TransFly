@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import okhttp3.Response;
 import retrofit2.Retrofit;
 
 import static com.truck.transfly.Adapter.BeforeAdapter.*;
@@ -41,6 +42,7 @@ public class BeforeActivity extends AppCompatActivity implements onClickListener
     private FrameLayout parent_of_loading;
     private Retrofit retrofit = null;
     private ApiEndpoints api = null;
+    private ArrayList<ResponseMine> legacybookingList = new ArrayList<>();
     private ArrayList<ResponseMine> bookingList = new ArrayList<>();
     private BeforeAdapter currentBookingAdapter;
     private TextView no_booking_data;
@@ -57,9 +59,18 @@ public class BeforeActivity extends AppCompatActivity implements onClickListener
             api = retrofit.create(ApiEndpoints.class);
         }
 
-        bookingList = getIntent().getBundleExtra("bundle").getParcelableArrayList("mines");
+        legacybookingList = getIntent().getBundleExtra("bundle").getParcelableArrayList("mines");
         loading = getIntent().getBundleExtra("bundle").getString("loading");
-        bookingList = getIntent().getParcelableArrayListExtra("mines2");
+        legacybookingList = getIntent().getParcelableArrayListExtra("mines2");
+        for (ResponseMine responseMine : legacybookingList) {
+            for(ResponseLoading responseLoading: responseMine.getLoading())
+            {
+                if(responseLoading.getLoadingname().equalsIgnoreCase(loading) && responseLoading.getActive())
+                {
+                    bookingList.add(responseMine);
+                }
+            }
+        }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             bookingList.sort(new Comparator<ResponseMine>() {
@@ -121,12 +132,21 @@ public class BeforeActivity extends AppCompatActivity implements onClickListener
         no_booking_data = findViewById(R.id.no_booking_data);
         no_booking_data.setVisibility(View.GONE);
 
-        RecyclerView current_booking_recycler = findViewById(R.id.current_booking_recycler);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
-        current_booking_recycler.setLayoutManager(linearLayoutManager);
-        currentBookingAdapter = new BeforeAdapter(this, bookingList,loading);
-        current_booking_recycler.setAdapter(currentBookingAdapter);
-        currentBookingAdapter.setOnClickListener(this);
+        if(bookingList.isEmpty())
+        {
+            activity.noBookingData.setVisibility(View.VISIBLE);
+            activity.currentBookingRecycler.setVisibility(View.GONE);
+        }
+        else
+        {
+            RecyclerView current_booking_recycler = findViewById(R.id.current_booking_recycler);
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
+            current_booking_recycler.setLayoutManager(linearLayoutManager);
+            currentBookingAdapter = new BeforeAdapter(this, bookingList,loading);
+            current_booking_recycler.setAdapter(currentBookingAdapter);
+            currentBookingAdapter.setOnClickListener(this);
+        }
+
 
     }
 

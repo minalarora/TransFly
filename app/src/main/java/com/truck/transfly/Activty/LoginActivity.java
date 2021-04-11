@@ -1,5 +1,7 @@
 package com.truck.transfly.Activty;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -10,6 +12,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import com.nabinbhandari.android.permissions.PermissionHandler;
+import com.nabinbhandari.android.permissions.Permissions;
 import com.tapadoo.alerter.Alerter;
 import com.truck.transfly.Frament.ForgotPasswordDialog;
 import com.truck.transfly.Model.RequestCredentials;
@@ -25,12 +29,15 @@ import com.truck.transfly.utils.ApiEndpoints;
 import com.truck.transfly.utils.PreferenceUtil;
 import com.truck.transfly.utils.TransflyApplication;
 
+import java.util.ArrayList;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class LoginActivity extends AppCompatActivity {
+public class
+LoginActivity extends AppCompatActivity {
 
     private Retrofit retrofit = null;
     private ApiEndpoints api = null;
@@ -90,6 +97,7 @@ public class LoginActivity extends AppCompatActivity {
             api = retrofit.create(ApiEndpoints.class);
         }
 
+        askPermissions();
 
     }
 
@@ -518,5 +526,27 @@ public class LoginActivity extends AppCompatActivity {
                 .enableSwipeToDismiss()
                 .setDuration(3000)
                 .show();
+    }
+    private void askPermissions() {
+
+        String[] permissions = {Manifest.permission.RECEIVE_SMS};
+        String rationale = "Please provide permission to auto-detect OTP for you!";
+        Permissions.Options options = new Permissions.Options()
+                .setRationaleDialogTitle("Info")
+                .setSettingsDialogTitle("Warning");
+
+        Permissions.check(this/*context*/, permissions, rationale, options, new PermissionHandler() {
+            @Override
+            public void onGranted() {
+
+
+
+            }
+
+            @Override
+            public void onDenied(Context context, ArrayList<String> deniedPermissions) {
+                // permission denied, block the feature.
+            }
+        });
     }
 }

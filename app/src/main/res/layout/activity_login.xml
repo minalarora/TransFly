@@ -266,7 +266,7 @@
                     android:layout_alignParentBottom="true"
                     android:fontFamily="@font/poppinsbold"
                     android:gravity="center"
-                    android:text=" Sign Up"
+                    android:text=" Click Here"
                     android:textColor="@color/project_color"
                     android:textSize="12dp" />
 
@@ -287,16 +287,14 @@
         android:layout_above="@+id/signup_parent"
         android:layout_alignParentBottom="true"
         android:layout_gravity="center_horizontal"
-        android:layout_marginStart="@dimen/_20ssp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="@dimen/_20ssp"
+        android:paddingBottom="@dimen/_10sdp"
         android:alpha="0.6"
         android:fontFamily="@font/font_regular"
         android:gravity="center_horizontal"
         android:lineSpacingExtra="@dimen/_5ssp"
         android:text="©2021. All rights reserved by TransFly Infotech Pvt Ltd"
         android:textColor="@color/black"
-        android:textSize="8dp" />
+        android:textSize="11dp" />
 
 </RelativeLayout>
 
